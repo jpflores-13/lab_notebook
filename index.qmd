@@ -1,6 +1,6 @@
 ---
-title: "Lab notebook"
-subtitle: "JP Flores · Phanstiel → Scavuzzo → Gabriele labs"
+title: ""
+subtitle: ""
 date: today
 ---
 
