@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 website:
-  title: "JP Flores — Lab Notebook"
-  description: "Protocols, experiment entries, and reading notes"
+  title: "JP Flores' Lab Notebook"
+  description: "Protocols and experiment entries"
   navbar:
     left:
       - text: "Home"
@@ -13,10 +13,6 @@ website:
         href: protocols/index.qmd
       - text: "Experiments"
         href: experiments/index.qmd
-      - text: "Reading notes"
-        href: reading-notes/index.qmd
-      - text: "Aims"
-        href: aims/index.qmd
     right:
       - icon: github
         href: https://github.com/jpflores-13/lab_notebook
@@ -34,20 +30,8 @@ website:
         - experiments/index.qmd
         - auto: "experiments/*.qmd"
 
-    - title: "Reading notes"
-      style: "docked"
-      contents:
-        - reading-notes/index.qmd
-        - auto: "reading-notes/*.qmd"
-
-    - title: "Aims"
-      style: "docked"
-      contents:
-        - aims/index.qmd
-        - auto: "aims/*.qmd"
-
   page-footer:
-    center: "JP Flores · Phanstiel / Scavuzzo / Gabriele labs"
+    center: "JP Flores"
 
 format:
   html:
