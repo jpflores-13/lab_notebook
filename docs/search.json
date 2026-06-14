@@ -268,28 +268,28 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Lab notebook",
+    "title": "",
     "section": "",
-    "text": "This is a living record of wet lab experiments, protocols, and reading notes. It is not a computational notebook — that lives separately. Every experiment entry is one .qmd file per run, committed to git when complete."
+    "text": "Code\nA living record of wet lab experiments and protocols. Not a computational notebook — that lives separately. Every experiment entry is one .qmd file per run, committed to git when complete."
   },
   {
     "objectID": "index.html#quick-links",
     "href": "index.html#quick-links",
-    "title": "Lab notebook",
+    "title": "",
     "section": "Quick links",
-    "text": "Quick links\n\n\n\nSection\nWhat’s in it\n\n\n\n\nProtocols\nShiny QMDs — configure inputs, print to PDF, take to bench\n\n\nExperiments\nOne entry per experiment run, filed by date\n\n\nReading notes\nProtocol-adjacent papers worth annotating in depth\n\n\nAims\nF32, HFSP, Fulbright — living documents"
+    "text": "Quick links\n\n\n\nSection\nWhat’s in it\n\n\n\n\nProtocols\nInteractive calculators — set inputs, volumes update live, print to PDF\n\n\nExperiments\nOne entry per experiment run, filed by date"
   },
   {
     "objectID": "index.html#how-to-use-this-notebook",
     "href": "index.html#how-to-use-this-notebook",
-    "title": "Lab notebook",
+    "title": "",
     "section": "How to use this notebook",
-    "text": "How to use this notebook\nStarting a new experiment:\n# Copy the relevant template\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\n\n# Open in Positron and fill in the planning section\n# Then each evening: fill in that day's section, save\n\n# When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\nPrinting a protocol:\nquarto serve protocols/HiC_protocol.qmd\n# Configure Shiny inputs in browser → Cmd+P → Save as PDF\nRebuilding the site:\nquarto render\n# Open _site/index.html in browser"
+    "text": "How to use this notebook\nPrinting a protocol:\nOpen any protocol page, set your sample count and parameters — all volumes update instantly in the browser. Hit 🖨 Print / Save as PDF for a bench copy.\nStarting a new experiment:\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\nFill in each day’s section at the bench. When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\ngit push\nRebuilding the site:\nquarto render && git add docs/ && git commit -m \"rebuild\" && git push"
   },
   {
     "objectID": "index.html#recent-experiments",
     "href": "index.html#recent-experiments",
-    "title": "Lab notebook",
+    "title": "",
     "section": "Recent experiments",
     "text": "Recent experiments\nNo experiment entries yet. Run your first experiment!"
   },

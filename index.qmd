@@ -4,48 +4,43 @@ subtitle: ""
 date: today
 ---
 
-This is a living record of wet lab experiments, protocols, and reading notes.
-It is not a computational notebook — that lives separately.
+A living record of wet lab experiments and protocols.
+Not a computational notebook — that lives separately.
 Every experiment entry is one `.qmd` file per run, committed to git when complete.
 
 ## Quick links
 
 | Section | What's in it |
 |---------|-------------|
-| [Protocols](protocols/index.qmd) | Shiny QMDs — configure inputs, print to PDF, take to bench |
+| [Protocols](protocols/index.qmd) | Interactive calculators — set inputs, volumes update live, print to PDF |
 | [Experiments](experiments/index.qmd) | One entry per experiment run, filed by date |
-| [Reading notes](reading-notes/index.qmd) | Protocol-adjacent papers worth annotating in depth |
-| [Aims](aims/index.qmd) | F32, HFSP, Fulbright — living documents |
 
 ## How to use this notebook
+
+**Printing a protocol:**
+
+Open any protocol page, set your sample count and parameters — all volumes update
+instantly in the browser. Hit **🖨 Print / Save as PDF** for a bench copy.
 
 **Starting a new experiment:**
 
 ```bash
-# Copy the relevant template
 cp experiments/_templates/HiC_entry_template.qmd \
    experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd
-
-# Open in Positron and fill in the planning section
-# Then each evening: fill in that day's section, save
-
-# When the experiment is fully done:
-git add experiments/YYYY-MM-DD_HiC-target-celltype.qmd
-git commit -m "Hi-C [target] [celltype] — [one-line result summary]"
 ```
 
-**Printing a protocol:**
+Fill in each day's section at the bench. When the experiment is fully done:
 
 ```bash
-quarto serve protocols/HiC_protocol.qmd
-# Configure Shiny inputs in browser → Cmd+P → Save as PDF
+git add experiments/YYYY-MM-DD_HiC-target-celltype.qmd
+git commit -m "Hi-C [target] [celltype] — [one-line result summary]"
+git push
 ```
 
 **Rebuilding the site:**
 
 ```bash
-quarto render
-# Open _site/index.html in browser
+quarto render && git add docs/ && git commit -m "rebuild" && git push
 ```
 
 ## Recent experiments
