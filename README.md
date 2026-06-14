@@ -18,9 +18,6 @@ Each file is one of two things:
 | **Protocol** | `protocols/` | Interactive OJS document — set inputs, volumes update live, print to PDF |
 | **Experiment entry** | `experiments/` | Static record of one experiment run, filled in day-by-day |
 
-> **Private content** — aims and reading notes live only on your local machine.
-> They are in `.gitignore` and never pushed to GitHub.
-
 ---
 
 ## Repo structure
@@ -123,9 +120,6 @@ with the right day sections, QC expected values, and metadata fields.
 install.packages(c("tidyverse", "knitr", "kableExtra"))
 quarto check
 ```
-
-> Note: `shiny` is no longer required — protocols use OJS and render statically.
-
 ---
 
 ## Copying this system
