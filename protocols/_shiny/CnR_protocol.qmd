@@ -1,0 +1,353 @@
+---
+title: "CUT&RUN Protocol"
+subtitle: "Phanstiel Lab · Skene et al. 2018"
+author: "JP Flores"
+date: today
+format:
+  html:
+    toc: true
+    toc-float: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    embed-resources: true
+    css: print.css
+prefer-html: true
+server: shiny
+---
+
+```{r setup}
+#| include: false
+library(shiny)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+fmt <- function(x, d = 1) formatC(round(x, d), format = "f", digits = d)
+ex  <- function(n, p = 0.10) n * (1 + p)
+
+make_mixes <- function(n, pcr_cyc) {
+  e <- ex(n)
+  list(
+    sds_pk = tibble(
+      Component         = c("10% SDS","Proteinase K (20 mg/mL)"),
+      `Per sample (µL)` = c(2,2),
+      `Total (µL)`      = fmt(c(2,2)*e)
+    ),
+    er = tibble(
+      Component         = c("End Repair & A-tailing Buffer","End Repair & A-tailing Enzyme mix"),
+      `Per sample (µL)` = c(7,3),
+      `Total (µL)`      = fmt(c(7,3)*e)
+    ),
+    lig = tibble(
+      Component         = c("PCR-grade H₂O","Ligation Buffer","DNA Ligase"),
+      `Per sample (µL)` = c(5,30,10),
+      `Total (µL)`      = fmt(c(5,30,10)*e)
+    ),
+    pcr = tibble(
+      Component         = c("KAPA HiFi HotStart ReadyMix (2×)",
+                             "KAPA Library Amplification Primer Mix (10×)"),
+      `Per sample (µL)` = c(25,5),
+      `Total (µL)`      = fmt(c(25,5)*e)
+    )
+  )
+}
+make_day1 <- function(n) {
+  tribble(
+    ~Step, ~Action,                                                          ~Volume,
+    "1",  "Thaw pellets on ice; resuspend in NE1 buffer",                    "1000 µL/sample",
+    "2",  "Rotate 10 min 4°C",                                                "—",
+    "3",  "Spin 500×g 10 min 4°C; resuspend in Wash buffer",                 "1000 µL/sample",
+    "4",  paste0("Activate ConA beads: ",fmt(10*n,0)," µL total"),           "Wash 1× Binding Buffer",
+    "5",  paste0("Resuspend in ",fmt(10*n,0)," µL Binding Buffer"),          "10 µL beads/sample",
+    "6",  "Mix cells + beads; invert ~10×; 10 min RT; magnet",               "Resuspend in 50 µL Antibody Buffer/sample",
+    "7",  "Add primary antibody; O/N 4°C thermomixer 1000 rpm",              "Per Ab dilution sheet"
+  )
+}
+make_day3 <- function(pcr_cyc) {
+  tribble(
+    ~Step, ~Action,                                                            ~Detail,
+    "1",  "Thaw KAPA reagents at 4°C",                                        "—",
+    "2",  "End repair & A-tailing: add 10 µL mix to 50 µL sample",            "20°C 30 min → 65°C 30 min (heated lid 85°C)",
+    "3",  "Adapter ligation: add 45 µL mix + 5 µL UNIQUE adapter",            "20°C 15 min; check adapter compatibility sheet",
+    "4",  "AMPure round 1 (1.2×): 132 µL beads → elute 50 µL 10 mM Tris",   "—",
+    "5",  "AMPure round 2 (1.2×): 60 µL beads → elute 25 µL",                "—",
+    "6",  paste0("PCR: 30 µL master mix + 20 µL sample; ",pcr_cyc," cycles"), "98°C 45s → (98°C 15s/60°C 10s) × N → 72°C 1 min",
+    "7",  "Post-PCR AMPure (1.2×) → elute 25 µL",                             "—",
+    "8",  "Qubit 1× HS dsDNA; Tapestation D1000",                              "Store 4°C (2 wk) or –20°C"
+  )
+}
+stbl <- function(df, ...) {
+  kbl(df, ...) |>
+    kable_styling(bootstrap_options = c("striped","hover","condensed"),
+                  full_width = FALSE, font_size = 13)
+}
+```
+
+```{r server}
+#| context: server
+output$summary <- renderUI({
+  tags$p(tags$strong(paste0(
+    input$n_samples," sample(s)  ·  ",input$n_cells_M,"M cells each",
+    "  ·  antibody: ",input$antibody,
+    "  ·  ",input$pcr_cycles," PCR cycles"
+  )))
+})
+output$mixes <- renderUI({
+  mixes <- make_mixes(input$n_samples, input$pcr_cycles)
+  mk <- function(df, title) tagList(
+    tags$h4(title),
+    renderTable(df, striped=TRUE, bordered=TRUE, spacing="xs", width="auto", align="l")
+  )
+  tagList(
+    mk(mixes$sds_pk, "SDS / Proteinase K (add 4 µL/sample after Stop buffer)"),
+    mk(mixes$er,     "End repair & A-tailing (add 10 µL to 50 µL sample)"),
+    mk(mixes$lig,    "Adapter ligation (add 45 µL mix + 5 µL unique adapter)"),
+    mk(mixes$pcr,    paste0("PCR amplification (",input$pcr_cycles," cycles)"))
+  )
+})
+output$day1 <- renderTable({ make_day1(input$n_samples) },
+                             striped=TRUE, bordered=TRUE, spacing="xs")
+output$day3 <- renderTable({ make_day3(input$pcr_cycles) },
+                             striped=TRUE, bordered=TRUE, spacing="xs")
+```
+
+---
+
+# Configure experiment {#configure-experiment .unnumbered}
+
+```{r inputs}
+#| panel: sidebar
+numericInput("n_samples",  "Number of samples",        value = 4, min=1, max=48)
+numericInput("n_cells_M",  "Cells per sample (×10⁶)",  value = 0.5, min=0.1, step=0.1)
+selectInput( "antibody",   "Primary antibody target",
+             choices = c("H3K4me3 (positive ctrl)","H3K27me3 (positive ctrl)",
+                         "IgG (negative ctrl)","CTCF","SOX10","BRG1","CHD7","Custom"))
+numericInput("pcr_cycles", "PCR cycles",               value = 12, min=10, max=15)
+hr()
+tags$small(tags$em("File → Print → Save as PDF for bench copy."))
+```
+
+```{r summary-out}
+#| panel: fill
+uiOutput("summary")
+```
+
+---
+
+::: {.callout-note}
+## Overview
+CUT&RUN uses pAG-MNase to cleave chromatin at antibody-bound sites. Advantages over ChIP-seq: low cell input (500k–1M cells), lower background, no crosslinking required. Key controls: H3K4me3 (positive), IgG (negative). Include both in every run.
+:::
+
+::: {.callout-important}
+## Before starting
+Set centrifuge to **4°C**. Add Complete Protease Inhibitor (EDTA-free) **fresh** to NE1 and Wash buffers immediately before use — not the night before.
+:::
+
+---
+
+# Buffer recipes
+
+```{r buffers}
+ne1 <- tribble(
+  ~Component,            ~Amount,    ~`Final conc.`,
+  "ddH₂O",              "28.59 mL", "—",
+  "1 M HEPES pH 7.5",   "600 µL",   "20 mM",
+  "2 M KCl",            "150 µL",   "10 mM",
+  "1 M MgCl₂",          "30 µL",    "1 mM",
+  "1 M DTT (fresh)",    "30 µL",    "1 mM",
+  "10% Triton X-100",   "300 µL",   "0.1%",
+  "Protease inhibitor", "300 µL",   "⚠ Add fresh"
+)
+wash <- tribble(
+  ~Component,           ~Amount,     ~`Final conc.`,
+  "ddH₂O",             "136.35 mL", "—",
+  "1 M HEPES pH 7.5",  "3 mL",      "20 mM",
+  "10% Tween-20",       "3 mL",      "0.2%",
+  "5 M NaCl",           "4.5 mL",    "150 mM",
+  "BSA",                "150 mg",    "0.1%",
+  "0.5 M Spermidine",  "150 µL",    "0.5 mM",
+  "1 M Na-Butyrate",   "1.5 mL",    "10 mM",
+  "Protease inhibitor", "150 µL",    "⚠ Add fresh"
+)
+ab_buf <- tribble(
+  ~Component,      ~Amount,   ~`Final conc.`,
+  "Triton Buffer", "to 4 mL", "Wash buffer + 0.1% Triton X-100",
+  "0.5 M EDTA",   "16 µL",   "2 mM"
+)
+stop_buf <- tribble(
+  ~Component,          ~Amount,   ~`Final conc.`,
+  "ddH₂O",            "2586 µL", "—",
+  "5 M NaCl",         "204 µL",  "340 mM",
+  "0.5 M EDTA",       "120 µL",  "20 mM",
+  "0.5 M EGTA",       "24 µL",   "4 mM",
+  "10% Triton X-100", "30 µL",   "0.1%",
+  "RNAse A (4 µg/µL)","37.5 µL", "50 µg/mL"
+)
+stbl(ne1,      caption = "NE1 buffer (10 mL)")
+stbl(wash,     caption = "Wash buffer (150 mL)")
+stbl(ab_buf,   caption = "Antibody buffer (4 mL)")
+stbl(stop_buf, caption = "2× Stop buffer (3 mL)")
+```
+
+::: {.callout-tip collapse="true"}
+## Buffer storage
+NE1 and Wash buffer can be made as a stock (without protease inhibitor) and stored at 4°C for up to 2 weeks. Add protease inhibitor only to the volume you need immediately before use. Stop buffer can be stored at 4°C for 1 month — add RNAse A fresh before use.
+:::
+
+---
+
+# Scaled master mixes
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+
+All volumes are computed by R from your sidebar inputs. Expand this if a number
+looks wrong — every formula used in the tables below is shown here.
+
+**Core formula (all standard master mixes):**
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times 1.10$$
+
+The $\times 1.10$ is the 10% excess factor built into every mix to account for
+pipetting loss. So for the end repair buffer with 4 samples:
+
+$$V_{total} = 7 \; \mu L \times 4 \times 1.10 = 30.8 \; \mu L$$
+
+**SDS / Proteinase K mix** (4 µL added per sample after Stop buffer):
+
+$$V_{SDS} = 2 \; \mu L \times N \times 1.10 \qquad V_{PK} = 2 \; \mu L \times N \times 1.10$$
+
+**End repair & A-tailing** (10 µL added to 50 µL sample):
+
+$$V_{buffer} = 7 \; \mu L \times N \times 1.10 \qquad V_{enzyme} = 3 \; \mu L \times N \times 1.10$$
+
+**Adapter ligation** (45 µL mix + 5 µL unique adapter per sample):
+
+$$V_{H_2O} = 5 \; \mu L \times N \times 1.10 \qquad V_{lig\;buffer} = 30 \; \mu L \times N \times 1.10 \qquad V_{ligase} = 10 \; \mu L \times N \times 1.10$$
+
+**PCR amplification** (30 µL mix + 20 µL sample per reaction):
+
+$$V_{ReadyMix} = 25 \; \mu L \times N \times 1.10 \qquad V_{primers} = 5 \; \mu L \times N \times 1.10$$
+
+**ConA bead prep** (not scaled with excess — fixed 10 µL per sample):
+
+$$V_{beads} = 10 \; \mu L \times N_{samples}$$
+
+**Where N =** your current sidebar input for number of samples.
+If a total looks off, check: is your N correct? Did you account for controls as samples?
+:::
+
+```{r mixes-out}
+uiOutput("mixes")
+```
+
+---
+
+# Day 1 — Cell binding to ConA beads (~2 hr)
+
+::: {.callout-note collapse="true"}
+## Why ConA beads?
+Concanavalin A-coated beads bind to the cell surface via glycoproteins, immobilizing cells for all subsequent washes. This eliminates centrifugation steps that would pellet and stress the nuclei. The key is that cells remain membrane-intact throughout — you are not isolating nuclei.
+:::
+
+```{r day1-out}
+uiOutput("summary")
+tableOutput("day1")
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] Primary antibody: `r renderText(input$antibody)` — lot # _______
+- [ ] IgG negative control included
+- [ ] H3K4me3 positive control included
+- [ ] Samples in thermomixer at 4°C, 1000 rpm O/N
+:::
+
+---
+
+# Day 2 — pAG-MNase & chromatin digestion (~4 hr)
+
+::: {.callout-warning}
+## CaCl₂ addition triggers digestion immediately
+Once CaCl₂ is added, MNase is active. Work quickly and consistently — keep all samples on ice until the moment you add CaCl₂ to each tube, then incubate exactly 30 min at 4°C. Longer digestion = smaller fragments = loss of signal at broad domains.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Pulse spin; magnet; wash Triton Buffer | 1 mL/sample |
+| 2 | Repeat Triton Buffer wash | 1 mL/sample |
+| 3 | Resuspend in Antibody Buffer; add pAG-MNase | 50 µL + 2.5 µL/sample |
+| 4 | Incubate 1h 4°C metal block | — |
+| 5 | Wash × 2 Triton Buffer; resuspend in Triton Buffer | 100 µL/sample |
+| 6 | Add 100 mM CaCl₂; **30 min 4°C** to digest | 2 µL/sample |
+| 7 | Add 2× Stop Buffer; 20 min 37°C to release fragments | 100 µL/sample |
+| 8 | Magnet; transfer supernatant to new tube | Fragments are in supernatant |
+| 9 | Add SDS/Prot-K master mix; 1h 65°C (or O/N) | 4 µL/sample |
+| 10 | Zymo Clean & Concentrator; elute in 55 µL | Lo-Bind tube; –20°C |
+
+::: {.callout-important}
+## Checklist
+- [ ] CaCl₂ added; digestion timer started
+- [ ] 37°C incubation complete
+- [ ] Supernatant transferred cleanly (beads discarded)
+- [ ] DNA in Lo-Bind tube at –20°C
+:::
+
+::: {.callout-tip collapse="true"}
+## Low yield after Zymo cleanup?
+Ensure you are collecting the **supernatant** after CaCl₂ digestion — the released fragments are in solution, not on the beads. Also check that the Zymo column was not overloaded (max 5 µg DNA per column).
+:::
+
+---
+
+# Day 3 — Library preparation (~4 hr)
+
+::: {.callout-warning}
+## Adapter index tracking
+Record your adapter–sample assignment before you open any tubes. Adapter swaps are not detectable until sequencing data arrives. Use a unique index for each sample — never reuse an index within a run.
+:::
+
+```{r day3-out}
+tableOutput("day3")
+```
+
+::: {.callout-tip collapse="true"}
+## How many PCR cycles?
+10–12 cycles for abundant targets (H3K4me3, H3K27me3). 12–14 cycles for lower-abundance targets (transcription factors, CTCF). Too many cycles introduces PCR duplicates that inflate apparent signal. When in doubt, use 12 and check duplicate rate after sequencing.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Adapters used: _______
+- [ ] Qubit HS dsDNA: _______ ng/µL
+- [ ] Tapestation peak: _______ bp (expected 150–350 bp)
+- [ ] Submitted for sequencing: _______
+:::
+
+---
+
+# QC log
+
+```{r qc-tbl}
+qc <- tribble(
+  ~Checkpoint,                  ~Expected,         ~Observed, ~Pass,
+  "Day 1: cells binding beads", "Even suspension",  "",        "",
+  "Day 2: digest supernatant",  "Clear",            "",        "",
+  "Post-Zymo Qubit",            ">1 ng/µL",         "",        "",
+  "Post-ligation Qubit",        ">5 ng/µL",         "",        "",
+  "Final library Qubit",        ">2 ng/µL",         "",        "",
+  "Tapestation peak",           "150–350 bp",       "",        ""
+)
+stbl(qc)
+```
+
+**Notes / deviations:**
+
+---
+
+# References
+
+Skene PJ, Henikoff JG, Henikoff S. *eLife.* 2018;7:e36906.
+Protocol: Phanstiel lab; adapted by JP Flores.

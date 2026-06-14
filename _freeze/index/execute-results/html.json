@@ -1,0 +1,15 @@
+{
+  "hash": "3c2a142f94df32e3b7c6d3db3a73376a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Lab notebook\"\nsubtitle: \"JP Flores · Phanstiel → Scavuzzo → Gabriele labs\"\ndate: today\n---\n\nThis is a living record of wet lab experiments, protocols, and reading notes.\nIt is not a computational notebook — that lives separately.\nEvery experiment entry is one `.qmd` file per run, committed to git when complete.\n\n## Quick links\n\n| Section | What's in it |\n|---------|-------------|\n| [Protocols](protocols/index.qmd) | Shiny QMDs — configure inputs, print to PDF, take to bench |\n| [Experiments](experiments/index.qmd) | One entry per experiment run, filed by date |\n| [Reading notes](reading-notes/index.qmd) | Protocol-adjacent papers worth annotating in depth |\n| [Aims](aims/index.qmd) | F32, HFSP, Fulbright — living documents |\n\n## How to use this notebook\n\n**Starting a new experiment:**\n\n```bash\n# Copy the relevant template\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\n\n# Open in Positron and fill in the planning section\n# Then each evening: fill in that day's section, save\n\n# When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\n```\n\n**Printing a protocol:**\n\n```bash\nquarto serve protocols/HiC_protocol.qmd\n# Configure Shiny inputs in browser → Cmd+P → Save as PDF\n```\n\n**Rebuilding the site:**\n\n```bash\nquarto render\n# Open _site/index.html in browser\n```\n\n## Recent experiments\n\n_No experiment entries yet. Run your first experiment!_\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,13 @@
+---
+title: "Aims"
+---
+
+Living documents for fellowship and grant aims.
+These update as experiments come in — figures and tables can embed R code
+that pulls from experiment entries directly.
+
+| Document | Status |
+|----------|--------|
+| F32 — Aim 1 | drafting |
+| HFSP overview | drafting |
+| Fulbright narrative | submitted |

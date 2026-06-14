@@ -1,0 +1,19 @@
+---
+title: "Reading notes"
+listing:
+  contents: "*.qmd"
+  exclude:
+    filename: "index.qmd"
+  sort: "date desc"
+  type: table
+  fields: [date, title, categories, description]
+  field-display-names:
+    date: "Date read"
+    title: "Paper"
+    categories: "Tags"
+    description: "One-line takeaway"
+---
+
+Protocol-adjacent papers worth annotating in depth.
+Not every paper — just the ones that directly inform how you run an experiment
+or interpret a result.

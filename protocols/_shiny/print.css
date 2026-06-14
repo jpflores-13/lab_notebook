@@ -1,0 +1,13 @@
+/* Checklist items — used in ENS protocol */
+.check li { list-style: none; }
+.check li::before { content: "☐  "; }
+
+@media print {
+  #quarto-sidebar,
+  .sidebar,
+  #configure-experiment {
+    display: none !important;
+  }
+  h1 { page-break-before: always; }
+  h1:first-of-type { page-break-before: avoid; }
+}

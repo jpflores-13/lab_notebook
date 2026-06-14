@@ -1,0 +1,183 @@
+---
+title: "CUT&RUN — [antibody] — [cell type]"
+date: today
+author: "JP Flores"
+categories: [CUT&RUN, chromatin]
+description: ""  # fill in one-line result summary when done
+status: "in-progress"  # change to "complete" when committed
+---
+
+```{r setup}
+#| include: false
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+stbl <- function(df, ...) {
+  kbl(df, ...) |>
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE, font_size = 13)
+}
+```
+
+## Overview
+
+```{r exp-meta}
+#| echo: false
+meta <- tribble(
+  ~Field,               ~Value,
+  "Date",               as.character(Sys.Date()),
+  "Cell line / type",   "",
+  "Treatment",          "",
+  "N samples",          "",
+  "Antibodies",         "",
+  "Cells per sample",   "",
+  "PCR cycles",         "",
+  "Aim this supports",  "",
+  "Protocol version",   "[protocols/CnR_protocol.qmd](../protocols/_shiny/CnR_protocol.qmd)",
+  "Raw data path",      "",
+  "Sequencing run ID",  ""
+)
+stbl(meta, col.names = c("", ""))
+```
+
+## Hypothesis
+
+<!-- What do you expect to see and why? -->
+
+## Antibody panel
+
+```{r antibody-table}
+abs <- tribble(
+  ~Sample, ~Antibody, ~Lot, ~Dilution, ~`Expected result`,
+  "1",     "H3K4me3 (positive ctrl)", "", "1:100", "Clear peaks at active promoters",
+  "2",     "IgG (negative ctrl)",     "", "1:100", "Flat / background only",
+  "3",     "",                         "", "",       "",
+  "4",     "",                         "", "",       ""
+)
+stbl(abs, caption = "Antibody panel — fill in before Day 1")
+```
+
+---
+
+## Day 1 — Cell binding to ConA beads {.day-header}
+
+**Date:** ___ **Started:** ___ **Finished:** ___
+
+::: {.callout-important appearance="minimal"}
+Always include H3K4me3 positive control and IgG negative control in every run.
+:::
+
+```{r day1-qc}
+qc1 <- tribble(
+  ~Checkpoint,                    ~Expected,                ~Observed, ~Pass,
+  "Cell count (hemocytometer)",   "~500k/sample",           "",        "",
+  "Viability (trypan blue)",      ">85%",                   "",        "",
+  "Bead binding appearance",      "Even suspension, no clumps","",     "",
+  "Antibody added + recorded",    "Yes",                    "",        "",
+  "In thermomixer at 4°C O/N",   "Yes — 1000 rpm",         "",        ""
+)
+stbl(qc1, caption = "Day 1 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 2 — pAG-MNase & chromatin digestion {.day-header}
+
+**Date:** ___ **CaCl₂ added at:** ___ **Digest completed at:** ___
+
+::: {.callout-warning appearance="minimal"}
+CaCl₂ triggers digestion immediately — work consistently across all samples.
+Digest time: exactly 30 min at 4°C. Supernatant = your fragments.
+:::
+
+```{r day2-qc}
+qc2 <- tribble(
+  ~Checkpoint,                    ~Expected,              ~Observed, ~Pass,
+  "Digest duration",              "30 min 4°C",           "",        "",
+  "37°C stop incubation",         "20 min done",          "",        "",
+  "Supernatant appearance",       "Clear (fragments released)","",   "",
+  "Post-Zymo Qubit HS (ng/µL)",  ">1",                   "",        ""
+)
+stbl(qc2, caption = "Day 2 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 3 — Library preparation {.day-header}
+
+**Date:** ___ **PCR cycles:** ___
+
+::: {.callout-warning appearance="minimal"}
+Record adapter assignments before opening any tubes — index swaps are invisible until sequencing.
+:::
+
+```{r day3-adapters}
+adapters <- tribble(
+  ~Sample, ~Antibody, ~Index, ~`Post-ligation Qubit (ng/µL)`, ~`Final Qubit (ng/µL)`, ~`Tapestation peak (bp)`,
+  "1",     "H3K4me3", "",    "",                               "",                      "",
+  "2",     "IgG",     "",    "",                               "",                      "",
+  "3",     "",        "",    "",                               "",                      "",
+  "4",     "",        "",    "",                               "",                      ""
+)
+stbl(adapters, caption = "Adapter assignments and final QC")
+```
+
+```{r day3-qc}
+qc3 <- tribble(
+  ~Checkpoint,                  ~Expected,      ~Observed, ~Pass,
+  "Post-ligation Qubit (ng/µL)","≥5",           "",        "",
+  "Final library Qubit (ng/µL)","≥2",           "",        "",
+  "Tapestation peak (bp)",      "150–350",      "",        "",
+  "Submitted for sequencing",   "Yes",          "",        ""
+)
+stbl(qc3, caption = "Day 3 QC")
+```
+
+**Sequencing run ID / submission date:**
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Summary QC table
+
+```{r summary-qc}
+qc_summary <- tribble(
+  ~Checkpoint,                    ~Expected,     ~Observed, ~Pass,
+  "Cell count per sample",        "~500k",       "",        "",
+  "Viability",                    ">85%",        "",        "",
+  "Post-Zymo Qubit (ng/µL)",     ">1",          "",        "",
+  "Post-ligation Qubit (ng/µL)", ">5",          "",        "",
+  "Final library Qubit (ng/µL)", ">2",          "",        "",
+  "Tapestation peak (bp)",        "150–350",     "",        ""
+)
+stbl(qc_summary, caption = "Full experiment QC summary")
+```
+
+---
+
+## Interpretation
+
+<!-- What did you see? Positive and negative controls behaving? Peaks where expected? -->
+
+## Deviations summary
+
+<!-- Consolidate all deviations here -->
+
+## Next steps
+
+## References
+
+- Skene PJ, Henikoff JG, Henikoff S. *eLife.* 2018;7:e36906.
+- Protocol: [protocols/CnR_protocol.qmd](../protocols/_shiny/CnR_protocol.qmd)

@@ -1,0 +1,21 @@
+---
+title: "Experiments"
+listing:
+  contents:
+    - "*.qmd"
+  exclude:
+    filename: "index.qmd"
+  sort: "date desc"
+  type: table
+  fields: [date, title, categories, description]
+  field-display-names:
+    date: "Date"
+    title: "Experiment"
+    categories: "Tags"
+    description: "Result summary"
+  date-format: "YYYY-MM-DD"
+---
+
+One entry per experiment run. Filed by date. Committed to git when complete.
+
+Templates live in `experiments/_templates/` — copy the relevant one to start a new entry.

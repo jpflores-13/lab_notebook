@@ -1,0 +1,70 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "JP Flores — Lab Notebook"
+  description: "Protocols, experiment entries, and reading notes"
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Protocols"
+        href: protocols/index.qmd
+      - text: "Experiments"
+        href: experiments/index.qmd
+      - text: "Reading notes"
+        href: reading-notes/index.qmd
+      - text: "Aims"
+        href: aims/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/jpflores-13/lab_notebook
+        aria-label: GitHub
+
+  sidebar:
+    - title: "Protocols"
+      style: "docked"
+      contents:
+        - protocols/index.qmd
+
+    - title: "Experiments"
+      style: "docked"
+      contents:
+        - experiments/index.qmd
+        - auto: "experiments/*.qmd"
+
+    - title: "Reading notes"
+      style: "docked"
+      contents:
+        - reading-notes/index.qmd
+        - auto: "reading-notes/*.qmd"
+
+    - title: "Aims"
+      style: "docked"
+      contents:
+        - aims/index.qmd
+        - auto: "aims/*.qmd"
+
+  page-footer:
+    center: "JP Flores · Phanstiel / Scavuzzo / Gabriele labs"
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+    toc-depth: 3
+    toc-float: true
+    number-sections: false
+    code-fold: true
+    code-tools: true
+    highlight-style: github
+    css: styles.css
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+  message: false

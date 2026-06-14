@@ -1,0 +1,517 @@
+---
+title: "In situ Hi-C Protocol"
+subtitle: "Phanstiel Lab · Rao et al. 2014"
+author: "JP Flores"
+date: today
+format:
+  html:
+    toc: true
+    toc-float: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    embed-resources: true
+    css: print.css
+prefer-html: true
+server: shiny
+---
+
+```{r setup}
+#| include: false
+library(shiny)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+fmt <- function(x, d = 1) formatC(round(x, d), format = "f", digits = d)
+ex  <- function(n, p = 0.10) n * (1 + p)
+ex5 <- function(n)           n * 1.05
+
+make_all_mixes <- function(n, pcr_cyc) {
+  e  <- ex(n)
+  e5 <- ex5(n)
+  list(
+    lysis_buf = tibble(
+      Component         = c("1M Tris-HCl pH 8.0","5M NaCl","IGEPAL CA-630","H₂O"),
+      `Per sample (µL)` = c(10,2,2,986),
+      `Total (µL)`      = fmt(c(10,2,2,986)*e)
+    ),
+    lysis_pi = tibble(
+      Component         = c("Lysis buffer","Protease inhibitor"),
+      `Per sample (µL)` = c(250,50),
+      `Total (µL)`      = fmt(c(250,50)*e)
+    ),
+    biotin = tibble(
+      Component                      = c("0.4 mM Biotin-14-dATP","10 mM dCTP",
+                                          "10 mM dGTP","10 mM dTTP","Klenow (5 U/µL, NEB M0210L)"),
+      `Per sample (µL)`             = c(37.5,1.5,1.5,1.5,8),
+      `Total — 5% excess ONLY (µL)` = fmt(c(37.5,1.5,1.5,1.5,8)*e5)
+    ),
+    ligation = tibble(
+      Component         = c("ddH₂O","10× NEB T4 ligase buffer","10% Triton X-100",
+                             "BSA (20 mg/mL)","T4 DNA Ligase (2000 U/µL, NEB M0202M)"),
+      `Per sample (µL)` = c(673,120,100,6,1),
+      `Total (µL)`      = fmt(c(673,120,100,6,1)*e)
+    ),
+    xl_rev = tibble(
+      Component         = c("ddH₂O","Proteinase K (20 mg/mL)","10% SDS","5M NaCl"),
+      `Per sample (µL)` = c(432,18,50,46),
+      `Total (µL)`      = fmt(c(432,18,50,46)*e)
+    ),
+    end_rep = tibble(
+      Component         = c("1× NEB T4 ligase buffer","25 mM dNTP mix",
+                             "T4 PNK (10 U/µL)","T4 DNA Pol (3 U/µL)","Klenow (5 U/µL)"),
+      `Per sample (µL)` = c(88,2,5,4,1),
+      `Total (µL)`      = fmt(c(88,2,5,4,1)*e)
+    ),
+    datp = tibble(
+      Component         = c("1× NEB Buffer 2","10 mM dATP","Klenow exo minus (5 U/µL)"),
+      `Per sample (µL)` = c(90,5,5),
+      `Total (µL)`      = fmt(c(90,5,5)*e)
+    ),
+    strep = tibble(
+      Component         = c("Streptavidin T1 beads (10 mg/mL)","1× Tween wash buffer"),
+      `Per sample (µL)` = c(150,400),
+      `Total (µL)`      = fmt(c(150,400)*e)
+    ),
+    pcr = tibble(
+      Component         = c("PCR primer cocktail","Enhanced PCR mix"),
+      `Per sample (µL)` = c(5,20),
+      `Total (µL)`      = fmt(c(5,20)*e)
+    )
+  )
+}
+make_day0 <- function(nc, ct) {
+  fa <- fmt(nc*1.1/0.16, 2)
+  gl <- fmt(nc*1.1/10,   2)
+  tribble(
+    ~Step, ~Action,                                                                     ~Detail,
+    "1",  paste0("Count cells; assume ~",nc,"M/sample"),                               ct,
+    "2",  paste0("Add 1% formaldehyde (",fa," mL of 16% stock/sample); 10 min RT"),   "Fume hood; rock gently",
+    "3",  paste0("Quench: ",gl," mL 2M glycine/sample → 0.2M final; 5 min RT"),       "Rock; RT",
+    "4",  "Pellet; wash 5 mL cold PBS × 2; scrape if adherent",                       "2500 rpm 5 min 4°C",
+    "5",  paste0("Resuspend 1 mL PBS/5M cells; aliquot ",nc,"M/tube"),                "—",
+    "6",  "Pellet 900×g 5 min 4°C; remove supernatant",                                "—",
+    "7",  "Flash freeze in LN₂; store –80°C",                                          "—"
+  )
+}
+make_day5 <- function(n) {
+  tribble(
+    ~Step, ~Action,                                                                  ~Detail,
+    "1",  paste0("Prep strep T1 beads: ",n*150," µL total in ",ceiling(n/4)," tube(s)"),
+           "Wash 1× TWB; resuspend in 2× binding buffer",
+    "2",  "Add 300 µL washed beads/sample; 15 min RT rotation",                    "—",
+    "3",  "Magnet; wash 600 µL 1× TWB 55°C 2 min × 2",                            "450 rpm",
+    "4",  "End repair: 100 µL master mix; RT 30 min",                              "—",
+    "5",  "Wash 1× TWB 55°C × 2; resuspend in 1× NEB Buffer 2",                   "—",
+    "6",  "dATP attachment: 100 µL master mix; 37°C 30 min",                       "—",
+    "7",  "Wash 1× TWB 55°C × 2; resuspend in Quick ligation buffer",              "—",
+    "8",  "Add 3 µL UNIQUE adapter + 2 µL Quick ligase; RT 15 min",               "⚠ Record sample–index below",
+    "9",  "Wash 1× TWB 55°C × 2; resuspend in 50 µL 1× Tris",                    "Store beads + DNA at –20°C"
+  )
+}
+make_day6 <- function(pcr_cyc) {
+  tribble(
+    ~Step, ~Action,                                                                ~Detail,
+    "1",  paste0("25 µL DNA+beads + 25 µL PCR mix; ",pcr_cyc," cycles"),          "95°C 3 min → (98°C 20s/60°C 15s/72°C 30s) × N → 72°C 5 min",
+    "2",  "Add 200 µL 1× Tris → 250 µL; magnet; transfer supernatant",           "Save beads at –20°C",
+    "3",  "AMPure 0.7× (175 µL); wash 700 µL 70% EtOH; resuspend 100 µL",        "—",
+    "4",  "Second AMPure 0.7× (70 µL); wash × 2; elute 25 µL 1× Tris",           "—",
+    "5",  "Qubit HS dsDNA; Tapestation",                                            "Submit for sequencing"
+  )
+}
+stbl <- function(df, ...) {
+  kbl(df, ...) |>
+    kable_styling(bootstrap_options = c("striped","hover","condensed"),
+                  full_width = FALSE, font_size = 13)
+}
+```
+
+```{r server}
+#| context: server
+output$summary <- renderUI({
+  n  <- input$n_samples
+  nc <- input$n_cells_M
+  tags$p(tags$strong(paste0(
+    n," sample(s)  ·  ",nc,"M cells  ·  ",input$cell_type,
+    "  ·  ",input$pcr_cycles," PCR cycles"
+  )))
+})
+output$crosslink_info <- renderUI({
+  nc <- input$n_cells_M
+  tagList(
+    tags$p(paste0("Formaldehyde per sample: ",fmt(nc*1.1/0.16,2)," mL of 16% stock → 1% final")),
+    tags$p(paste0("Glycine per sample: ",fmt(nc*1.1/10,2)," mL of 2M stock → 0.2M quench"))
+  )
+})
+output$mixes <- renderUI({
+  mixes <- make_all_mixes(input$n_samples, input$pcr_cycles)
+  mk <- function(df, title) tagList(
+    tags$h4(title),
+    renderTable(df, striped=TRUE, bordered=TRUE, spacing="xs", width="auto", align="l")
+  )
+  tagList(
+    mk(mixes$lysis_buf, "Lysis buffer master mix (1 mL/sample)"),
+    mk(mixes$lysis_pi,  "Lysis buffer + protease inhibitor (300 µL/sample)"),
+    tags$div(class="callout callout-style-simple callout-warning",
+      tags$p(tags$strong("Biotin fill-in — 5% excess ONLY."),
+             " Biotin-14-dATP is very expensive. Do not apply the standard 10% excess.")),
+    mk(mixes$biotin,   "Biotin fill-in master mix (50 µL/sample — 5% excess only)"),
+    mk(mixes$ligation, "Ligation master mix (900 µL/sample)"),
+    mk(mixes$xl_rev,   "Crosslink reversal master mix (546 µL/sample)"),
+    mk(mixes$end_rep,  "End repair master mix (100 µL/sample — Day 5)"),
+    mk(mixes$datp,     "dATP attachment master mix (100 µL/sample — Day 5)"),
+    mk(mixes$strep,    paste0("Streptavidin bead prep (",input$n_samples*150," µL total — Day 5)")),
+    mk(mixes$pcr,      paste0("PCR master mix (",input$pcr_cycles," cycles — Day 6)"))
+  )
+})
+output$day0   <- renderTable({ make_day0(input$n_cells_M, input$cell_type) },
+                               striped=TRUE, bordered=TRUE, spacing="xs")
+output$day5   <- renderTable({ make_day5(input$n_samples) },
+                               striped=TRUE, bordered=TRUE, spacing="xs")
+output$day6   <- renderTable({ make_day6(input$pcr_cycles) },
+                               striped=TRUE, bordered=TRUE, spacing="xs")
+```
+
+---
+
+# Configure experiment {#configure-experiment .unnumbered}
+
+```{r inputs}
+#| panel: sidebar
+numericInput("n_samples",  "Number of samples",        value = 4, min=1, max=24)
+numericInput("n_cells_M",  "Cells per sample (×10⁶)",  value = 5, min=0.75, step=0.25)
+numericInput("pcr_cycles", "PCR cycles (target 7–8)",  value = 8, min=4, max=12)
+selectInput( "cell_type",  "Cell type",
+             choices = c("Adherent","Suspension","Semi-adherent"))
+hr()
+tags$small(tags$em("File → Print → Save as PDF for bench copy."))
+```
+
+```{r summary-out}
+#| panel: fill
+uiOutput("summary")
+uiOutput("crosslink_info")
+```
+
+---
+
+::: {.callout-note}
+## Overview
+In situ Hi-C captures genome-wide chromatin contacts by crosslinking, restriction digestion (MboI), proximity ligation, and sequencing. The protocol runs over 6 days. Key rate-limiting steps: restriction digest efficiency (Day 1 O/N), biotin fill-in (Day 2 — 5% excess only), and shearing target size (Day 4 300–500 bp).
+:::
+
+::: {.callout-important}
+## Before Day 0
+Fill LN₂ thermos. Set two centrifuges to 4°C. Prepare 1% formaldehyde and 2M glycine stock. Enzymes stay in glycerol block on ice — do **not** pre-thaw MboI or Klenow.
+:::
+
+---
+
+# Buffer recipes
+
+```{r buffers}
+twb <- tribble(
+  ~Component,             ~Amount,     ~`Final conc.`,
+  "1 M Tris-HCl pH 7.5", "250 µL",    "5 mM",
+  "0.5 M EDTA",           "50 µL",     "0.5 mM",
+  "5 M NaCl",             "10 mL",     "1 M",
+  "Tween-20",             "25 µL",     "0.05%",
+  "H₂O",                  "39.675 mL", "—"
+)
+bb2x <- tribble(
+  ~Component,             ~Amount,   ~`Final conc.`,
+  "1 M Tris-HCl pH 7.5", "500 µL",  "10 mM",
+  "0.5 M EDTA",           "100 µL",  "1 mM",
+  "5 M NaCl",             "20 mL",   "2 M",
+  "H₂O",                  "29.4 mL", "—"
+)
+gly2m <- tribble(
+  ~Component, ~Amount,   ~Notes,
+  "PBS",      "450 mL",  "Remove 50 mL from 500 mL bottle first",
+  "Glycine",  "75.07 g", "Dissolve; fill back to 500 mL mark"
+)
+lysis_r <- tribble(
+  ~Component,       ~Amount,  ~`Final conc.`,
+  "1M Tris pH 8.0", "10 µL",  "1 mM",
+  "5M NaCl",        "2 µL",   "1 mM",
+  "IGEPAL CA-630",  "2 µL",   "0.02%",
+  "H₂O",           "986 µL",  "—",
+  "Protease inh.",  "50 µL",  "⚠ Add fresh"
+)
+stbl(twb,    caption = "1× Tween wash buffer (50 mL)")
+stbl(bb2x,   caption = "2× Binding buffer (50 mL)")
+stbl(gly2m,  caption = "2M Glycine stock (500 mL)")
+stbl(lysis_r,caption = "Lysis buffer (1 mL — scale as needed)")
+```
+
+---
+
+# Scaled master mixes
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+
+All volumes computed by R from your sidebar inputs. Expand if a number looks wrong.
+
+**Core formula (all standard mixes):**
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times 1.10$$
+
+**Formaldehyde crosslinking** — working backwards from 1% final in ~10 mL/sample:
+
+$$V_{16\%\;stock} = \frac{N_{cells} \times 1.1 \times 10^6 \; cells \times 2\; \mu L/10^6\;cells}{0.16} \approx \frac{N_{cells} \times 1.1}{0.16} \; mL$$
+
+The $\times 1.1$ adds 10% extra to ensure complete fixation before quench.
+
+**Glycine quench** — to reach 0.2M final from 2M stock:
+
+$$V_{2M\;glycine} = \frac{N_{cells} \times 1.1}{10} \; mL$$
+
+**Biotin fill-in** — ⚠️ 5% excess ONLY (not 10%):
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times \mathbf{1.05}$$
+
+Biotin-14-dATP costs ~\$800/vial. The 5% exception is intentional and hardcoded.
+All other dNTPs in this mix still use 5% for consistency.
+
+**Ligation master mix** (900 µL per sample — largest mix in protocol):
+
+$$V_{total} = 900 \; \mu L \times N \times 1.10$$
+
+Component breakdown per sample: 673 µL H₂O + 120 µL 10× buffer + 100 µL Triton + 6 µL BSA + 1 µL ligase = 900 µL.
+
+**Crosslink reversal** (546 µL per sample):
+
+$$V_{total} = 546 \; \mu L \times N \times 1.10$$
+
+Component breakdown: 432 µL H₂O + 18 µL Prot-K + 50 µL SDS + 46 µL NaCl = 546 µL.
+
+**AMPure size selection** (Day 4) — two-step logic:
+
+$$\text{Step 1: } V_{AMPure} = 0.55 \times V_{sample} = 0.55 \times 200 \; \mu L = 110 \; \mu L \quad \text{(keep supernatant — removes >500 bp)}$$
+
+$$\text{Step 2: } V_{AMPure} = 0.15 \times V_{sample} = 0.15 \times 200 \; \mu L = 30 \; \mu L \quad \text{(keep beads — captures 300–500 bp)}$$
+
+The ratios are bead:sample, not absolute volumes. If you changed the elution volume
+on Day 3, recalculate: 0.55× and 0.15× of your actual volume going into size selection.
+
+**Where N =** your current sidebar input for number of samples.
+:::
+
+```{r mixes-out}
+uiOutput("mixes")
+```
+
+---
+
+# Day 0 — Crosslinking
+
+::: {.callout-warning}
+## Formaldehyde — fume hood only
+All formaldehyde steps must be performed in a fume hood. Collect formaldehyde-exposed waste separately for disposal per institutional guidelines. Glycine quench must be added **in the hood** before moving tubes to bench.
+:::
+
+::: {.callout-tip collapse="true"}
+## Counting cells before crosslinking
+Plate an extra well at the same density as your experimental wells and count from that well on Day 0. Do not count from your experimental wells — removing cells for counting changes the density of the remaining cells.
+:::
+
+```{r day0-out}
+tableOutput("day0")
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] Formaldehyde waste in designated fume hood containers
+- [ ] Glycine quench added in fume hood
+- [ ] LN₂ flash freeze complete; pellets at –80°C
+:::
+
+---
+
+# Day 1 — Lysis & MboI restriction digest (~2 hr + O/N)
+
+::: {.callout-warning}
+## MboI handling
+Keep MboI in the glycerol block on ice at all times. Return to –20°C immediately after dispensing. Never let it sit at room temperature — glycerol-containing enzymes lose activity quickly when warmed.
+:::
+
+::: {.callout-note collapse="true"}
+## Why 0.5% SDS + Triton X-100 quench?
+SDS permeabilizes nuclei to allow MboI access to chromatin. However, SDS also inhibits MboI, so it must be quenched with Triton X-100 before adding enzyme. The 62°C step ensures denaturation of surface proteins without denaturing chromatin structure.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Set microcentrifuge 4°C; thermomixer 62°C; oven 37°C | — |
+| 2 | Thaw crosslinked cells on ice; add 300 µL lysis buffer + PI | Ice 15 min |
+| 3 | Spin 2500×g 5 min 4°C; discard supernatant | — |
+| 4 | Wash pellet with 500 µL lysis buffer; spin again | — |
+| 5 | Resuspend in 50 µL 0.5% SDS; 62°C 7 min | — |
+| 6 | Add 145 µL ddH₂O + 25 µL 10% Triton X-100; quench SDS | 37°C 15 min; avoid foaming |
+| 7 | Add 25 µL 10× NEBuffer 2 + 20 µL MboI (100 U) | Return MboI to –20°C immediately |
+| 8 | Digest O/N (or ≥2 hr) at 37°C with rotation | Hybridization oven |
+
+::: {.callout-important}
+## Checklist
+- [ ] MboI returned to –20°C
+- [ ] Samples rotating at 37°C O/N
+:::
+
+---
+
+# Day 2 — Biotin fill-in, ligation & crosslink reversal (~6.5 hr + O/N)
+
+::: {.callout-warning}
+## 5% excess only for biotin fill-in — not 10%
+Biotin-14-dATP is extremely expensive. The biotin fill-in master mix uses **5% excess** (not the standard 10%). This is the only step in the protocol with a different excess factor.
+:::
+
+::: {.callout-note collapse="true"}
+## Why proximity ligation at RT with slow rotation?
+Proximity ligation must occur while chromatin is still condensed inside intact nuclei — this ensures only DNA ends that are spatially close get ligated. Elevated temperature or vigorous mixing would release chromatin and allow random intermolecular ligation, destroying the contact information.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Inactivate MboI: 62°C 20 min; cool to RT | Set oven to 23°C (open door) |
+| 2 | **Add 50 µL biotin fill-in mix — 5% excess only** | 37°C 1.5h rotation |
+| 3 | Add 900 µL ligation mix; RT 4h slow rotation | Slowest oven speed; door open |
+| 4 | Spin 2500×g 5 min; remove supernatant | — |
+| 5 | Resuspend in 546 µL crosslink reversal mix; 55°C 30 min | Thermomixer |
+| 6 | Continue 68°C O/N; no shaking | — |
+
+::: {.callout-important}
+## Checklist
+- [ ] Biotin fill-in time: _______ min at 37°C
+- [ ] Ligation time: _______ hr at RT
+- [ ] 68°C O/N started at: _______
+:::
+
+---
+
+# Day 3 — DNA precipitation (~3 hr + 6 hr at –80°C)
+
+::: {.callout-tip}
+## This is a clean break point
+DNA can sit dissolved in 1× Tris pH 8 at 4°C O/N after the precipitation step. If you need to pause, stop here — Day 4 shearing can be done the next morning.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Cool tubes to RT | — |
+| 2 | Add 874 µL 100% EtOH + 55 µL 3M NaAc pH 5.2 | Invert to mix; –80°C 4–6h |
+| 3 | Spin max speed 2°C 25 min; remove supernatant on ice | Keep tubes cold throughout |
+| 4 | Wash 800 µL 70% EtOH × 2; vacuum dry | — |
+| 5 | Dissolve in 130 µL 1× Tris pH 8; 37°C 1h | Or 4°C O/N |
+
+::: {.callout-important}
+## Checklist
+- [ ] –80°C precipitation started at: _______
+- [ ] Qubit BR dsDNA before shearing: _______ ng/µL
+:::
+
+---
+
+# Day 4 — Shearing & size selection (~6.5 hr)
+
+::: {.callout-warning}
+## Target size is 300–500 bp — verify with gel before proceeding
+If shearing is outside this range, the size selection will be off and library complexity will suffer. Run a 1:5 dilution on a 2% agarose gel before proceeding to AMPure. Do not skip the gel check.
+:::
+
+::: {.callout-tip collapse="true"}
+## AMPure size selection logic
+The two-step AMPure protocol selects for 300–500 bp fragments. Step 1 (0.55×): large fragments (>500 bp) bind beads, small fragments (<500 bp) stay in supernatant — **keep supernatant**. Step 2 (add 0.15× more to supernatant): now 300–500 bp fragments bind — **keep these beads**. Fragments <300 bp remain in supernatant and are discarded.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Qubit BR; if >150 ng/µL dilute to 150 ng/µL in 130 µL | — |
+| 2 | Covaris LE220: Duty 25 / PIP 500 / 200 cyc/burst / 90 sec | 130 µL microTUBE; fill level 6 |
+| 3 | Transfer + wash vial with 70 µL ddH₂O → 200 µL total | — |
+| 4 | Gel verify shearing: 1:5 dilution on 2% agarose | Use bottom layer of gel |
+| 5 | AMPure 0.55× (110 µL); keep **supernatant** | <500 bp in supernatant |
+| 6 | Add 0.15× more AMPure (30 µL) to supernatant; keep **beads** | 300–500 bp on beads |
+| 7 | Wash 700 µL 70% EtOH × 2; elute in 300 µL 1× Tris | — |
+| 8 | Qubit HS dsDNA; gel verify size selection | Store –20°C |
+
+::: {.callout-important}
+## Checklist
+- [ ] Post-shear gel: _______ pass/fail
+- [ ] Post-size-selection Qubit: _______ ng/µL
+- [ ] Size range confirmed: _______ bp
+:::
+
+---
+
+# Day 5 — Biotin pull-down & library prep (~9 hr)
+
+::: {.callout-warning}
+## Adapter index tracking — record before opening tubes
+Write down your sample-to-index assignment now, before you open any adapter tubes. Index swaps are catastrophic and invisible until sequencing.
+
+| Sample | Index |
+|--------|-------|
+| | |
+| | |
+| | |
+| | |
+:::
+
+```{r day5-out}
+tableOutput("day5")
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] All adapter assignments recorded above
+- [ ] Beads + DNA stored at –20°C
+:::
+
+---
+
+# Day 6 — PCR amplification & final cleanup (~2 hr)
+
+::: {.callout-tip collapse="true"}
+## Cycle number
+Target 7–8 cycles for 5M cells starting input. Use 4–6 cycles if starting input was higher (>10M cells). Never exceed 12 cycles — PCR duplicates inflate apparent contact counts and reduce unique pair complexity.
+:::
+
+```{r day6-out}
+tableOutput("day6")
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] Final Qubit: _______ ng/µL
+- [ ] Tapestation peak: _______ bp (expected 300–600 bp)
+- [ ] Submitted for sequencing: _______
+:::
+
+---
+
+# QC summary
+
+```{r qc-tbl}
+qc <- tribble(
+  ~Checkpoint,                      ~Expected,           ~Observed, ~Pass,
+  "Pre-shear Qubit (BR)",           "measurable",         "",        "",
+  "Post-shear gel",                 "smear 200–2000 bp",  "",        "",
+  "Post-size-selection Qubit (HS)", ">5 ng/µL",           "",        "",
+  "Post-size-selection gel",        "300–500 bp",         "",        "",
+  "Final library Qubit",            ">2 ng/µL",           "",        "",
+  "Tapestation peak",               "300–600 bp",         "",        ""
+)
+stbl(qc)
+```
+
+**Notes / deviations:**
+
+---
+
+# References
+
+Rao SSP et al. *Cell.* 2014;159(7):1665–1680.
+Protocol: Phanstiel lab; adapted by Katie Metz, HyunAh Kim, Yoseli Quiroga, JP Flores.

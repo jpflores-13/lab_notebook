@@ -1,0 +1,239 @@
+---
+title: "Hi-C — [target] — [cell type]"
+date: today
+author: "JP Flores"
+categories: [Hi-C, chromatin]
+description: ""  # fill in one-line result summary when done — shows in experiments/index
+status: "in-progress"  # change to "complete" when committed
+---
+
+```{r setup}
+#| include: false
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+stbl <- function(df, ...) {
+  kbl(df, ...) |>
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
+                  full_width = FALSE, font_size = 13)
+}
+```
+
+## Overview
+
+```{r exp-meta}
+#| echo: false
+meta <- tribble(
+  ~Field,              ~Value,
+  "Date started",      as.character(Sys.Date()),
+  "Date completed",    "",
+  "Cell line / type",  "",
+  "Treatment",         "",
+  "N samples",         "",
+  "Aim this supports", "",
+  "Protocol version",  "[protocols/HiC_protocol.qmd](../protocols/_shiny/HiC_protocol.qmd)",
+  "Raw data path",     "",
+  "Sequencing run ID", ""
+)
+stbl(meta, col.names = c("", ""))
+```
+
+## Hypothesis
+
+<!-- What do you expect to see and why? One paragraph. -->
+
+## Experimental design
+
+<!-- Which samples? What's the comparison? Any controls? -->
+
+---
+
+## Day 0 — Crosslinking {.day-header}
+
+**Date:** ___ **Started:** ___ **Finished:** ___
+
+```{r day0-qc}
+qc0 <- tribble(
+  ~Checkpoint,                      ~Expected,                ~Observed, ~Pass,
+  "Cell count (hemocytometer)",     "~5M/sample",              "",        "",
+  "Viability (trypan blue)",        ">85%",                    "",        "",
+  "Pellet appearance post-fixation","Firm, off-white",         "",        "",
+  "Formaldehyde lot #",             "",                        "",        ""
+)
+stbl(qc0, caption = "Day 0 QC")
+```
+
+::: {.callout-note appearance="minimal" collapse="true"}
+## Protocol reminder — Day 0
+Formaldehyde 1% final (16% stock), 10 min RT. Quench with 2M glycine to 0.2M. Wash 2× cold PBS. Flash freeze in LN₂.
+:::
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 1 — Lysis & MboI restriction digest {.day-header}
+
+**Date:** ___ **Started:** ___ **MboI lot #:** ___
+
+```{r day1-qc}
+qc1 <- tribble(
+  ~Checkpoint,              ~Expected,           ~Observed, ~Pass,
+  "SDS permeabilization",   "62°C 7 min done",   "",        "",
+  "Triton quench",          "37°C 15 min done",  "",        "",
+  "MboI digest duration",   "O/N or ≥2 hr",      "",        "",
+  "MboI returned to –20°C", "Yes",               "",        ""
+)
+stbl(qc1, caption = "Day 1 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 2 — Biotin fill-in, ligation & crosslink reversal {.day-header}
+
+**Date:** ___ **Biotin fill-in started:** ___ **Ligation started:** ___
+
+::: {.callout-warning appearance="minimal"}
+Biotin fill-in: 5% excess only. Ligation: RT slow rotation, door open.
+:::
+
+```{r day2-qc}
+qc2 <- tribble(
+  ~Checkpoint,                ~Expected,            ~Observed, ~Pass,
+  "MboI inactivation",        "62°C 20 min done",   "",        "",
+  "Biotin fill-in",           "37°C 1.5h done",     "",        "",
+  "Ligation duration",        "4h RT",               "",        "",
+  "Crosslink reversal started","55°C 30 min → 68°C O/N","",   ""
+)
+stbl(qc2, caption = "Day 2 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 3 — DNA precipitation {.day-header}
+
+**Date:** ___ **–80°C precipitation started:** ___
+
+```{r day3-qc}
+qc3 <- tribble(
+  ~Checkpoint,              ~Expected,          ~Observed, ~Pass,
+  "Pellet visible post-spin","Yes",              "",        "",
+  "Qubit BR dsDNA",         "measurable",        "",        "",
+  "Pellet dissolved in Tris","37°C 1h done",     "",        ""
+)
+stbl(qc3, caption = "Day 3 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 4 — Shearing & size selection {.day-header}
+
+**Date:** ___ **Covaris settings:** Duty 25 / PIP 500 / 200 cyc/burst / 90 sec
+
+```{r day4-qc}
+qc4 <- tribble(
+  ~Checkpoint,                       ~Expected,          ~Observed, ~Pass,
+  "Pre-shear Qubit BR (ng/µL)",      ">10",              "",        "",
+  "Post-shear gel",                  "smear 200–2000 bp", "",       "",
+  "Post-size-selection Qubit HS",    ">5 ng/µL",         "",        "",
+  "Post-size-selection gel",         "300–500 bp",       "",        ""
+)
+stbl(qc4, caption = "Day 4 QC")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 5 — Biotin pull-down & library prep {.day-header}
+
+**Date:** ___
+
+```{r day5-qc}
+qc5 <- tribble(
+  ~Sample, ~Index, ~Notes,
+  "",      "",     "",
+  "",      "",     "",
+  "",      "",     ""
+)
+stbl(qc5, caption = "Adapter index assignments — fill in before opening tubes")
+```
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Day 6 — PCR amplification & final cleanup {.day-header}
+
+**Date:** ___ **PCR cycles used:** ___
+
+```{r day6-qc}
+qc6 <- tribble(
+  ~Sample, ~`Qubit HS (ng/µL)`, ~`Tapestation peak (bp)`, ~`Submitted?`,
+  "",      "",                   "",                        "",
+  "",      "",                   "",                        "",
+  "",      "",                   "",                        ""
+)
+stbl(qc6, caption = "Final library QC")
+```
+
+**Sequencing run ID / submission date:**
+
+**Deviations from protocol:**
+
+**Notes:**
+
+---
+
+## Summary QC table
+
+```{r summary-qc}
+qc_summary <- tribble(
+  ~Checkpoint,                        ~Expected,           ~Observed, ~Pass,
+  "Pre-shear Qubit BR (ng/µL)",       ">10",               "",        "",
+  "Post-shear gel",                   "smear 200–2000 bp", "",        "",
+  "Post-size-selection Qubit (ng/µL)","≥5",                "",        "",
+  "Post-size-selection gel",          "300–500 bp",        "",        "",
+  "Final library Qubit (ng/µL)",      ">2",                "",        "",
+  "Tapestation peak (bp)",            "300–600",           "",        ""
+)
+stbl(qc_summary, caption = "Full experiment QC summary")
+```
+
+---
+
+## Interpretation
+
+<!-- What did you see? Does it match your hypothesis? -->
+
+## Deviations summary
+
+<!-- Consolidate all deviations from the 6 days here for easy reference -->
+
+## Next steps
+
+<!-- What does this experiment tell you to do next? -->
+
+## References
+
+- Rao SSP et al. *Cell.* 2014;159(7):1665–1680.
+- Protocol: [protocols/HiC_protocol.qmd](../protocols/_shiny/HiC_protocol.qmd)

@@ -1,0 +1,8 @@
+_site/
+.quarto/
+*.html
+!experiments/_templates/*.qmd
+.DS_Store
+*.Rproj.user/
+*.Rhistory
+*.RData
