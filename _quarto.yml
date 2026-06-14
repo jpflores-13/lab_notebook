@@ -23,6 +23,7 @@ website:
       style: "docked"
       contents:
         - protocols/index.qmd
+        - auto: "protocols/*.qmd"
 
     - title: "Experiments"
       style: "docked"

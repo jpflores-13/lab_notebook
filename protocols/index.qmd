@@ -2,48 +2,16 @@
 title: "Protocols"
 ---
 
-Protocol calculators are **Shiny documents** — they live in `protocols/_shiny/`
-and are served individually, not as part of the notebook site.
-They cannot be included in a static website, so they are not browsable here.
-
-## How to open a protocol calculator
-
-Protocol calculators must be served from **inside** `protocols/_shiny/` —
-running `quarto serve` from the repo root fails because the parent `_quarto.yml`
-defines a website project, which is incompatible with Shiny.
-
-```bash
-cd protocols/_shiny
-
-quarto serve HiC_protocol.qmd      # in situ Hi-C
-quarto serve CnR_protocol.qmd      # CUT&RUN
-quarto serve ENS_2D_protocol.qmd   # 2D ENS differentiation
-
-# When done: Ctrl+C, then cd ../.. to return to the repo root
-```
-
-Each opens in your browser. Configure your inputs in the sidebar, then
-**File → Print → Save as PDF** for your bench copy.
+Interactive protocol calculators — set your sample count and volumes scale automatically. Use **🖨 Print / Save as PDF** on any protocol for a bench copy.
 
 ## Available protocols
 
-| Protocol | File | Type | Source |
-|----------|------|------|--------|
-| In situ Hi-C | `protocols/_shiny/HiC_protocol.qmd` | Chromatin conformation | Phanstiel lab · Rao et al. 2014 |
-| CUT&RUN | `protocols/_shiny/CnR_protocol.qmd` | Chromatin profiling | Phanstiel lab · Skene et al. 2018 |
-| 2D ENS differentiation | `protocols/_shiny/ENS_2D_protocol.qmd` | Cell biology | Barber, Studer & Fattahi 2019 |
+| Protocol | Type | Source |
+|----------|------|--------|
+| [In situ Hi-C](hic-protocol.qmd) | Chromatin conformation | Rao et al. 2014 |
+| [CUT&RUN](cnr-protocol.qmd) | Chromatin profiling | Skene et al. 2018 |
+| [2D ENS differentiation](ens-2d-protocol.qmd) | Cell biology | Barber et al. 2019 |
 
 ## Adding a new protocol
 
-Give Claude the source (PDF, `.docx`, or paste the methods section) and say
-**"make a QMD for this protocol."**
-Output goes in `protocols/_shiny/`. Then add a row to the table above.
-
-## Why the separation?
-
-Quarto website projects render everything to static HTML.
-Shiny documents require a live R process and can't be static.
-They coexist in the same repo but are used differently:
-
-- **Notebook site** (`quarto render` from project root) — static, browsable, searchable
-- **Protocol calculators** (`cd protocols/_shiny && quarto serve X.qmd`) — interactive, run on demand
+Give Claude the source (PDF, `.docx`, or paste the methods section) and say **"make a QMD for this protocol."** Output goes in `protocols/`. Then add a row to the table above.

@@ -1,20 +1,109 @@
 [
   {
+    "objectID": "protocols/cnr-protocol.html",
+    "href": "protocols/cnr-protocol.html",
+    "title": "CUT&RUN Protocol",
+    "section": "",
+    "text": "🖨 Print / Save as PDF",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#configure-experiment",
+    "href": "protocols/cnr-protocol.html#configure-experiment",
+    "title": "CUT&RUN Protocol",
+    "section": "Configure experiment",
+    "text": "Configure experiment\n\n\nCode\nviewof n_samples  = Inputs.number({label: \"Number of samples\", value: 4, min: 1, max: 48, step: 1})\nviewof n_cells_M  = Inputs.number({label: \"Cells per sample (×10⁶)\", value: 0.5, min: 0.1, step: 0.1})\nviewof antibody   = Inputs.select([\"H3K4me3 (positive ctrl)\", \"H3K27me3 (positive ctrl)\", \"IgG (negative ctrl)\", \"CTCF\", \"SOX10\", \"BRG1\", \"CHD7\", \"Custom\"], {label: \"Primary antibody target\"})\nviewof pcr_cycles = Inputs.number({label: \"PCR cycles\", value: 12, min: 10, max: 15, step: 1})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmd`**${n_samples} sample(s) · ${n_cells_M}M cells each · antibody: ${antibody} · ${pcr_cycles} PCR cycles**`",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#buffer-recipes",
+    "href": "protocols/cnr-protocol.html#buffer-recipes",
+    "title": "CUT&RUN Protocol",
+    "section": "Buffer recipes",
+    "text": "Buffer recipes\nNE1 buffer (10 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n28.59 mL\n—\n\n\n1 M HEPES pH 7.5\n600 µL\n20 mM\n\n\n2 M KCl\n150 µL\n10 mM\n\n\n1 M MgCl₂\n30 µL\n1 mM\n\n\n1 M DTT (fresh)\n30 µL\n1 mM\n\n\n10% Triton X-100\n300 µL\n0.1%\n\n\nProtease inhibitor\n300 µL\n⚠ Add fresh\n\n\n\nWash buffer (150 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n136.35 mL\n—\n\n\n1 M HEPES pH 7.5\n3 mL\n20 mM\n\n\n10% Tween-20\n3 mL\n0.2%\n\n\n5 M NaCl\n4.5 mL\n150 mM\n\n\nBSA\n150 mg\n0.1%\n\n\n0.5 M Spermidine\n150 µL\n0.5 mM\n\n\n1 M Na-Butyrate\n1.5 mL\n10 mM\n\n\nProtease inhibitor\n150 µL\n⚠ Add fresh\n\n\n\nAntibody buffer (4 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nTriton Buffer\nto 4 mL\nWash buffer + 0.1% Triton X-100\n\n\n0.5 M EDTA\n16 µL\n2 mM\n\n\n\n2× Stop buffer (3 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n2586 µL\n—\n\n\n5 M NaCl\n204 µL\n340 mM\n\n\n0.5 M EDTA\n120 µL\n20 mM\n\n\n0.5 M EGTA\n24 µL\n4 mM\n\n\n10% Triton X-100\n30 µL\n0.1%\n\n\nRNAse A (4 µg/µL)\n37.5 µL\n50 µg/mL\n\n\n\n\n\n\n\n\n\nTipBuffer storage\n\n\n\n\n\nNE1 and Wash buffer can be made as a stock (without protease inhibitor) and stored at 4°C for up to 2 weeks. Add protease inhibitor only to the volume you need immediately before use. Stop buffer can be stored at 4°C for 1 month — add RNAse A fresh before use.",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#scaled-master-mixes",
+    "href": "protocols/cnr-protocol.html#scaled-master-mixes",
+    "title": "CUT&RUN Protocol",
+    "section": "Scaled master mixes",
+    "text": "Scaled master mixes\n\n\n\n\n\n\nNoteMath audit — how every volume is calculated\n\n\n\n\n\nCore formula (all standard master mixes):\n\\[V_{total} = V_{per\\_sample} \\times N_{samples} \\times 1.10\\]\nSDS / Proteinase K mix (4 µL added per sample after Stop buffer):\n\\[V_{SDS} = 2 \\; \\mu L \\times N \\times 1.10 \\qquad V_{PK} = 2 \\; \\mu L \\times N \\times 1.10\\]\nConA bead prep (not scaled with excess — fixed 10 µL per sample):\n\\[V_{beads} = 10 \\; \\mu L \\times N_{samples}\\]\nWhere N = your current input for number of samples. Include controls as samples.\n\n\n\n\n\nCode\ne_cnr = n_samples * 1.10\nfmt_cnr = (x, d = 1) =&gt; x.toFixed(d)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDS / Proteinase K (add 4 µL/sample after Stop buffer)\n\n\nCode\nInputs.table([\n  {Component: \"10% SDS\",                   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)},\n  {Component: \"Proteinase K (20 mg/mL)\",   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nEnd repair & A-tailing (add 10 µL to 50 µL sample)\n\n\nCode\nInputs.table([\n  {Component: \"End Repair & A-tailing Buffer\",      \"Per sample (µL)\": 7, \"Total (µL)\": fmt_cnr(7 * e_cnr)},\n  {Component: \"End Repair & A-tailing Enzyme mix\",  \"Per sample (µL)\": 3, \"Total (µL)\": fmt_cnr(3 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nAdapter ligation (add 45 µL mix + 5 µL unique adapter)\n\n\nCode\nInputs.table([\n  {Component: \"PCR-grade H₂O\",   \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)},\n  {Component: \"Ligation Buffer\", \"Per sample (µL)\": 30, \"Total (µL)\": fmt_cnr(30 * e_cnr)},\n  {Component: \"DNA Ligase\",      \"Per sample (µL)\": 10, \"Total (µL)\": fmt_cnr(10 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nCode\nmd`**PCR amplification (${pcr_cycles} cycles)**`\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Component: \"KAPA HiFi HotStart ReadyMix (2×)\",          \"Per sample (µL)\": 25, \"Total (µL)\": fmt_cnr(25 * e_cnr)},\n  {Component: \"KAPA Library Amplification Primer Mix (10×)\", \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)}\n], {layout: \"auto\"})",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
+    "href": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 1 — Cell binding to ConA beads (~2 hr)",
+    "text": "Day 1 — Cell binding to ConA beads (~2 hr)\n\n\n\n\n\n\nNoteWhy ConA beads?\n\n\n\n\n\nConcanavalin A-coated beads bind to the cell surface via glycoproteins, immobilizing cells for all subsequent washes. This eliminates centrifugation steps that would pellet and stress the nuclei. The key is that cells remain membrane-intact throughout — you are not isolating nuclei.\n\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw pellets on ice; resuspend in NE1 buffer\",                             Volume: \"1000 µL/sample\"},\n  {Step: \"2\", Action: \"Rotate 10 min 4°C\",                                                         Volume: \"—\"},\n  {Step: \"3\", Action: \"Spin 500×g 10 min 4°C; resuspend in Wash buffer\",                          Volume: \"1000 µL/sample\"},\n  {Step: \"4\", Action: `Activate ConA beads: ${(10 * n_samples).toFixed(0)} µL total`,             Volume: \"Wash 1× Binding Buffer\"},\n  {Step: \"5\", Action: `Resuspend in ${(10 * n_samples).toFixed(0)} µL Binding Buffer`,            Volume: \"10 µL beads/sample\"},\n  {Step: \"6\", Action: \"Mix cells + beads; invert ~10×; 10 min RT; magnet\",                        Volume: \"Resuspend in 50 µL Antibody Buffer/sample\"},\n  {Step: \"7\", Action: \"Add primary antibody; O/N 4°C thermomixer 1000 rpm\",                       Volume: \"Per Ab dilution sheet\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nPrimary antibody: _______ — lot # _______\nIgG negative control included\nH3K4me3 positive control included\nSamples in thermomixer at 4°C, 1000 rpm O/N",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
+    "href": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)",
+    "text": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)\n\n\n\n\n\n\nWarningCaCl₂ addition triggers digestion immediately\n\n\n\nOnce CaCl₂ is added, MNase is active. Work quickly and consistently — keep all samples on ice until the moment you add CaCl₂ to each tube, then incubate exactly 30 min at 4°C. Longer digestion = smaller fragments = loss of signal at broad domains.\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nPulse spin; magnet; wash Triton Buffer\n1 mL/sample\n\n\n2\nRepeat Triton Buffer wash\n1 mL/sample\n\n\n3\nResuspend in Antibody Buffer; add pAG-MNase\n50 µL + 2.5 µL/sample\n\n\n4\nIncubate 1h 4°C metal block\n—\n\n\n5\nWash × 2 Triton Buffer; resuspend in Triton Buffer\n100 µL/sample\n\n\n6\nAdd 100 mM CaCl₂; 30 min 4°C to digest\n2 µL/sample\n\n\n7\nAdd 2× Stop Buffer; 20 min 37°C to release fragments\n100 µL/sample\n\n\n8\nMagnet; transfer supernatant to new tube\nFragments are in supernatant\n\n\n9\nAdd SDS/Prot-K master mix; 1h 65°C (or O/N)\n4 µL/sample\n\n\n10\nZymo Clean & Concentrator; elute in 55 µL\nLo-Bind tube; –20°C\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nCaCl₂ added; digestion timer started\n37°C incubation complete\nSupernatant transferred cleanly (beads discarded)\nDNA in Lo-Bind tube at –20°C\n\n\n\n\n\n\n\n\n\nTipLow yield after Zymo cleanup?\n\n\n\n\n\nEnsure you are collecting the supernatant after CaCl₂ digestion — the released fragments are in solution, not on the beads. Also check that the Zymo column was not overloaded (max 5 µg DNA per column).",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
+    "href": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 3 — Library preparation (~4 hr)",
+    "text": "Day 3 — Library preparation (~4 hr)\n\n\n\n\n\n\nWarningAdapter index tracking\n\n\n\nRecord your adapter–sample assignment before you open any tubes. Adapter swaps are not detectable until sequencing data arrives. Use a unique index for each sample — never reuse an index within a run.\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw KAPA reagents at 4°C\",                                                    Detail: \"—\"},\n  {Step: \"2\", Action: \"End repair & A-tailing: add 10 µL mix to 50 µL sample\",                        Detail: \"20°C 30 min → 65°C 30 min (heated lid 85°C)\"},\n  {Step: \"3\", Action: \"Adapter ligation: add 45 µL mix + 5 µL UNIQUE adapter\",                        Detail: \"20°C 15 min; check adapter compatibility sheet\"},\n  {Step: \"4\", Action: \"AMPure round 1 (1.2×): 132 µL beads → elute 50 µL 10 mM Tris\",               Detail: \"—\"},\n  {Step: \"5\", Action: \"AMPure round 2 (1.2×): 60 µL beads → elute 25 µL\",                            Detail: \"—\"},\n  {Step: \"6\", Action: `PCR: 30 µL master mix + 20 µL sample; ${pcr_cycles} cycles`,                  Detail: \"98°C 45s → (98°C 15s/60°C 10s) × N → 72°C 1 min\"},\n  {Step: \"7\", Action: \"Post-PCR AMPure (1.2×) → elute 25 µL\",                                         Detail: \"—\"},\n  {Step: \"8\", Action: \"Qubit 1× HS dsDNA; Tapestation D1000\",                                          Detail: \"Store 4°C (2 wk) or –20°C\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipHow many PCR cycles?\n\n\n\n\n\n10–12 cycles for abundant targets (H3K4me3, H3K27me3). 12–14 cycles for lower-abundance targets (transcription factors, CTCF). Too many cycles introduces PCR duplicates that inflate apparent signal. When in doubt, use 12 and check duplicate rate after sequencing.\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nAdapters used: _______\nQubit HS dsDNA: _______ ng/µL\nTapestation peak: _______ bp (expected 150–350 bp)\nSubmitted for sequencing: _______",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#qc-log",
+    "href": "protocols/cnr-protocol.html#qc-log",
+    "title": "CUT&RUN Protocol",
+    "section": "QC log",
+    "text": "QC log\n\n\n\nCheckpoint\nExpected\nObserved\nPass\n\n\n\n\nDay 1: cells binding beads\nEven suspension\n\n\n\n\nDay 2: digest supernatant\nClear\n\n\n\n\nPost-Zymo Qubit\n&gt;1 ng/µL\n\n\n\n\nPost-ligation Qubit\n&gt;5 ng/µL\n\n\n\n\nFinal library Qubit\n&gt;2 ng/µL\n\n\n\n\nTapestation peak\n150–350 bp\n\n\n\n\n\nNotes / deviations:",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#references",
+    "href": "protocols/cnr-protocol.html#references",
+    "title": "CUT&RUN Protocol",
+    "section": "References",
+    "text": "References\nSkene PJ, Henikoff JG, Henikoff S. eLife. 2018;7:e36906. Protocol: Phanstiel lab; adapted by JP Flores.",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
     "objectID": "protocols/index.html",
     "href": "protocols/index.html",
     "title": "Protocols",
     "section": "",
-    "text": "Protocol calculators are Shiny documents — they live in protocols/_shiny/ and are served individually, not as part of the notebook site. They cannot be included in a static website, so they are not browsable here.",
-    "crumbs": [
-      "Protocols"
-    ]
-  },
-  {
-    "objectID": "protocols/index.html#how-to-open-a-protocol-calculator",
-    "href": "protocols/index.html#how-to-open-a-protocol-calculator",
-    "title": "Protocols",
-    "section": "How to open a protocol calculator",
-    "text": "How to open a protocol calculator\nProtocol calculators must be served from inside protocols/_shiny/ — running quarto serve from the repo root fails because the parent _quarto.yml defines a website project, which is incompatible with Shiny.\ncd protocols/_shiny\n\nquarto serve HiC_protocol.qmd      # in situ Hi-C\nquarto serve CnR_protocol.qmd      # CUT&RUN\nquarto serve ENS_2D_protocol.qmd   # 2D ENS differentiation\n\n# When done: Ctrl+C, then cd ../.. to return to the repo root\nEach opens in your browser. Configure your inputs in the sidebar, then File → Print → Save as PDF for your bench copy.",
+    "text": "Interactive protocol calculators — set your sample count and volumes scale automatically. Use 🖨 Print / Save as PDF on any protocol for a bench copy.",
     "crumbs": [
       "Protocols"
     ]
@@ -24,7 +113,7 @@
     "href": "protocols/index.html#available-protocols",
     "title": "Protocols",
     "section": "Available protocols",
-    "text": "Available protocols\n\n\n\n\n\n\n\n\n\nProtocol\nFile\nType\nSource\n\n\n\n\nIn situ Hi-C\nprotocols/_shiny/HiC_protocol.qmd\nChromatin conformation\nPhanstiel lab · Rao et al. 2014\n\n\nCUT&RUN\nprotocols/_shiny/CnR_protocol.qmd\nChromatin profiling\nPhanstiel lab · Skene et al. 2018\n\n\n2D ENS differentiation\nprotocols/_shiny/ENS_2D_protocol.qmd\nCell biology\nBarber, Studer & Fattahi 2019",
+    "text": "Available protocols\n\n\n\nProtocol\nType\nSource\n\n\n\n\nIn situ Hi-C\nChromatin conformation\nRao et al. 2014\n\n\nCUT&RUN\nChromatin profiling\nSkene et al. 2018\n\n\n2D ENS differentiation\nCell biology\nBarber et al. 2019",
     "crumbs": [
       "Protocols"
     ]
@@ -34,37 +123,17 @@
     "href": "protocols/index.html#adding-a-new-protocol",
     "title": "Protocols",
     "section": "Adding a new protocol",
-    "text": "Adding a new protocol\nGive Claude the source (PDF, .docx, or paste the methods section) and say “make a QMD for this protocol.” Output goes in protocols/_shiny/. Then add a row to the table above.",
+    "text": "Adding a new protocol\nGive Claude the source (PDF, .docx, or paste the methods section) and say “make a QMD for this protocol.” Output goes in protocols/. Then add a row to the table above.",
     "crumbs": [
       "Protocols"
     ]
   },
   {
-    "objectID": "protocols/index.html#why-the-separation",
-    "href": "protocols/index.html#why-the-separation",
-    "title": "Protocols",
-    "section": "Why the separation?",
-    "text": "Why the separation?\nQuarto website projects render everything to static HTML. Shiny documents require a live R process and can’t be static. They coexist in the same repo but are used differently:\n\nNotebook site (quarto render from project root) — static, browsable, searchable\nProtocol calculators (cd protocols/_shiny && quarto serve X.qmd) — interactive, run on demand",
-    "crumbs": [
-      "Protocols"
-    ]
-  },
-  {
-    "objectID": "reading-notes/index.html",
-    "href": "reading-notes/index.html",
-    "title": "Reading notes",
+    "objectID": "aims/index.html",
+    "href": "aims/index.html",
+    "title": "Aims",
     "section": "",
-    "text": "Protocol-adjacent papers worth annotating in depth. Not every paper — just the ones that directly inform how you run an experiment or interpret a result.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate read\nPaper\nTags\nOne-line takeaway\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "experiments/index.html",
-    "href": "experiments/index.html",
-    "title": "Experiments",
-    "section": "",
-    "text": "One entry per experiment run. Filed by date. Committed to git when complete.\nTemplates live in experiments/_templates/ — copy the relevant one to start a new entry.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate\nExperiment\nTags\nResult summary\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Experiments"
-    ]
+    "text": "Living documents for fellowship and grant aims. These update as experiments come in — figures and tables can embed R code that pulls from experiment entries directly.\n\n\n\nDocument\nStatus\n\n\n\n\nF32 — Aim 1\ndrafting\n\n\nHFSP overview\ndrafting\n\n\nFulbright narrative\nsubmitted"
   },
   {
     "objectID": "index.html",
@@ -95,10 +164,273 @@
     "text": "Recent experiments\nNo experiment entries yet. Run your first experiment!"
   },
   {
-    "objectID": "aims/index.html",
-    "href": "aims/index.html",
-    "title": "Aims",
+    "objectID": "experiments/index.html",
+    "href": "experiments/index.html",
+    "title": "Experiments",
     "section": "",
-    "text": "Living documents for fellowship and grant aims. These update as experiments come in — figures and tables can embed R code that pulls from experiment entries directly.\n\n\n\nDocument\nStatus\n\n\n\n\nF32 — Aim 1\ndrafting\n\n\nHFSP overview\ndrafting\n\n\nFulbright narrative\nsubmitted"
+    "text": "One entry per experiment run. Filed by date. Committed to git when complete.\nTemplates live in experiments/_templates/ — copy the relevant one to start a new entry.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate\nExperiment\nTags\nResult summary\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "reading-notes/index.html",
+    "href": "reading-notes/index.html",
+    "title": "Reading notes",
+    "section": "",
+    "text": "Protocol-adjacent papers worth annotating in depth. Not every paper — just the ones that directly inform how you run an experiment or interpret a result.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate read\nPaper\nTags\nOne-line takeaway\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "protocols/hic-protocol.html",
+    "href": "protocols/hic-protocol.html",
+    "title": "In situ Hi-C Protocol",
+    "section": "",
+    "text": "🖨 Print / Save as PDF",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#configure-experiment",
+    "href": "protocols/hic-protocol.html#configure-experiment",
+    "title": "In situ Hi-C Protocol",
+    "section": "Configure experiment",
+    "text": "Configure experiment\n\n\nCode\nviewof n_samples  = Inputs.number({label: \"Number of samples\", value: 4, min: 1, max: 24, step: 1})\nviewof n_cells_M  = Inputs.number({label: \"Cells per sample (×10⁶)\", value: 5, min: 0.75, step: 0.25})\nviewof pcr_cycles = Inputs.number({label: \"PCR cycles (target 7–8)\", value: 8, min: 4, max: 12, step: 1})\nviewof cell_type  = Inputs.select([\"Adherent\", \"Suspension\", \"Semi-adherent\"], {label: \"Cell type\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmd`**${n_samples} sample(s) · ${n_cells_M}M cells · ${cell_type} · ${pcr_cycles} PCR cycles**`",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#buffer-recipes",
+    "href": "protocols/hic-protocol.html#buffer-recipes",
+    "title": "In situ Hi-C Protocol",
+    "section": "Buffer recipes",
+    "text": "Buffer recipes\n1× Tween wash buffer (50 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\n1 M Tris-HCl pH 7.5\n250 µL\n5 mM\n\n\n0.5 M EDTA\n50 µL\n0.5 mM\n\n\n5 M NaCl\n10 mL\n1 M\n\n\nTween-20\n25 µL\n0.05%\n\n\nH₂O\n39.675 mL\n—\n\n\n\n2× Binding buffer (50 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\n1 M Tris-HCl pH 7.5\n500 µL\n10 mM\n\n\n0.5 M EDTA\n100 µL\n1 mM\n\n\n5 M NaCl\n20 mL\n2 M\n\n\nH₂O\n29.4 mL\n—\n\n\n\n2M Glycine stock (500 mL)\n\n\n\nComponent\nAmount\nNotes\n\n\n\n\nPBS\n450 mL\nRemove 50 mL from 500 mL bottle first\n\n\nGlycine\n75.07 g\nDissolve; fill back to 500 mL mark\n\n\n\nLysis buffer (1 mL — scale as needed)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\n1M Tris pH 8.0\n10 µL\n1 mM\n\n\n5M NaCl\n2 µL\n1 mM\n\n\nIGEPAL CA-630\n2 µL\n0.02%\n\n\nH₂O\n986 µL\n—\n\n\nProtease inh.\n50 µL\n⚠ Add fresh",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#scaled-master-mixes",
+    "href": "protocols/hic-protocol.html#scaled-master-mixes",
+    "title": "In situ Hi-C Protocol",
+    "section": "Scaled master mixes",
+    "text": "Scaled master mixes\n\n\n\n\n\n\nNoteMath audit — how every volume is calculated\n\n\n\n\n\nCore formula (all standard mixes):\n\\[V_{total} = V_{per\\_sample} \\times N_{samples} \\times 1.10\\]\nFormaldehyde crosslinking — working backwards from 1% final in ~10 mL/sample:\n\\[V_{16\\%\\;stock} = \\frac{N_{cells} \\times 1.1}{0.16} \\; mL\\]\nGlycine quench — to reach 0.2M final from 2M stock:\n\\[V_{2M\\;glycine} = \\frac{N_{cells} \\times 1.1}{10} \\; mL\\]\nBiotin fill-in — ⚠️ 5% excess ONLY (not 10%):\n\\[V_{total} = V_{per\\_sample} \\times N_{samples} \\times \\mathbf{1.05}\\]\nBiotin-14-dATP costs ~$800/vial. The 5% exception is intentional and hardcoded.\n\n\n\n\n\nCode\nfmt = (x, d = 1) =&gt; x.toFixed(d)\ne   = n_samples * 1.10\ne5  = n_samples * 1.05\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLysis buffer master mix (1 mL/sample)\n\n\nCode\nInputs.table([\n  {Component: \"1M Tris-HCl pH 8.0\", \"Per sample (µL)\": 10,  \"Total (µL)\": fmt(10  * e)},\n  {Component: \"5M NaCl\",             \"Per sample (µL)\": 2,   \"Total (µL)\": fmt(2   * e)},\n  {Component: \"IGEPAL CA-630\",       \"Per sample (µL)\": 2,   \"Total (µL)\": fmt(2   * e)},\n  {Component: \"H₂O\",                 \"Per sample (µL)\": 986, \"Total (µL)\": fmt(986 * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nLysis buffer + protease inhibitor (300 µL/sample)\n\n\nCode\nInputs.table([\n  {Component: \"Lysis buffer\",       \"Per sample (µL)\": 250, \"Total (µL)\": fmt(250 * e)},\n  {Component: \"Protease inhibitor\", \"Per sample (µL)\": 50,  \"Total (µL)\": fmt(50  * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nBiotin fill-in — 5% excess ONLY. Biotin-14-dATP is very expensive. Do not apply the standard 10% excess.\n\n\nBiotin fill-in master mix (50 µL/sample — 5% excess only)\n\n\nCode\nInputs.table([\n  {Component: \"0.4 mM Biotin-14-dATP\",        \"Per sample (µL)\": 37.5, \"Total — 5% excess ONLY (µL)\": fmt(37.5 * e5)},\n  {Component: \"10 mM dCTP\",                    \"Per sample (µL)\": 1.5,  \"Total — 5% excess ONLY (µL)\": fmt(1.5  * e5)},\n  {Component: \"10 mM dGTP\",                    \"Per sample (µL)\": 1.5,  \"Total — 5% excess ONLY (µL)\": fmt(1.5  * e5)},\n  {Component: \"10 mM dTTP\",                    \"Per sample (µL)\": 1.5,  \"Total — 5% excess ONLY (µL)\": fmt(1.5  * e5)},\n  {Component: \"Klenow (5 U/µL, NEB M0210L)\",  \"Per sample (µL)\": 8,    \"Total — 5% excess ONLY (µL)\": fmt(8    * e5)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nLigation master mix (900 µL/sample)\n\n\nCode\nInputs.table([\n  {Component: \"ddH₂O\",                                   \"Per sample (µL)\": 673, \"Total (µL)\": fmt(673 * e)},\n  {Component: \"10× NEB T4 ligase buffer\",                 \"Per sample (µL)\": 120, \"Total (µL)\": fmt(120 * e)},\n  {Component: \"10% Triton X-100\",                         \"Per sample (µL)\": 100, \"Total (µL)\": fmt(100 * e)},\n  {Component: \"BSA (20 mg/mL)\",                           \"Per sample (µL)\": 6,   \"Total (µL)\": fmt(6   * e)},\n  {Component: \"T4 DNA Ligase (2000 U/µL, NEB M0202M)\",   \"Per sample (µL)\": 1,   \"Total (µL)\": fmt(1   * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nCrosslink reversal master mix (546 µL/sample)\n\n\nCode\nInputs.table([\n  {Component: \"ddH₂O\",                    \"Per sample (µL)\": 432, \"Total (µL)\": fmt(432 * e)},\n  {Component: \"Proteinase K (20 mg/mL)\",  \"Per sample (µL)\": 18,  \"Total (µL)\": fmt(18  * e)},\n  {Component: \"10% SDS\",                  \"Per sample (µL)\": 50,  \"Total (µL)\": fmt(50  * e)},\n  {Component: \"5M NaCl\",                  \"Per sample (µL)\": 46,  \"Total (µL)\": fmt(46  * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nEnd repair master mix (100 µL/sample — Day 5)\n\n\nCode\nInputs.table([\n  {Component: \"1× NEB T4 ligase buffer\",  \"Per sample (µL)\": 88, \"Total (µL)\": fmt(88 * e)},\n  {Component: \"25 mM dNTP mix\",           \"Per sample (µL)\": 2,  \"Total (µL)\": fmt(2  * e)},\n  {Component: \"T4 PNK (10 U/µL)\",         \"Per sample (µL)\": 5,  \"Total (µL)\": fmt(5  * e)},\n  {Component: \"T4 DNA Pol (3 U/µL)\",      \"Per sample (µL)\": 4,  \"Total (µL)\": fmt(4  * e)},\n  {Component: \"Klenow (5 U/µL)\",          \"Per sample (µL)\": 1,  \"Total (µL)\": fmt(1  * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\ndATP attachment master mix (100 µL/sample — Day 5)\n\n\nCode\nInputs.table([\n  {Component: \"1× NEB Buffer 2\",              \"Per sample (µL)\": 90, \"Total (µL)\": fmt(90 * e)},\n  {Component: \"10 mM dATP\",                   \"Per sample (µL)\": 5,  \"Total (µL)\": fmt(5  * e)},\n  {Component: \"Klenow exo minus (5 U/µL)\",    \"Per sample (µL)\": 5,  \"Total (µL)\": fmt(5  * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nCode\nmd`**Streptavidin bead prep (${n_samples * 150} µL total — Day 5)**`\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Component: \"Streptavidin T1 beads (10 mg/mL)\", \"Per sample (µL)\": 150, \"Total (µL)\": fmt(150 * e)},\n  {Component: \"1× Tween wash buffer\",              \"Per sample (µL)\": 400, \"Total (µL)\": fmt(400 * e)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nCode\nmd`**PCR master mix (${pcr_cycles} cycles — Day 6)**`\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Component: \"PCR primer cocktail\", \"Per sample (µL)\": 5,  \"Total (µL)\": fmt(5  * e)},\n  {Component: \"Enhanced PCR mix\",    \"Per sample (µL)\": 20, \"Total (µL)\": fmt(20 * e)}\n], {layout: \"auto\"})",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-0-crosslinking",
+    "href": "protocols/hic-protocol.html#day-0-crosslinking",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 0 — Crosslinking",
+    "text": "Day 0 — Crosslinking\n\n\n\n\n\n\nWarningFormaldehyde — fume hood only\n\n\n\nAll formaldehyde steps must be performed in a fume hood. Collect formaldehyde-exposed waste separately for disposal per institutional guidelines. Glycine quench must be added in the hood before moving tubes to bench.\n\n\n\n\n\n\n\n\nTipCounting cells before crosslinking\n\n\n\n\n\nPlate an extra well at the same density as your experimental wells and count from that well on Day 0. Do not count from your experimental wells — removing cells for counting changes the density of the remaining cells.\n\n\n\n\n\nCode\nfa = (n_cells_M * 1.1 / 0.16).toFixed(2)\ngl = (n_cells_M * 1.1 / 10).toFixed(2)\n\nInputs.table([\n  {Step: \"1\", Action: `Count cells; assume ~${n_cells_M}M/sample`,                                          Detail: cell_type},\n  {Step: \"2\", Action: `Add 1% formaldehyde (${fa} mL of 16% stock/sample); 10 min RT`,                     Detail: \"Fume hood; rock gently\"},\n  {Step: \"3\", Action: `Quench: ${gl} mL 2M glycine/sample → 0.2M final; 5 min RT`,                         Detail: \"Rock; RT\"},\n  {Step: \"4\", Action: \"Pellet; wash 5 mL cold PBS × 2; scrape if adherent\",                                 Detail: \"2500 rpm 5 min 4°C\"},\n  {Step: \"5\", Action: `Resuspend 1 mL PBS/5M cells; aliquot ${n_cells_M}M/tube`,                            Detail: \"—\"},\n  {Step: \"6\", Action: \"Pellet 900×g 5 min 4°C; remove supernatant\",                                         Detail: \"—\"},\n  {Step: \"7\", Action: \"Flash freeze in LN₂; store –80°C\",                                                    Detail: \"—\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nFormaldehyde waste in designated fume hood containers\nGlycine quench added in fume hood\nLN₂ flash freeze complete; pellets at –80°C",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-1-lysis-mboi-restriction-digest-2-hr-on",
+    "href": "protocols/hic-protocol.html#day-1-lysis-mboi-restriction-digest-2-hr-on",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 1 — Lysis & MboI restriction digest (~2 hr + O/N)",
+    "text": "Day 1 — Lysis & MboI restriction digest (~2 hr + O/N)\n\n\n\n\n\n\nWarningMboI handling\n\n\n\nKeep MboI in the glycerol block on ice at all times. Return to –20°C immediately after dispensing. Never let it sit at room temperature — glycerol-containing enzymes lose activity quickly when warmed.\n\n\n\n\n\n\n\n\nNoteWhy 0.5% SDS + Triton X-100 quench?\n\n\n\n\n\nSDS permeabilizes nuclei to allow MboI access to chromatin. However, SDS also inhibits MboI, so it must be quenched with Triton X-100 before adding enzyme. The 62°C step ensures denaturation of surface proteins without denaturing chromatin structure.\n\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nSet microcentrifuge 4°C; thermomixer 62°C; oven 37°C\n—\n\n\n2\nThaw crosslinked cells on ice; add 300 µL lysis buffer + PI\nIce 15 min\n\n\n3\nSpin 2500×g 5 min 4°C; discard supernatant\n—\n\n\n4\nWash pellet with 500 µL lysis buffer; spin again\n—\n\n\n5\nResuspend in 50 µL 0.5% SDS; 62°C 7 min\n—\n\n\n6\nAdd 145 µL ddH₂O + 25 µL 10% Triton X-100; quench SDS\n37°C 15 min; avoid foaming\n\n\n7\nAdd 25 µL 10× NEBuffer 2 + 20 µL MboI (100 U)\nReturn MboI to –20°C immediately\n\n\n8\nDigest O/N (or ≥2 hr) at 37°C with rotation\nHybridization oven\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nMboI returned to –20°C\nSamples rotating at 37°C O/N",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-2-biotin-fill-in-ligation-crosslink-reversal-6.5-hr-on",
+    "href": "protocols/hic-protocol.html#day-2-biotin-fill-in-ligation-crosslink-reversal-6.5-hr-on",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 2 — Biotin fill-in, ligation & crosslink reversal (~6.5 hr + O/N)",
+    "text": "Day 2 — Biotin fill-in, ligation & crosslink reversal (~6.5 hr + O/N)\n\n\n\n\n\n\nWarning5% excess only for biotin fill-in — not 10%\n\n\n\nBiotin-14-dATP is extremely expensive. The biotin fill-in master mix uses 5% excess (not the standard 10%). This is the only step in the protocol with a different excess factor.\n\n\n\n\n\n\n\n\nNoteWhy proximity ligation at RT with slow rotation?\n\n\n\n\n\nProximity ligation must occur while chromatin is still condensed inside intact nuclei — this ensures only DNA ends that are spatially close get ligated. Elevated temperature or vigorous mixing would release chromatin and allow random intermolecular ligation, destroying the contact information.\n\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nInactivate MboI: 62°C 20 min; cool to RT\nSet oven to 23°C (open door)\n\n\n2\nAdd 50 µL biotin fill-in mix — 5% excess only\n37°C 1.5h rotation\n\n\n3\nAdd 900 µL ligation mix; RT 4h slow rotation\nSlowest oven speed; door open\n\n\n4\nSpin 2500×g 5 min; remove supernatant\n—\n\n\n5\nResuspend in 546 µL crosslink reversal mix; 55°C 30 min\nThermomixer\n\n\n6\nContinue 68°C O/N; no shaking\n—\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nBiotin fill-in time: _______ min at 37°C\nLigation time: _______ hr at RT\n68°C O/N started at: _______",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-3-dna-precipitation-3-hr-6-hr-at-80c",
+    "href": "protocols/hic-protocol.html#day-3-dna-precipitation-3-hr-6-hr-at-80c",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 3 — DNA precipitation (~3 hr + 6 hr at –80°C)",
+    "text": "Day 3 — DNA precipitation (~3 hr + 6 hr at –80°C)\n\n\n\n\n\n\nTipThis is a clean break point\n\n\n\nDNA can sit dissolved in 1× Tris pH 8 at 4°C O/N after the precipitation step. If you need to pause, stop here — Day 4 shearing can be done the next morning.\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nCool tubes to RT\n—\n\n\n2\nAdd 874 µL 100% EtOH + 55 µL 3M NaAc pH 5.2\nInvert to mix; –80°C 4–6h\n\n\n3\nSpin max speed 2°C 25 min; remove supernatant on ice\nKeep tubes cold throughout\n\n\n4\nWash 800 µL 70% EtOH × 2; vacuum dry\n—\n\n\n5\nDissolve in 130 µL 1× Tris pH 8; 37°C 1h\nOr 4°C O/N\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\n–80°C precipitation started at: _______\nQubit BR dsDNA before shearing: _______ ng/µL",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-4-shearing-size-selection-6.5-hr",
+    "href": "protocols/hic-protocol.html#day-4-shearing-size-selection-6.5-hr",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 4 — Shearing & size selection (~6.5 hr)",
+    "text": "Day 4 — Shearing & size selection (~6.5 hr)\n\n\n\n\n\n\nWarningTarget size is 300–500 bp — verify with gel before proceeding\n\n\n\nIf shearing is outside this range, the size selection will be off and library complexity will suffer. Run a 1:5 dilution on a 2% agarose gel before proceeding to AMPure. Do not skip the gel check.\n\n\n\n\n\n\n\n\nTipAMPure size selection logic\n\n\n\n\n\nThe two-step AMPure protocol selects for 300–500 bp fragments. Step 1 (0.55×): large fragments (&gt;500 bp) bind beads, small fragments (&lt;500 bp) stay in supernatant — keep supernatant. Step 2 (add 0.15× more to supernatant): now 300–500 bp fragments bind — keep these beads. Fragments &lt;300 bp remain in supernatant and are discarded.\n\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nQubit BR; if &gt;150 ng/µL dilute to 150 ng/µL in 130 µL\n—\n\n\n2\nCovaris LE220: Duty 25 / PIP 500 / 200 cyc/burst / 90 sec\n130 µL microTUBE; fill level 6\n\n\n3\nTransfer + wash vial with 70 µL ddH₂O → 200 µL total\n—\n\n\n4\nGel verify shearing: 1:5 dilution on 2% agarose\nUse bottom layer of gel\n\n\n5\nAMPure 0.55× (110 µL); keep supernatant\n&lt;500 bp in supernatant\n\n\n6\nAdd 0.15× more AMPure (30 µL) to supernatant; keep beads\n300–500 bp on beads\n\n\n7\nWash 700 µL 70% EtOH × 2; elute in 300 µL 1× Tris\n—\n\n\n8\nQubit HS dsDNA; gel verify size selection\nStore –20°C\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nPost-shear gel: _______ pass/fail\nPost-size-selection Qubit: _______ ng/µL\nSize range confirmed: _______ bp",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-5-biotin-pull-down-library-prep-9-hr",
+    "href": "protocols/hic-protocol.html#day-5-biotin-pull-down-library-prep-9-hr",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 5 — Biotin pull-down & library prep (~9 hr)",
+    "text": "Day 5 — Biotin pull-down & library prep (~9 hr)\n\n\n\n\n\n\nWarningAdapter index tracking — record before opening tubes\n\n\n\nWrite down your sample-to-index assignment now, before you open any adapter tubes. Index swaps are catastrophic and invisible until sequencing.\n\n\n\nSample\nIndex\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: `Prep strep T1 beads: ${n_samples * 150} µL total in ${Math.ceil(n_samples/4)} tube(s)`, Detail: \"Wash 1× TWB; resuspend in 2× binding buffer\"},\n  {Step: \"2\", Action: \"Add 300 µL washed beads/sample; 15 min RT rotation\",    Detail: \"—\"},\n  {Step: \"3\", Action: \"Magnet; wash 600 µL 1× TWB 55°C 2 min × 2\",            Detail: \"450 rpm\"},\n  {Step: \"4\", Action: \"End repair: 100 µL master mix; RT 30 min\",              Detail: \"—\"},\n  {Step: \"5\", Action: \"Wash 1× TWB 55°C × 2; resuspend in 1× NEB Buffer 2\",   Detail: \"—\"},\n  {Step: \"6\", Action: \"dATP attachment: 100 µL master mix; 37°C 30 min\",       Detail: \"—\"},\n  {Step: \"7\", Action: \"Wash 1× TWB 55°C × 2; resuspend in Quick ligation buffer\", Detail: \"—\"},\n  {Step: \"8\", Action: \"Add 3 µL UNIQUE adapter + 2 µL Quick ligase; RT 15 min\", Detail: \"⚠ Record sample–index below\"},\n  {Step: \"9\", Action: \"Wash 1× TWB 55°C × 2; resuspend in 50 µL 1× Tris\",    Detail: \"Store beads + DNA at –20°C\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nAll adapter assignments recorded above\nBeads + DNA stored at –20°C",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#day-6-pcr-amplification-final-cleanup-2-hr",
+    "href": "protocols/hic-protocol.html#day-6-pcr-amplification-final-cleanup-2-hr",
+    "title": "In situ Hi-C Protocol",
+    "section": "Day 6 — PCR amplification & final cleanup (~2 hr)",
+    "text": "Day 6 — PCR amplification & final cleanup (~2 hr)\n\n\n\n\n\n\nTipCycle number\n\n\n\n\n\nTarget 7–8 cycles for 5M cells starting input. Use 4–6 cycles if starting input was higher (&gt;10M cells). Never exceed 12 cycles — PCR duplicates inflate apparent contact counts and reduce unique pair complexity.\n\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: `25 µL DNA+beads + 25 µL PCR mix; ${pcr_cycles} cycles`, Detail: \"95°C 3 min → (98°C 20s/60°C 15s/72°C 30s) × N → 72°C 5 min\"},\n  {Step: \"2\", Action: \"Add 200 µL 1× Tris → 250 µL; magnet; transfer supernatant\", Detail: \"Save beads at –20°C\"},\n  {Step: \"3\", Action: \"AMPure 0.7× (175 µL); wash 700 µL 70% EtOH; resuspend 100 µL\", Detail: \"—\"},\n  {Step: \"4\", Action: \"Second AMPure 0.7× (70 µL); wash × 2; elute 25 µL 1× Tris\", Detail: \"—\"},\n  {Step: \"5\", Action: \"Qubit HS dsDNA; Tapestation\", Detail: \"Submit for sequencing\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nFinal Qubit: _______ ng/µL\nTapestation peak: _______ bp (expected 300–600 bp)\nSubmitted for sequencing: _______",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#qc-summary",
+    "href": "protocols/hic-protocol.html#qc-summary",
+    "title": "In situ Hi-C Protocol",
+    "section": "QC summary",
+    "text": "QC summary\n\n\n\nCheckpoint\nExpected\nObserved\nPass\n\n\n\n\nPre-shear Qubit (BR)\nmeasurable\n\n\n\n\nPost-shear gel\nsmear 200–2000 bp\n\n\n\n\nPost-size-selection Qubit (HS)\n&gt;5 ng/µL\n\n\n\n\nPost-size-selection gel\n300–500 bp\n\n\n\n\nFinal library Qubit\n&gt;2 ng/µL\n\n\n\n\nTapestation peak\n300–600 bp\n\n\n\n\n\nNotes / deviations:",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/hic-protocol.html#references",
+    "href": "protocols/hic-protocol.html#references",
+    "title": "In situ Hi-C Protocol",
+    "section": "References",
+    "text": "References\nRao SSP et al. Cell. 2014;159(7):1665–1680. Protocol: Phanstiel lab; adapted by Katie Metz, HyunAh Kim, Yoseli Quiroga, JP Flores.",
+    "crumbs": [
+      "Protocols",
+      "In situ Hi-C Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html",
+    "href": "protocols/ens-2d-protocol.html",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "",
+    "text": "🖨 Print / Save as PDF",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#configure-experiment",
+    "href": "protocols/ens-2d-protocol.html#configure-experiment",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Configure experiment",
+    "text": "Configure experiment\n\n\nCode\nviewof n_wells    = Inputs.number({label: \"6-well plate wells\", value: 6, min: 1, max: 96, step: 1})\nviewof hpsc_line  = Inputs.select([\"H9 (WA09)\", \"UCSF4\", \"WTC11\", \"Custom\"], {label: \"hPSC line\"})\nviewof pp121      = Inputs.toggle({label: \"PP121 — NOS1⁺ enrichment (Days 15–20)\", value: false})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nCM2 = 9.5\ntotal_cm2 = n_wells * CM2\nmd`**${n_wells} well(s) · ${total_cm2} cm² total · ${hpsc_line}**\nAll master mix volumes include +10% excess.`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\npp121 ? md`::: {.callout-warning}\n**PP121 active.** Add PP121 at 1–2 µM from Day 15 to Day 20 only. Enriches NOS1⁺ nitrergic neurons at the expense of CHAT⁺ cholinergic neurons. Remove completely from EN-C on Day 20 — extended treatment reduces viability.\n:::` : md``",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#media-compositions",
+    "href": "protocols/ens-2d-protocol.html#media-compositions",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Media compositions",
+    "text": "Media compositions\n\n\n\n\n\n\nNoteMath audit — how every volume is calculated\n\n\n\n\n\nSurface area — the foundation of all ENS volume calculations:\n\\[A_{total} = N_{wells} \\times 9.5 \\; cm^2/well\\]\nCocktail volumes:\n\n\n\nPhase\nDays\nµL/cm²\n\n\n\n\nCocktails A & B\n0–4\n200\n\n\nCocktail C early\n6–8\n400\n\n\nCocktail C late\n10\n600\n\n\nEN-C feeds\n15–40\n200\n\n\nEN-C late feeds\n40+\n400\n\n\n\nFactor dilutions — each growth factor is added as a small volume to E6 base. For Cocktail A, BMP4 at 1:10,000 dilution means: \\(V_{BMP4} = V_{total} \\times 10^{-4}\\)\nNC-C medium — scales by number of ULA wells (2 mL per well): \\[V_{NC\\text{-}C\\;total} = N_{wells} \\times 2 \\; mL\\]\nCoating volumes (PLO, LM/FN) — 100 µL/cm²: \\[V_{coating} = A_{total} \\times 0.1 \\; mL/cm^2\\]\n\n\n\n\n\nCode\nfmt_ens = (x, d = 1) =&gt; x.toFixed(d)\n\n\n\n\n\n\n\n\nCocktail A — Days 0–2 (200 µL/cm²)\n\n\n\n\n\n\nNoteWhy these signals?\n\n\n\n\n\nBMP4 (1 ng/mL) activates the NC gene regulatory network in the absence of serum. SB431542 blocks TGFβ to prevent mesendodermal fate. CHIR at 600 nM activates WNT to initiate NC specification. Lower CHIR here than in later cocktails — high WNT too early overspecifies posterior identity before NC identity is established.\n\n\n\n\n\nCode\n{\n  const vol = total_cm2 * 0.2\n  Inputs.table([\n    {Component: \"Essential 6 (E6)\",    Catalog: \"Life Tech A1516401\", \"Final conc.\": \"base\",    \"Amount (µL)\": fmt_ens(vol * (1 - 1e-4 - 1e-3 - 1e-4))},\n    {Component: \"BMP4 (10 µg/mL)\",    Catalog: \"R&D 314-BP\",        \"Final conc.\": \"1 ng/mL\", \"Amount (µL)\": fmt_ens(vol * 1e-4)},\n    {Component: \"SB431542 (10 mM)\",   Catalog: \"R&D 1614\",          \"Final conc.\": \"10 µM\",   \"Amount (µL)\": fmt_ens(vol * 1e-3)},\n    {Component: \"CHIR 99021 (6 mM)\",  Catalog: \"Tocris 4423\",       \"Final conc.\": \"600 nM\",  \"Amount (µL)\": fmt_ens(vol * 1e-4)}\n  ], {layout: \"auto\"})\n}\n\n\n\n\n\n\n\n\n\nCocktail B — Days 2–4 (200 µL/cm²)\n\n\n\n\n\n\nNoteWhy the CHIR increase?\n\n\n\n\n\nCHIR rises from 600 nM to 1.5 µM at Day 2. Once NC identity is initiated, sustained higher WNT signaling drives proliferation and maintains SOX10+ progenitor state. BMP4 is dropped — it is only needed in the short induction window at Day 0.\n\n\n\n\n\nCode\n{\n  const vol = total_cm2 * 0.2\n  Inputs.table([\n    {Component: \"Essential 6 (E6)\",   \"Final conc.\": \"base\",   \"Amount (µL)\": fmt_ens(vol * (1 - 1e-3 - 2.5e-4))},\n    {Component: \"SB431542 (10 mM)\",  \"Final conc.\": \"10 µM\",  \"Amount (µL)\": fmt_ens(vol * 1e-3)},\n    {Component: \"CHIR 99021 (6 mM)\", \"Final conc.\": \"1.5 µM\", \"Amount (µL)\": fmt_ens(vol * 2.5e-4)}\n  ], {layout: \"auto\"})\n}\n\n\n\n\n\n\n\n\n\nCocktail C — Days 6–12 (vagal patterning + retinoic acid)\n\n\n\n\n\n\nWarningVolume increases — do not miss this\n\n\n\n\nDays 6–8: 400 µL/cm² (doubles from Cocktail B)\nDay 10: 600 µL/cm² (increases again)\n\nThis compensates for rising confluency. Insufficient volume at this stage causes monolayer detachment and lost cells.\n\n\n\n\n\n\n\n\nWarningRetinoic acid handling\n\n\n\nRA is light-sensitive and degrades rapidly at 37°C. Always make a fresh working stock from your –80°C aliquot on the day of use. Use amber tubes. Do not re-use opened aliquots.\n\n\n\n\n\n\n\n\nNoteWhy RA starts at Day 6, not Day 0\n\n\n\n\n\nPremature RA exposure (Days 0–4) actually inhibits NC induction by over-posteriorizing cells before NC identity is established. RA is only added once CHIR-driven NC specification is underway, then it caudalizes NC cells toward vagal/HOXB3+/HOXB5+ identity required for ENS competence.\n\n\n\n\n\nCode\n{\n  const v6  = total_cm2 * 0.4\n  const v10 = total_cm2 * 0.6\n  Inputs.table([\n    {Component: \"Essential 6 (E6)\",       \"Final conc.\": \"base\",   \"Days 6–8 (µL)\": fmt_ens(v6  * (1 - 1e-3 - 2.5e-4 - 1e-3)), \"Day 10 (µL)\": fmt_ens(v10 * (1 - 1e-3 - 2.5e-4 - 1e-3))},\n    {Component: \"SB431542 (10 mM)\",      \"Final conc.\": \"10 µM\",  \"Days 6–8 (µL)\": fmt_ens(v6  * 1e-3),                         \"Day 10 (µL)\": fmt_ens(v10 * 1e-3)},\n    {Component: \"CHIR 99021 (6 mM)\",     \"Final conc.\": \"1.5 µM\", \"Days 6–8 (µL)\": fmt_ens(v6  * 2.5e-4),                       \"Day 10 (µL)\": fmt_ens(v10 * 2.5e-4)},\n    {Component: \"Retinoic Acid (1 mM)\",  \"Final conc.\": \"1 µM\",   \"Days 6–8 (µL)\": fmt_ens(v6  * 1e-3),                         \"Day 10 (µL)\": fmt_ens(v10 * 1e-3)}\n  ], {layout: \"auto\"})\n}\n\n\n\n\n\n\n\n\n\nNC-C — Crestosphere medium (Days 12–15, 2 mL/ULA well)\n\n\n\n\n\n\nTipFGF2 stability\n\n\n\nFGF2 is unstable at 37°C. Add it from a fresh –80°C aliquot to NC-C on the day of use. Carry protein in 0.1% BSA to prevent adsorption to tube walls.\n\n\n\n\nCode\n{\n  const vol = n_wells * 2  // mL\n  Inputs.table([\n    {Component: \"Neurobasal medium\", Catalog: \"Life Tech 21103049\", \"Per mL\": \"base\",                \"Total (µL)\": fmt_ens(vol * 1e3 * (1 - 0.01 - 0.02 - 0.01 - 0.01 - 0.001 - 5e-4))},\n    {Component: \"N2 (100×)\",        Catalog: \"CTS A1370701\",       \"Per mL\": \"10 µL\",              \"Total (µL)\": fmt_ens(vol * 10)},\n    {Component: \"B27 (50×)\",        Catalog: \"Life Tech 17504044\", \"Per mL\": \"20 µL\",              \"Total (µL)\": fmt_ens(vol * 20)},\n    {Component: \"Glutagro (200 mM)\",\"Catalog\": \"Corning 25-015-CI\",\"Per mL\": \"10 µL\",              \"Total (µL)\": fmt_ens(vol * 10)},\n    {Component: \"MEM NEAAs (100×)\", Catalog: \"Corning 25-025-CI\", \"Per mL\": \"10 µL\",              \"Total (µL)\": fmt_ens(vol * 10)},\n    {Component: \"FGF2 (10 µg/mL)\", Catalog: \"R&D 233-FB\",        \"Per mL\": \"1 µL → 10 ng/mL\",   \"Total (µL)\": fmt_ens(vol * 1)},\n    {Component: \"CHIR 99021 (6 mM)\",\"Catalog\": \"Tocris 4423\",     \"Per mL\": \"0.5 µL → 3 µM\",     \"Total (µL)\": fmt_ens(vol * 0.5)}\n  ], {layout: \"auto\"})\n}\n\n\n\n\n\n\n\n\n\nEN-C — Enteric neuron maturation medium (Days 15+)\n\n\n\n\n\n\nTipAfter Day 40\n\n\n\nReduce feeding to 1–2×/week but increase volume to 400 µL/cm². Wait until medium turns yellow before feeding — over-feeding mature cultures stresses neurons. If cultures begin detaching, supplement EN-C with FN (2 µg/mL) + LM (2 µg/mL).\n\n\n\n\nCode\n{\n  const vol = total_cm2 * 0.2\n  Inputs.table([\n    {Component: \"Neurobasal medium\",     Catalog: \"Life Tech 21103049\", \"Per mL\": \"base\",               \"Per feed (µL)\": fmt_ens(vol * (1 - 0.01 - 0.02 - 0.01 - 0.01 - 0.001 - 5e-4))},\n    {Component: \"N2 (100×)\",            Catalog: \"CTS A1370701\",       \"Per mL\": \"10 µL\",             \"Per feed (µL)\": fmt_ens(vol * 0.01)},\n    {Component: \"B27 (50×)\",            Catalog: \"Life Tech 17504044\", \"Per mL\": \"20 µL\",             \"Per feed (µL)\": fmt_ens(vol * 0.02)},\n    {Component: \"Glutagro (200 mM)\",    Catalog: \"Corning 25-015-CI\", \"Per mL\": \"10 µL\",             \"Per feed (µL)\": fmt_ens(vol * 0.01)},\n    {Component: \"MEM NEAAs (100×)\",     Catalog: \"Corning 25-025-CI\", \"Per mL\": \"10 µL\",             \"Per feed (µL)\": fmt_ens(vol * 0.01)},\n    {Component: \"GDNF (10 µg/mL)\",     Catalog: \"Peprotech 450-10\",  \"Per mL\": \"1 µL → 10 ng/mL\",  \"Per feed (µL)\": fmt_ens(vol * 0.001)},\n    {Component: \"Ascorbic Acid (200 mM)\",\"Catalog\": \"Sigma\",          \"Per mL\": \"0.5 µL → 100 µM\",  \"Per feed (µL)\": fmt_ens(vol * 5e-4)}\n  ], {layout: \"auto\"})\n}",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#surface-coating-plo-laminin-fibronectin",
+    "href": "protocols/ens-2d-protocol.html#surface-coating-plo-laminin-fibronectin",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Surface coating — PLO / Laminin / Fibronectin",
+    "text": "Surface coating — PLO / Laminin / Fibronectin\n\n\n\n\n\n\nWarningPrepare on Day 14 — not Day 15\n\n\n\nThe PLO overnight step means coating must start the day before plating. If you prepare it Day 15 morning you will lose hours of LM/FN incubation time and get poor cell attachment.\n\n\n\n\n\n\n\n\nWarningNever let the coated surface dry\n\n\n\nAspirate the LM/FN solution and immediately add cells — no gap. A dried laminin surface is denatured and cells will not adhere.\n\n\n\n\nCode\n{\n  const vol = total_cm2 * 0.1\n  Inputs.table([\n    {Step: \"1 — PLO overnight\",           Reagent: `PLO 15 µg/mL in borate buffer — ${fmt_ens(vol, 0)} µL`, Temp: \"37°C\",  Time: \"O/N\"},\n    {Step: \"2 — Wash\",                    Reagent: \"PBS × 3\",                                                  Temp: \"RT\",    Time: \"—\"},\n    {Step: \"3 — LM + FN (≥2 hr)\",        Reagent: `Laminin 2 µg/mL + FN 2 µg/mL in PBS — ${fmt_ens(vol, 0)} µL`, Temp: \"37°C\", Time: \"≥2 hr\"},\n    {Step: \"4 — Aspirate before plating\", Reagent: \"Do NOT let surface dry\",                                   Temp: \"—\",     Time: \"—\"}\n  ], {layout: \"auto\"})\n}",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#phase-1-encc-induction-days-2-to-12",
+    "href": "protocols/ens-2d-protocol.html#phase-1-encc-induction-days-2-to-12",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Phase 1 — ENCC induction (Days –2 to 12)",
+    "text": "Phase 1 — ENCC induction (Days –2 to 12)\n\nDay –2: Replate hPSCs\n\n\n\n\n\n\nImportantDay 0 confluency is the #1 determinant of induction efficiency\n\n\n\nTarget: ~70% confluent monolayer on Day 0. Too sparse (&lt;60%) or too dense (&gt;85%) both significantly reduce CD49D+ yield at Day 12. If your cell line tends to grow slowly, plate at 5:4 instead of 5:6.\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nAspirate E8-C; EDTA (500 µM in PBS) 3–5 min\nLonger than standard passaging — increases cell separation\n\n\n2\nPassage at 5:6 ratio (5 wells → 6 new wells)\n—\n\n\n3\nPlate on Matrigel or Vitronectin XF in E8-C\nVitronectin preferred for fully defined system\n\n\n4\nTarget: ~70% confluent monolayer on Day 0\nFeed every other day with E8-C\n\n\n\n\n\nDays 0–12: Medium change schedule\n\n\n\n\n\n\nTipAdding medium without detaching cells\n\n\n\nAs the monolayer gets dense (especially Days 8–12), always tilt the plate and pipette slowly from the lower corner or side. Never pipette directly downward onto confluent cells — shear force detaches them.\n\n\n\n\nCode\nInputs.table([\n  {Day: \"0\",     Medium: \"Cocktail A\",  \"µL/cm²\": \"200\", \"Total (µL)\": fmt_ens(total_cm2 * 0.2, 0), Notes: \"Switch from E8; record Day 0\"},\n  {Day: \"2\",     Medium: \"Cocktail B\",  \"µL/cm²\": \"200\", \"Total (µL)\": fmt_ens(total_cm2 * 0.2, 0), Notes: \"—\"},\n  {Day: \"4\",     Medium: \"Cocktail B\",  \"µL/cm²\": \"200\", \"Total (µL)\": fmt_ens(total_cm2 * 0.2, 0), Notes: \"Full medium change\"},\n  {Day: \"6\",     Medium: \"Cocktail C\",  \"µL/cm²\": \"400\", \"Total (µL)\": fmt_ens(total_cm2 * 0.4, 0), Notes: \"⚠ Volume increases; add RA\"},\n  {Day: \"8\",     Medium: \"Cocktail C\",  \"µL/cm²\": \"400\", \"Total (µL)\": fmt_ens(total_cm2 * 0.4, 0), Notes: \"Tilt plate; add from corner\"},\n  {Day: \"10\",    Medium: \"Cocktail C\",  \"µL/cm²\": \"600\", \"Total (µL)\": fmt_ens(total_cm2 * 0.6, 0), Notes: \"⚠ Volume increases again\"},\n  {Day: \"11–12\", Medium: \"Harvest →\",   \"µL/cm²\": \"—\",   \"Total (µL)\": \"—\",                          Notes: \"QC first; proceed to Phase 2\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nDay 11–12 QC — do not proceed without passing\n\n\n\n\n\n\nImportantQC gate — required before Phase 2\n\n\n\n\nFACS: CD49D+ ≥ 50% (target 60–80%) — observed: _______ %\nqPCR: HOXB3 ≥ 10-fold over Day 0 hPSC — observed: _______ fold\nqPCR: HOXB5 ≥ 10-fold over Day 0 hPSC — observed: _______ fold\nPhase contrast: loose, elongated cells; disrupted colony borders\n\nIf CD49D+ &lt; 40%, check RA freshness, CHIR lot, and Day 0 confluency before troubleshooting further.\n\n\n\n\n\n\n\n\nTipOptional: FACS purify at Day 12 for early progenitor experiments\n\n\n\nSort for CD49D+ using Pe/Cy7 anti-human CD49D (Biolegend 304314). Recommended if you need pure ENC progenitors for Day 11 assays. For most applications, the sphere phase (Days 12–15) provides sufficient enrichment without sorting.",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#phase-2-crestosphere-formation-days-1215",
+    "href": "protocols/ens-2d-protocol.html#phase-2-crestosphere-formation-days-1215",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Phase 2 — Crestosphere formation (Days 12–15)",
+    "text": "Phase 2 — Crestosphere formation (Days 12–15)\n\n\n\n\n\n\nWarningUltra-low attachment plates — must be certified ULA\n\n\n\nStandard tissue culture plates will cause cells to adhere instead of forming spheres. Use Corning Costar certified ultra-low attachment plates only. This is the most common cause of Phase 2 failure.\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Aspirate Cocktail C\",                                                                       Detail: \"—\"},\n  {Step: \"2\", Action: `Accutase: ${fmt_ens(total_cm2 * 0.1, 0)} µL (100 µL/cm²); 30 min 37°C`,                  Detail: \"Full 30 min — do not shorten\"},\n  {Step: \"3\", Action: `Add NC-C: ${fmt_ens(total_cm2 * 0.1, 0)} µL; harvest with serological pipette`,           Detail: \"—\"},\n  {Step: \"4\", Action: \"Spin 290×g 1 min RT; resuspend in NC-C\",                                                    Detail: \"—\"},\n  {Step: \"5\", Action: `Transfer to ULA plates: 2 mL/well × ${n_wells} wells`,                                     Detail: \"Certified ULA only — Corning Costar\"},\n  {Step: \"6\", Action: \"Incubate 2 days\",                                                                            Detail: \"—\"},\n  {Step: \"7\", Action: \"Day 14: swirl to center; aspirate from circumference carefully\",                             Detail: \"Never aspirate spheroids with media\"},\n  {Step: \"8\", Action: \"Add 2 mL fresh NC-C/well; incubate 24h\",                                                    Detail: \"Target: 100–300 µm, compact, round\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipSphere size troubleshooting\n\n\n\nSpheres should be 100–300 µm at Day 14, compact and round with smooth borders. If spheres have fused into large irregular bodies, gently pipette 2–3× with a P1000 to separate. Necrotic cores develop in large bodies and reduce Day 15 viability.\n\n\n\n\n\n\n\n\nImportantDay 15 QC\n\n\n\n\nFACS: CD49D+ ≥ 80–90% — observed: _______ %\n\nIf CD49D+ is still &lt;70% after the sphere phase, extend suspension culture to Day 16 before plating.",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#phase-3-2d-ens-differentiation-days-1540",
+    "href": "protocols/ens-2d-protocol.html#phase-3-2d-ens-differentiation-days-1540",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Phase 3 — 2D ENS differentiation (Days 15–40+)",
+    "text": "Phase 3 — 2D ENS differentiation (Days 15–40+)\n\n\n\n\n\n\nWarningSerological pipette — not P1000 — for Day 15 dissociation\n\n\n\nThe narrower P1000 tip adds shear stress that causes excessive cell death. Use a 5 mL serological pipette for gentle dissociation into small clusters (5–20 cells). Single cell suspensions give very poor neuronal yields.\n\n\n\n\nCode\n{\n  const baseSteps = [\n    {Step: \"1\", Action: \"Prepare PLO/LM/FN coating on Day 14 (see Surface Coating section)\",                       Detail: \"Do not let surface dry\"},\n    {Step: \"2\", Action: \"Swirl ULA plates; remove NC-C from circumference with P1000\",                              Detail: \"—\"},\n    {Step: \"3\", Action: \"Wash with PBS; add Accutase (1 mL/well); 30 min 37°C\",                                    Detail: \"—\"},\n    {Step: \"4\", Action: \"⚠ USE 5 mL SEROLOGICAL PIPETTE — 2–3 gentle rounds\",                                      Detail: \"Small clusters only; P1000 causes excess cell death\"},\n    {Step: \"5\", Action: \"Spin 290×g 1 min; count viable cells with hemocytometer + trypan blue\",                   Detail: \"—\"},\n    {Step: \"6\", Action: `Plate 100,000 viable cells/cm² — ${fmt_ens(total_cm2 * 1e5 / 1e6, 1)}M cells total`,    Detail: \"Move plates N/S/E/W after returning to incubator\"}\n  ]\n  const pp121Step = {Step: \"7\", Action: \"⚠ Add PP121 (1–2 µM) — NOS1⁺ enrichment\", Detail: \"Days 15–20 ONLY. Remove from EN-C Day 20. Depletes CHAT⁺ cholinergic neurons.\"}\n  Inputs.table(pp121 ? [...baseSteps, pp121Step] : baseSteps, {layout: \"auto\"})\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\nNoteWhy move plates N/S/E/W after plating?\n\n\n\n\n\nCells in suspension in EN-C distribute unevenly as soon as the plate is set flat. A gentle 4-direction rocking motion redistributes them before they settle, giving even coverage across the well. Do this within 2 minutes of placing in the incubator.\n\n\n\n\nFeeding schedule\n\n\nCode\nInputs.table([\n  {\"Day range\": \"15–40\", Frequency: \"Every other day\", \"µL/cm²\": \"200\", \"Total/feed (µL)\": fmt_ens(total_cm2 * 0.2, 0), Notes: \"Tilt; add from corner — never onto neurites\"},\n  {\"Day range\": \"40–75\", Frequency: \"1–2×/week\",       \"µL/cm²\": \"400\", \"Total/feed (µL)\": fmt_ens(total_cm2 * 0.4, 0), Notes: \"Wait for yellow before feeding\"},\n  {\"Day range\": \"&gt;75\",   Frequency: \"When yellow\",     \"µL/cm²\": \"400\", \"Total/feed (µL)\": fmt_ens(total_cm2 * 0.4, 0), Notes: \"Supplement with FN+LM if detaching\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipLong-term culture (Day 75+)\n\n\n\nFor cultures older than 50 days, wait until medium turns yellow before feeding — do not feed on a fixed schedule. Use FN/LM-supplemented EN-C at every feed. Cultures lasting &gt;100 days are achievable. The main enemy of long-term cultures is aggressive medium changes that mechanically detach neurites.",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#qc-checkpoints-summary",
+    "href": "protocols/ens-2d-protocol.html#qc-checkpoints-summary",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "QC checkpoints summary",
+    "text": "QC checkpoints summary\n\n\n\nDay\nCheckpoint\nExpected\nObserved\nPass\n\n\n\n\n0\nhPSC confluency\n~70% monolayer\n\n\n\n\n6\nSOX10 clustering\nGFP+ clusters visible\n\n\n\n\n12\nENCC induction (FACS)\nCD49D+ ≥50%\n\n\n\n\n12\nVagal identity (qPCR)\nHOXB3/5 ≥10-fold\n\n\n\n\n15\nSphere enrichment (FACS)\nCD49D+ ≥80–90%\n\n\n\n\n15\nSphere morphology\n100–300 µm, compact, round\n\n\n\n\n30\nEarly neurons (IF)\nTUBB3+/TrkC+ networks\n\n\n\n\n40\nNeuronal purity (FACS)\n&gt;80% TUBB3+\n\n\n\n\n40\nNeurochemical (IF)\nNOS1, CHAT, 5HT, GABA\n\n\n\n\n75\nFull FACS\nCHAT~40%, NOS1~9%, 5HT~6%\n\n\n\n\n\n\n\n\n\n\n\nNoteExpected neurochemical composition at Day 75\n\n\n\n\n\nPer Barber et al. 2019 Fig. 4g and Fig. 5b: ~40% CHAT+ (cholinergic), ~9% GABA+, ~9% NOS1+ (nitrergic), ~6% 5HT+ (serotonergic), and ~25% SOX10+/GFAP+ (enteric glia). With PP121 treatment Days 15–20, NOS1+ increases 3–5× at the expense of CHAT+ (Majd et al. 2025).\n\n\n\nNotes / deviations:",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#troubleshooting",
+    "href": "protocols/ens-2d-protocol.html#troubleshooting",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "Troubleshooting",
+    "text": "Troubleshooting\n\n\n\n\n\n\nTipCD49D+ &lt;40% at Day 12\n\n\n\n\n\nMost likely causes: wrong Day 0 confluency; degraded RA; CHIR lot variability. Check in this order: (1) confirm Day 0 was 70%; (2) make fresh RA from a new –80°C aliquot; (3) titrate your CHIR lot (1–5 µM) in a test well. CHIR activity varies significantly between lots.\n\n\n\n\n\n\n\n\n\nTipSpheroids not forming (Phase 2)\n\n\n\n\n\nAlmost always a plate issue — verify Corning ULA certification. If using correct plates, check FGF2 activity (add BSA carrier) and reduce seeding density.\n\n\n\n\n\n\n\n\n\nTipLow TUBB3+ at Day 40 (&lt;60%)\n\n\n\n\n\nThree most common causes: (1) single-cell dissociation at Day 15 — use serological pipette; (2) PLO/LM/FN surface dried before plating; (3) inactive GDNF lot. Test each in order.\n\n\n\n\n\n\n\n\n\nTipSMA+ myofibroblast contamination\n\n\n\n\n\nNC-derived SMA+ flat cells are the primary contaminant. They eventually cause neuronal detachment. Minimize by FACS-sorting CD49D+ at Day 12 if contamination is severe, or by reducing passaging ratio at Day –2.",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/ens-2d-protocol.html#references",
+    "href": "protocols/ens-2d-protocol.html#references",
+    "title": "2D ENS Differentiation Protocol",
+    "section": "References",
+    "text": "References\nBarber K, Studer L, Fattahi F. Nat Protoc. 2019;14(4):1261–1279.\nMajd H, Samuel RM, et al. Nature. 2025;645:158–167.\nFattahi F, et al. Nature. 2016;531:105–109.",
+    "crumbs": [
+      "Protocols",
+      "2D ENS Differentiation Protocol"
+    ]
   }
 ]

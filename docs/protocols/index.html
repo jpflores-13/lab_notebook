@@ -342,6 +342,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Protocols</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../protocols/cnr-protocol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CUT&amp;RUN Protocol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../protocols/ens-2d-protocol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2D ENS Differentiation Protocol</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../protocols/hic-protocol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">In situ Hi-C Protocol</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -352,10 +370,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-to-open-a-protocol-calculator" id="toc-how-to-open-a-protocol-calculator" class="nav-link active" data-scroll-target="#how-to-open-a-protocol-calculator">How to open a protocol calculator</a></li>
-  <li><a href="#available-protocols" id="toc-available-protocols" class="nav-link" data-scroll-target="#available-protocols">Available protocols</a></li>
+  <li><a href="#available-protocols" id="toc-available-protocols" class="nav-link active" data-scroll-target="#available-protocols">Available protocols</a></li>
   <li><a href="#adding-a-new-protocol" id="toc-adding-a-new-protocol" class="nav-link" data-scroll-target="#adding-a-new-protocol">Adding a new protocol</a></li>
-  <li><a href="#why-the-separation" id="toc-why-the-separation" class="nav-link" data-scroll-target="#why-the-separation">Why the separation?</a></li>
   </ul>
 </nav>
     </div>
@@ -382,69 +398,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Protocol calculators are <strong>Shiny documents</strong> — they live in <code>protocols/_shiny/</code> and are served individually, not as part of the notebook site. They cannot be included in a static website, so they are not browsable here.</p>
-<section id="how-to-open-a-protocol-calculator" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-open-a-protocol-calculator">How to open a protocol calculator</h2>
-<p>Protocol calculators must be served from <strong>inside</strong> <code>protocols/_shiny/</code> — running <code>quarto serve</code> from the repo root fails because the parent <code>_quarto.yml</code> defines a website project, which is incompatible with Shiny.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> protocols/_shiny</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve HiC_protocol.qmd      <span class="co"># in situ Hi-C</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve CnR_protocol.qmd      <span class="co"># CUT&amp;RUN</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve ENS_2D_protocol.qmd   <span class="co"># 2D ENS differentiation</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># When done: Ctrl+C, then cd ../.. to return to the repo root</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Each opens in your browser. Configure your inputs in the sidebar, then <strong>File → Print → Save as PDF</strong> for your bench copy.</p>
-</section>
+<p>Interactive protocol calculators — set your sample count and volumes scale automatically. Use <strong>🖨 Print / Save as PDF</strong> on any protocol for a bench copy.</p>
 <section id="available-protocols" class="level2">
 <h2 class="anchored" data-anchor-id="available-protocols">Available protocols</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 26%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Protocol</th>
-<th>File</th>
 <th>Type</th>
 <th>Source</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>In situ Hi-C</td>
-<td><code>protocols/_shiny/HiC_protocol.qmd</code></td>
+<td><a href="../protocols/hic-protocol.html">In situ Hi-C</a></td>
 <td>Chromatin conformation</td>
-<td>Phanstiel lab · Rao et al.&nbsp;2014</td>
+<td>Rao et al.&nbsp;2014</td>
 </tr>
 <tr class="even">
-<td>CUT&amp;RUN</td>
-<td><code>protocols/_shiny/CnR_protocol.qmd</code></td>
+<td><a href="../protocols/cnr-protocol.html">CUT&amp;RUN</a></td>
 <td>Chromatin profiling</td>
-<td>Phanstiel lab · Skene et al.&nbsp;2018</td>
+<td>Skene et al.&nbsp;2018</td>
 </tr>
 <tr class="odd">
-<td>2D ENS differentiation</td>
-<td><code>protocols/_shiny/ENS_2D_protocol.qmd</code></td>
+<td><a href="../protocols/ens-2d-protocol.html">2D ENS differentiation</a></td>
 <td>Cell biology</td>
-<td>Barber, Studer &amp; Fattahi 2019</td>
+<td>Barber et al.&nbsp;2019</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="adding-a-new-protocol" class="level2">
 <h2 class="anchored" data-anchor-id="adding-a-new-protocol">Adding a new protocol</h2>
-<p>Give Claude the source (PDF, <code>.docx</code>, or paste the methods section) and say <strong>“make a QMD for this protocol.”</strong> Output goes in <code>protocols/_shiny/</code>. Then add a row to the table above.</p>
-</section>
-<section id="why-the-separation" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-separation">Why the separation?</h2>
-<p>Quarto website projects render everything to static HTML. Shiny documents require a live R process and can’t be static. They coexist in the same repo but are used differently:</p>
-<ul>
-<li><strong>Notebook site</strong> (<code>quarto render</code> from project root) — static, browsable, searchable</li>
-<li><strong>Protocol calculators</strong> (<code>cd protocols/_shiny &amp;&amp; quarto serve X.qmd</code>) — interactive, run on demand</li>
-</ul>
+<p>Give Claude the source (PDF, <code>.docx</code>, or paste the methods section) and say <strong>“make a QMD for this protocol.”</strong> Output goes in <code>protocols/</code>. Then add a row to the table above.</p>
 
 
 <!-- -->
@@ -916,55 +902,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Protocols"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Protocol calculators are **Shiny documents** — they live in <span class="in">`protocols/_shiny/`</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>and are served individually, not as part of the notebook site.</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>They cannot be included in a static website, so they are not browsable here.</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to open a protocol calculator</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Protocol calculators must be served from **inside** <span class="in">`protocols/_shiny/`</span> —</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>running <span class="in">`quarto serve`</span> from the repo root fails because the parent <span class="in">`_quarto.yml`</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>defines a website project, which is incompatible with Shiny.</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> protocols/_shiny</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve HiC_protocol.qmd      <span class="co"># in situ Hi-C</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve CnR_protocol.qmd      <span class="co"># CUT&amp;RUN</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> serve ENS_2D_protocol.qmd   <span class="co"># 2D ENS differentiation</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># When done: Ctrl+C, then cd ../.. to return to the repo root</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>Each opens in your browser. Configure your inputs in the sidebar, then</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>**File → Print → Save as PDF** for your bench copy.</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## Available protocols</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Protocol <span class="pp">|</span> File <span class="pp">|</span> Type <span class="pp">|</span> Source <span class="pp">|</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|------|--------|</span></span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> In situ Hi-C <span class="pp">|</span> <span class="in">`protocols/_shiny/HiC_protocol.qmd`</span> <span class="pp">|</span> Chromatin conformation <span class="pp">|</span> Phanstiel lab · Rao et al. 2014 <span class="pp">|</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> CUT&amp;RUN <span class="pp">|</span> <span class="in">`protocols/_shiny/CnR_protocol.qmd`</span> <span class="pp">|</span> Chromatin profiling <span class="pp">|</span> Phanstiel lab · Skene et al. 2018 <span class="pp">|</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2D ENS differentiation <span class="pp">|</span> <span class="in">`protocols/_shiny/ENS_2D_protocol.qmd`</span> <span class="pp">|</span> Cell biology <span class="pp">|</span> Barber, Studer &amp; Fattahi 2019 <span class="pp">|</span></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding a new protocol</span></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>Give Claude the source (PDF, <span class="in">`.docx`</span>, or paste the methods section) and say</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>**"make a QMD for this protocol."**</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>Output goes in <span class="in">`protocols/_shiny/`</span>. Then add a row to the table above.</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why the separation?</span></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>Quarto website projects render everything to static HTML.</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>Shiny documents require a live R process and can't be static.</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>They coexist in the same repo but are used differently:</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Notebook site** (<span class="in">`quarto render`</span> from project root) — static, browsable, searchable</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Protocol calculators** (<span class="in">`cd protocols/_shiny &amp;&amp; quarto serve X.qmd`</span>) — interactive, run on demand</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Protocols"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Interactive protocol calculators — set your sample count and volumes scale automatically. Use **🖨 Print / Save as PDF** on any protocol for a bench copy.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Available protocols</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Protocol <span class="pp">|</span> Type <span class="pp">|</span> Source <span class="pp">|</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|--------|</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">In situ Hi-C</span><span class="co">](hic-protocol.qmd)</span> <span class="pp">|</span> Chromatin conformation <span class="pp">|</span> Rao et al. 2014 <span class="pp">|</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">CUT&amp;RUN</span><span class="co">](cnr-protocol.qmd)</span> <span class="pp">|</span> Chromatin profiling <span class="pp">|</span> Skene et al. 2018 <span class="pp">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">2D ENS differentiation</span><span class="co">](ens-2d-protocol.qmd)</span> <span class="pp">|</span> Cell biology <span class="pp">|</span> Barber et al. 2019 <span class="pp">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding a new protocol</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Give Claude the source (PDF, <span class="in">`.docx`</span>, or paste the methods section) and say **"make a QMD for this protocol."** Output goes in <span class="in">`protocols/`</span>. Then add a row to the table above.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
