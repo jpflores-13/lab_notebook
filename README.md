@@ -1,6 +1,6 @@
 # lab_notebook
 
-A Quarto-based wet lab notebook for protocols and experiment entries — hosted publicly
+A Quarto-based wet lab notebook for protocols and experiment entries, hosted publicly
 on GitHub Pages at **[jpflores-13.github.io/lab_notebook](https://jpflores-13.github.io/lab_notebook)**.
 
 This is **not** a computational notebook — analysis code lives separately.
