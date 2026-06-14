@@ -1,0 +1,110 @@
+[
+  {
+    "objectID": "protocols/index.html",
+    "href": "protocols/index.html",
+    "title": "Protocols",
+    "section": "",
+    "text": "Protocol calculators are Shiny documents — they live in protocols/_shiny/ and are served individually, not as part of the notebook site. They cannot be included in a static website, so they are not browsable here.",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#how-to-open-a-protocol-calculator",
+    "href": "protocols/index.html#how-to-open-a-protocol-calculator",
+    "title": "Protocols",
+    "section": "How to open a protocol calculator",
+    "text": "How to open a protocol calculator\nProtocol calculators must be served from inside protocols/_shiny/ — running quarto serve from the repo root fails because the parent _quarto.yml defines a website project, which is incompatible with Shiny.\ncd protocols/_shiny\n\nquarto serve HiC_protocol.qmd      # in situ Hi-C\nquarto serve CnR_protocol.qmd      # CUT&RUN\nquarto serve ENS_2D_protocol.qmd   # 2D ENS differentiation\n\n# When done: Ctrl+C, then cd ../.. to return to the repo root\nEach opens in your browser. Configure your inputs in the sidebar, then File → Print → Save as PDF for your bench copy.",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#available-protocols",
+    "href": "protocols/index.html#available-protocols",
+    "title": "Protocols",
+    "section": "Available protocols",
+    "text": "Available protocols\n\n\n\n\n\n\n\n\n\nProtocol\nFile\nType\nSource\n\n\n\n\nIn situ Hi-C\nprotocols/_shiny/HiC_protocol.qmd\nChromatin conformation\nPhanstiel lab · Rao et al. 2014\n\n\nCUT&RUN\nprotocols/_shiny/CnR_protocol.qmd\nChromatin profiling\nPhanstiel lab · Skene et al. 2018\n\n\n2D ENS differentiation\nprotocols/_shiny/ENS_2D_protocol.qmd\nCell biology\nBarber, Studer & Fattahi 2019",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#adding-a-new-protocol",
+    "href": "protocols/index.html#adding-a-new-protocol",
+    "title": "Protocols",
+    "section": "Adding a new protocol",
+    "text": "Adding a new protocol\nGive Claude the source (PDF, .docx, or paste the methods section) and say “make a QMD for this protocol.” Output goes in protocols/_shiny/. Then add a row to the table above.",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#why-the-separation",
+    "href": "protocols/index.html#why-the-separation",
+    "title": "Protocols",
+    "section": "Why the separation?",
+    "text": "Why the separation?\nQuarto website projects render everything to static HTML. Shiny documents require a live R process and can’t be static. They coexist in the same repo but are used differently:\n\nNotebook site (quarto render from project root) — static, browsable, searchable\nProtocol calculators (cd protocols/_shiny && quarto serve X.qmd) — interactive, run on demand",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "reading-notes/index.html",
+    "href": "reading-notes/index.html",
+    "title": "Reading notes",
+    "section": "",
+    "text": "Protocol-adjacent papers worth annotating in depth. Not every paper — just the ones that directly inform how you run an experiment or interpret a result.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate read\nPaper\nTags\nOne-line takeaway\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Reading notes"
+    ]
+  },
+  {
+    "objectID": "experiments/index.html",
+    "href": "experiments/index.html",
+    "title": "Experiments",
+    "section": "",
+    "text": "One entry per experiment run. Filed by date. Committed to git when complete.\nTemplates live in experiments/_templates/ — copy the relevant one to start a new entry.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate\nExperiment\nTags\nResult summary\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lab notebook",
+    "section": "",
+    "text": "This is a living record of wet lab experiments, protocols, and reading notes. It is not a computational notebook — that lives separately. Every experiment entry is one .qmd file per run, committed to git when complete."
+  },
+  {
+    "objectID": "index.html#quick-links",
+    "href": "index.html#quick-links",
+    "title": "Lab notebook",
+    "section": "Quick links",
+    "text": "Quick links\n\n\n\nSection\nWhat’s in it\n\n\n\n\nProtocols\nShiny QMDs — configure inputs, print to PDF, take to bench\n\n\nExperiments\nOne entry per experiment run, filed by date\n\n\nReading notes\nProtocol-adjacent papers worth annotating in depth\n\n\nAims\nF32, HFSP, Fulbright — living documents"
+  },
+  {
+    "objectID": "index.html#how-to-use-this-notebook",
+    "href": "index.html#how-to-use-this-notebook",
+    "title": "Lab notebook",
+    "section": "How to use this notebook",
+    "text": "How to use this notebook\nStarting a new experiment:\n# Copy the relevant template\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\n\n# Open in Positron and fill in the planning section\n# Then each evening: fill in that day's section, save\n\n# When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\nPrinting a protocol:\nquarto serve protocols/HiC_protocol.qmd\n# Configure Shiny inputs in browser → Cmd+P → Save as PDF\nRebuilding the site:\nquarto render\n# Open _site/index.html in browser"
+  },
+  {
+    "objectID": "index.html#recent-experiments",
+    "href": "index.html#recent-experiments",
+    "title": "Lab notebook",
+    "section": "Recent experiments",
+    "text": "Recent experiments\nNo experiment entries yet. Run your first experiment!"
+  },
+  {
+    "objectID": "aims/index.html",
+    "href": "aims/index.html",
+    "title": "Aims",
+    "section": "",
+    "text": "Living documents for fellowship and grant aims. These update as experiments come in — figures and tables can embed R code that pulls from experiment entries directly.\n\n\n\nDocument\nStatus\n\n\n\n\nF32 — Aim 1\ndrafting\n\n\nHFSP overview\ndrafting\n\n\nFulbright narrative\nsubmitted",
+    "crumbs": [
+      "Aims"
+    ]
+  }
+]
