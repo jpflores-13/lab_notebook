@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Welcome!"
 subtitle: ""
 date: today
 ---
