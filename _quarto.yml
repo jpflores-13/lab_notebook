@@ -1,6 +1,11 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "protocols/*.qmd"
+    - "experiments/*.qmd"
+    - "experiments/_templates/*.qmd"
 
 website:
   title: "JP Flores' Lab Notebook"

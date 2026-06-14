@@ -1,179 +1,5 @@
 [
   {
-    "objectID": "protocols/cnr-protocol.html",
-    "href": "protocols/cnr-protocol.html",
-    "title": "CUT&RUN Protocol",
-    "section": "",
-    "text": "🖨 Print / Save as PDF",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#configure-experiment",
-    "href": "protocols/cnr-protocol.html#configure-experiment",
-    "title": "CUT&RUN Protocol",
-    "section": "Configure experiment",
-    "text": "Configure experiment\n\n\nCode\nviewof n_samples  = Inputs.number({label: \"Number of samples\", value: 4, min: 1, max: 48, step: 1})\nviewof n_cells_M  = Inputs.number({label: \"Cells per sample (×10⁶)\", value: 0.5, min: 0.1, step: 0.1})\nviewof antibody   = Inputs.select([\"H3K4me3 (positive ctrl)\", \"H3K27me3 (positive ctrl)\", \"IgG (negative ctrl)\", \"CTCF\", \"SOX10\", \"BRG1\", \"CHD7\", \"Custom\"], {label: \"Primary antibody target\"})\nviewof pcr_cycles = Inputs.number({label: \"PCR cycles\", value: 12, min: 10, max: 15, step: 1})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmd`**${n_samples} sample(s) · ${n_cells_M}M cells each · antibody: ${antibody} · ${pcr_cycles} PCR cycles**`",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#buffer-recipes",
-    "href": "protocols/cnr-protocol.html#buffer-recipes",
-    "title": "CUT&RUN Protocol",
-    "section": "Buffer recipes",
-    "text": "Buffer recipes\nNE1 buffer (10 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n28.59 mL\n—\n\n\n1 M HEPES pH 7.5\n600 µL\n20 mM\n\n\n2 M KCl\n150 µL\n10 mM\n\n\n1 M MgCl₂\n30 µL\n1 mM\n\n\n1 M DTT (fresh)\n30 µL\n1 mM\n\n\n10% Triton X-100\n300 µL\n0.1%\n\n\nProtease inhibitor\n300 µL\n⚠ Add fresh\n\n\n\nWash buffer (150 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n136.35 mL\n—\n\n\n1 M HEPES pH 7.5\n3 mL\n20 mM\n\n\n10% Tween-20\n3 mL\n0.2%\n\n\n5 M NaCl\n4.5 mL\n150 mM\n\n\nBSA\n150 mg\n0.1%\n\n\n0.5 M Spermidine\n150 µL\n0.5 mM\n\n\n1 M Na-Butyrate\n1.5 mL\n10 mM\n\n\nProtease inhibitor\n150 µL\n⚠ Add fresh\n\n\n\nAntibody buffer (4 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nTriton Buffer\nto 4 mL\nWash buffer + 0.1% Triton X-100\n\n\n0.5 M EDTA\n16 µL\n2 mM\n\n\n\n2× Stop buffer (3 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n2586 µL\n—\n\n\n5 M NaCl\n204 µL\n340 mM\n\n\n0.5 M EDTA\n120 µL\n20 mM\n\n\n0.5 M EGTA\n24 µL\n4 mM\n\n\n10% Triton X-100\n30 µL\n0.1%\n\n\nRNAse A (4 µg/µL)\n37.5 µL\n50 µg/mL\n\n\n\n\n\n\n\n\n\nTipBuffer storage\n\n\n\n\n\nNE1 and Wash buffer can be made as a stock (without protease inhibitor) and stored at 4°C for up to 2 weeks. Add protease inhibitor only to the volume you need immediately before use. Stop buffer can be stored at 4°C for 1 month — add RNAse A fresh before use.",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#scaled-master-mixes",
-    "href": "protocols/cnr-protocol.html#scaled-master-mixes",
-    "title": "CUT&RUN Protocol",
-    "section": "Scaled master mixes",
-    "text": "Scaled master mixes\n\n\n\n\n\n\nNoteMath audit — how every volume is calculated\n\n\n\n\n\nCore formula (all standard master mixes):\n\\[V_{total} = V_{per\\_sample} \\times N_{samples} \\times 1.10\\]\nSDS / Proteinase K mix (4 µL added per sample after Stop buffer):\n\\[V_{SDS} = 2 \\; \\mu L \\times N \\times 1.10 \\qquad V_{PK} = 2 \\; \\mu L \\times N \\times 1.10\\]\nConA bead prep (not scaled with excess — fixed 10 µL per sample):\n\\[V_{beads} = 10 \\; \\mu L \\times N_{samples}\\]\nWhere N = your current input for number of samples. Include controls as samples.\n\n\n\n\n\nCode\ne_cnr = n_samples * 1.10\nfmt_cnr = (x, d = 1) =&gt; x.toFixed(d)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDS / Proteinase K (add 4 µL/sample after Stop buffer)\n\n\nCode\nInputs.table([\n  {Component: \"10% SDS\",                   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)},\n  {Component: \"Proteinase K (20 mg/mL)\",   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nEnd repair & A-tailing (add 10 µL to 50 µL sample)\n\n\nCode\nInputs.table([\n  {Component: \"End Repair & A-tailing Buffer\",      \"Per sample (µL)\": 7, \"Total (µL)\": fmt_cnr(7 * e_cnr)},\n  {Component: \"End Repair & A-tailing Enzyme mix\",  \"Per sample (µL)\": 3, \"Total (µL)\": fmt_cnr(3 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nAdapter ligation (add 45 µL mix + 5 µL unique adapter)\n\n\nCode\nInputs.table([\n  {Component: \"PCR-grade H₂O\",   \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)},\n  {Component: \"Ligation Buffer\", \"Per sample (µL)\": 30, \"Total (µL)\": fmt_cnr(30 * e_cnr)},\n  {Component: \"DNA Ligase\",      \"Per sample (µL)\": 10, \"Total (µL)\": fmt_cnr(10 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nCode\nmd`**PCR amplification (${pcr_cycles} cycles)**`\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Component: \"KAPA HiFi HotStart ReadyMix (2×)\",          \"Per sample (µL)\": 25, \"Total (µL)\": fmt_cnr(25 * e_cnr)},\n  {Component: \"KAPA Library Amplification Primer Mix (10×)\", \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)}\n], {layout: \"auto\"})",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
-    "href": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
-    "title": "CUT&RUN Protocol",
-    "section": "Day 1 — Cell binding to ConA beads (~2 hr)",
-    "text": "Day 1 — Cell binding to ConA beads (~2 hr)\n\n\n\n\n\n\nNoteWhy ConA beads?\n\n\n\n\n\nConcanavalin A-coated beads bind to the cell surface via glycoproteins, immobilizing cells for all subsequent washes. This eliminates centrifugation steps that would pellet and stress the nuclei. The key is that cells remain membrane-intact throughout — you are not isolating nuclei.\n\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw pellets on ice; resuspend in NE1 buffer\",                             Volume: \"1000 µL/sample\"},\n  {Step: \"2\", Action: \"Rotate 10 min 4°C\",                                                         Volume: \"—\"},\n  {Step: \"3\", Action: \"Spin 500×g 10 min 4°C; resuspend in Wash buffer\",                          Volume: \"1000 µL/sample\"},\n  {Step: \"4\", Action: `Activate ConA beads: ${(10 * n_samples).toFixed(0)} µL total`,             Volume: \"Wash 1× Binding Buffer\"},\n  {Step: \"5\", Action: `Resuspend in ${(10 * n_samples).toFixed(0)} µL Binding Buffer`,            Volume: \"10 µL beads/sample\"},\n  {Step: \"6\", Action: \"Mix cells + beads; invert ~10×; 10 min RT; magnet\",                        Volume: \"Resuspend in 50 µL Antibody Buffer/sample\"},\n  {Step: \"7\", Action: \"Add primary antibody; O/N 4°C thermomixer 1000 rpm\",                       Volume: \"Per Ab dilution sheet\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nPrimary antibody: _______ — lot # _______\nIgG negative control included\nH3K4me3 positive control included\nSamples in thermomixer at 4°C, 1000 rpm O/N",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
-    "href": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
-    "title": "CUT&RUN Protocol",
-    "section": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)",
-    "text": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)\n\n\n\n\n\n\nWarningCaCl₂ addition triggers digestion immediately\n\n\n\nOnce CaCl₂ is added, MNase is active. Work quickly and consistently — keep all samples on ice until the moment you add CaCl₂ to each tube, then incubate exactly 30 min at 4°C. Longer digestion = smaller fragments = loss of signal at broad domains.\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nPulse spin; magnet; wash Triton Buffer\n1 mL/sample\n\n\n2\nRepeat Triton Buffer wash\n1 mL/sample\n\n\n3\nResuspend in Antibody Buffer; add pAG-MNase\n50 µL + 2.5 µL/sample\n\n\n4\nIncubate 1h 4°C metal block\n—\n\n\n5\nWash × 2 Triton Buffer; resuspend in Triton Buffer\n100 µL/sample\n\n\n6\nAdd 100 mM CaCl₂; 30 min 4°C to digest\n2 µL/sample\n\n\n7\nAdd 2× Stop Buffer; 20 min 37°C to release fragments\n100 µL/sample\n\n\n8\nMagnet; transfer supernatant to new tube\nFragments are in supernatant\n\n\n9\nAdd SDS/Prot-K master mix; 1h 65°C (or O/N)\n4 µL/sample\n\n\n10\nZymo Clean & Concentrator; elute in 55 µL\nLo-Bind tube; –20°C\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nCaCl₂ added; digestion timer started\n37°C incubation complete\nSupernatant transferred cleanly (beads discarded)\nDNA in Lo-Bind tube at –20°C\n\n\n\n\n\n\n\n\n\nTipLow yield after Zymo cleanup?\n\n\n\n\n\nEnsure you are collecting the supernatant after CaCl₂ digestion — the released fragments are in solution, not on the beads. Also check that the Zymo column was not overloaded (max 5 µg DNA per column).",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
-    "href": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
-    "title": "CUT&RUN Protocol",
-    "section": "Day 3 — Library preparation (~4 hr)",
-    "text": "Day 3 — Library preparation (~4 hr)\n\n\n\n\n\n\nWarningAdapter index tracking\n\n\n\nRecord your adapter–sample assignment before you open any tubes. Adapter swaps are not detectable until sequencing data arrives. Use a unique index for each sample — never reuse an index within a run.\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw KAPA reagents at 4°C\",                                                    Detail: \"—\"},\n  {Step: \"2\", Action: \"End repair & A-tailing: add 10 µL mix to 50 µL sample\",                        Detail: \"20°C 30 min → 65°C 30 min (heated lid 85°C)\"},\n  {Step: \"3\", Action: \"Adapter ligation: add 45 µL mix + 5 µL UNIQUE adapter\",                        Detail: \"20°C 15 min; check adapter compatibility sheet\"},\n  {Step: \"4\", Action: \"AMPure round 1 (1.2×): 132 µL beads → elute 50 µL 10 mM Tris\",               Detail: \"—\"},\n  {Step: \"5\", Action: \"AMPure round 2 (1.2×): 60 µL beads → elute 25 µL\",                            Detail: \"—\"},\n  {Step: \"6\", Action: `PCR: 30 µL master mix + 20 µL sample; ${pcr_cycles} cycles`,                  Detail: \"98°C 45s → (98°C 15s/60°C 10s) × N → 72°C 1 min\"},\n  {Step: \"7\", Action: \"Post-PCR AMPure (1.2×) → elute 25 µL\",                                         Detail: \"—\"},\n  {Step: \"8\", Action: \"Qubit 1× HS dsDNA; Tapestation D1000\",                                          Detail: \"Store 4°C (2 wk) or –20°C\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipHow many PCR cycles?\n\n\n\n\n\n10–12 cycles for abundant targets (H3K4me3, H3K27me3). 12–14 cycles for lower-abundance targets (transcription factors, CTCF). Too many cycles introduces PCR duplicates that inflate apparent signal. When in doubt, use 12 and check duplicate rate after sequencing.\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nAdapters used: _______\nQubit HS dsDNA: _______ ng/µL\nTapestation peak: _______ bp (expected 150–350 bp)\nSubmitted for sequencing: _______",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#qc-log",
-    "href": "protocols/cnr-protocol.html#qc-log",
-    "title": "CUT&RUN Protocol",
-    "section": "QC log",
-    "text": "QC log\n\n\n\nCheckpoint\nExpected\nObserved\nPass\n\n\n\n\nDay 1: cells binding beads\nEven suspension\n\n\n\n\nDay 2: digest supernatant\nClear\n\n\n\n\nPost-Zymo Qubit\n&gt;1 ng/µL\n\n\n\n\nPost-ligation Qubit\n&gt;5 ng/µL\n\n\n\n\nFinal library Qubit\n&gt;2 ng/µL\n\n\n\n\nTapestation peak\n150–350 bp\n\n\n\n\n\nNotes / deviations:",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/cnr-protocol.html#references",
-    "href": "protocols/cnr-protocol.html#references",
-    "title": "CUT&RUN Protocol",
-    "section": "References",
-    "text": "References\nSkene PJ, Henikoff JG, Henikoff S. eLife. 2018;7:e36906. Protocol: Phanstiel lab; adapted by JP Flores.",
-    "crumbs": [
-      "Protocols",
-      "CUT&RUN Protocol"
-    ]
-  },
-  {
-    "objectID": "protocols/index.html",
-    "href": "protocols/index.html",
-    "title": "Protocols",
-    "section": "",
-    "text": "Interactive protocol calculators — set your sample count and volumes scale automatically. Use 🖨 Print / Save as PDF on any protocol for a bench copy.",
-    "crumbs": [
-      "Protocols"
-    ]
-  },
-  {
-    "objectID": "protocols/index.html#available-protocols",
-    "href": "protocols/index.html#available-protocols",
-    "title": "Protocols",
-    "section": "Available protocols",
-    "text": "Available protocols\n\n\n\nProtocol\nType\nSource\n\n\n\n\nIn situ Hi-C\nChromatin conformation\nRao et al. 2014\n\n\nCUT&RUN\nChromatin profiling\nSkene et al. 2018\n\n\n2D ENS differentiation\nCell biology\nBarber et al. 2019",
-    "crumbs": [
-      "Protocols"
-    ]
-  },
-  {
-    "objectID": "protocols/index.html#adding-a-new-protocol",
-    "href": "protocols/index.html#adding-a-new-protocol",
-    "title": "Protocols",
-    "section": "Adding a new protocol",
-    "text": "Adding a new protocol\nGive Claude the source (PDF, .docx, or paste the methods section) and say “make a QMD for this protocol.” Output goes in protocols/. Then add a row to the table above.",
-    "crumbs": [
-      "Protocols"
-    ]
-  },
-  {
-    "objectID": "aims/index.html",
-    "href": "aims/index.html",
-    "title": "Aims",
-    "section": "",
-    "text": "Living documents for fellowship and grant aims. These update as experiments come in — figures and tables can embed R code that pulls from experiment entries directly.\n\n\n\nDocument\nStatus\n\n\n\n\nF32 — Aim 1\ndrafting\n\n\nHFSP overview\ndrafting\n\n\nFulbright narrative\nsubmitted"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Lab notebook",
-    "section": "",
-    "text": "This is a living record of wet lab experiments, protocols, and reading notes. It is not a computational notebook — that lives separately. Every experiment entry is one .qmd file per run, committed to git when complete."
-  },
-  {
-    "objectID": "index.html#quick-links",
-    "href": "index.html#quick-links",
-    "title": "Lab notebook",
-    "section": "Quick links",
-    "text": "Quick links\n\n\n\nSection\nWhat’s in it\n\n\n\n\nProtocols\nShiny QMDs — configure inputs, print to PDF, take to bench\n\n\nExperiments\nOne entry per experiment run, filed by date\n\n\nReading notes\nProtocol-adjacent papers worth annotating in depth\n\n\nAims\nF32, HFSP, Fulbright — living documents"
-  },
-  {
-    "objectID": "index.html#how-to-use-this-notebook",
-    "href": "index.html#how-to-use-this-notebook",
-    "title": "Lab notebook",
-    "section": "How to use this notebook",
-    "text": "How to use this notebook\nStarting a new experiment:\n# Copy the relevant template\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\n\n# Open in Positron and fill in the planning section\n# Then each evening: fill in that day's section, save\n\n# When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\nPrinting a protocol:\nquarto serve protocols/HiC_protocol.qmd\n# Configure Shiny inputs in browser → Cmd+P → Save as PDF\nRebuilding the site:\nquarto render\n# Open _site/index.html in browser"
-  },
-  {
-    "objectID": "index.html#recent-experiments",
-    "href": "index.html#recent-experiments",
-    "title": "Lab notebook",
-    "section": "Recent experiments",
-    "text": "Recent experiments\nNo experiment entries yet. Run your first experiment!"
-  },
-  {
-    "objectID": "experiments/index.html",
-    "href": "experiments/index.html",
-    "title": "Experiments",
-    "section": "",
-    "text": "One entry per experiment run. Filed by date. Committed to git when complete.\nTemplates live in experiments/_templates/ — copy the relevant one to start a new entry.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate\nExperiment\nTags\nResult summary\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Experiments"
-    ]
-  },
-  {
     "objectID": "reading-notes/index.html",
     "href": "reading-notes/index.html",
     "title": "Reading notes",
@@ -324,6 +150,150 @@
     ]
   },
   {
+    "objectID": "protocols/cnr-protocol.html",
+    "href": "protocols/cnr-protocol.html",
+    "title": "CUT&RUN Protocol",
+    "section": "",
+    "text": "🖨 Print / Save as PDF",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#configure-experiment",
+    "href": "protocols/cnr-protocol.html#configure-experiment",
+    "title": "CUT&RUN Protocol",
+    "section": "Configure experiment",
+    "text": "Configure experiment\n\n\nCode\nviewof n_samples  = Inputs.number({label: \"Number of samples\", value: 4, min: 1, max: 48, step: 1})\nviewof n_cells_M  = Inputs.number({label: \"Cells per sample (×10⁶)\", value: 0.5, min: 0.1, step: 0.1})\nviewof antibody   = Inputs.select([\"H3K4me3 (positive ctrl)\", \"H3K27me3 (positive ctrl)\", \"IgG (negative ctrl)\", \"CTCF\", \"SOX10\", \"BRG1\", \"CHD7\", \"Custom\"], {label: \"Primary antibody target\"})\nviewof pcr_cycles = Inputs.number({label: \"PCR cycles\", value: 12, min: 10, max: 15, step: 1})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nmd`**${n_samples} sample(s) · ${n_cells_M}M cells each · antibody: ${antibody} · ${pcr_cycles} PCR cycles**`",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#buffer-recipes",
+    "href": "protocols/cnr-protocol.html#buffer-recipes",
+    "title": "CUT&RUN Protocol",
+    "section": "Buffer recipes",
+    "text": "Buffer recipes\nNE1 buffer (10 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n28.59 mL\n—\n\n\n1 M HEPES pH 7.5\n600 µL\n20 mM\n\n\n2 M KCl\n150 µL\n10 mM\n\n\n1 M MgCl₂\n30 µL\n1 mM\n\n\n1 M DTT (fresh)\n30 µL\n1 mM\n\n\n10% Triton X-100\n300 µL\n0.1%\n\n\nProtease inhibitor\n300 µL\n⚠ Add fresh\n\n\n\nWash buffer (150 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n136.35 mL\n—\n\n\n1 M HEPES pH 7.5\n3 mL\n20 mM\n\n\n10% Tween-20\n3 mL\n0.2%\n\n\n5 M NaCl\n4.5 mL\n150 mM\n\n\nBSA\n150 mg\n0.1%\n\n\n0.5 M Spermidine\n150 µL\n0.5 mM\n\n\n1 M Na-Butyrate\n1.5 mL\n10 mM\n\n\nProtease inhibitor\n150 µL\n⚠ Add fresh\n\n\n\nAntibody buffer (4 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nTriton Buffer\nto 4 mL\nWash buffer + 0.1% Triton X-100\n\n\n0.5 M EDTA\n16 µL\n2 mM\n\n\n\n2× Stop buffer (3 mL)\n\n\n\nComponent\nAmount\nFinal conc.\n\n\n\n\nddH₂O\n2586 µL\n—\n\n\n5 M NaCl\n204 µL\n340 mM\n\n\n0.5 M EDTA\n120 µL\n20 mM\n\n\n0.5 M EGTA\n24 µL\n4 mM\n\n\n10% Triton X-100\n30 µL\n0.1%\n\n\nRNAse A (4 µg/µL)\n37.5 µL\n50 µg/mL\n\n\n\n\n\n\n\n\n\nTipBuffer storage\n\n\n\n\n\nNE1 and Wash buffer can be made as a stock (without protease inhibitor) and stored at 4°C for up to 2 weeks. Add protease inhibitor only to the volume you need immediately before use. Stop buffer can be stored at 4°C for 1 month — add RNAse A fresh before use.",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#scaled-master-mixes",
+    "href": "protocols/cnr-protocol.html#scaled-master-mixes",
+    "title": "CUT&RUN Protocol",
+    "section": "Scaled master mixes",
+    "text": "Scaled master mixes\n\n\n\n\n\n\nNoteMath audit — how every volume is calculated\n\n\n\n\n\nCore formula (all standard master mixes):\n\\[V_{total} = V_{per\\_sample} \\times N_{samples} \\times 1.10\\]\nSDS / Proteinase K mix (4 µL added per sample after Stop buffer):\n\\[V_{SDS} = 2 \\; \\mu L \\times N \\times 1.10 \\qquad V_{PK} = 2 \\; \\mu L \\times N \\times 1.10\\]\nConA bead prep (not scaled with excess — fixed 10 µL per sample):\n\\[V_{beads} = 10 \\; \\mu L \\times N_{samples}\\]\nWhere N = your current input for number of samples. Include controls as samples.\n\n\n\n\n\nCode\ne_cnr = n_samples * 1.10\nfmt_cnr = (x, d = 1) =&gt; x.toFixed(d)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSDS / Proteinase K (add 4 µL/sample after Stop buffer)\n\n\nCode\nInputs.table([\n  {Component: \"10% SDS\",                   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)},\n  {Component: \"Proteinase K (20 mg/mL)\",   \"Per sample (µL)\": 2, \"Total (µL)\": fmt_cnr(2 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nEnd repair & A-tailing (add 10 µL to 50 µL sample)\n\n\nCode\nInputs.table([\n  {Component: \"End Repair & A-tailing Buffer\",      \"Per sample (µL)\": 7, \"Total (µL)\": fmt_cnr(7 * e_cnr)},\n  {Component: \"End Repair & A-tailing Enzyme mix\",  \"Per sample (µL)\": 3, \"Total (µL)\": fmt_cnr(3 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\nAdapter ligation (add 45 µL mix + 5 µL unique adapter)\n\n\nCode\nInputs.table([\n  {Component: \"PCR-grade H₂O\",   \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)},\n  {Component: \"Ligation Buffer\", \"Per sample (µL)\": 30, \"Total (µL)\": fmt_cnr(30 * e_cnr)},\n  {Component: \"DNA Ligase\",      \"Per sample (µL)\": 10, \"Total (µL)\": fmt_cnr(10 * e_cnr)}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\nCode\nmd`**PCR amplification (${pcr_cycles} cycles)**`\n\n\n\n\n\n\n\n\n\nCode\nInputs.table([\n  {Component: \"KAPA HiFi HotStart ReadyMix (2×)\",          \"Per sample (µL)\": 25, \"Total (µL)\": fmt_cnr(25 * e_cnr)},\n  {Component: \"KAPA Library Amplification Primer Mix (10×)\", \"Per sample (µL)\": 5,  \"Total (µL)\": fmt_cnr(5  * e_cnr)}\n], {layout: \"auto\"})",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
+    "href": "protocols/cnr-protocol.html#day-1-cell-binding-to-cona-beads-2-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 1 — Cell binding to ConA beads (~2 hr)",
+    "text": "Day 1 — Cell binding to ConA beads (~2 hr)\n\n\n\n\n\n\nNoteWhy ConA beads?\n\n\n\n\n\nConcanavalin A-coated beads bind to the cell surface via glycoproteins, immobilizing cells for all subsequent washes. This eliminates centrifugation steps that would pellet and stress the nuclei. The key is that cells remain membrane-intact throughout — you are not isolating nuclei.\n\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw pellets on ice; resuspend in NE1 buffer\",                             Volume: \"1000 µL/sample\"},\n  {Step: \"2\", Action: \"Rotate 10 min 4°C\",                                                         Volume: \"—\"},\n  {Step: \"3\", Action: \"Spin 500×g 10 min 4°C; resuspend in Wash buffer\",                          Volume: \"1000 µL/sample\"},\n  {Step: \"4\", Action: `Activate ConA beads: ${(10 * n_samples).toFixed(0)} µL total`,             Volume: \"Wash 1× Binding Buffer\"},\n  {Step: \"5\", Action: `Resuspend in ${(10 * n_samples).toFixed(0)} µL Binding Buffer`,            Volume: \"10 µL beads/sample\"},\n  {Step: \"6\", Action: \"Mix cells + beads; invert ~10×; 10 min RT; magnet\",                        Volume: \"Resuspend in 50 µL Antibody Buffer/sample\"},\n  {Step: \"7\", Action: \"Add primary antibody; O/N 4°C thermomixer 1000 rpm\",                       Volume: \"Per Ab dilution sheet\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nPrimary antibody: _______ — lot # _______\nIgG negative control included\nH3K4me3 positive control included\nSamples in thermomixer at 4°C, 1000 rpm O/N",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
+    "href": "protocols/cnr-protocol.html#day-2-pag-mnase-chromatin-digestion-4-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)",
+    "text": "Day 2 — pAG-MNase & chromatin digestion (~4 hr)\n\n\n\n\n\n\nWarningCaCl₂ addition triggers digestion immediately\n\n\n\nOnce CaCl₂ is added, MNase is active. Work quickly and consistently — keep all samples on ice until the moment you add CaCl₂ to each tube, then incubate exactly 30 min at 4°C. Longer digestion = smaller fragments = loss of signal at broad domains.\n\n\n\n\n\n\n\n\n\n\nStep\nAction\nDetail\n\n\n\n\n1\nPulse spin; magnet; wash Triton Buffer\n1 mL/sample\n\n\n2\nRepeat Triton Buffer wash\n1 mL/sample\n\n\n3\nResuspend in Antibody Buffer; add pAG-MNase\n50 µL + 2.5 µL/sample\n\n\n4\nIncubate 1h 4°C metal block\n—\n\n\n5\nWash × 2 Triton Buffer; resuspend in Triton Buffer\n100 µL/sample\n\n\n6\nAdd 100 mM CaCl₂; 30 min 4°C to digest\n2 µL/sample\n\n\n7\nAdd 2× Stop Buffer; 20 min 37°C to release fragments\n100 µL/sample\n\n\n8\nMagnet; transfer supernatant to new tube\nFragments are in supernatant\n\n\n9\nAdd SDS/Prot-K master mix; 1h 65°C (or O/N)\n4 µL/sample\n\n\n10\nZymo Clean & Concentrator; elute in 55 µL\nLo-Bind tube; –20°C\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nCaCl₂ added; digestion timer started\n37°C incubation complete\nSupernatant transferred cleanly (beads discarded)\nDNA in Lo-Bind tube at –20°C\n\n\n\n\n\n\n\n\n\nTipLow yield after Zymo cleanup?\n\n\n\n\n\nEnsure you are collecting the supernatant after CaCl₂ digestion — the released fragments are in solution, not on the beads. Also check that the Zymo column was not overloaded (max 5 µg DNA per column).",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
+    "href": "protocols/cnr-protocol.html#day-3-library-preparation-4-hr",
+    "title": "CUT&RUN Protocol",
+    "section": "Day 3 — Library preparation (~4 hr)",
+    "text": "Day 3 — Library preparation (~4 hr)\n\n\n\n\n\n\nWarningAdapter index tracking\n\n\n\nRecord your adapter–sample assignment before you open any tubes. Adapter swaps are not detectable until sequencing data arrives. Use a unique index for each sample — never reuse an index within a run.\n\n\n\n\nCode\nInputs.table([\n  {Step: \"1\", Action: \"Thaw KAPA reagents at 4°C\",                                                    Detail: \"—\"},\n  {Step: \"2\", Action: \"End repair & A-tailing: add 10 µL mix to 50 µL sample\",                        Detail: \"20°C 30 min → 65°C 30 min (heated lid 85°C)\"},\n  {Step: \"3\", Action: \"Adapter ligation: add 45 µL mix + 5 µL UNIQUE adapter\",                        Detail: \"20°C 15 min; check adapter compatibility sheet\"},\n  {Step: \"4\", Action: \"AMPure round 1 (1.2×): 132 µL beads → elute 50 µL 10 mM Tris\",               Detail: \"—\"},\n  {Step: \"5\", Action: \"AMPure round 2 (1.2×): 60 µL beads → elute 25 µL\",                            Detail: \"—\"},\n  {Step: \"6\", Action: `PCR: 30 µL master mix + 20 µL sample; ${pcr_cycles} cycles`,                  Detail: \"98°C 45s → (98°C 15s/60°C 10s) × N → 72°C 1 min\"},\n  {Step: \"7\", Action: \"Post-PCR AMPure (1.2×) → elute 25 µL\",                                         Detail: \"—\"},\n  {Step: \"8\", Action: \"Qubit 1× HS dsDNA; Tapestation D1000\",                                          Detail: \"Store 4°C (2 wk) or –20°C\"}\n], {layout: \"auto\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\nTipHow many PCR cycles?\n\n\n\n\n\n10–12 cycles for abundant targets (H3K4me3, H3K27me3). 12–14 cycles for lower-abundance targets (transcription factors, CTCF). Too many cycles introduces PCR duplicates that inflate apparent signal. When in doubt, use 12 and check duplicate rate after sequencing.\n\n\n\n\n\n\n\n\n\nImportantChecklist\n\n\n\n\nAdapters used: _______\nQubit HS dsDNA: _______ ng/µL\nTapestation peak: _______ bp (expected 150–350 bp)\nSubmitted for sequencing: _______",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#qc-log",
+    "href": "protocols/cnr-protocol.html#qc-log",
+    "title": "CUT&RUN Protocol",
+    "section": "QC log",
+    "text": "QC log\n\n\n\nCheckpoint\nExpected\nObserved\nPass\n\n\n\n\nDay 1: cells binding beads\nEven suspension\n\n\n\n\nDay 2: digest supernatant\nClear\n\n\n\n\nPost-Zymo Qubit\n&gt;1 ng/µL\n\n\n\n\nPost-ligation Qubit\n&gt;5 ng/µL\n\n\n\n\nFinal library Qubit\n&gt;2 ng/µL\n\n\n\n\nTapestation peak\n150–350 bp\n\n\n\n\n\nNotes / deviations:",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/cnr-protocol.html#references",
+    "href": "protocols/cnr-protocol.html#references",
+    "title": "CUT&RUN Protocol",
+    "section": "References",
+    "text": "References\nSkene PJ, Henikoff JG, Henikoff S. eLife. 2018;7:e36906. Protocol: Phanstiel lab; adapted by JP Flores.",
+    "crumbs": [
+      "Protocols",
+      "CUT&RUN Protocol"
+    ]
+  },
+  {
+    "objectID": "experiments/index.html",
+    "href": "experiments/index.html",
+    "title": "Experiments",
+    "section": "",
+    "text": "One entry per experiment run. Filed by date. Committed to git when complete.\nTemplates live in experiments/_templates/ — copy the relevant one to start a new entry.\n\n\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\nDate\nExperiment\nTags\nResult summary\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Experiments"
+    ]
+  },
+  {
+    "objectID": "aims/index.html",
+    "href": "aims/index.html",
+    "title": "Aims",
+    "section": "",
+    "text": "Living documents for fellowship and grant aims. These update as experiments come in — figures and tables can embed R code that pulls from experiment entries directly.\n\n\n\nDocument\nStatus\n\n\n\n\nF32 — Aim 1\ndrafting\n\n\nHFSP overview\ndrafting\n\n\nFulbright narrative\nsubmitted"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Lab notebook",
+    "section": "",
+    "text": "This is a living record of wet lab experiments, protocols, and reading notes. It is not a computational notebook — that lives separately. Every experiment entry is one .qmd file per run, committed to git when complete."
+  },
+  {
+    "objectID": "index.html#quick-links",
+    "href": "index.html#quick-links",
+    "title": "Lab notebook",
+    "section": "Quick links",
+    "text": "Quick links\n\n\n\nSection\nWhat’s in it\n\n\n\n\nProtocols\nShiny QMDs — configure inputs, print to PDF, take to bench\n\n\nExperiments\nOne entry per experiment run, filed by date\n\n\nReading notes\nProtocol-adjacent papers worth annotating in depth\n\n\nAims\nF32, HFSP, Fulbright — living documents"
+  },
+  {
+    "objectID": "index.html#how-to-use-this-notebook",
+    "href": "index.html#how-to-use-this-notebook",
+    "title": "Lab notebook",
+    "section": "How to use this notebook",
+    "text": "How to use this notebook\nStarting a new experiment:\n# Copy the relevant template\ncp experiments/_templates/HiC_entry_template.qmd \\\n   experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd\n\n# Open in Positron and fill in the planning section\n# Then each evening: fill in that day's section, save\n\n# When the experiment is fully done:\ngit add experiments/YYYY-MM-DD_HiC-target-celltype.qmd\ngit commit -m \"Hi-C [target] [celltype] — [one-line result summary]\"\nPrinting a protocol:\nquarto serve protocols/HiC_protocol.qmd\n# Configure Shiny inputs in browser → Cmd+P → Save as PDF\nRebuilding the site:\nquarto render\n# Open _site/index.html in browser"
+  },
+  {
+    "objectID": "index.html#recent-experiments",
+    "href": "index.html#recent-experiments",
+    "title": "Lab notebook",
+    "section": "Recent experiments",
+    "text": "Recent experiments\nNo experiment entries yet. Run your first experiment!"
+  },
+  {
     "objectID": "protocols/ens-2d-protocol.html",
     "href": "protocols/ens-2d-protocol.html",
     "title": "2D ENS Differentiation Protocol",
@@ -431,6 +401,36 @@
     "crumbs": [
       "Protocols",
       "2D ENS Differentiation Protocol"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html",
+    "href": "protocols/index.html",
+    "title": "Protocols",
+    "section": "",
+    "text": "Interactive protocol calculators — set your sample count and volumes scale automatically. Use 🖨 Print / Save as PDF on any protocol for a bench copy.",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#available-protocols",
+    "href": "protocols/index.html#available-protocols",
+    "title": "Protocols",
+    "section": "Available protocols",
+    "text": "Available protocols\n\n\n\nProtocol\nType\nSource\n\n\n\n\nIn situ Hi-C\nChromatin conformation\nRao et al. 2014\n\n\nCUT&RUN\nChromatin profiling\nSkene et al. 2018\n\n\n2D ENS differentiation\nCell biology\nBarber et al. 2019",
+    "crumbs": [
+      "Protocols"
+    ]
+  },
+  {
+    "objectID": "protocols/index.html#adding-a-new-protocol",
+    "href": "protocols/index.html#adding-a-new-protocol",
+    "title": "Protocols",
+    "section": "Adding a new protocol",
+    "text": "Adding a new protocol\nGive Claude the source (PDF, .docx, or paste the methods section) and say “make a QMD for this protocol.” Output goes in protocols/. Then add a row to the table above.",
+    "crumbs": [
+      "Protocols"
     ]
   }
 ]
