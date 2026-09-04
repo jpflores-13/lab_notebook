@@ -31,8 +31,7 @@ lab_notebook/
 ├── protocols/
 │   ├── index.qmd                        # protocol index page
 │   ├── hic-protocol.qmd                 # in situ Hi-C
-│   ├── cnr-protocol.qmd                 # CUT&RUN
-│   └── ens-2d-protocol.qmd              # 2D ENS differentiation
+│   └── cnr-protocol.qmd                 # CUT&RUN
 │
 ├── experiments/
 │   ├── index.qmd                        # experiment table
@@ -93,7 +92,7 @@ git push             # GitHub Pages picks up docs/ automatically
 
 ## Adding a new protocol
 
-Give Claude the protocol source (PDF, `.docx`, or paste the methods section) and say
+Provide the protocol source (PDF, `.docx`, or paste the methods section) and say
 **"make a QMD for this protocol."** The `/protocol-to-qmd` skill handles the
 conversion — it produces an OJS file in `protocols/`.
 
@@ -104,7 +103,7 @@ Then:
 
 ## Starting a new experiment entry
 
-Say **"make me an entry for a [protocol] run starting today"** to Claude.
+Say **"make me an entry for a [protocol] run starting today."**
 The `/experiment-entry` skill generates a protocol-specific entry pre-filled
 with the right day sections, QC expected values, and metadata fields.
 

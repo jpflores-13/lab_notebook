@@ -356,12 +356,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../protocols/ens-2d-protocol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2D ENS Differentiation Protocol</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../protocols/gemx-3p-protocol.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chromium GEM-X Single Cell 3’ v4 Protocol</span></a>
   </div>
@@ -433,16 +427,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Skene et al.&nbsp;2018</td>
 </tr>
 <tr class="odd">
-<td><a href="../protocols/ens-2d-protocol.html">2D ENS differentiation</a></td>
-<td>Cell biology</td>
-<td>Barber et al.&nbsp;2019</td>
-</tr>
-<tr class="even">
 <td><a href="../protocols/citraprep-protocol.html">CitraPrep nuclei isolation</a></td>
 <td>Single-nucleus prep</td>
 <td>Source not specified</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="../protocols/gemx-3p-protocol.html">Chromium GEM-X Single Cell 3’ v4</a></td>
 <td>scRNA-seq library prep</td>
 <td>10x Genomics CG000731 Rev B</td>
@@ -452,7 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="adding-a-new-protocol" class="level2">
 <h2 class="anchored" data-anchor-id="adding-a-new-protocol">Adding a new protocol</h2>
-<p>Give Claude the source (PDF, <code>.docx</code>, or paste the methods section) and say <strong>“make a QMD for this protocol.”</strong> Output goes in <code>protocols/</code>. Then add a row to the table above.</p>
+<p>Provide the source (PDF, <code>.docx</code>, or paste the methods section) and say <strong>“make a QMD for this protocol.”</strong> Output goes in <code>protocols/</code>. Then add a row to the table above.</p>
 
 
 <!-- -->
@@ -936,13 +925,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------|--------|</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">In situ Hi-C</span><span class="co">](hic-protocol.qmd)</span> <span class="pp">|</span> Chromatin conformation <span class="pp">|</span> Rao et al. 2014 <span class="pp">|</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">CUT&amp;RUN</span><span class="co">](cnr-protocol.qmd)</span> <span class="pp">|</span> Chromatin profiling <span class="pp">|</span> Skene et al. 2018 <span class="pp">|</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">2D ENS differentiation</span><span class="co">](ens-2d-protocol.qmd)</span> <span class="pp">|</span> Cell biology <span class="pp">|</span> Barber et al. 2019 <span class="pp">|</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">CitraPrep nuclei isolation</span><span class="co">](citraprep-protocol.qmd)</span> <span class="pp">|</span> Single-nucleus prep <span class="pp">|</span> Source not specified <span class="pp">|</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">Chromium GEM-X Single Cell 3' v4</span><span class="co">](gemx-3p-protocol.qmd)</span> <span class="pp">|</span> scRNA-seq library prep <span class="pp">|</span> 10x Genomics CG000731 Rev B <span class="pp">|</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding a new protocol</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Give Claude the source (PDF, <span class="in">`.docx`</span>, or paste the methods section) and say **"make a QMD for this protocol."** Output goes in <span class="in">`protocols/`</span>. Then add a row to the table above.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">CitraPrep nuclei isolation</span><span class="co">](citraprep-protocol.qmd)</span> <span class="pp">|</span> Single-nucleus prep <span class="pp">|</span> Source not specified <span class="pp">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="co">[</span><span class="ot">Chromium GEM-X Single Cell 3' v4</span><span class="co">](gemx-3p-protocol.qmd)</span> <span class="pp">|</span> scRNA-seq library prep <span class="pp">|</span> 10x Genomics CG000731 Rev B <span class="pp">|</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding a new protocol</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Provide the source (PDF, <span class="in">`.docx`</span>, or paste the methods section) and say **"make a QMD for this protocol."** Output goes in <span class="in">`protocols/`</span>. Then add a row to the table above.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
