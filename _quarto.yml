@@ -25,13 +25,13 @@ website:
 
   sidebar:
     - title: "Protocols"
-      style: "docked"
+      style: "floating"
       contents:
         - protocols/index.qmd
         - auto: "protocols/*.qmd"
 
     - title: "Experiments"
-      style: "docked"
+      style: "floating"
       contents:
         - experiments/index.qmd
         - auto: "experiments/*.qmd"
