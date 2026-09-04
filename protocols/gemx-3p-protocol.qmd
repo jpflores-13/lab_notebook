@@ -260,13 +260,26 @@ After GEM-RT incubation, GEMs are broken and the pooled aqueous fraction is reco
 | Recovery Agent | 220016 | — | Ambient |
 | 10x Magnetic Separator B | 2001212 | — | Ambient |
 | Qiagen Buffer EB | — | Manufacturer's recommendations | — |
-| Bio-Rad 10% Tween 20 | — | Manufacturer's recommendations | — |
+| Bio-Rad 10% Tween 20 | — | If diluting from 100% stock, see prep note below; pipette slowly (viscous) | Ambient |
 | 80% Ethanol | — | Prepare fresh, 15 mL per 8 reactions | Ambient |
 | Beckman Coulter SPRIselect Reagent | — | Manufacturer's recommendations | — |
 | Agilent Bioanalyzer High Sensitivity Kit | — | If used for QC & quantification | — |
 | Agilent TapeStation ScreenTape & Reagents | — | If used for QC & quantification | — |
 
 *Consolidated from CG000731 Rev B, "2.0 Get Started" (p.42).*
+:::
+
+::: {.callout-tip collapse="true"}
+## Making 10% Tween 20 from 100% stock
+If your Tween 20 stock is 100% (neat), dilute 1:10 in water: $V_{Tween} = 10\% \times V_{final}$.
+
+| Final volume | Tween 20 (100%) | Water |
+|---|---|---|
+| 10 mL | 1 mL | 9 mL |
+| 50 mL | 5 mL | 45 mL |
+| 100 mL | 10 mL | 90 mL |
+
+Tween 20 is viscous — add the water to the tube first, then the Tween 20 (cutting a few mm off the tip helps), and pipette slowly. It won't dissolve instantly; vortex or stir until the solution runs clear with no streaks, which can take a few minutes. Store the 10% stock at room temperature.
 :::
 
 ### Calculations for this step
