@@ -8,20 +8,22 @@ date: today
 
 ::: {.callout-note}
 ## Overview
-CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient (18 min, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into every buffer **except** the final nuclei resuspension buffer — spermine, spermidine, and dithiothreitol (DTT) are deliberately left out of that one because they interfere with downstream cDNA synthesis.
+CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into every buffer **except** the final nuclei resuspension buffer — spermine, spermidine, and dithiothreitol (DTT) are deliberately left out of that one because they interfere with downstream cDNA synthesis.
 
 <!-- TODO: confirm original source/citation for this protocol with JP — none given in the source document -->
 :::
 
 ::: {.callout-important}
 ## Before starting
+- Use **cell culture grade water** for every "water" call in this protocol (stock buffers and 1000X fresh solutions alike) — not general lab ddH₂O.
 - Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first — CitraHB and Diluent are both built from them.
 - Prepare CitraHB, Diluent, and Detergent stock buffers **a day ahead** — good for 1 month at 4°C.
 - Pre-chill the 7 mL glass dounce homogenizer on ice.
 - Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) **fresh** each time.
 - Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.
 - Make the nuclei resuspension buffer during the centrifugation step (Step 8) — **no** spermine, spermidine, or DTT in this one.
-- Set centrifuge to 4°C and confirm the rotor/tubes are rated for **no-brake** deceleration (Step 8).
+- Set the **ultracentrifuge** to 4°C and confirm the rotor/tubes are rated for **no-brake** deceleration (Step 8).
+- Book more time than the spin itself: the 18 min is only the run — loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to **around an hour**. Schedule accordingly.
 :::
 
 ---
@@ -80,8 +82,8 @@ tricine_g = 1 * (stock_vol_mL / 1000) * tricine_MW
 citric_g  = 1 * (stock_vol_mL / 1000) * citric_MW
 
 Inputs.table([
-  {Component: "Tricine (free acid)", "Amount": `${fmt(tricine_g)} g`, "Recipe": `Dissolve in ~80% of ${fmt(stock_vol_mL)} mL water; titrate to pH 7.8 with Potassium Hydroxide (KOH); bring to ${fmt(stock_vol_mL)} mL`},
-  {Component: "Citric Acid",         "Amount": `${fmt(citric_g)} g`,  "Recipe": `Dissolve in double-distilled water (ddH₂O) to ${fmt(stock_vol_mL)} mL`}
+  {Component: "Tricine (free acid)", "Amount": `${fmt(tricine_g)} g`, "Recipe": `Dissolve in ~80% of ${fmt(stock_vol_mL)} mL cell culture grade water; titrate to pH 7.8 with Potassium Hydroxide (KOH); bring to ${fmt(stock_vol_mL)} mL`},
+  {Component: "Citric Acid",         "Amount": `${fmt(citric_g)} g`,  "Recipe": `Dissolve in cell culture grade water to ${fmt(stock_vol_mL)} mL`}
 ], {layout: "auto"})
 ```
 
@@ -100,7 +102,7 @@ Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium H
 | Tricine-KOH pH 7.8 | 20 mM | 600 µL of 1 M stock |
 | Citric Acid | 10 mM | 300 µL of 1 M stock |
 
-Dissolve in double-distilled water (ddH₂O) to a final volume of 30 mL.
+Dissolve in cell culture grade water to a final volume of 30 mL.
 
 **Diluent (10 mL)**
 
@@ -111,7 +113,7 @@ Dissolve in double-distilled water (ddH₂O) to a final volume of 30 mL.
 | Tricine-KOH pH 7.8 | 120 mM | 1.2 mL of 1 M stock |
 | Citric Acid | 10 mM | 100 µL of 1 M stock |
 
-Dissolve in double-distilled water (ddH₂O) to a final volume of 10 mL.
+Dissolve in cell culture grade water to a final volume of 10 mL.
 
 **Detergent (1 mL)**
 
@@ -133,9 +135,9 @@ Make fresh each time — do not store.
 
 | Component | Final stock | Recipe |
 |-----------|-------------|--------|
-| 1 M Dithiothreitol (DTT) | 1000X | 0.15425 g in 1 mL water |
-| 0.15 M spermine | 1000X | 0.03035 g in 1 mL water |
-| 0.5 M spermidine | 1000X | 0.072625 g in 1 mL water |
+| 1 M Dithiothreitol (DTT) | 1000X | 0.15425 g in 1 mL cell culture grade water |
+| 0.15 M spermine | 1000X | 0.03035 g in 1 mL cell culture grade water |
+| 0.5 M spermidine | 1000X | 0.072625 g in 1 mL cell culture grade water |
 
 Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, **except** the nuclei resuspension buffer (see warning below).
 
@@ -311,20 +313,21 @@ Step 4 calls for pulling an aliquot to check nuclei release after homogenization
 
 ::: {.callout-warning}
 ## No brake on the Step 8 spin
-Centrifuge for **18 min at 10,000×g at 4°C with no brake**. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery.
+This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall — loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.
 :::
 
 | Step | Action | Volume |
 |------|--------|--------|
 | 6 | Add 50% iodixanol solution to the filtered sample (5 mL CitraHB fraction) and vortex to mix | 5 mL/sample |
 | 7 | Underlay sample with 30% and then 40% iodixanol solutions | Per gradient volumes above |
-| 8 | Weigh to balance; centrifuge 18 min at 10,000×g, 4°C, **no brake** | — |
+| 8 | Weigh conical tubes against each other on a scale, topping up the lighter tube(s) with cell culture grade water dropwise until matched (within ~0.1 g), then place balanced tubes opposite each other in the rotor; centrifuge in the ultracentrifuge for 18 min at 10,000×g, 4°C, **no brake** | — |
 | 9 | Collect nuclei from the interface layer with a P1000 pipette; transfer to a new tube | — |
 
 ::: {.callout-important}
 ## Checklist
-- [ ] Gradient tubes balanced by weight before spinning
-- [ ] Centrifuge confirmed at no-brake setting
+- [ ] Gradient tubes weighed against each other and balanced to within ~0.1 g before spinning
+- [ ] Balanced tubes loaded opposite each other in the rotor
+- [ ] Ultracentrifuge confirmed at no-brake setting
 - [ ] Interface layer collected cleanly, minimal carryover of gradient layers
 :::
 
@@ -336,11 +339,28 @@ Centrifuge for **18 min at 10,000×g at 4°C with no brake**. Braking will distu
 | 11 | Filter through 20 µM filter | — |
 | 12 | Spin 10 min at 500×g, 4°C to pellet nuclei | — |
 | 13 | Resuspend in nuclei wash buffer; repeat spin (Step 12) | 10 mL/sample |
-| 14 | Resuspend in nuclei wash buffer; count using hemocytometer | 200 µL/sample |
+| 14 | Resuspend in nuclei wash buffer; count using hemocytometer (see method below) | 200 µL/sample |
 | 15 | Load for single cell | — |
+
+::: {.callout-tip}
+## Hemocytometer counting method
+CitraPrep nuclei yields are typically too low for a reliable Countess (automated) read, so this is a **manual hemocytometer count** every time — do not substitute the Countess.
+
+a. Filter your trypan blue stock through a 0.2 µm filter before use — unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.
+b. Mix the nuclei suspension with filtered trypan blue at a **1:1** ratio (e.g. 10 µL suspension + 10 µL trypan blue) — dilution factor = 2.
+c. Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.
+d. Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Use the standard hemocytometer counting rule: count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.
+e. Calculate concentration:
+
+$$Nuclei/mL = \frac{\text{sum of nuclei in 4 corner squares}}{4} \times 2\ (\text{dilution factor}) \times 10^4$$
+
+Divide by 1000 to convert to nuclei/µL for loading calculations.
+:::
 
 ::: {.callout-important}
 ## Checklist
+- [ ] Trypan blue filtered (0.2 µm) before use
+- [ ] Nuclei suspension diluted 1:1 with trypan blue
 - [ ] Nuclei intact and free of debris under the hemocytometer
 - [ ] Nuclei concentration: _______ nuclei/µL
 - [ ] Loaded for single-cell run at: _______

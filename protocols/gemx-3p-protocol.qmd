@@ -30,8 +30,15 @@ Four steps: **1** GEM Generation & Barcoding → **2** Post GEM-RT Cleanup & cDN
 ```{ojs}
 //| echo: false
 viewof n_reactions   = Inputs.number({label: "Number of reactions (chip wells, ≤8/chip)", value: 1, min: 1, max: 8, step: 1})
-viewof target_cells   = Inputs.number({label: "Targeted cell recovery", value: 5000, min: 500, max: 20000, step: 500})
-viewof stock_conc     = Inputs.number({label: "Cell stock concentration (cells/µL)", value: 1000, min: 50, step: 50})
+viewof target_cells   = Inputs.number({label: "Targeted cell recovery (same target for every sample)", value: 5000, min: 500, max: 20000, step: 500})
+```
+
+```{ojs}
+//| echo: false
+viewof stock_concs_raw = Inputs.text({
+  label: "Cell stock concentration per sample (cells/µL), comma-separated in chip-loading order",
+  value: Array(n_reactions).fill(1000).join(", ")
+})
 ```
 
 ```{ojs}
@@ -40,12 +47,19 @@ mm_scale    = (x, n) => x * n * 1.10   // standard master mixes: N reactions + 1
 plain_scale = (x, n) => x * n          // Elution Solution I: exact N×, no excess
 fmt         = (x, d = 1) => x.toFixed(d)
 
-md`**${n_reactions} reaction(s) · targeting ${target_cells} cells · ${stock_conc} cells/µL stock**`
+stock_concs = stock_concs_raw.split(",").map(s => parseFloat(s.trim())).filter(n => Number.isFinite(n) && n > 0)
+
+md`**${n_reactions} reaction(s) · targeting ${target_cells} cells/sample · ${stock_concs.length} stock concentration(s) entered**`
 ```
 
 ::: {.callout-tip collapse="true"}
 ## Running more than 8 reactions
 Only one GEM-X 3' Chip is used per run, with a maximum of 8 reaction wells. For more than 8 samples, run additional chips separately and repeat this protocol per chip (up to 8 reactions per chip's worth of master mix).
+:::
+
+::: {.callout-tip collapse="true"}
+## Re-entering concentrations after changing reaction count
+Changing "Number of reactions" above resets the concentration field to placeholder values (1000 each) — re-enter your actual per-sample stock concentrations afterward, keeping the same left-to-right order you'll use when loading the chip.
 :::
 
 ---
@@ -84,28 +98,57 @@ $$V_{cell\ suspension} = \frac{1.45 \times N_{target}}{C_{stock}} \qquad V_{PBS}
 
 where 36.6 µL is the fixed PBS + cell-suspension allowance (Master Mix 28.4 µL + 36.6 µL = 65 µL total per tube), and 1.45 is the recovery/loading factor implied by the table (≈69% capture efficiency). This reproduces every checked entry in the source table to within its printed rounding (±0.1 µL). If a computed cell suspension volume exceeds 36.6 µL, that combination isn't achievable — the source table greys these cells out ("exceeds allowable PBS volume"); dilute your stock or lower the target instead.
 
+Since stock concentration is entered **per sample** above, this section computes cell suspension and PBS volumes **per sample** too — each tube gets its own mix even though every tube targets the same cell recovery.
+
 <!-- TODO: this constant is empirically derived from the printed table, not stated explicitly as a formula in the source document. Sanity-check against CG000731 p.34-35 for your specific concentration/target if it matters for a critical run. -->
 :::
 
 ```{ojs}
 //| echo: false
-cell_susp_vol = 1.45 * target_cells / stock_conc
-pbs_vol       = 36.6 - cell_susp_vol
+sample_calcs = stock_concs.map((c, i) => {
+  const cell_susp_vol = 1.45 * target_cells / c;
+  return {
+    sample: i + 1,
+    stock_conc: c,
+    cell_susp_vol,
+    pbs_vol: 36.6 - cell_susp_vol,
+    achievable: cell_susp_vol <= 36.6
+  };
+})
+```
 
-cell_susp_vol > 36.6
+```{ojs}
+//| echo: false
+stock_concs.length !== n_reactions
   ? md`::: {.callout-warning}
-**Not achievable at this concentration.** ${fmt(cell_susp_vol)} µL of cell suspension would be needed, which exceeds the 36.6 µL PBS + cell-suspension allowance. Dilute your stock to at least ${fmt(1.45 * target_cells / 36.6, 0)} cells/µL, or lower the targeted cell recovery.
+**${stock_concs.length} concentration(s) entered but ${n_reactions} reaction(s) configured above.** Enter exactly one stock concentration per reaction, comma-separated, in the same order you'll load the chip wells.
 :::`
-  : Inputs.table([
-      {Component: "Cell suspension stock", "Volume (µL)": fmt(cell_susp_vol)},
-      {Component: "1X Phosphate-Buffered Saline (PBS)", "Volume (µL)": fmt(pbs_vol)},
-      {Component: "Total (added to Master Mix)", "Volume (µL)": fmt(cell_susp_vol + pbs_vol)}
-    ], {layout: "auto"})
+  : Inputs.table(
+      sample_calcs.map(s => ({
+        Sample: s.sample,
+        "Stock conc. (cells/µL)": s.stock_conc,
+        "Cell suspension (µL)": s.achievable ? fmt(s.cell_susp_vol) : "—",
+        "1X PBS (µL)": s.achievable ? fmt(s.pbs_vol) : "—",
+        "Total (µL, added to Master Mix)": s.achievable ? fmt(s.cell_susp_vol + s.pbs_vol) : "—"
+      })),
+      {layout: "auto"}
+    )
+```
+
+```{ojs}
+//| echo: false
+unachievable = sample_calcs.filter(s => !s.achievable)
+
+unachievable.length > 0
+  ? md`::: {.callout-warning}
+**Not achievable at the current concentration:** ${unachievable.map(s => `Sample ${s.sample} (${s.stock_conc} cells/µL) needs ≥${fmt(1.45 * target_cells / 36.6, 0)} cells/µL — dilute that sample's stock, or lower the targeted cell recovery for the whole run`).join("; ")}.
+:::`
+  : ""
 ```
 
 ::: {.callout-tip collapse="true"}
 ## Low transfer volume
-Cell suspension volumes below ~2 µL are hard to pipette accurately and increase cell-load variability — dilute your stock further if the calculator above returns a very small volume.
+Cell suspension volumes below ~2 µL are hard to pipette accurately and increase cell-load variability — dilute the stock further for any sample where the table above returns a very small volume.
 :::
 
 ### 1.2 Load GEM-X Chip
@@ -114,7 +157,7 @@ Cell suspension volumes below ~2 µL are hard to pipette accurately and increase
 |------|--------|--------|
 | a | If loading <8 reactions/chip, add 50% glycerol to each **unused** well | 60 µL (row 1), 60 µL (row 2), 250 µL (row 3) |
 | b | Vortex Gel Bead strip 30 sec in 10x Vortex Adapter; centrifuge ~5 sec; check for bubbles | — |
-| c | Add PBS volume (above) to Master Mix, then add cell suspension volume (above); total 65 µL/tube | Per calculator above |
+| c | For each tube, add that sample's own PBS volume then its own cell suspension volume (per-sample table above) to its Master Mix; total 65 µL/tube for every sample | Per-sample calculator above |
 | d | Load row labeled **1**: dispense Master Mix + Cell Suspension into bottom center of each well; wait 30 sec | 60 µL/well |
 | e | Load row labeled **2**: aspirate Gel Beads (puncture foil first), dispense; wait 30 sec | 60 µL/well |
 | f | Load row labeled **3**: dispense Partitioning Oil B from a reservoir, 2× 125 µL aliquots | 250 µL/well |
