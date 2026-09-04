@@ -11,6 +11,8 @@ Interactive protocol calculators — set your sample count and volumes scale aut
 | [In situ Hi-C](hic-protocol.qmd) | Chromatin conformation | Rao et al. 2014 |
 | [CUT&RUN](cnr-protocol.qmd) | Chromatin profiling | Skene et al. 2018 |
 | [2D ENS differentiation](ens-2d-protocol.qmd) | Cell biology | Barber et al. 2019 |
+| [CitraPrep nuclei isolation](citraprep-protocol.qmd) | Single-nucleus prep | Source not specified |
+| [Chromium GEM-X Single Cell 3' v4](gemx-3p-protocol.qmd) | scRNA-seq library prep | 10x Genomics CG000731 Rev B |
 
 ## Adding a new protocol
 

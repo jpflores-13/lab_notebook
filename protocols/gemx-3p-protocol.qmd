@@ -1,0 +1,494 @@
+---
+title: "Chromium GEM-X Single Cell 3' v4 Protocol"
+subtitle: "10x Genomics · User Guide CG000731 Rev B"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Barcoded Gel Beads, a cell suspension, and Partitioning Oil B are combined on a GEM-X 3' Chip to generate nanoliter Gel Beads-in-emulsion (GEMs) at limiting dilution, so most GEMs contain either zero or one cell. Reverse transcription inside the GEMs produces barcoded, full-length cDNA from poly-adenylated mRNA. After breaking the emulsion, cDNA is cleaned up, amplified, and a fixed 25% carried forward into 3' Gene Expression library construction (fragmentation, end repair/A-tailing, adaptor ligation, and sample index PCR), then sequenced.
+
+Four steps: **1** GEM Generation & Barcoding → **2** Post GEM-RT Cleanup & cDNA Amplification → **3** 3' Gene Expression Library Construction → **4** Sequencing.
+:::
+
+::: {.callout-important}
+## Before starting
+- Equilibrate RT Reagent E, Reducing Agent B, cDNA Primers, Fragmentation Buffer, and Ligation Mix to room temperature before use.
+- Prepare cell suspension in 1X Phosphate-Buffered Saline (PBS); **do not** add PBS directly to the suspension — PBS is added to the Master Mix instead (Step 1.2c).
+- Prepare fresh 80% ethanol (15 mL per 8 reactions).
+- Thaw Cleanup Buffer for 10 min at 65°C; verify no visible crystals before use.
+- Vortex Dynabeads MyOne SILANE thoroughly (≥30 sec) immediately before adding to any mix — **do not** centrifuge beforehand.
+- Firmware ≥2.0.0 required for Chromium X/iX; ≥2.2.0 for Chromium Xo.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_reactions   = Inputs.number({label: "Number of reactions (chip wells, ≤8/chip)", value: 1, min: 1, max: 8, step: 1})
+viewof target_cells   = Inputs.number({label: "Targeted cell recovery", value: 5000, min: 500, max: 20000, step: 500})
+viewof stock_conc     = Inputs.number({label: "Cell stock concentration (cells/µL)", value: 1000, min: 50, step: 50})
+```
+
+```{ojs}
+//| echo: false
+mm_scale    = (x, n) => x * n * 1.10   // standard master mixes: N reactions + 10% excess
+plain_scale = (x, n) => x * n          // Elution Solution I: exact N×, no excess
+fmt         = (x, d = 1) => x.toFixed(d)
+
+md`**${n_reactions} reaction(s) · targeting ${target_cells} cells · ${stock_conc} cells/µL stock**`
+```
+
+::: {.callout-tip collapse="true"}
+## Running more than 8 reactions
+Only one GEM-X 3' Chip is used per run, with a maximum of 8 reaction wells. For more than 8 samples, run additional chips separately and repeat this protocol per chip (up to 8 reactions per chip's worth of master mix).
+:::
+
+---
+
+## Step 1: GEM Generation & Barcoding
+
+### 1.1 Prepare Master Mix
+
+Prepare on ice, pipette mix 15x, centrifuge briefly. Add reagents in the listed order.
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "RT Reagent E (PN-2001106)",           "1X (µL)": 16.3, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(16.3, n_reactions))},
+  {Component: "Template Switch Oligo B (PN-2001027)", "1X (µL)": 3.1,  [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(3.1,  n_reactions))},
+  {Component: "Reducing Agent B (PN-2000087)",         "1X (µL)": 2.0,  [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(2.0,  n_reactions))},
+  {Component: "RT Enzyme E (PN-2001105/2001146)",      "1X (µL)": 7.0,  [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(7.0,  n_reactions))},
+  {Component: "Total",                                 "1X (µL)": 28.4, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(28.4, n_reactions))}
+], {layout: "auto"})
+```
+
+Add 28.4 µL Master Mix into each tube of a PCR 8-tube strip on ice (1X per reaction, regardless of how many reactions the batch above covers).
+
+### Cell Suspension Volume Calculator
+
+::: {.callout-warning}
+## Do not add PBS directly to the cell suspension
+Add PBS to the Master Mix instead — see Step 1.2c below.
+:::
+
+::: {.callout-note collapse="true"}
+## Math audit — reproduced from the source calculator table
+10x Genomics ships this step as a large printed lookup table (Cell Stock Concentration × Targeted Cell Recovery, CG000731 p.34–35) rather than a formula. Back-calculating from >10 entries spanning both halves of that table gives a consistent relationship:
+
+$$V_{cell\ suspension} = \frac{1.45 \times N_{target}}{C_{stock}} \qquad V_{PBS} = 36.6\;\mu L - V_{cell\ suspension}$$
+
+where 36.6 µL is the fixed PBS + cell-suspension allowance (Master Mix 28.4 µL + 36.6 µL = 65 µL total per tube), and 1.45 is the recovery/loading factor implied by the table (≈69% capture efficiency). This reproduces every checked entry in the source table to within its printed rounding (±0.1 µL). If a computed cell suspension volume exceeds 36.6 µL, that combination isn't achievable — the source table greys these cells out ("exceeds allowable PBS volume"); dilute your stock or lower the target instead.
+
+<!-- TODO: this constant is empirically derived from the printed table, not stated explicitly as a formula in the source document. Sanity-check against CG000731 p.34-35 for your specific concentration/target if it matters for a critical run. -->
+:::
+
+```{ojs}
+//| echo: false
+cell_susp_vol = 1.45 * target_cells / stock_conc
+pbs_vol       = 36.6 - cell_susp_vol
+
+cell_susp_vol > 36.6
+  ? md`::: {.callout-warning}
+**Not achievable at this concentration.** ${fmt(cell_susp_vol)} µL of cell suspension would be needed, which exceeds the 36.6 µL PBS + cell-suspension allowance. Dilute your stock to at least ${fmt(1.45 * target_cells / 36.6, 0)} cells/µL, or lower the targeted cell recovery.
+:::`
+  : Inputs.table([
+      {Component: "Cell suspension stock", "Volume (µL)": fmt(cell_susp_vol)},
+      {Component: "1X Phosphate-Buffered Saline (PBS)", "Volume (µL)": fmt(pbs_vol)},
+      {Component: "Total (added to Master Mix)", "Volume (µL)": fmt(cell_susp_vol + pbs_vol)}
+    ], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Low transfer volume
+Cell suspension volumes below ~2 µL are hard to pipette accurately and increase cell-load variability — dilute your stock further if the calculator above returns a very small volume.
+:::
+
+### 1.2 Load GEM-X Chip
+
+| Step | Action | Volume |
+|------|--------|--------|
+| a | If loading <8 reactions/chip, add 50% glycerol to each **unused** well | 60 µL (row 1), 60 µL (row 2), 250 µL (row 3) |
+| b | Vortex Gel Bead strip 30 sec in 10x Vortex Adapter; centrifuge ~5 sec; check for bubbles | — |
+| c | Add PBS volume (above) to Master Mix, then add cell suspension volume (above); total 65 µL/tube | Per calculator above |
+| d | Load row labeled **1**: dispense Master Mix + Cell Suspension into bottom center of each well; wait 30 sec | 60 µL/well |
+| e | Load row labeled **2**: aspirate Gel Beads (puncture foil first), dispense; wait 30 sec | 60 µL/well |
+| f | Load row labeled **3**: dispense Partitioning Oil B from a reservoir, 2× 125 µL aliquots | 250 µL/well |
+| g | Close chip holder (gasket attached); do not press on top of gasket; keep horizontal | — |
+
+::: {.callout-warning}
+## Partitioning Oil B is mandatory
+Failure to add Partitioning Oil B to row 3 will prevent GEM generation and can damage the instrument. Run the chip on the Chromium X series instrument immediately after loading.
+:::
+
+### 1.3 Run the Chromium X Series Instrument
+
+a. Eject tray; place assembled chip with gasket, keeping it horizontal; retract tray.
+b. Confirm the GEM-X 3P program on screen; press play.
+c. Run takes ~6 min; instrument chimes at completion — proceed immediately.
+
+### 1.4 Transfer GEMs
+
+a. Place a tube strip on ice.
+b. Eject chip; discard gasket; fold lid back to expose wells at 45°.
+c. Check rows 1–2 for abnormally high remaining volume (possible clog indicator).
+d. Slowly aspirate **100 µL** GEMs from the lowest point of each recovery well (top NO FILL row) without sealing tips against the well bottom.
+e. Dispense into the tube strip on ice over ~20 sec, tips against the sidewalls.
+f. Start GEM incubation within 5 min. Route GEMs from separate chips to separate thermal cyclers if running back-to-back.
+
+### 1.5 GEM-RT Incubation
+
+Use a thermal cycler holding ≥100 µL (125 µL preferred, e.g. Bio-Rad C1000 Touch — use the highest available reaction volume setting on other instruments).
+
+| Lid | Reaction volume | Run time |
+|-----|-----------------|----------|
+| 48°C | 125 µL | ~55 min |
+
+| Step | Temperature | Time |
+|------|-------------|------|
+| 1 | 48°C | 00:45:00 |
+| 2 | 85°C | 00:05:00 |
+| 3 | 4°C | Hold |
+
+Store at 4°C up to 72 h, or −20°C up to 1 week, or proceed directly.
+
+---
+
+## Step 2: Post GEM-RT Cleanup & cDNA Amplification
+
+### 2.1 Post GEM-RT Cleanup — Dynabeads
+
+a. Add **125 µL Recovery Agent** to each sample at room temperature. Do **not** pipette mix or vortex the biphasic mixture. Wait 2 min.
+b. Slowly remove and discard **125 µL** Recovery Agent/Partitioning Oil (pink, bottom layer) — do not aspirate the aqueous phase.
+c. Prepare the Dynabeads Cleanup Mix (vortex SILANE beads ≥30 sec immediately before use; do not centrifuge):
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Cleanup Buffer (PN-2000088)",         "1X (µL)": 182, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(182, n_reactions))},
+  {Component: "Dynabeads MyOne SILANE (PN-2000048)",  "1X (µL)": 8,   [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(8,   n_reactions))},
+  {Component: "Reducing Agent B (PN-2000087)",         "1X (µL)": 5,   [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(5,   n_reactions))},
+  {Component: "Nuclease-free Water",                   "1X (µL)": 5,   [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(5,   n_reactions))},
+  {Component: "Total",                                 "1X (µL)": 200, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(200, n_reactions))}
+], {layout: "auto"})
+```
+
+d. Vortex; add 200 µL to each tube; pipette mix 10x (pipette set to 200 µL).
+e. Incubate 10 min RT, caps open; re-mix at ~5 min to resuspend settled beads.
+f. Prepare Elution Solution I (no extra excess — scales exactly ×N):
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Buffer EB",              "1X (µL)": 98,  [`${n_reactions}X (µL)`]: fmt(plain_scale(98,  n_reactions))},
+  {Component: "10% Tween 20",           "1X (µL)": 1,   [`${n_reactions}X (µL)`]: fmt(plain_scale(1,   n_reactions))},
+  {Component: "Reducing Agent B",       "1X (µL)": 1,   [`${n_reactions}X (µL)`]: fmt(plain_scale(1,   n_reactions))},
+  {Component: "Total",                  "1X (µL)": 100, [`${n_reactions}X (µL)`]: fmt(plain_scale(100, n_reactions))}
+], {layout: "auto"})
+```
+
+| Step | Action | Volume |
+|------|--------|--------|
+| g | Magnet•High until clear (white interface is normal) | — |
+| h | Remove supernatant | — |
+| i–j | Add 80% ethanol to pellet, wait 30 sec, remove | 300 µL |
+| k–l | Repeat ethanol wash | 200 µL |
+| m | Centrifuge briefly; magnet•Low | — |
+| n | Remove remaining ethanol; air dry 1 min | — |
+| o | Remove from magnet; add Elution Solution I immediately | 35.5 µL |
+| p–q | Pipette mix 15x (set to 30 µL); incubate 1 min RT | — |
+| r | Magnet•Low until clear | — |
+| s | Transfer to a new tube strip | 35 µL |
+
+### 2.2 cDNA Amplification
+
+a. Prepare cDNA Amplification Reaction Mix on ice; vortex, centrifuge briefly.
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Amp Mix (PN-2000047/2000103) — NOT Library Amp Mix", "1X (µL)": 50, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(50, n_reactions))},
+  {Component: "cDNA Primers (PN-2000089)",                          "1X (µL)": 15, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(15, n_reactions))},
+  {Component: "Total",                                              "1X (µL)": 65, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(65, n_reactions))}
+], {layout: "auto"})
+```
+
+::: {.callout-warning}
+## Reagent mix-up risk
+Do **not** substitute Library Amp Mix (PN-2000531) here — it causes a significant drop in assay performance. Use Amp Mix (PN-2000047/2000103) only.
+:::
+
+b. Add 65 µL Reaction Mix to the 35 µL sample from Step 2.1s. c. Pipette mix 15x (set to 90 µL); centrifuge briefly.
+
+d. Thermal cycler protocol (lid 105°C, 100 µL reaction, ~25–50 min):
+
+| Step | Temperature | Time |
+|------|-------------|------|
+| 1 | 98°C | 00:00:45 |
+| 2 | 98°C | 00:00:20 |
+| 3 | 63°C | 00:00:30 |
+| 4 | 72°C | 00:01:00 |
+| 5 | Go to step 2 — see cycle table below | — |
+| 6 | 72°C | 00:01:00 |
+| 7 | 4°C | Hold |
+
+```{ojs}
+//| echo: false
+cdna_cycles = target_cells < 500 ? 13 : target_cells <= 6000 ? 12 : 11
+
+md`**Recommended cDNA amplification cycles: ${cdna_cycles}**, based on the targeted cell recovery (${target_cells}) set above — a starting point that trades off final mass vs. amplification artifacts.`
+```
+
+e. Store at 4°C up to 72 h or −20°C up to 1 week, or proceed.
+
+### 2.3 cDNA Cleanup — SPRIselect
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| a | Add SPRIselect (0.6X); pipette mix 15x (set to 150 µL) | 60 µL |
+| b | Incubate 5 min RT | — |
+| c–d | Magnet•High until clear; remove supernatant | — |
+| e–f | Add 80% ethanol, wait 30 sec, remove (×2 washes total) | 200 µL |
+| h | Centrifuge briefly; magnet•Low | — |
+| i | Remove remaining ethanol; air dry **≤2 min** (over-drying hurts elution) | — |
+| j | Remove from magnet; add Buffer EB; pipette mix 15x | 40.5 µL |
+| k | Incubate 2 min RT | — |
+| l | Magnet•High until clear | — |
+| m | Transfer to new tube strip | 40 µL |
+
+Store at 4°C up to 72 h or −20°C up to 4 weeks, or proceed.
+
+### 2.4 Post cDNA Amplification QC & Quantification
+
+Run 1 µL (undiluted for low-RNA-content cells <1 pg total RNA/cell; 1:5–1:10 diluted for high-RNA-content cells) on a Bioanalyzer High Sensitivity chip (or TapeStation/LabChip). Select the ~200–9,000 bp region and read the reported concentration (pg/µL).
+
+::: {.callout-note collapse="true"}
+## Yield calculator (reproduces the source worked example)
+$$Total\ Yield\ (ng) = \frac{Conc.\ (pg/\mu L) \times Elution\ Vol.\ (\mu L) \times Dilution\ Factor}{1000}$$
+Only **25%** of total cDNA yield is carried forward into Gene Expression library construction (Step 3.1d).
+:::
+
+```{ojs}
+//| echo: false
+viewof qc_conc      = Inputs.number({label: "Reported concentration (pg/µL)", value: 2005.93, min: 0, step: 0.01})
+viewof qc_elution_uL = Inputs.number({label: "Elution volume (µL)", value: 40, min: 0, step: 0.5})
+viewof qc_dilution  = Inputs.number({label: "Dilution factor", value: 10, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+cdna_total_yield_ng = (qc_conc * qc_elution_uL * qc_dilution) / 1000
+cdna_carry_forward_ng = cdna_total_yield_ng * 0.25
+
+md`**Total cDNA yield: ${fmt(cdna_total_yield_ng, 2)} ng · Carry forward (25%) into GEX library construction: ${fmt(cdna_carry_forward_ng, 2)} ng** — see Step 3.5 for the matching Sample Index PCR cycle count.`
+```
+
+---
+
+## Step 3: 3' Gene Expression Library Construction
+
+::: {.callout-note}
+## Fixed-proportion input
+Only **10 µL (25%)** of the 40 µL total cDNA from Step 2.3m goes into fragmentation — regardless of total yield. The remaining 30 µL (75%) can be stored at 4°C (≤72 h) or −20°C (≤4 weeks) for additional libraries.
+:::
+
+### 3.1 GEX Fragmentation, End Repair & A-tailing
+
+a. Pre-cool thermal cycler block to 4°C before preparing the Fragmentation Mix.
+
+| Lid | Reaction volume | Run time |
+|-----|------------------|----------|
+| 65°C | 50 µL | ~35 min |
+
+| Step | Temperature | Time |
+|------|-------------|------|
+| Pre-cool | 4°C | Hold |
+| Fragmentation | 32°C | 00:05:00 |
+| End Repair & A-Tailing | 65°C | 00:30:00 |
+| Hold | 4°C | Hold |
+
+c. Prepare Fragmentation Mix on ice; pipette mix, centrifuge briefly.
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Buffer EB",                             "1X (µL)": 25, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(25, n_reactions))},
+  {Component: "Fragmentation Buffer (PN-2000091)",      "1X (µL)": 5,  [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(5,  n_reactions))},
+  {Component: "Fragmentation Enzyme (PN-2000090/2000104)", "1X (µL)": 10, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(10, n_reactions))},
+  {Component: "Total",                                  "1X (µL)": 40, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(40, n_reactions))}
+], {layout: "auto"})
+```
+
+d. Transfer **only 10 µL** purified cDNA (25%) from Step 2.3 to a fresh tube strip. e. Add 40 µL Fragmentation Mix. f. Pipette mix 15x (set to 30 µL) on ice; centrifuge briefly. g. Transfer to the pre-cooled (4°C) thermal cycler and press SKIP to start.
+
+### 3.2 Post Fragmentation/End Repair/A-tailing Cleanup — SPRIselect (double-sided)
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| a | Add SPRIselect (0.6X); pipette mix 15x (set to 75 µL) | 30 µL |
+| b–c | Incubate 5 min RT; magnet•High until clear — **keep supernatant** | — |
+| d | Transfer supernatant to new tube strip | 75 µL |
+| e | Add SPRIselect (0.8X) to the transferred supernatant; pipette mix 15x (set to 80 µL) | 10 µL |
+| f–g | Incubate 5 min RT; magnet•High until clear | — |
+| h | Remove supernatant — **do not discard beads** | 80 µL |
+| i–j | On magnet, add 80% ethanol, wait 30 sec, remove (×2 washes total) | 125 µL |
+| l | Centrifuge briefly; magnet•Low | — |
+| m | Remove ethanol — do not over-dry | — |
+| n | Add Buffer EB; pipette mix 15x (set to 45 µL) | 50.5 µL |
+| o–p | Incubate 2 min RT; magnet•High until clear | — |
+| q | Transfer to new tube strip | 50 µL |
+
+### 3.3 GEX Adaptor Ligation
+
+a. Prepare Adaptor Ligation Mix; pipette mix, centrifuge briefly.
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Ligation Mix (PN-2001109)",         "1X (µL)": 40, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(40, n_reactions))},
+  {Component: "DNA Ligase (PN-220110/220131)",      "1X (µL)": 10, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(10, n_reactions))},
+  {Component: "Total",                              "1X (µL)": 50, [`${n_reactions}X + 10% (µL)`]: fmt(mm_scale(50, n_reactions))}
+], {layout: "auto"})
+```
+
+b. Add 50 µL Adaptor Ligation Mix to the 50 µL sample; pipette mix 15x (set to 90 µL); centrifuge briefly.
+
+c. Incubate (lid 30°C — may be turned off if unsupported; 100 µL reaction; 15 min):
+
+| Step | Temperature | Time |
+|------|-------------|------|
+| 1 | 20°C | 00:15:00 |
+| 2 | 4°C | Hold |
+
+### 3.4 Post Ligation Cleanup — SPRIselect
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| a | Add SPRIselect (0.8X); pipette mix 15x (set to 150 µL) | 80 µL |
+| b–d | Incubate 5 min RT; magnet•High; remove supernatant | — |
+| e–f | 80% ethanol wash, wait 30 sec, remove (×2 washes total) | 200 µL |
+| h | Centrifuge briefly; magnet•Low | — |
+| i | Air dry **≤2 min** | — |
+| j | Add Buffer EB; pipette mix 15x | 30.5 µL |
+| k–l | Incubate 2 min RT; magnet•Low until clear | — |
+| m | Transfer to new tube strip | 30 µL |
+
+### 3.5 GEX Sample Index PCR
+
+a. Choose sample index sets so no indices overlap in a multiplexed run; record the Dual Index Plate TT Set A well ID used.
+
+b. Add **50 µL** Library Amp Mix (PN-2000531) or Amp Mix (PN-2000047/2000103) to the 30 µL sample. c. Add **20 µL** of an individual Dual Index TT Set A well; pipette mix 5x (set to 90 µL); centrifuge briefly.
+
+d. Thermal cycler protocol (lid 105°C, 100 µL, ~30 min):
+
+| Step | Temperature | Time |
+|------|-------------|------|
+| 1 | 98°C | 00:00:45 |
+| 2 | 98°C | 00:00:20 |
+| 3 | 54°C | 00:00:30 |
+| 4 | 72°C | 00:00:20 |
+| 5 | Go to step 2 — see cycle table below | — |
+| 6 | 72°C | 00:01:00 |
+| 7 | 4°C | Hold |
+
+```{ojs}
+//| echo: false
+si_cycles = cdna_carry_forward_ng <= 50   ? "14-16"
+          : cdna_carry_forward_ng <= 250  ? "12-14"
+          : cdna_carry_forward_ng <= 600  ? "10-12"
+          : cdna_carry_forward_ng <= 1100 ? "8-10"
+          : cdna_carry_forward_ng <= 1500 ? "6-8"
+          : "5"
+
+md`**Recommended Sample Index PCR cycles: ${si_cycles}**, based on the ${fmt(cdna_carry_forward_ng, 2)} ng carry-forward computed in Step 2.4 above.`
+```
+
+e. Store at 4°C up to 72 h, or proceed.
+
+### 3.6 Post Sample Index PCR Size Selection — SPRIselect (double-sided)
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| a | Add SPRIselect (0.6X); pipette mix 15x (set to 150 µL) | 60 µL |
+| b–c | Incubate 5 min RT; magnet•High until clear — **keep supernatant** | — |
+| d | Transfer supernatant to new tube strip | 150 µL |
+| e | Add SPRIselect (0.8X) to transferred supernatant; pipette mix 15x (set to 150 µL) | 20 µL |
+| f–g | Incubate 5 min RT; magnet•High until clear | — |
+| h | Remove supernatant — do not discard beads | 165 µL |
+| i–j | On magnet, add 80% ethanol, wait 30 sec, remove (×2 washes total) | 200 µL |
+| l | Centrifuge briefly; magnet•Low | — |
+| m | Remove ethanol — do not over-dry | — |
+| n | Add Buffer EB; pipette mix 15x (set to 35 µL) | 35.5 µL |
+| o–p | Incubate 2 min RT; magnet•Low until clear | — |
+| q | Transfer to new tube strip | 35 µL |
+
+Store at 4°C up to 72 h or −20°C for long-term storage.
+
+::: {.callout-tip collapse="true"}
+## Peaks below 200 bp on QC?
+Repeat this step: bring the library to 100 µL with nuclease-free water before repeating 3.6a. Expect ~40% material loss on a repeat. Alternatively, pool libraries destined to be sequenced together first, then run the pool through 3.6.
+:::
+
+### 3.7 Post Library Construction QC & Quantification
+
+Run 1 µL at 1:10 dilution on Bioanalyzer High Sensitivity (or TapeStation/LabChip); select the 200–2,000 bp region for average library size (used as insert size for quantification). Use a qPCR-based method (e.g. KAPA Library Quantification Kit) for the most accurate loading concentration ahead of sequencing.
+
+---
+
+## Step 4: Sequencing
+
+**Library depth & run parameters**
+
+| Parameter | Value |
+|-----------|-------|
+| Sequencing depth | Minimum 20,000 read pairs/cell |
+| Sequencing type | Paired-end, dual indexing |
+| Read 1 | 28 cycles |
+| i7 Index | 10 cycles |
+| i5 Index | 10 cycles |
+| Read 2 | 90 cycles |
+
+**Loading concentration by instrument**
+
+| Instrument | Loading conc. (pM)* | PhiX (%) |
+|------------|---------------------|----------|
+| MiSeq | 12 | 1 |
+| NextSeq 500/550 | 1.6 | 1 |
+| NextSeq 1000/2000 | 650 | 1 |
+| HiSeq 2500 (RR) | 12 | 1 |
+| HiSeq 4000 | 240 | 1 |
+| NovaSeq 6000 (Standard & Xp) | 150 | 1 |
+
+\*Check the 10x Genomics Support site for current loading concentrations — these are periodically updated.
+
+::: {.callout-warning}
+## Index hopping mitigation
+Store each library individually (4°C ≤72 h, or −20°C long-term) — **do not** pool during storage. Pool only immediately before sequencing; an extra 1.0X SPRI cleanup on the pooled libraries can remove residual free adaptors. Never pool two libraries sharing the same sample index in one lane — this breaks demultiplexing.
+:::
+
+Compatible sequencers: MiSeq, NextSeq 500/550/2000, HiSeq 2500 (Rapid Run), HiSeq 3000/4000, NovaSeq 6000. Data is analyzed with Cell Ranger (BCL/FASTQ → BAM, MEX, CSV, HDF5, web summary, .cloupe) and visualized in Loupe Browser.
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| GEM generation | Opaque, uniform GEMs across channels | | |
+| Post GEM-RT cleanup | Biphasic separation clean, no clog | | |
+| cDNA amplification (Bioanalyzer) | Yield per targeted cell recovery band | | |
+| Post-fragmentation cleanup | Clean elution, no over-drying artifacts | | |
+| Final library (Bioanalyzer, 200–2,000 bp) | No peaks <200 bp | | |
+| Library qPCR quantification | Loading concentration confirmed | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+10x Genomics. *Chromium GEM-X Single Cell 3' Reagent Kits v4 User Guide.* Document CG000731, Rev B.
