@@ -198,6 +198,18 @@ Inputs.table([
 
 ### Iodixanol step gradient
 
+::: {.callout-warning}
+## Make base 50% first, split it, then add additives to each tube separately
+
+The 40% and 30% solutions are diluted from **additive-free base 50% iodixanol**, not from the finished 50% solution in the first table below. Work in this order:
+
+1. Make base 50% iodixanol — **OptiPrep + Diluent only.** No spermidine, spermine, DTT, SUPERase, or RNAsin yet.
+2. Pull off the "50% iodixanol (above)" volumes listed in the 40% and 30% tables. That aliquot carries **no additives** with it.
+3. You now have three separate tubes (leftover 50%, 40% mix, 30% mix). Add spermidine, spermine, DTT, SUPERase, and RNAsin to **each tube**, scaled to that tube's own total volume.
+
+Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tables is **not** a repeat of the 50% — the 50%-derived iodixanol in those tubes started out additive-free.
+:::
+
 ```{ojs}
 //| echo: false
 v50 = 15  * scale
@@ -264,11 +276,6 @@ Inputs.table([
   {Component: `RNAsin (${rnase_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v30))}
 ], {layout: "auto"})
 ```
-
-::: {.callout-tip collapse="true"}
-## Add polyamines/RNase inhibitor last
-Per the source protocol: make the base 50% iodixanol solution (OptiPrep + Diluent only) first, pull off the volumes you need to dilute into 40% and 30%, and only then add spermidine, spermine, DTT, SUPERase, and RNAsin to what remains.
-:::
 
 ### Nuclei resuspension buffer (30 mL aliquot/sample)
 
