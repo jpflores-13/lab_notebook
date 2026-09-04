@@ -8,7 +8,7 @@ date: today
 
 ::: {.callout-note}
 ## Overview
-CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into every buffer **except** the final nuclei resuspension buffer — spermine, spermidine, and dithiothreitol (DTT) are deliberately left out of that one because they interfere with downstream cDNA synthesis.
+CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into **every** buffer, including the final nuclei resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT), by contrast, are deliberately left **out** of the nuclei resuspension buffer because they interfere with downstream cDNA synthesis.
 
 <!-- TODO: confirm original source/citation for this protocol with JP — none given in the source document -->
 :::
