@@ -367,7 +367,7 @@ window.Quarto = {
   <li><a href="#m-stock-reagents-make-first" id="toc-m-stock-reagents-make-first" class="nav-link" data-scroll-target="#m-stock-reagents-make-first">1 M stock reagents (make first)</a></li>
   </ul></li>
   <li><a href="#fresh-working-solutions-1000x-stocks" id="toc-fresh-working-solutions-1000x-stocks" class="nav-link" data-scroll-target="#fresh-working-solutions-1000x-stocks">Fresh working solutions (1000X stocks)</a></li>
-  <li><a href="#working-solutions-scaled-to-sample-count" id="toc-working-solutions-scaled-to-sample-count" class="nav-link" data-scroll-target="#working-solutions-scaled-to-sample-count">Working solutions — scaled to sample count</a>
+  <li><a href="#working-solutions-scaled-to-sample-count" id="toc-working-solutions-scaled-to-sample-count" class="nav-link" data-scroll-target="#working-solutions-scaled-to-sample-count">Working solutions: scaled to sample count</a>
   <ul class="collapse">
   <li><a href="#citrahb-complete-10-ml-aliquotsample" id="toc-citrahb-complete-10-ml-aliquotsample" class="nav-link" data-scroll-target="#citrahb-complete-10-ml-aliquotsample">CitraHB Complete (10 mL aliquot/sample)</a></li>
   <li><a href="#iodixanol-step-gradient" id="toc-iodixanol-step-gradient" class="nav-link" data-scroll-target="#iodixanol-step-gradient">Iodixanol step gradient</a></li>
@@ -428,7 +428,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: “Load for single cell”). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an <strong>ultracentrifuge</strong> (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, <strong>no brake</strong>) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into <strong>every</strong> buffer, including the final nuclei resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT), by contrast, are deliberately left <strong>out</strong> of the nuclei resuspension buffer because they interfere with downstream cDNA synthesis.</p>
-<!-- TODO: confirm original source/citation for this protocol with JP — none given in the source document -->
+<!-- TODO: confirm source/citation for this protocol with JP -->
 </div>
 </div>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -442,15 +442,15 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Use <strong>cell culture grade water</strong> for every “water” call in this protocol (stock buffers and 1000X fresh solutions alike) — not general lab ddH₂O.</li>
-<li>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first — CitraHB and Diluent are both built from them.</li>
-<li>Prepare CitraHB, Diluent, and Detergent stock buffers <strong>a day ahead</strong> — good for 1 month at 4°C.</li>
+<li>Use <strong>cell culture grade water</strong> for every “water” call in this protocol (stock buffers and 1000X fresh solutions alike), not general lab ddH₂O.</li>
+<li>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and Diluent are both built from them.</li>
+<li>Prepare CitraHB, Diluent, and Detergent stock buffers <strong>a day ahead</strong>; good for 1 month at 4°C.</li>
 <li>Pre-chill the 7 mL glass dounce homogenizer on ice.</li>
 <li>Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) <strong>fresh</strong> each time.</li>
 <li>Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.</li>
-<li>Make the nuclei resuspension buffer during the centrifugation step (Step 8) — <strong>no</strong> spermine, spermidine, or DTT in this one.</li>
+<li>Make the nuclei resuspension buffer during the centrifugation step (Step 8) with <strong>no</strong> spermine, spermidine, or DTT in this one.</li>
 <li>Set the <strong>ultracentrifuge</strong> to 4°C and confirm the rotor/tubes are rated for <strong>no-brake</strong> deceleration (Step 8).</li>
-<li>Book more time than the spin itself: the 18 min is only the run — loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to <strong>around an hour</strong>. Schedule accordingly.</li>
+<li>Book more time than the spin itself: the 18 min is only the run; loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to <strong>around an hour</strong>. Schedule accordingly.</li>
 </ul>
 </div>
 </div>
@@ -481,7 +481,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="44" data-source-offset="-199"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 43;"><span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>viewof superase_final <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERase final conc. (U/µL, each buffer)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="44" data-source-offset="-198"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 43;"><span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>viewof superase_final <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERase final conc. (U/µL, each buffer)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>viewof rnasin_final   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"RNAsin final conc. (U/µL, each buffer)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>viewof rnase_stock    <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"RNase inhibitor stock conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -556,13 +556,13 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Ordering quantities (from source protocol)
+<span class="screen-reader-only">Tip</span>Ordering quantities
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Per sample, the original protocol notes you will need roughly <strong>1 mL SUPERase</strong> and <strong>500 µL Protector</strong> (RNase inhibitor) on hand for ordering purposes. The line-item breakdown below is the granular per-buffer calculation — it will not sum to exactly this figure, since the source note is a rough ordering estimate rather than a derived total.</p>
+<p>Per sample, keep roughly <strong>1 mL SUPERase</strong> and <strong>500 µL Protector</strong> (RNase inhibitor) on hand. The line-item breakdown below is the granular per-buffer calculation; it will not sum to exactly this figure, since the ordering number is a rough estimate rather than a derived total.</p>
 </div>
 </div>
 </div>
@@ -570,7 +570,7 @@ window.Quarto = {
 </section>
 <section id="stock-buffers" class="level2">
 <h2 class="anchored" data-anchor-id="stock-buffers">Stock buffers</h2>
-<p>Make ~1 month’s supply at once; store at 4°C. These do <strong>not</strong> scale with sample count — they’re a standing stock, not a per-run master mix.</p>
+<p>Make ~1 month’s supply at once; store at 4°C. These do <strong>not</strong> scale with sample count; they’re a standing stock, not a per-run master mix.</p>
 <section id="m-stock-reagents-make-first" class="level3">
 <h3 class="anchored" data-anchor-id="m-stock-reagents-make-first">1 M stock reagents (make first)</h3>
 <p>CitraHB and Diluent both draw their Tricine-KOH and Citric Acid components from 1 M stocks. Pick a batch volume and the amounts scale automatically.</p>
@@ -647,7 +647,7 @@ window.Quarto = {
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium Hydroxide (KOH) — the “-KOH” in the name refers to this titration, not a separate reagent added at the bench. Citric Acid stock is used as-is; both CitraHB and Diluent get their acidic character partly from it, so no pH adjustment is needed here.</p>
+<p>Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium Hydroxide (KOH); the “-KOH” in the name refers to this titration, not a separate reagent added at the bench. Citric Acid stock is used as-is; both CitraHB and Diluent get their acidic character partly from it, so no pH adjustment is needed here.</p>
 </div>
 </div>
 </div>
@@ -753,7 +753,7 @@ window.Quarto = {
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>CitraHB, Diluent, and Detergent are stable at 4°C for up to 1 month. Scale any of these recipes linearly if you need a larger batch — the ratios above hold regardless of final volume.</p>
+<p>CitraHB, Diluent, and Detergent are stable at 4°C for up to 1 month. Scale any of these recipes linearly if you need a larger batch; the ratios above hold regardless of final volume.</p>
 </div>
 </div>
 </div>
@@ -762,7 +762,7 @@ window.Quarto = {
 </section>
 <section id="fresh-working-solutions-1000x-stocks" class="level2">
 <h2 class="anchored" data-anchor-id="fresh-working-solutions-1000x-stocks">Fresh working solutions (1000X stocks)</h2>
-<p>Make fresh each time — do not store.</p>
+<p>Make fresh each time; do not store.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 34%">
@@ -795,36 +795,36 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, <strong>except</strong> the nuclei resuspension buffer (see warning below).</p>
-<p>Add RNase inhibitor to all buffers below at the final concentrations set in <strong>Configure experiment</strong> above — default 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) + 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.</p>
+<p>Add RNase inhibitor to all buffers below at the final concentrations set in <strong>Configure experiment</strong> above. The defaults are 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) and 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.</p>
 <hr>
 </section>
 <section id="working-solutions-scaled-to-sample-count" class="level2">
-<h2 class="anchored" data-anchor-id="working-solutions-scaled-to-sample-count">Working solutions — scaled to sample count</h2>
+<h2 class="anchored" data-anchor-id="working-solutions-scaled-to-sample-count">Working solutions: scaled to sample count</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Math audit — how every volume is calculated
+<span class="screen-reader-only">Note</span>Math audit: how every volume is calculated
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>CitraHB Complete</strong> (10 mL aliquot per sample — used in Steps 2, 3, and 6):</p>
+<p><strong>CitraHB Complete</strong> (10 mL aliquot per sample, used in Steps 2, 3, and 6):</p>
 <p><span class="math display">\[V_{aliquot} = 10\;mL \times N_{samples} \times (1 + overage)\]</span></p>
 <p>Additives (SUPERase, RNAsin, spermidine, spermine, DTT) scale linearly with <span class="math inline">\(V_{aliquot}\)</span>; protease inhibitor tablets are whole units, so the tablet count rounds up.</p>
-<p><strong>Iodixanol step gradient</strong> — each of the three working solutions is made by diluting 50% iodixanol (itself made 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and <span class="math inline">\(5/6 \times 60\% = 50\%\)</span>) down to the target percentage with CitraPrepHB, using <span class="math inline">\(C_1V_1 = C_2V_2\)</span>:</p>
+<p><strong>Iodixanol step gradient</strong>: each of the three working solutions is made by diluting 50% iodixanol (itself made 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and <span class="math inline">\(5/6 \times 60\% = 50\%\)</span>) down to the target percentage with CitraPrepHB, using <span class="math inline">\(C_1V_1 = C_2V_2\)</span>:</p>
 <p><span class="math display">\[V_{50\%\ stock\ needed} = V_{total} \times \frac{\%_{target}}{50\%} \qquad V_{diluent} = V_{total} - V_{50\%\ stock\ needed}\]</span></p>
-<p>Per-sample total volumes (from the source calculation): 15 mL of 50% (kept as-is), 4 mL of 40%, and 7.5 mL of 30%. All three scale with <span class="math inline">\(N_{samples} \times (1+overage)\)</span>.</p>
-<p>Polyamine additives in each gradient solution scale as <span class="math inline">\(V_{total}/1000\)</span> (spermidine, spermine, DTT — 1000X). SUPERase and RNAsin scale as:</p>
+<p>Per-sample total volumes: 15 mL of 50% (kept as-is), 4 mL of 40%, and 7.5 mL of 30%. All three scale with <span class="math inline">\(N_{samples} \times (1+overage)\)</span>.</p>
+<p>Polyamine additives in each gradient solution scale as <span class="math inline">\(V_{total}/1000\)</span> (spermidine, spermine, DTT, all 1000X). SUPERase and RNAsin scale as:</p>
 <p><span class="math display">\[V_{stock} = \frac{C_{final}}{C_{stock}} \times V_{total}\]</span></p>
 <p>Each inhibitor’s <span class="math inline">\(C_{final}\)</span> and the shared <span class="math inline">\(C_{stock}\)</span> are set in <strong>Configure experiment</strong> (<code>superase_final</code>, <code>rnasin_final</code>, <code>rnase_stock</code>; defaults 0.5 / 0.5 / 40 U/µL). Change them there and every table below rescales.</p>
-<!-- TODO: in the source spreadsheet, SUPERase/RNAsin added to the retained 50% fraction are computed at half the rate of the 40%/30% fractions (divided by 2). That halving is preserved here exactly as given — confirm with JP whether this is intentional before scaling to large batches. -->
+<!-- TODO: SUPERase/RNAsin in the retained 50% fraction are dosed at half the rate of the 40%/30% fractions (divided by 2). Preserved here as-is; confirm with JP whether this is intentional before scaling to large batches. -->
 <p><strong>Nuclei resuspension buffer</strong> (30 mL aliquot per sample):</p>
 <p><span class="math display">\[V_{buffer} = 30\;mL \times N_{samples} \times (1+overage)\]</span></p>
-<p>Bovine Serum Albumin (BSA) scales as 1% w/v of <span class="math inline">\(V_{buffer}\)</span>; SUPERase and RNAsin use the same <span class="math inline">\(C_{final}/C_{stock} \times V_{buffer}\)</span> formula above. No spermine, spermidine, or Dithiothreitol (DTT) — these interfere with downstream cDNA synthesis.</p>
+<p>Bovine Serum Albumin (BSA) scales as 1% w/v of <span class="math inline">\(V_{buffer}\)</span>; SUPERase and RNAsin use the same <span class="math inline">\(C_{final}/C_{stock} \times V_{buffer}\)</span> formula above. No spermine, spermidine, or Dithiothreitol (DTT); these interfere with downstream cDNA synthesis.</p>
 </div>
 </div>
 </div>
@@ -883,11 +883,11 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <p>The 40% and 30% solutions are diluted from <strong>additive-free base 50% iodixanol</strong>, not from the finished 50% solution in the first table below. Work in this order:</p>
 <ol type="1">
-<li>Make base 50% iodixanol — <strong>OptiPrep + Diluent only.</strong> No spermidine, spermine, DTT, SUPERase, or RNAsin yet.</li>
+<li>Make base 50% iodixanol with <strong>OptiPrep + Diluent only.</strong> No spermidine, spermine, DTT, SUPERase, or RNAsin yet.</li>
 <li>Pull off the “50% iodixanol (above)” volumes listed in the 40% and 30% tables. That aliquot carries <strong>no additives</strong> with it.</li>
 <li>You now have three separate tubes (leftover 50%, 40% mix, 30% mix). Add spermidine, spermine, DTT, SUPERase, and RNAsin to <strong>each tube</strong>, scaled to that tube’s own total volume.</li>
 </ol>
-<p>Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tables is <strong>not</strong> a repeat of the 50% — the 50%-derived iodixanol in those tubes started out additive-free.</p>
+<p>Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tables is <strong>not</strong> a repeat of the 50%; the 50%-derived iodixanol in those tubes started out additive-free.</p>
 </div>
 </div>
 <div class="cell">
@@ -906,7 +906,7 @@ window.Quarto = {
 <span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a>stock50_for_30  <span class="op">=</span> v30 <span class="op">*</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>citraprephb_30  <span class="op">=</span> v30 <span class="op">-</span> stock50_for_30</span>
 <span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**50% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v50)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**50% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v50)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1001,7 +1001,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="252" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 251;"><span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**40% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v40)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="252" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 251;"><span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**40% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v40)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-10" data-nodetype="expression">
@@ -1031,7 +1031,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="270" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 269;"><span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**30% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v30)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="270" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 269;"><span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**30% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v30)<span class="sc">}</span><span class="vs"> mL total**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-12" data-nodetype="expression">
@@ -1128,7 +1128,7 @@ window.Quarto = {
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Step 4 calls for pulling an aliquot to check nuclei release after homogenization — add more strokes with the tight pestle if intact cells are still visible before moving on.</p>
+<p>Step 4 calls for pulling an aliquot to check nuclei release after homogenization; add more strokes with the tight pestle if intact cells are still visible before moving on.</p>
 </div>
 </div>
 </div>
@@ -1186,7 +1186,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This spin is run on an <strong>ultracentrifuge</strong>: <strong>18 min at 10,000×g at 4°C with no brake</strong>. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for <strong>18 min</strong> run time, but budget closer to <strong>an hour</strong> for the step overall — loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.</p>
+<p>This spin is run on an <strong>ultracentrifuge</strong>: <strong>18 min at 10,000×g at 4°C with no brake</strong>. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for <strong>18 min</strong> run time, but budget closer to <strong>an hour</strong> for the step overall; loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.</p>
 </div>
 </div>
 <table class="caption-top table">
@@ -1302,10 +1302,10 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>CitraPrep nuclei yields are typically too low for a reliable Countess (automated) read, so this is a <strong>manual hemocytometer count</strong> every time — do not substitute the Countess.</p>
+<p>CitraPrep nuclei yields are typically too low for a reliable Countess (automated) read, so this is a <strong>manual hemocytometer count</strong> every time; do not substitute the Countess.</p>
 <ol type="a">
-<li>Filter your trypan blue stock through a 0.2 µm filter before use — unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</li>
-<li>Mix the nuclei suspension with filtered trypan blue at a <strong>1:1</strong> ratio (e.g.&nbsp;10 µL suspension + 10 µL trypan blue) — dilution factor = 2.</li>
+<li>Filter your trypan blue stock through a 0.2 µm filter before use; unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</li>
+<li>Mix the nuclei suspension with filtered trypan blue at a <strong>1:1</strong> ratio (e.g.&nbsp;10 µL suspension + 10 µL trypan blue, dilution factor = 2).</li>
 <li>Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.</li>
 <li>Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Use the standard hemocytometer counting rule: count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.</li>
 <li>Calculate concentration:</li>
@@ -1385,8 +1385,8 @@ window.Quarto = {
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<!-- TODO: no source paper, kit, or lab of origin was given in the uploaded protocol — add citation/attribution once confirmed with JP -->
-<p>Protocol: source not specified in provided document; transcribed as-is by JP Flores.</p>
+<!-- TODO: no source paper, kit, or lab of origin on hand; add citation/attribution once confirmed with JP -->
+<p>Protocol: source not specified; transcribed by JP Flores.</p>
 
 
 <!-- -->
@@ -1395,7 +1395,7 @@ window.Quarto = {
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3NhbXBsZXMgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIHNhbXBsZXNcIiwgdmFsdWU6IDEsIG1pbjogMSwgbWF4OiAyNCwgc3RlcDogMX0pXG52aWV3b2YgZXhjZXNzX3BjdCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkV4dHJhIG92ZXJhZ2Ugb24gc2NhbGVkIHNvbHV0aW9ucyAoJSlcIiwgdmFsdWU6IDAsIG1pbjogMCwgbWF4OiAzMCwgc3RlcDogNX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBSTmFzZSBpbmhpYml0b3IgZmluYWwgY29uY2VudHJhdGlvbnMg4oCUIGRpZmZlcmVudCBsYWIgbWVtYmVycyBkb3NlIHRoZXNlXG4vLyBkaWZmZXJlbnRseSwgc28gdGhleSdyZSB0b2dnbGVzIGhlcmUuIEV2ZXJ5IGJ1ZmZlciB0YWJsZSBiZWxvdyByZXNjYWxlcy5cbi8vIFNldCB0byAwIHRvIGxlYXZlIGFuIGluaGliaXRvciBvdXQgZW50aXJlbHkuXG52aWV3b2Ygc3VwZXJhc2VfZmluYWwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJTVVBFUmFzZSBmaW5hbCBjb25jLiAoVS/CtUwsIGVhY2ggYnVmZmVyKVwiLCB2YWx1ZTogMC41LCBtaW46IDAsIHN0ZXA6IDAuMDV9KVxudmlld29mIHJuYXNpbl9maW5hbCAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiUk5Bc2luIGZpbmFsIGNvbmMuIChVL8K1TCwgZWFjaCBidWZmZXIpXCIsIHZhbHVlOiAwLjUsIG1pbjogMCwgc3RlcDogMC4wNX0pXG52aWV3b2Ygcm5hc2Vfc3RvY2sgICAgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJSTmFzZSBpbmhpYml0b3Igc3RvY2sgY29uYy4gKFUvwrVMKVwiLCB2YWx1ZTogNDAsIG1pbjogMSwgc3RlcDogMX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJzY2FsZSA9IG5fc2FtcGxlcyAqICgxICsgZXhjZXNzX3BjdCAvIDEwMClcbmZtdCAgID0gKHgsIGQgPSAyKSA9PiB4LnRvRml4ZWQoZClcblxubWRgKioke25fc2FtcGxlc30gc2FtcGxlKHMpIMK3ICR7ZXhjZXNzX3BjdH0lIG92ZXJhZ2Ugwrcgc2NhbGUgZmFjdG9yICR7Zm10KHNjYWxlKX3DlyDCtyBTVVBFUmFzZSAke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCDCtyBSTkFzaW4gJHtybmFzaW5fZmluYWx9IFUvwrVMIChzdG9jayAke3JuYXNlX3N0b2NrfSBVL8K1TCkqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIFZvbHVtZSBvZiBSTmFzZSBpbmhpYml0b3Igc3RvY2sgbmVlZGVkIHRvIHJlYWNoIGZpbmFsIGNvbmMgY19maW5hbCBpbiBhIHRvdGFsXG4vLyB2b2x1bWUgViAoViBhbmQgdGhlIHJldHVybmVkIHZvbHVtZSBhcmUgaW4gdGhlIHNhbWUgdW5pdHMpLlxucm5hc2Vfdm9sID0gKFYsIGNfZmluYWwpID0+IGNfZmluYWwgKiBWIC8gcm5hc2Vfc3RvY2tcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzdG9ja192b2xfbUwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCIxTSBzdG9jayBiYXRjaCB2b2x1bWUgKG1MKVwiLCB2YWx1ZTogMTAwLCBtaW46IDEwLCBzdGVwOiAxMH0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ0cmljaW5lX01XID0gMTc5LjE3XG5jaXRyaWNfTVcgID0gMTkyLjEyNFxuXG50cmljaW5lX2cgPSAxICogKHN0b2NrX3ZvbF9tTCAvIDEwMDApICogdHJpY2luZV9NV1xuY2l0cmljX2cgID0gMSAqIChzdG9ja192b2xfbUwgLyAxMDAwKSAqIGNpdHJpY19NV1xuXG5JbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIlRyaWNpbmUgKGZyZWUgYWNpZClcIiwgXCJBbW91bnRcIjogYCR7Zm10KHRyaWNpbmVfZyl9IGdgLCBcIlJlY2lwZVwiOiBgRGlzc29sdmUgaW4gfjgwJSBvZiAke2ZtdChzdG9ja192b2xfbUwpfSBtTCBjZWxsIGN1bHR1cmUgZ3JhZGUgd2F0ZXI7IHRpdHJhdGUgdG8gcEggNy44IHdpdGggUG90YXNzaXVtIEh5ZHJveGlkZSAoS09IKTsgYnJpbmcgdG8gJHtmbXQoc3RvY2tfdm9sX21MKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJDaXRyaWMgQWNpZFwiLCAgICAgICAgIFwiQW1vdW50XCI6IGAke2ZtdChjaXRyaWNfZyl9IGdgLCAgXCJSZWNpcGVcIjogYERpc3NvbHZlIGluIGNlbGwgY3VsdHVyZSBncmFkZSB3YXRlciB0byAke2ZtdChzdG9ja192b2xfbUwpfSBtTGB9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJjaGJfdm9sICAgICA9IDEwICogc2NhbGVcbmNoYl90YWJsZXRzID0gTWF0aC5jZWlsKGNoYl92b2wgLyAxMClcblxuSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJQcm90ZWFzZSBpbmhpYml0b3IgdGFibGV0XCIsICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEgd2hvbGUgdGFibGV0XCIsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbFwiOiBgJHtjaGJfdGFibGV0c30gdGFibGV0KHMpYH0sXG4gIHtDb21wb25lbnQ6IGBTVVBFUmFzZSAoJHtzdXBlcmFzZV9maW5hbH0gVS/CtUwgZmluYWwpYCwgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBgJHtmbXQocm5hc2Vfdm9sKDEwMDAwLCBzdXBlcmFzZV9maW5hbCkpfSDCtUxgLCAgXCJUb3RhbCAowrVMKVwiOiBmbXQocm5hc2Vfdm9sKGNoYl92b2wgKiAxMDAwLCBzdXBlcmFzZV9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgICAgXCJQZXIgMTAgbUwgKGFsaXF1b3QpXCI6IGAke2ZtdChybmFzZV92b2woMTAwMDAsIHJuYXNpbl9maW5hbCkpfSDCtUxgLCAgICBcIlRvdGFsICjCtUwpXCI6IGZtdChybmFzZV92b2woY2hiX3ZvbCAqIDEwMDAsIHJuYXNpbl9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogXCJTcGVybWlkaW5lICgxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEwIMK1TFwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQoMTAgKiBjaGJfdm9sIC8gMTApfSxcbiAge0NvbXBvbmVudDogXCJTcGVybWluZSAoMTAwMFgpXCIsICAgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEwIMK1TFwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQoMTAgKiBjaGJfdm9sIC8gMTApfSxcbiAge0NvbXBvbmVudDogXCJEaXRoaW90aHJlaXRvbCAoRFRULCAxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlBlciAxMCBtTCAoYWxpcXVvdClcIjogXCIxMCDCtUxcIiwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiVG90YWwgKMK1TClcIjogZm10KDEwICogY2hiX3ZvbCAvIDEwKX0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmFIQiBzdG9ja1wiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlBlciAxMCBtTCAoYWxpcXVvdClcIjogXCJ0byB2b2x1bWVcIiwgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAobUwpXCI6IGZtdChjaGJfdm9sKX1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InY1MCA9IDE1ICAqIHNjYWxlXG52NDAgPSA0ICAgKiBzY2FsZVxudjMwID0gNy41ICogc2NhbGVcblxub3B0aXByZXBfNTAgPSB2NTAgKiA1LzZcbmRpbHVlbnRfNTAgID0gdjUwICogMS82XG5cbnN0b2NrNTBfZm9yXzQwICA9IHY0MCAqIDQwLzUwXG5jaXRyYXByZXBoYl80MCAgPSB2NDAgLSBzdG9jazUwX2Zvcl80MFxuXG5zdG9jazUwX2Zvcl8zMCAgPSB2MzAgKiAzMC81MFxuY2l0cmFwcmVwaGJfMzAgID0gdjMwIC0gc3RvY2s1MF9mb3JfMzBcblxubWRgKio1MCUgaW9kaXhhbm9sIOKAlCAke2ZtdCh2NTApfSBtTCB0b3RhbCoqYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJPcHRpUHJlcFwiLCAgIFwiVm9sdW1lIChtTClcIjogZm10KG9wdGlwcmVwXzUwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGlsdWVudFwiLCAgICBcIlZvbHVtZSAobUwpXCI6IGZtdChkaWx1ZW50XzUwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pZGluZSAoMTAwMFgpXCIsIFwiVm9sdW1lIChtTClcIjogZm10KHY1MC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pbmUgKDEwMDBYKVwiLCAgIFwiVm9sdW1lIChtTClcIjogZm10KHY1MC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGl0aGlvdGhyZWl0b2wgKERUVCwgMTAwMFgpXCIsICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NTAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2UgKCR7c3VwZXJhc2VfZmluYWx9IFUvwrVMIGZpbmFsKWAsIFwiVm9sdW1lIChtTClcIjogZm10KHJuYXNlX3ZvbCh2NTAsIHN1cGVyYXNlX2ZpbmFsKSAvIDIpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQocm5hc2Vfdm9sKHY1MCwgcm5hc2luX2ZpbmFsKSAvIDIpfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Im1kYCoqNDAlIGlvZGl4YW5vbCDigJQgJHtmbXQodjQwKX0gbUwgdG90YWwqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTEiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJJbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIjUwJSBpb2RpeGFub2wgKGFib3ZlKVwiLCBcIlZvbHVtZSAobUwpXCI6IGZtdChzdG9jazUwX2Zvcl80MCl9LFxuICB7Q29tcG9uZW50OiBcIkNpdHJhUHJlcEhCXCIsICAgICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdChjaXRyYXByZXBoYl80MCl9LFxuICB7Q29tcG9uZW50OiBcIlNwZXJtaWRpbmUgKDEwMDBYKVwiLCAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NDAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBcIlNwZXJtaW5lICgxMDAwWClcIiwgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NDAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBcIkRpdGhpb3RocmVpdG9sIChEVFQsIDEwMDBYKVwiLCAgICAgICAgICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQodjQwLzEwMDApfSxcbiAge0NvbXBvbmVudDogYFNVUEVSYXNlICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCBcIlZvbHVtZSAobUwpXCI6IGZtdChybmFzZV92b2wodjQwLCBzdXBlcmFzZV9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQocm5hc2Vfdm9sKHY0MCwgcm5hc2luX2ZpbmFsKSl9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTEyIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWRgKiozMCUgaW9kaXhhbm9sIOKAlCAke2ZtdCh2MzApfSBtTCB0b3RhbCoqYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IklucHV0cy50YWJsZShbXG4gIHtDb21wb25lbnQ6IFwiNTAlIGlvZGl4YW5vbCAoYWJvdmUpXCIsIFwiVm9sdW1lIChtTClcIjogZm10KHN0b2NrNTBfZm9yXzMwKX0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmFQcmVwSEJcIiwgICAgICAgICAgIFwiVm9sdW1lIChtTClcIjogZm10KGNpdHJhcHJlcGhiXzMwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pZGluZSAoMTAwMFgpXCIsICAgIFwiVm9sdW1lIChtTClcIjogZm10KHYzMC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pbmUgKDEwMDBYKVwiLCAgICAgIFwiVm9sdW1lIChtTClcIjogZm10KHYzMC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGl0aGlvdGhyZWl0b2wgKERUVCwgMTAwMFgpXCIsICAgICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2MzAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2UgKCR7c3VwZXJhc2VfZmluYWx9IFUvwrVMIGZpbmFsKWAsIFwiVm9sdW1lIChtTClcIjogZm10KHJuYXNlX3ZvbCh2MzAsIHN1cGVyYXNlX2ZpbmFsKSl9LFxuICB7Q29tcG9uZW50OiBgUk5Bc2luICgke3JuYXNpbl9maW5hbH0gVS/CtUwgZmluYWwpYCwgICBcIlZvbHVtZSAobUwpXCI6IGZtdChybmFzZV92b2wodjMwLCBybmFzaW5fZmluYWwpKX1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJucmJfdm9sICAgPSAzMCAqIHNjYWxlXG5ucmJfYnNhX2cgPSBucmJfdm9sICogMS8xMDBcblxuSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJCb3ZpbmUgU2VydW0gQWxidW1pbiAoQlNBKVwiLCAgICAgICAgICAgICBcIkFtb3VudFwiOiBgJHtmbXQobnJiX2JzYV9nKX0gZ2B9LFxuICB7Q29tcG9uZW50OiBcIjFYIFBob3NwaGF0ZS1CdWZmZXJlZCBTYWxpbmUgKFBCUylcIiwgICAgIFwiQW1vdW50XCI6IGB0byAke2ZtdChucmJfdm9sKX0gbUxgfSxcbiAge0NvbXBvbmVudDogYFNVUEVSYXNlICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCBcIkFtb3VudFwiOiBgJHtmbXQocm5hc2Vfdm9sKG5yYl92b2wsIHN1cGVyYXNlX2ZpbmFsKSl9IG1MYH0sXG4gIHtDb21wb25lbnQ6IGBSTkFzaW4gKCR7cm5hc2luX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCAgICAgIFwiQW1vdW50XCI6IGAke2ZtdChybmFzZV92b2wobnJiX3ZvbCwgcm5hc2luX2ZpbmFsKSl9IG1MYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9zYW1wbGVzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2V4Y2Vzc19wY3QnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc3VwZXJhc2VfZmluYWwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncm5hc2luX2ZpbmFsJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3JuYXNlX3N0b2NrJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3N0b2NrX3ZvbF9tTCcpIn1dfQ==
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3NhbXBsZXMgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIHNhbXBsZXNcIiwgdmFsdWU6IDEsIG1pbjogMSwgbWF4OiAyNCwgc3RlcDogMX0pXG52aWV3b2YgZXhjZXNzX3BjdCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkV4dHJhIG92ZXJhZ2Ugb24gc2NhbGVkIHNvbHV0aW9ucyAoJSlcIiwgdmFsdWU6IDAsIG1pbjogMCwgbWF4OiAzMCwgc3RlcDogNX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBSTmFzZSBpbmhpYml0b3IgZmluYWwgY29uY2VudHJhdGlvbnMuIERpZmZlcmVudCBsYWIgbWVtYmVycyBkb3NlIHRoZXNlXG4vLyBkaWZmZXJlbnRseSwgc28gdGhleSdyZSB0b2dnbGVzIGhlcmU7IGV2ZXJ5IGJ1ZmZlciB0YWJsZSBiZWxvdyByZXNjYWxlcy5cbi8vIFNldCB0byAwIHRvIGxlYXZlIGFuIGluaGliaXRvciBvdXQgZW50aXJlbHkuXG52aWV3b2Ygc3VwZXJhc2VfZmluYWwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJTVVBFUmFzZSBmaW5hbCBjb25jLiAoVS/CtUwsIGVhY2ggYnVmZmVyKVwiLCB2YWx1ZTogMC41LCBtaW46IDAsIHN0ZXA6IDAuMDV9KVxudmlld29mIHJuYXNpbl9maW5hbCAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiUk5Bc2luIGZpbmFsIGNvbmMuIChVL8K1TCwgZWFjaCBidWZmZXIpXCIsIHZhbHVlOiAwLjUsIG1pbjogMCwgc3RlcDogMC4wNX0pXG52aWV3b2Ygcm5hc2Vfc3RvY2sgICAgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJSTmFzZSBpbmhpYml0b3Igc3RvY2sgY29uYy4gKFUvwrVMKVwiLCB2YWx1ZTogNDAsIG1pbjogMSwgc3RlcDogMX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJzY2FsZSA9IG5fc2FtcGxlcyAqICgxICsgZXhjZXNzX3BjdCAvIDEwMClcbmZtdCAgID0gKHgsIGQgPSAyKSA9PiB4LnRvRml4ZWQoZClcblxubWRgKioke25fc2FtcGxlc30gc2FtcGxlKHMpIMK3ICR7ZXhjZXNzX3BjdH0lIG92ZXJhZ2Ugwrcgc2NhbGUgZmFjdG9yICR7Zm10KHNjYWxlKX3DlyDCtyBTVVBFUmFzZSAke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCDCtyBSTkFzaW4gJHtybmFzaW5fZmluYWx9IFUvwrVMIChzdG9jayAke3JuYXNlX3N0b2NrfSBVL8K1TCkqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ii8vIFZvbHVtZSBvZiBSTmFzZSBpbmhpYml0b3Igc3RvY2sgbmVlZGVkIHRvIHJlYWNoIGZpbmFsIGNvbmMgY19maW5hbCBpbiBhIHRvdGFsXG4vLyB2b2x1bWUgViAoViBhbmQgdGhlIHJldHVybmVkIHZvbHVtZSBhcmUgaW4gdGhlIHNhbWUgdW5pdHMpLlxucm5hc2Vfdm9sID0gKFYsIGNfZmluYWwpID0+IGNfZmluYWwgKiBWIC8gcm5hc2Vfc3RvY2tcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBzdG9ja192b2xfbUwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCIxTSBzdG9jayBiYXRjaCB2b2x1bWUgKG1MKVwiLCB2YWx1ZTogMTAwLCBtaW46IDEwLCBzdGVwOiAxMH0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ0cmljaW5lX01XID0gMTc5LjE3XG5jaXRyaWNfTVcgID0gMTkyLjEyNFxuXG50cmljaW5lX2cgPSAxICogKHN0b2NrX3ZvbF9tTCAvIDEwMDApICogdHJpY2luZV9NV1xuY2l0cmljX2cgID0gMSAqIChzdG9ja192b2xfbUwgLyAxMDAwKSAqIGNpdHJpY19NV1xuXG5JbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIlRyaWNpbmUgKGZyZWUgYWNpZClcIiwgXCJBbW91bnRcIjogYCR7Zm10KHRyaWNpbmVfZyl9IGdgLCBcIlJlY2lwZVwiOiBgRGlzc29sdmUgaW4gfjgwJSBvZiAke2ZtdChzdG9ja192b2xfbUwpfSBtTCBjZWxsIGN1bHR1cmUgZ3JhZGUgd2F0ZXI7IHRpdHJhdGUgdG8gcEggNy44IHdpdGggUG90YXNzaXVtIEh5ZHJveGlkZSAoS09IKTsgYnJpbmcgdG8gJHtmbXQoc3RvY2tfdm9sX21MKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJDaXRyaWMgQWNpZFwiLCAgICAgICAgIFwiQW1vdW50XCI6IGAke2ZtdChjaXRyaWNfZyl9IGdgLCAgXCJSZWNpcGVcIjogYERpc3NvbHZlIGluIGNlbGwgY3VsdHVyZSBncmFkZSB3YXRlciB0byAke2ZtdChzdG9ja192b2xfbUwpfSBtTGB9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJjaGJfdm9sICAgICA9IDEwICogc2NhbGVcbmNoYl90YWJsZXRzID0gTWF0aC5jZWlsKGNoYl92b2wgLyAxMClcblxuSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJQcm90ZWFzZSBpbmhpYml0b3IgdGFibGV0XCIsICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEgd2hvbGUgdGFibGV0XCIsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbFwiOiBgJHtjaGJfdGFibGV0c30gdGFibGV0KHMpYH0sXG4gIHtDb21wb25lbnQ6IGBTVVBFUmFzZSAoJHtzdXBlcmFzZV9maW5hbH0gVS/CtUwgZmluYWwpYCwgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBgJHtmbXQocm5hc2Vfdm9sKDEwMDAwLCBzdXBlcmFzZV9maW5hbCkpfSDCtUxgLCAgXCJUb3RhbCAowrVMKVwiOiBmbXQocm5hc2Vfdm9sKGNoYl92b2wgKiAxMDAwLCBzdXBlcmFzZV9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgICAgXCJQZXIgMTAgbUwgKGFsaXF1b3QpXCI6IGAke2ZtdChybmFzZV92b2woMTAwMDAsIHJuYXNpbl9maW5hbCkpfSDCtUxgLCAgICBcIlRvdGFsICjCtUwpXCI6IGZtdChybmFzZV92b2woY2hiX3ZvbCAqIDEwMDAsIHJuYXNpbl9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogXCJTcGVybWlkaW5lICgxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEwIMK1TFwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQoMTAgKiBjaGJfdm9sIC8gMTApfSxcbiAge0NvbXBvbmVudDogXCJTcGVybWluZSAoMTAwMFgpXCIsICAgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MIChhbGlxdW90KVwiOiBcIjEwIMK1TFwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQoMTAgKiBjaGJfdm9sIC8gMTApfSxcbiAge0NvbXBvbmVudDogXCJEaXRoaW90aHJlaXRvbCAoRFRULCAxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlBlciAxMCBtTCAoYWxpcXVvdClcIjogXCIxMCDCtUxcIiwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiVG90YWwgKMK1TClcIjogZm10KDEwICogY2hiX3ZvbCAvIDEwKX0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmFIQiBzdG9ja1wiLCAgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlBlciAxMCBtTCAoYWxpcXVvdClcIjogXCJ0byB2b2x1bWVcIiwgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAobUwpXCI6IGZtdChjaGJfdm9sKX1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InY1MCA9IDE1ICAqIHNjYWxlXG52NDAgPSA0ICAgKiBzY2FsZVxudjMwID0gNy41ICogc2NhbGVcblxub3B0aXByZXBfNTAgPSB2NTAgKiA1LzZcbmRpbHVlbnRfNTAgID0gdjUwICogMS82XG5cbnN0b2NrNTBfZm9yXzQwICA9IHY0MCAqIDQwLzUwXG5jaXRyYXByZXBoYl80MCAgPSB2NDAgLSBzdG9jazUwX2Zvcl80MFxuXG5zdG9jazUwX2Zvcl8zMCAgPSB2MzAgKiAzMC81MFxuY2l0cmFwcmVwaGJfMzAgID0gdjMwIC0gc3RvY2s1MF9mb3JfMzBcblxubWRgKio1MCUgaW9kaXhhbm9sOiAke2ZtdCh2NTApfSBtTCB0b3RhbCoqYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJPcHRpUHJlcFwiLCAgIFwiVm9sdW1lIChtTClcIjogZm10KG9wdGlwcmVwXzUwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGlsdWVudFwiLCAgICBcIlZvbHVtZSAobUwpXCI6IGZtdChkaWx1ZW50XzUwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pZGluZSAoMTAwMFgpXCIsIFwiVm9sdW1lIChtTClcIjogZm10KHY1MC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pbmUgKDEwMDBYKVwiLCAgIFwiVm9sdW1lIChtTClcIjogZm10KHY1MC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGl0aGlvdGhyZWl0b2wgKERUVCwgMTAwMFgpXCIsICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NTAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2UgKCR7c3VwZXJhc2VfZmluYWx9IFUvwrVMIGZpbmFsKWAsIFwiVm9sdW1lIChtTClcIjogZm10KHJuYXNlX3ZvbCh2NTAsIHN1cGVyYXNlX2ZpbmFsKSAvIDIpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQocm5hc2Vfdm9sKHY1MCwgcm5hc2luX2ZpbmFsKSAvIDIpfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Im1kYCoqNDAlIGlvZGl4YW5vbDogJHtmbXQodjQwKX0gbUwgdG90YWwqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTEiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJJbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIjUwJSBpb2RpeGFub2wgKGFib3ZlKVwiLCBcIlZvbHVtZSAobUwpXCI6IGZtdChzdG9jazUwX2Zvcl80MCl9LFxuICB7Q29tcG9uZW50OiBcIkNpdHJhUHJlcEhCXCIsICAgICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdChjaXRyYXByZXBoYl80MCl9LFxuICB7Q29tcG9uZW50OiBcIlNwZXJtaWRpbmUgKDEwMDBYKVwiLCAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NDAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBcIlNwZXJtaW5lICgxMDAwWClcIiwgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2NDAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBcIkRpdGhpb3RocmVpdG9sIChEVFQsIDEwMDBYKVwiLCAgICAgICAgICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQodjQwLzEwMDApfSxcbiAge0NvbXBvbmVudDogYFNVUEVSYXNlICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCBcIlZvbHVtZSAobUwpXCI6IGZtdChybmFzZV92b2wodjQwLCBzdXBlcmFzZV9maW5hbCkpfSxcbiAge0NvbXBvbmVudDogYFJOQXNpbiAoJHtybmFzaW5fZmluYWx9IFUvwrVMIGZpbmFsKWAsICAgXCJWb2x1bWUgKG1MKVwiOiBmbXQocm5hc2Vfdm9sKHY0MCwgcm5hc2luX2ZpbmFsKSl9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTEyIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWRgKiozMCUgaW9kaXhhbm9sOiAke2ZtdCh2MzApfSBtTCB0b3RhbCoqYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IklucHV0cy50YWJsZShbXG4gIHtDb21wb25lbnQ6IFwiNTAlIGlvZGl4YW5vbCAoYWJvdmUpXCIsIFwiVm9sdW1lIChtTClcIjogZm10KHN0b2NrNTBfZm9yXzMwKX0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmFQcmVwSEJcIiwgICAgICAgICAgIFwiVm9sdW1lIChtTClcIjogZm10KGNpdHJhcHJlcGhiXzMwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pZGluZSAoMTAwMFgpXCIsICAgIFwiVm9sdW1lIChtTClcIjogZm10KHYzMC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiU3Blcm1pbmUgKDEwMDBYKVwiLCAgICAgIFwiVm9sdW1lIChtTClcIjogZm10KHYzMC8xMDAwKX0sXG4gIHtDb21wb25lbnQ6IFwiRGl0aGlvdGhyZWl0b2wgKERUVCwgMTAwMFgpXCIsICAgICAgICAgICBcIlZvbHVtZSAobUwpXCI6IGZtdCh2MzAvMTAwMCl9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2UgKCR7c3VwZXJhc2VfZmluYWx9IFUvwrVMIGZpbmFsKWAsIFwiVm9sdW1lIChtTClcIjogZm10KHJuYXNlX3ZvbCh2MzAsIHN1cGVyYXNlX2ZpbmFsKSl9LFxuICB7Q29tcG9uZW50OiBgUk5Bc2luICgke3JuYXNpbl9maW5hbH0gVS/CtUwgZmluYWwpYCwgICBcIlZvbHVtZSAobUwpXCI6IGZtdChybmFzZV92b2wodjMwLCBybmFzaW5fZmluYWwpKX1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJucmJfdm9sICAgPSAzMCAqIHNjYWxlXG5ucmJfYnNhX2cgPSBucmJfdm9sICogMS8xMDBcblxuSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJCb3ZpbmUgU2VydW0gQWxidW1pbiAoQlNBKVwiLCAgICAgICAgICAgICBcIkFtb3VudFwiOiBgJHtmbXQobnJiX2JzYV9nKX0gZ2B9LFxuICB7Q29tcG9uZW50OiBcIjFYIFBob3NwaGF0ZS1CdWZmZXJlZCBTYWxpbmUgKFBCUylcIiwgICAgIFwiQW1vdW50XCI6IGB0byAke2ZtdChucmJfdm9sKX0gbUxgfSxcbiAge0NvbXBvbmVudDogYFNVUEVSYXNlICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCBcIkFtb3VudFwiOiBgJHtmbXQocm5hc2Vfdm9sKG5yYl92b2wsIHN1cGVyYXNlX2ZpbmFsKSl9IG1MYH0sXG4gIHtDb21wb25lbnQ6IGBSTkFzaW4gKCR7cm5hc2luX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCAgICAgIFwiQW1vdW50XCI6IGAke2ZtdChybmFzZV92b2wobnJiX3ZvbCwgcm5hc2luX2ZpbmFsKSl9IG1MYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9zYW1wbGVzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2V4Y2Vzc19wY3QnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc3VwZXJhc2VfZmluYWwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncm5hc2luX2ZpbmFsJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3JuYXNlX3N0b2NrJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3N0b2NrX3ZvbF9tTCcpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -1881,20 +1881,20 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into **every** buffer, including the final nuclei resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT), by contrast, are deliberately left **out** of the nuclei resuspension buffer because they interfere with downstream cDNA synthesis.</span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: confirm original source/citation for this protocol with JP — none given in the source document --&gt;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: confirm source/citation for this protocol with JP --&gt;</span></span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before starting</span></span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use **cell culture grade water** for every "water" call in this protocol (stock buffers and 1000X fresh solutions alike) — not general lab ddH₂O.</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first — CitraHB and Diluent are both built from them.</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prepare CitraHB, Diluent, and Detergent stock buffers **a day ahead** — good for 1 month at 4°C.</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use **cell culture grade water** for every "water" call in this protocol (stock buffers and 1000X fresh solutions alike), not general lab ddH₂O.</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and Diluent are both built from them.</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prepare CitraHB, Diluent, and Detergent stock buffers **a day ahead**; good for 1 month at 4°C.</span>
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pre-chill the 7 mL glass dounce homogenizer on ice.</span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) **fresh** each time.</span>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make the nuclei resuspension buffer during the centrifugation step (Step 8) — **no** spermine, spermidine, or DTT in this one.</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make the nuclei resuspension buffer during the centrifugation step (Step 8) with **no** spermine, spermidine, or DTT in this one.</span>
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Set the **ultracentrifuge** to 4°C and confirm the rotor/tubes are rated for **no-brake** deceleration (Step 8).</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book more time than the spin itself: the 18 min is only the run — loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to **around an hour**. Schedule accordingly.</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book more time than the spin itself: the 18 min is only the run; loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to **around an hour**. Schedule accordingly.</span>
 <span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>---</span>
@@ -1909,8 +1909,8 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
 <span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
-<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">// RNase inhibitor final concentrations — different lab members dose these</span></span>
-<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co">// differently, so they're toggles here. Every buffer table below rescales.</span></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a><span class="co">// RNase inhibitor final concentrations. Different lab members dose these</span></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a><span class="co">// differently, so they're toggles here; every buffer table below rescales.</span></span>
 <span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a><span class="co">// Set to 0 to leave an inhibitor out entirely.</span></span>
 <span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>viewof superase_final <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERase final conc. (U/µL, each buffer)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
 <span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>viewof rnasin_final   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"RNAsin final conc. (U/µL, each buffer)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
@@ -1933,15 +1933,15 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
-<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ordering quantities (from source protocol)</span></span>
-<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>Per sample, the original protocol notes you will need roughly **1 mL SUPERase** and **500 µL Protector** (RNase inhibitor) on hand for ordering purposes. The line-item breakdown below is the granular per-buffer calculation — it will not sum to exactly this figure, since the source note is a rough ordering estimate rather than a derived total.</span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ordering quantities</span></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a>Per sample, keep roughly **1 mL SUPERase** and **500 µL Protector** (RNase inhibitor) on hand. The line-item breakdown below is the granular per-buffer calculation; it will not sum to exactly this figure, since the ordering number is a rough estimate rather than a derived total.</span>
 <span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stock buffers</span></span>
 <span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>Make ~1 month's supply at once; store at 4°C. These do **not** scale with sample count — they're a standing stock, not a per-run master mix.</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a>Make ~1 month's supply at once; store at 4°C. These do **not** scale with sample count; they're a standing stock, not a per-run master mix.</span>
 <span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1 M stock reagents (make first)</span></span>
 <span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a></span>
@@ -1968,7 +1968,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
 <span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Tricine needs KOH and citric acid doesn't</span></span>
-<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a>Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium Hydroxide (KOH) — the "-KOH" in the name refers to this titration, not a separate reagent added at the bench. Citric Acid stock is used as-is; both CitraHB and Diluent get their acidic character partly from it, so no pH adjustment is needed here.</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a>Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium Hydroxide (KOH); the "-KOH" in the name refers to this titration, not a separate reagent added at the bench. Citric Acid stock is used as-is; both CitraHB and Diluent get their acidic character partly from it, so no pH adjustment is needed here.</span>
 <span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a>**CitraHB (30 mL)**</span>
@@ -2003,14 +2003,14 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
 <span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## Buffer storage</span></span>
-<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>CitraHB, Diluent, and Detergent are stable at 4°C for up to 1 month. Scale any of these recipes linearly if you need a larger batch — the ratios above hold regardless of final volume.</span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>CitraHB, Diluent, and Detergent are stable at 4°C for up to 1 month. Scale any of these recipes linearly if you need a larger batch; the ratios above hold regardless of final volume.</span>
 <span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fresh working solutions (1000X stocks)</span></span>
 <span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>Make fresh each time — do not store.</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>Make fresh each time; do not store.</span>
 <span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> Final stock <span class="pp">|</span> Recipe <span class="pp">|</span></span>
 <span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----------|-------------|--------|</span></span>
@@ -2020,40 +2020,40 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a>Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, **except** the nuclei resuspension buffer (see warning below).</span>
 <span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a>Add RNase inhibitor to all buffers below at the final concentrations set in **Configure experiment** above — default 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) + 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.</span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a>Add RNase inhibitor to all buffers below at the final concentrations set in **Configure experiment** above. The defaults are 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) and 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.</span>
 <span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Working solutions — scaled to sample count</span></span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Working solutions: scaled to sample count</span></span>
 <span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
-<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## Math audit — how every volume is calculated</span></span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## Math audit: how every volume is calculated</span></span>
 <span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a>**CitraHB Complete** (10 mL aliquot per sample — used in Steps 2, 3, and 6):</span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a>**CitraHB Complete** (10 mL aliquot per sample, used in Steps 2, 3, and 6):</span>
 <span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a>$$V_{aliquot} = 10\;mL \times N_{samples} \times (1 + overage)$$</span>
 <span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a>Additives (SUPERase, RNAsin, spermidine, spermine, DTT) scale linearly with $V_{aliquot}$; protease inhibitor tablets are whole units, so the tablet count rounds up.</span>
 <span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a>**Iodixanol step gradient** — each of the three working solutions is made by diluting 50% iodixanol (itself made 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and $5/6 \times 60\% = 50\%$) down to the target percentage with CitraPrepHB, using $C_1V_1 = C_2V_2$:</span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a>**Iodixanol step gradient**: each of the three working solutions is made by diluting 50% iodixanol (itself made 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and $5/6 \times 60\% = 50\%$) down to the target percentage with CitraPrepHB, using $C_1V_1 = C_2V_2$:</span>
 <span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a>$$V_{50\%\ stock\ needed} = V_{total} \times \frac{\%_{target}}{50\%} \qquad V_{diluent} = V_{total} - V_{50\%\ stock\ needed}$$</span>
 <span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a>Per-sample total volumes (from the source calculation): 15 mL of 50% (kept as-is), 4 mL of 40%, and 7.5 mL of 30%. All three scale with $N_{samples} \times (1+overage)$.</span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a>Per-sample total volumes: 15 mL of 50% (kept as-is), 4 mL of 40%, and 7.5 mL of 30%. All three scale with $N_{samples} \times (1+overage)$.</span>
 <span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a>Polyamine additives in each gradient solution scale as $V_{total}/1000$ (spermidine, spermine, DTT — 1000X). SUPERase and RNAsin scale as:</span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a>Polyamine additives in each gradient solution scale as $V_{total}/1000$ (spermidine, spermine, DTT, all 1000X). SUPERase and RNAsin scale as:</span>
 <span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a>$$V_{stock} = \frac{C_{final}}{C_{stock}} \times V_{total}$$</span>
 <span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>Each inhibitor's $C_{final}$ and the shared $C_{stock}$ are set in **Configure experiment** (<span class="in">`superase_final`</span>, <span class="in">`rnasin_final`</span>, <span class="in">`rnase_stock`</span>; defaults 0.5 / 0.5 / 40 U/µL). Change them there and every table below rescales.</span>
 <span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: in the source spreadsheet, SUPERase/RNAsin added to the retained 50% fraction are computed at half the rate of the 40%/30% fractions (divided by 2). That halving is preserved here exactly as given — confirm with JP whether this is intentional before scaling to large batches. --&gt;</span></span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: SUPERase/RNAsin in the retained 50% fraction are dosed at half the rate of the 40%/30% fractions (divided by 2). Preserved here as-is; confirm with JP whether this is intentional before scaling to large batches. --&gt;</span></span>
 <span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a>**Nuclei resuspension buffer** (30 mL aliquot per sample):</span>
 <span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a>$$V_{buffer} = 30\;mL \times N_{samples} \times (1+overage)$$</span>
 <span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a>Bovine Serum Albumin (BSA) scales as 1% w/v of $V_{buffer}$; SUPERase and RNAsin use the same $C_{final}/C_{stock} \times V_{buffer}$ formula above. No spermine, spermidine, or Dithiothreitol (DTT) — these interfere with downstream cDNA synthesis.</span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a>Bovine Serum Albumin (BSA) scales as 1% w/v of $V_{buffer}$; SUPERase and RNAsin use the same $C_{final}/C_{stock} \times V_{buffer}$ formula above. No spermine, spermidine, or Dithiothreitol (DTT); these interfere with downstream cDNA synthesis.</span>
 <span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### CitraHB Complete (10 mL aliquot/sample)</span></span>
@@ -2081,11 +2081,11 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a>The 40% and 30% solutions are diluted from **additive-free base 50% iodixanol**, not from the finished 50% solution in the first table below. Work in this order:</span>
 <span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Make base 50% iodixanol — **OptiPrep + Diluent only.** No spermidine, spermine, DTT, SUPERase, or RNAsin yet.</span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Make base 50% iodixanol with **OptiPrep + Diluent only.** No spermidine, spermine, DTT, SUPERase, or RNAsin yet.</span>
 <span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Pull off the "50% iodixanol (above)" volumes listed in the 40% and 30% tables. That aliquot carries **no additives** with it.</span>
 <span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>You now have three separate tubes (leftover 50%, 40% mix, 30% mix). Add spermidine, spermine, DTT, SUPERase, and RNAsin to **each tube**, scaled to that tube's own total volume.</span>
 <span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a>Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tables is **not** a repeat of the 50% — the 50%-derived iodixanol in those tubes started out additive-free.</span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a>Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tables is **not** a repeat of the 50%; the 50%-derived iodixanol in those tubes started out additive-free.</span>
 <span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
@@ -2103,7 +2103,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a>stock50_for_30  <span class="op">=</span> v30 <span class="op">*</span> <span class="dv">30</span><span class="op">/</span><span class="dv">50</span></span>
 <span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a>citraprephb_30  <span class="op">=</span> v30 <span class="op">-</span> stock50_for_30</span>
 <span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**50% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v50)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**50% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v50)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
 <span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
@@ -2121,7 +2121,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
 <span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
-<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**40% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v40)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**40% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v40)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
 <span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
@@ -2139,7 +2139,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-293"><a href="#cb15-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
 <span id="cb15-294"><a href="#cb15-294" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
-<span id="cb15-295"><a href="#cb15-295" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**30% iodixanol — </span><span class="sc">${</span><span class="fu">fmt</span>(v30)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
+<span id="cb15-295"><a href="#cb15-295" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**30% iodixanol: </span><span class="sc">${</span><span class="fu">fmt</span>(v30)<span class="sc">}</span><span class="vs"> mL total**`</span></span>
 <span id="cb15-296"><a href="#cb15-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb15-297"><a href="#cb15-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-300"><a href="#cb15-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
@@ -2183,7 +2183,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-340"><a href="#cb15-340" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-341"><a href="#cb15-341" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
 <span id="cb15-342"><a href="#cb15-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## Check nuclei before proceeding</span></span>
-<span id="cb15-343"><a href="#cb15-343" aria-hidden="true" tabindex="-1"></a>Step 4 calls for pulling an aliquot to check nuclei release after homogenization — add more strokes with the tight pestle if intact cells are still visible before moving on.</span>
+<span id="cb15-343"><a href="#cb15-343" aria-hidden="true" tabindex="-1"></a>Step 4 calls for pulling an aliquot to check nuclei release after homogenization; add more strokes with the tight pestle if intact cells are still visible before moving on.</span>
 <span id="cb15-344"><a href="#cb15-344" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-345"><a href="#cb15-345" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-346"><a href="#cb15-346" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span> Volume <span class="pp">|</span></span>
@@ -2198,7 +2198,7 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-355"><a href="#cb15-355" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-356"><a href="#cb15-356" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
 <span id="cb15-357"><a href="#cb15-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## No brake on the Step 8 spin</span></span>
-<span id="cb15-358"><a href="#cb15-358" aria-hidden="true" tabindex="-1"></a>This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall — loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.</span>
+<span id="cb15-358"><a href="#cb15-358" aria-hidden="true" tabindex="-1"></a>This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall; loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.</span>
 <span id="cb15-359"><a href="#cb15-359" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb15-360"><a href="#cb15-360" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-361"><a href="#cb15-361" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span> Volume <span class="pp">|</span></span>
@@ -2229,10 +2229,10 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-386"><a href="#cb15-386" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-387"><a href="#cb15-387" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
 <span id="cb15-388"><a href="#cb15-388" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hemocytometer counting method</span></span>
-<span id="cb15-389"><a href="#cb15-389" aria-hidden="true" tabindex="-1"></a>CitraPrep nuclei yields are typically too low for a reliable Countess (automated) read, so this is a **manual hemocytometer count** every time — do not substitute the Countess.</span>
+<span id="cb15-389"><a href="#cb15-389" aria-hidden="true" tabindex="-1"></a>CitraPrep nuclei yields are typically too low for a reliable Countess (automated) read, so this is a **manual hemocytometer count** every time; do not substitute the Countess.</span>
 <span id="cb15-390"><a href="#cb15-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-391"><a href="#cb15-391" aria-hidden="true" tabindex="-1"></a>a. Filter your trypan blue stock through a 0.2 µm filter before use — unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</span>
-<span id="cb15-392"><a href="#cb15-392" aria-hidden="true" tabindex="-1"></a>b. Mix the nuclei suspension with filtered trypan blue at a **1:1** ratio (e.g. 10 µL suspension + 10 µL trypan blue) — dilution factor = 2.</span>
+<span id="cb15-391"><a href="#cb15-391" aria-hidden="true" tabindex="-1"></a>a. Filter your trypan blue stock through a 0.2 µm filter before use; unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</span>
+<span id="cb15-392"><a href="#cb15-392" aria-hidden="true" tabindex="-1"></a>b. Mix the nuclei suspension with filtered trypan blue at a **1:1** ratio (e.g. 10 µL suspension + 10 µL trypan blue, dilution factor = 2).</span>
 <span id="cb15-393"><a href="#cb15-393" aria-hidden="true" tabindex="-1"></a>c. Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.</span>
 <span id="cb15-394"><a href="#cb15-394" aria-hidden="true" tabindex="-1"></a>d. Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Use the standard hemocytometer counting rule: count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.</span>
 <span id="cb15-395"><a href="#cb15-395" aria-hidden="true" tabindex="-1"></a>e. Calculate concentration:</span>
@@ -2268,8 +2268,8 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb15-425"><a href="#cb15-425" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-426"><a href="#cb15-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
 <span id="cb15-427"><a href="#cb15-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-428"><a href="#cb15-428" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: no source paper, kit, or lab of origin was given in the uploaded protocol — add citation/attribution once confirmed with JP --&gt;</span></span>
-<span id="cb15-429"><a href="#cb15-429" aria-hidden="true" tabindex="-1"></a>Protocol: source not specified in provided document; transcribed as-is by JP Flores.</span>
+<span id="cb15-428"><a href="#cb15-428" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: no source paper, kit, or lab of origin on hand; add citation/attribution once confirmed with JP --&gt;</span></span>
+<span id="cb15-429"><a href="#cb15-429" aria-hidden="true" tabindex="-1"></a>Protocol: source not specified; transcribed by JP Flores.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
