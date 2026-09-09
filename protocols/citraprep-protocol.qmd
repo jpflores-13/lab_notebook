@@ -38,19 +38,27 @@ viewof excess_pct = Inputs.number({label: "Extra overage on scaled solutions (%)
 
 ```{ojs}
 //| echo: false
-scale = n_samples * (1 + excess_pct / 100)
-fmt   = (x, d = 2) => x.toFixed(d)
-
-md`**${n_samples} sample(s) · ${excess_pct}% overage · scale factor ${fmt(scale)}×**`
+// RNase inhibitor final concentrations — different lab members dose these
+// differently, so they're toggles here. Every buffer table below rescales.
+// Set to 0 to leave an inhibitor out entirely.
+viewof superase_final = Inputs.number({label: "SUPERase final conc. (U/µL, each buffer)", value: 0.5, min: 0, step: 0.05})
+viewof rnasin_final   = Inputs.number({label: "RNAsin final conc. (U/µL, each buffer)", value: 0.5, min: 0, step: 0.05})
+viewof rnase_stock    = Inputs.number({label: "RNase inhibitor stock conc. (U/µL)", value: 40, min: 1, step: 1})
 ```
 
 ```{ojs}
 //| echo: false
-// RNase inhibitor target/stock — single source of truth for every buffer below.
-// This protocol uses 0.5 U/µL final for BOTH SUPERase and RNAsin (not 0.2 U/µL).
-rnase_final = 0.5   // U/µL, final concentration of each inhibitor
-rnase_stock = 40    // U/µL, assumed stock concentration — edit if yours differs
-rnase_vol   = (V) => rnase_final * V / rnase_stock   // volume of stock needed for total volume V (same units as V)
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 2) => x.toFixed(d)
+
+md`**${n_samples} sample(s) · ${excess_pct}% overage · scale factor ${fmt(scale)}× · SUPERase ${superase_final} U/µL · RNAsin ${rnasin_final} U/µL (stock ${rnase_stock} U/µL)**`
+```
+
+```{ojs}
+//| echo: false
+// Volume of RNase inhibitor stock needed to reach final conc c_final in a total
+// volume V (V and the returned volume are in the same units).
+rnase_vol = (V, c_final) => c_final * V / rnase_stock
 ```
 
 ::: {.callout-tip collapse="true"}
@@ -141,7 +149,7 @@ Make fresh each time — do not store.
 
 Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, **except** the nuclei resuspension buffer (see warning below).
 
-Add RNase inhibitor to all buffers below: 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) + 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin) — 1 U/µL total. Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.
+Add RNase inhibitor to all buffers below at the final concentrations set in **Configure experiment** above — default 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) + 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.
 
 ---
 
@@ -166,7 +174,7 @@ Polyamine additives in each gradient solution scale as $V_{total}/1000$ (spermid
 
 $$V_{stock} = \frac{C_{final}}{C_{stock}} \times V_{total}$$
 
-This protocol targets $C_{final} = 0.5$ U/µL for **each** inhibitor (not 0.2 U/µL), assuming a $C_{stock} = 40$ U/µL stock — both are single-source-of-truth cells (`rnase_final`, `rnase_stock`) up top, so edit them there if your stock concentration differs.
+Each inhibitor's $C_{final}$ and the shared $C_{stock}$ are set in **Configure experiment** (`superase_final`, `rnasin_final`, `rnase_stock`; defaults 0.5 / 0.5 / 40 U/µL). Change them there and every table below rescales.
 
 <!-- TODO: in the source spreadsheet, SUPERase/RNAsin added to the retained 50% fraction are computed at half the rate of the 40%/30% fractions (divided by 2). That halving is preserved here exactly as given — confirm with JP whether this is intentional before scaling to large batches. -->
 
@@ -181,14 +189,13 @@ Bovine Serum Albumin (BSA) scales as 1% w/v of $V_{buffer}$; SUPERase and RNAsin
 
 ```{ojs}
 //| echo: false
-chb_vol         = 10 * scale
-chb_tablets     = Math.ceil(chb_vol / 10)
-chb_rnase_uL    = rnase_vol(chb_vol * 1000)   // total volume in µL
+chb_vol     = 10 * scale
+chb_tablets = Math.ceil(chb_vol / 10)
 
 Inputs.table([
-  {Component: "Protease inhibitor tablet",               "Per 10 mL (aliquot)": "1 whole tablet",                    "Total": `${chb_tablets} tablet(s)`},
-  {Component: `SUPERase (${rnase_final} U/µL final)`,     "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000))} µL`,       "Total (µL)": fmt(chb_rnase_uL)},
-  {Component: `RNAsin (${rnase_final} U/µL final)`,       "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000))} µL`,       "Total (µL)": fmt(chb_rnase_uL)},
+  {Component: "Protease inhibitor tablet",                "Per 10 mL (aliquot)": "1 whole tablet",                              "Total": `${chb_tablets} tablet(s)`},
+  {Component: `SUPERase (${superase_final} U/µL final)`,  "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000, superase_final))} µL`,  "Total (µL)": fmt(rnase_vol(chb_vol * 1000, superase_final))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,      "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000, rnasin_final))} µL`,    "Total (µL)": fmt(rnase_vol(chb_vol * 1000, rnasin_final))},
   {Component: "Spermidine (1000X)",                       "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
   {Component: "Spermine (1000X)",                         "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
   {Component: "Dithiothreitol (DTT, 1000X)",                              "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
@@ -236,8 +243,8 @@ Inputs.table([
   {Component: "Spermidine (1000X)", "Volume (mL)": fmt(v50/1000)},
   {Component: "Spermine (1000X)",   "Volume (mL)": fmt(v50/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",        "Volume (mL)": fmt(v50/1000)},
-  {Component: `SUPERase (${rnase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v50) / 2)},
-  {Component: `RNAsin (${rnase_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v50) / 2)}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v50, superase_final) / 2)},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v50, rnasin_final) / 2)}
 ], {layout: "auto"})
 ```
 
@@ -254,8 +261,8 @@ Inputs.table([
   {Component: "Spermidine (1000X)",    "Volume (mL)": fmt(v40/1000)},
   {Component: "Spermine (1000X)",      "Volume (mL)": fmt(v40/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",           "Volume (mL)": fmt(v40/1000)},
-  {Component: `SUPERase (${rnase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v40))},
-  {Component: `RNAsin (${rnase_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v40))}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v40, superase_final))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v40, rnasin_final))}
 ], {layout: "auto"})
 ```
 
@@ -272,8 +279,8 @@ Inputs.table([
   {Component: "Spermidine (1000X)",    "Volume (mL)": fmt(v30/1000)},
   {Component: "Spermine (1000X)",      "Volume (mL)": fmt(v30/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",           "Volume (mL)": fmt(v30/1000)},
-  {Component: `SUPERase (${rnase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v30))},
-  {Component: `RNAsin (${rnase_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v30))}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v30, superase_final))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v30, rnasin_final))}
 ], {layout: "auto"})
 ```
 
@@ -292,8 +299,8 @@ nrb_bsa_g = nrb_vol * 1/100
 Inputs.table([
   {Component: "Bovine Serum Albumin (BSA)",             "Amount": `${fmt(nrb_bsa_g)} g`},
   {Component: "1X Phosphate-Buffered Saline (PBS)",     "Amount": `to ${fmt(nrb_vol)} mL`},
-  {Component: `SUPERase (${rnase_final} U/µL final)`,    "Amount": `${fmt(rnase_vol(nrb_vol))} mL`},
-  {Component: `RNAsin (${rnase_final} U/µL final)`,      "Amount": `${fmt(rnase_vol(nrb_vol))} mL`}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Amount": `${fmt(rnase_vol(nrb_vol, superase_final))} mL`},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,      "Amount": `${fmt(rnase_vol(nrb_vol, rnasin_final))} mL`}
 ], {layout: "auto"})
 ```
 
