@@ -1,0 +1,6 @@
+# Applies to every protocols/*.qmd page.
+# Hide the site sidebar on individual protocol pages so opening one protocol
+# doesn't show the full list of every other protocol on the left. Navigation
+# stays available via the navbar and the table on protocols/index.qmd; the
+# right-hand floating TOC still lists the current protocol's own sections.
+sidebar: false
