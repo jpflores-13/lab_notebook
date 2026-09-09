@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-09">
+
+<title>TaqMan qPCR Protocol – JP Flores’ Lab Notebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4ee3db49c2535a8f187f0d04f590a1ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JP Flores’ Lab Notebook</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../protocols/index.html"> 
+<span class="menu-text">Protocols</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../experiments/index.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jpflores-13/lab_notebook"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configure-qpcr-run" id="toc-configure-qpcr-run" class="nav-link active" data-scroll-target="#configure-qpcr-run">Configure qPCR run</a></li>
+  <li><a href="#cdna-dilution-15" id="toc-cdna-dilution-15" class="nav-link" data-scroll-target="#cdna-dilution-15">cDNA dilution (1:5)</a></li>
+  <li><a href="#master-mix-per-gene" id="toc-master-mix-per-gene" class="nav-link" data-scroll-target="#master-mix-per-gene">Master mix per gene</a></li>
+  <li><a href="#plate-setup" id="toc-plate-setup" class="nav-link" data-scroll-target="#plate-setup">Plate setup</a></li>
+  <li><a href="#qc-log" id="toc-qc-log" class="nav-link" data-scroll-target="#qc-log">QC log</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">TaqMan qPCR Protocol</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Plate setup + reactive mastermix/plate calculator (qPCR.docx + qPCR_Sample_Sheet.xlsx)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">
+🖨 Print / Save as PDF
+</button>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>TaqMan-based qPCR from diluted cDNA: dilute cDNA 1:5, build one master mix per target gene (primer/probe + 2X TaqMan PCR Master Mix + water), load 2 µL diluted cDNA (or 2 µL water for no-template controls) into each well followed by 18 µL master mix, then spin and run. This page merges two near-identical source documents (<code>qPCR.docx</code> and <code>Protocol_for_qPCR.docx</code> — confirmed by diff to differ only in paragraph styling, not content) and embeds the logic of <code>qPCR_Sample_Sheet.xlsx</code> as a reactive calculator below, generalized to any samples/genes/replicates rather than the specific genes (IL1B, β-Actin, AP-1) and 0h–24h timepoint series used as the worked example in the source spreadsheet.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Before starting
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Get ice; thaw cDNA samples.</li>
+<li>While thawing, prepare PCR strip tubes for 1:5 cDNA dilutions.</li>
+<li>Know your sample count, target gene count, and desired replicate/control counts before building master mixes (see calculator below).</li>
+<li>Pipette diluted cDNA and water controls into the <strong>very bottom</strong> of each well; pipette master mix against the <strong>side</strong> of the well.</li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="configure-qpcr-run" class="level2">
+<h2 class="anchored" data-anchor-id="configure-qpcr-run">Configure qPCR run</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="28" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 27;"><span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>viewof n_samples        <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of biological samples (excluding water controls)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">24</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>viewof n_replicates      <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Replicates per sample × gene (wells)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>viewof gene_names_text   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">text</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Target gene names (comma-separated, optional — leave blank to use generic names)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span> <span class="dt">placeholder</span><span class="op">:</span> <span class="st">"e.g. IL1B, B-Actin, AP-1"</span>})</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>viewof n_genes           <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of target genes (used only if names above are blank)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>viewof n_water_controls  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"No-template (water) control wells per gene"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>viewof excess            <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Master mix excess multiplier"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">1.25</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="38" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 37;"><span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> gene_names_text<span class="op">.</span><span class="fu">trim</span>()</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> gene_names_text<span class="op">.</span><span class="fu">split</span>(<span class="st">","</span>)<span class="op">.</span><span class="fu">map</span>(s <span class="kw">=&gt;</span> s<span class="op">.</span><span class="fu">trim</span>())<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> n_genes}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="vs">`Gene </span><span class="sc">${</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>wells_per_gene <span class="op">=</span> n_samples <span class="op">*</span> n_replicates <span class="op">+</span> n_water_controls</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>total_wells    <span class="op">=</span> wells_per_gene <span class="op">*</span> genes<span class="op">.</span><span class="at">length</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) × </span><span class="sc">${</span>n_replicates<span class="sc">}</span><span class="vs"> replicate(s) + </span><span class="sc">${</span>n_water_controls<span class="sc">}</span><span class="vs"> water control(s) = </span><span class="sc">${</span>wells_per_gene<span class="sc">}</span><span class="vs"> well(s)/gene × </span><span class="sc">${</span>genes<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs"> gene(s) = </span><span class="sc">${</span>total_wells<span class="sc">}</span><span class="vs"> total well(s)** · excess ×</span><span class="sc">${</span>excess<span class="sc">}</span><span class="vs">`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="51" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 50;"><span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>total_wells <span class="op">&gt;</span> <span class="dv">96</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">md</span><span class="vs">`::: {.callout-warning}</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="vs">**Exceeds one 96-well plate.** </span><span class="sc">${</span>total_wells<span class="sc">}</span><span class="vs"> total wells requested — split across multiple 96-well plates, or use a 384-well plate/block if your instrument supports it.</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="vs">:::`</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">md</span><span class="vs">``</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Example use case from the source spreadsheet
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The original <code>qPCR_Sample_Sheet.xlsx</code> worked example ran a 6-timepoint series (0h, 0.5h, 1h, 4h, 6h, 24h) across 3 CRISPR’d clones + 1 WT control, each in duplicate, against 3 genes (IL1B, β-Actin, AP-1/FOS) — i.e.&nbsp;4 conditions × 6 timepoints = 24 samples, 2 replicates, 3 genes, plus water and extra controls. Reproduce that specific layout by setting samples = 24, replicates = 2, genes = “IL1B, B-Actin, AP-1”. This is mentioned as an example only — nothing about gene identity or timepoints is hardcoded into the calculator itself.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Math audit — how every volume is calculated
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Per-well TaqMan reaction (20 µL total, fixed ratio — single source of truth below):</strong></p>
+<p><span class="math display">\[V_{well} = V_{cDNA} + V_{probe} + V_{TaqMan\;MM} + V_{water} = 2 + 1 + 10 + 7 = 20\;\mu L\]</span></p>
+<p><strong>Wells needed per gene</strong> (includes water controls, which use the same master mix but 2 µL water instead of cDNA):</p>
+<p><span class="math display">\[W_{gene} = N_{samples} \times N_{replicates} + N_{water\;controls}\]</span></p>
+<p><strong>Master mix per gene</strong> (primer/probe + TaqMan MM + water only — cDNA/water is pipetted directly into the well, not part of the master mix):</p>
+<p><span class="math display">\[V_{component,\;total} = V_{component,\;well} \times W_{gene} \times excess\]</span></p>
+<p>This reproduces the source spreadsheet’s <code>EXCESS × replicates × SUM(per-well column)</code> formula, generalized so <code>replicates</code> is a single user-supplied parameter (technical + biological wells per sample) rather than a second hardcoded multiplier layered on top of the per-well list.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="cdna-dilution-15" class="level2">
+<h2 class="anchored" data-anchor-id="cdna-dilution-15">cDNA dilution (1:5)</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="86" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 85;"><span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> dilution tube(s):** add 20 µL H₂O + 5 µL cDNA to each (1:5 dilution).`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="master-mix-per-gene" class="level2">
+<h2 class="anchored" data-anchor-id="master-mix-per-gene">Master mix per gene</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="96" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a>cdna_vol   <span class="op">=</span> <span class="dv">2</span>    <span class="co">// µL diluted cDNA per well (pipetted directly, not part of master mix)</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>probe_vol  <span class="op">=</span> <span class="dv">1</span>    <span class="co">// µL TaqMan primer/probe (20X) per well</span></span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>taqman_vol <span class="op">=</span> <span class="dv">10</span>   <span class="co">// µL 2X TaqMan PCR Master Mix per well</span></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>water_vol  <span class="op">=</span> <span class="dv">7</span>    <span class="co">// µL water per well (part of the combined master mix)</span></span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a>well_total <span class="op">=</span> cdna_vol <span class="op">+</span> probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol   <span class="co">// = 20 µL</span></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(</span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a>  genes<span class="op">.</span><span class="fu">map</span>(g <span class="kw">=&gt;</span> ({</span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Gene</span><span class="op">:</span> g<span class="op">,</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Wells needed (incl. water ctrls)"</span><span class="op">:</span> wells_per_gene<span class="op">,</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Primer/Probe 20X total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(probe_vol  <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2X TaqMan PCR Master Mix total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(taqman_vol <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Water total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(water_vol <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Combined master mix total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>((probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol) <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)</span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">,</span></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>}</span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="117" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 116;"><span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>grand_total_mm <span class="op">=</span> genes<span class="op">.</span><span class="at">length</span> <span class="op">*</span> (probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol) <span class="op">*</span> wells_per_gene <span class="op">*</span> excess</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Grand total master mix across all </span><span class="sc">${</span>genes<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs"> gene(s): </span><span class="sc">${</span><span class="fu">fmt</span>(grand_total_mm)<span class="sc">}</span><span class="vs"> µL**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="plate-setup" class="level2">
+<h2 class="anchored" data-anchor-id="plate-setup">Plate setup</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Carefully add 2 µL diluted cDNA to its respective well — pipette into the very bottom of the well</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Add 2 µL H₂O to the no-template control wells</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Carefully add 18 µL of the appropriate gene’s master mix to each well — pipette against the side of the well</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Cover the plate; vortex</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Spin at 2000×g for 5 min</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Place into qPCR machine</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Per-well volume check
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>2 µL (cDNA or water) + 18 µL master mix = 20 µL total per well, matching the 20 µL per-well reaction table above.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="qc-log" class="level2">
+<h2 class="anchored" data-anchor-id="qc-log">QC log</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Checkpoint</th>
+<th>Expected</th>
+<th>Observed</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cDNA dilution</td>
+<td>Clear, no precipitate</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Master mix (per gene)</td>
+<td>Homogeneous, no bubbles</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>No-template controls</td>
+<td>No amplification / undetermined Ct</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Amplification curves</td>
+<td>Sigmoidal, expected Ct range</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes / deviations:</strong></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Source: <code>qPCR.docx</code> (used as base — <code>Protocol_for_qPCR.docx</code> confirmed to be a paragraph-style duplicate of the same content) and <code>qPCR_Sample_Sheet.xlsx</code>. No external kit/paper citation given in either source document.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3NhbXBsZXMgICAgICAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIGJpb2xvZ2ljYWwgc2FtcGxlcyAoZXhjbHVkaW5nIHdhdGVyIGNvbnRyb2xzKVwiLCB2YWx1ZTogMjQsIG1pbjogMSwgc3RlcDogMX0pXG52aWV3b2Ygbl9yZXBsaWNhdGVzICAgICAgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJSZXBsaWNhdGVzIHBlciBzYW1wbGUgw5cgZ2VuZSAod2VsbHMpXCIsIHZhbHVlOiAyLCBtaW46IDEsIHN0ZXA6IDF9KVxudmlld29mIGdlbmVfbmFtZXNfdGV4dCAgID0gSW5wdXRzLnRleHQoe2xhYmVsOiBcIlRhcmdldCBnZW5lIG5hbWVzIChjb21tYS1zZXBhcmF0ZWQsIG9wdGlvbmFsIOKAlCBsZWF2ZSBibGFuayB0byB1c2UgZ2VuZXJpYyBuYW1lcylcIiwgdmFsdWU6IFwiXCIsIHBsYWNlaG9sZGVyOiBcImUuZy4gSUwxQiwgQi1BY3RpbiwgQVAtMVwifSlcbnZpZXdvZiBuX2dlbmVzICAgICAgICAgICA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIk51bWJlciBvZiB0YXJnZXQgZ2VuZXMgKHVzZWQgb25seSBpZiBuYW1lcyBhYm92ZSBhcmUgYmxhbmspXCIsIHZhbHVlOiAzLCBtaW46IDEsIHN0ZXA6IDF9KVxudmlld29mIG5fd2F0ZXJfY29udHJvbHMgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTm8tdGVtcGxhdGUgKHdhdGVyKSBjb250cm9sIHdlbGxzIHBlciBnZW5lXCIsIHZhbHVlOiAyLCBtaW46IDAsIHN0ZXA6IDF9KVxudmlld29mIGV4Y2VzcyAgICAgICAgICAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTWFzdGVyIG1peCBleGNlc3MgbXVsdGlwbGllclwiLCB2YWx1ZTogMS4yNSwgbWluOiAxLCBtYXg6IDIsIHN0ZXA6IDAuMDV9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZm10ID0gKHgsIGQgPSAyKSA9PiB4LnRvRml4ZWQoZClcblxuZ2VuZXMgPSBnZW5lX25hbWVzX3RleHQudHJpbSgpXG4gID8gZ2VuZV9uYW1lc190ZXh0LnNwbGl0KFwiLFwiKS5tYXAocyA9PiBzLnRyaW0oKSkuZmlsdGVyKEJvb2xlYW4pXG4gIDogQXJyYXkuZnJvbSh7bGVuZ3RoOiBuX2dlbmVzfSwgKF8sIGkpID0+IGBHZW5lICR7aSArIDF9YClcblxud2VsbHNfcGVyX2dlbmUgPSBuX3NhbXBsZXMgKiBuX3JlcGxpY2F0ZXMgKyBuX3dhdGVyX2NvbnRyb2xzXG50b3RhbF93ZWxscyAgICA9IHdlbGxzX3Blcl9nZW5lICogZ2VuZXMubGVuZ3RoXG5cbm1kYCoqJHtuX3NhbXBsZXN9IHNhbXBsZShzKSDDlyAke25fcmVwbGljYXRlc30gcmVwbGljYXRlKHMpICsgJHtuX3dhdGVyX2NvbnRyb2xzfSB3YXRlciBjb250cm9sKHMpID0gJHt3ZWxsc19wZXJfZ2VuZX0gd2VsbChzKS9nZW5lIMOXICR7Z2VuZXMubGVuZ3RofSBnZW5lKHMpID0gJHt0b3RhbF93ZWxsc30gdG90YWwgd2VsbChzKSoqIMK3IGV4Y2VzcyDDlyR7ZXhjZXNzfWBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InRvdGFsX3dlbGxzID4gOTZcbiAgPyBtZGA6Ojogey5jYWxsb3V0LXdhcm5pbmd9XG4qKkV4Y2VlZHMgb25lIDk2LXdlbGwgcGxhdGUuKiogJHt0b3RhbF93ZWxsc30gdG90YWwgd2VsbHMgcmVxdWVzdGVkIOKAlCBzcGxpdCBhY3Jvc3MgbXVsdGlwbGUgOTYtd2VsbCBwbGF0ZXMsIG9yIHVzZSBhIDM4NC13ZWxsIHBsYXRlL2Jsb2NrIGlmIHlvdXIgaW5zdHJ1bWVudCBzdXBwb3J0cyBpdC5cbjo6OmBcbiAgOiBtZGBgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJtZGAqKiR7bl9zYW1wbGVzfSBkaWx1dGlvbiB0dWJlKHMpOioqIGFkZCAyMCDCtUwgSOKCgk8gKyA1IMK1TCBjRE5BIHRvIGVhY2ggKDE6NSBkaWx1dGlvbikuYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiY2RuYV92b2wgICA9IDIgICAgLy8gwrVMIGRpbHV0ZWQgY0ROQSBwZXIgd2VsbCAocGlwZXR0ZWQgZGlyZWN0bHksIG5vdCBwYXJ0IG9mIG1hc3RlciBtaXgpXG5wcm9iZV92b2wgID0gMSAgICAvLyDCtUwgVGFxTWFuIHByaW1lci9wcm9iZSAoMjBYKSBwZXIgd2VsbFxudGFxbWFuX3ZvbCA9IDEwICAgLy8gwrVMIDJYIFRhcU1hbiBQQ1IgTWFzdGVyIE1peCBwZXIgd2VsbFxud2F0ZXJfdm9sICA9IDcgICAgLy8gwrVMIHdhdGVyIHBlciB3ZWxsIChwYXJ0IG9mIHRoZSBjb21iaW5lZCBtYXN0ZXIgbWl4KVxud2VsbF90b3RhbCA9IGNkbmFfdm9sICsgcHJvYmVfdm9sICsgdGFxbWFuX3ZvbCArIHdhdGVyX3ZvbCAgIC8vID0gMjAgwrVMXG5cbklucHV0cy50YWJsZShcbiAgZ2VuZXMubWFwKGcgPT4gKHtcbiAgICBHZW5lOiBnLFxuICAgIFwiV2VsbHMgbmVlZGVkIChpbmNsLiB3YXRlciBjdHJscylcIjogd2VsbHNfcGVyX2dlbmUsXG4gICAgXCJQcmltZXIvUHJvYmUgMjBYIHRvdGFsICjCtUwpXCI6IGZtdChwcm9iZV92b2wgICogd2VsbHNfcGVyX2dlbmUgKiBleGNlc3MpLFxuICAgIFwiMlggVGFxTWFuIFBDUiBNYXN0ZXIgTWl4IHRvdGFsICjCtUwpXCI6IGZtdCh0YXFtYW5fdm9sICogd2VsbHNfcGVyX2dlbmUgKiBleGNlc3MpLFxuICAgIFwiV2F0ZXIgdG90YWwgKMK1TClcIjogZm10KHdhdGVyX3ZvbCAqIHdlbGxzX3Blcl9nZW5lICogZXhjZXNzKSxcbiAgICBcIkNvbWJpbmVkIG1hc3RlciBtaXggdG90YWwgKMK1TClcIjogZm10KChwcm9iZV92b2wgKyB0YXFtYW5fdm9sICsgd2F0ZXJfdm9sKSAqIHdlbGxzX3Blcl9nZW5lICogZXhjZXNzKVxuICB9KSksXG4gIHtsYXlvdXQ6IFwiYXV0b1wifVxuKVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiZ3JhbmRfdG90YWxfbW0gPSBnZW5lcy5sZW5ndGggKiAocHJvYmVfdm9sICsgdGFxbWFuX3ZvbCArIHdhdGVyX3ZvbCkgKiB3ZWxsc19wZXJfZ2VuZSAqIGV4Y2Vzc1xuXG5tZGAqKkdyYW5kIHRvdGFsIG1hc3RlciBtaXggYWNyb3NzIGFsbCAke2dlbmVzLmxlbmd0aH0gZ2VuZShzKTogJHtmbXQoZ3JhbmRfdG90YWxfbW0pfSDCtUwqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9zYW1wbGVzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ25fcmVwbGljYXRlcycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdnZW5lX25hbWVzX3RleHQnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9nZW5lcycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3dhdGVyX2NvbnRyb2xzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2V4Y2VzcycpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../protocols";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "TaqMan qPCR Protocol"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Plate setup + reactive mastermix/plate calculator (qPCR.docx + qPCR_Sample_Sheet.xlsx)"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"window.print()"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"float:right;margin-bottom:1rem"</span><span class="dt">&gt;</span>🖨 Print / Save as PDF<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>TaqMan-based qPCR from diluted cDNA: dilute cDNA 1:5, build one master mix per target gene (primer/probe + 2X TaqMan PCR Master Mix + water), load 2 µL diluted cDNA (or 2 µL water for no-template controls) into each well followed by 18 µL master mix, then spin and run. This page merges two near-identical source documents (<span class="in">`qPCR.docx`</span> and <span class="in">`Protocol_for_qPCR.docx`</span> — confirmed by diff to differ only in paragraph styling, not content) and embeds the logic of <span class="in">`qPCR_Sample_Sheet.xlsx`</span> as a reactive calculator below, generalized to any samples/genes/replicates rather than the specific genes (IL1B, β-Actin, AP-1) and 0h–24h timepoint series used as the worked example in the source spreadsheet.</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before starting</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Get ice; thaw cDNA samples.</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>While thawing, prepare PCR strip tubes for 1:5 cDNA dilutions.</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Know your sample count, target gene count, and desired replicate/control counts before building master mixes (see calculator below).</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pipette diluted cDNA and water controls into the **very bottom** of each well; pipette master mix against the **side** of the well.</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configure qPCR run</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>viewof n_samples        <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of biological samples (excluding water controls)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">24</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>viewof n_replicates      <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Replicates per sample × gene (wells)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>viewof gene_names_text   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">text</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Target gene names (comma-separated, optional — leave blank to use generic names)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span> <span class="dt">placeholder</span><span class="op">:</span> <span class="st">"e.g. IL1B, B-Actin, AP-1"</span>})</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>viewof n_genes           <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of target genes (used only if names above are blank)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>viewof n_water_controls  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"No-template (water) control wells per gene"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>viewof excess            <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Master mix excess multiplier"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">1.25</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> gene_names_text<span class="op">.</span><span class="fu">trim</span>()</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> gene_names_text<span class="op">.</span><span class="fu">split</span>(<span class="st">","</span>)<span class="op">.</span><span class="fu">map</span>(s <span class="kw">=&gt;</span> s<span class="op">.</span><span class="fu">trim</span>())<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>({<span class="dt">length</span><span class="op">:</span> n_genes}<span class="op">,</span> (_<span class="op">,</span> i) <span class="kw">=&gt;</span> <span class="vs">`Gene </span><span class="sc">${</span>i <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="vs">`</span>)</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>wells_per_gene <span class="op">=</span> n_samples <span class="op">*</span> n_replicates <span class="op">+</span> n_water_controls</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>total_wells    <span class="op">=</span> wells_per_gene <span class="op">*</span> genes<span class="op">.</span><span class="at">length</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) × </span><span class="sc">${</span>n_replicates<span class="sc">}</span><span class="vs"> replicate(s) + </span><span class="sc">${</span>n_water_controls<span class="sc">}</span><span class="vs"> water control(s) = </span><span class="sc">${</span>wells_per_gene<span class="sc">}</span><span class="vs"> well(s)/gene × </span><span class="sc">${</span>genes<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs"> gene(s) = </span><span class="sc">${</span>total_wells<span class="sc">}</span><span class="vs"> total well(s)** · excess ×</span><span class="sc">${</span>excess<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>total_wells <span class="op">&gt;</span> <span class="dv">96</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">md</span><span class="vs">`::: {.callout-warning}</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a><span class="vs">**Exceeds one 96-well plate.** </span><span class="sc">${</span>total_wells<span class="sc">}</span><span class="vs"> total wells requested — split across multiple 96-well plates, or use a 384-well plate/block if your instrument supports it.</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a><span class="vs">:::`</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">md</span><span class="vs">``</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example use case from the source spreadsheet</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>The original <span class="in">`qPCR_Sample_Sheet.xlsx`</span> worked example ran a 6-timepoint series (0h, 0.5h, 1h, 4h, 6h, 24h) across 3 CRISPR'd clones + 1 WT control, each in duplicate, against 3 genes (IL1B, β-Actin, AP-1/FOS) — i.e. 4 conditions × 6 timepoints = 24 samples, 2 replicates, 3 genes, plus water and extra controls. Reproduce that specific layout by setting samples = 24, replicates = 2, genes = "IL1B, B-Actin, AP-1". This is mentioned as an example only — nothing about gene identity or timepoints is hardcoded into the calculator itself.</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## Math audit — how every volume is calculated</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>**Per-well TaqMan reaction (20 µL total, fixed ratio — single source of truth below):**</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>$$V_{well} = V_{cDNA} + V_{probe} + V_{TaqMan\;MM} + V_{water} = 2 + 1 + 10 + 7 = 20\;\mu L$$</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>**Wells needed per gene** (includes water controls, which use the same master mix but 2 µL water instead of cDNA):</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>$$W_{gene} = N_{samples} \times N_{replicates} + N_{water\;controls}$$</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>**Master mix per gene** (primer/probe + TaqMan MM + water only — cDNA/water is pipetted directly into the well, not part of the master mix):</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>$$V_{component,\;total} = V_{component,\;well} \times W_{gene} \times excess$$</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>This reproduces the source spreadsheet's <span class="in">`EXCESS × replicates × SUM(per-well column)`</span> formula, generalized so <span class="in">`replicates`</span> is a single user-supplied parameter (technical + biological wells per sample) rather than a second hardcoded multiplier layered on top of the per-well list.</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## cDNA dilution (1:5)</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> dilution tube(s):** add 20 µL H₂O + 5 µL cDNA to each (1:5 dilution).`</span></span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## Master mix per gene</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>cdna_vol   <span class="op">=</span> <span class="dv">2</span>    <span class="co">// µL diluted cDNA per well (pipetted directly, not part of master mix)</span></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>probe_vol  <span class="op">=</span> <span class="dv">1</span>    <span class="co">// µL TaqMan primer/probe (20X) per well</span></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>taqman_vol <span class="op">=</span> <span class="dv">10</span>   <span class="co">// µL 2X TaqMan PCR Master Mix per well</span></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a>water_vol  <span class="op">=</span> <span class="dv">7</span>    <span class="co">// µL water per well (part of the combined master mix)</span></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>well_total <span class="op">=</span> cdna_vol <span class="op">+</span> probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol   <span class="co">// = 20 µL</span></span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a>  genes<span class="op">.</span><span class="fu">map</span>(g <span class="kw">=&gt;</span> ({</span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Gene</span><span class="op">:</span> g<span class="op">,</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Wells needed (incl. water ctrls)"</span><span class="op">:</span> wells_per_gene<span class="op">,</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Primer/Probe 20X total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(probe_vol  <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2X TaqMan PCR Master Mix total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(taqman_vol <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Water total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(water_vol <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)<span class="op">,</span></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Combined master mix total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>((probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol) <span class="op">*</span> wells_per_gene <span class="op">*</span> excess)</span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">,</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>}</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a>grand_total_mm <span class="op">=</span> genes<span class="op">.</span><span class="at">length</span> <span class="op">*</span> (probe_vol <span class="op">+</span> taqman_vol <span class="op">+</span> water_vol) <span class="op">*</span> wells_per_gene <span class="op">*</span> excess</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Grand total master mix across all </span><span class="sc">${</span>genes<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs"> gene(s): </span><span class="sc">${</span><span class="fu">fmt</span>(grand_total_mm)<span class="sc">}</span><span class="vs"> µL**`</span></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plate setup</span></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Carefully add 2 µL diluted cDNA to its respective well — pipette into the very bottom of the well <span class="pp">|</span></span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Add 2 µL H₂O to the no-template control wells <span class="pp">|</span></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Carefully add 18 µL of the appropriate gene's master mix to each well — pipette against the side of the well <span class="pp">|</span></span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Cover the plate; vortex <span class="pp">|</span></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Spin at 2000×g for 5 min <span class="pp">|</span></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Place into qPCR machine <span class="pp">|</span></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Per-well volume check</span></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>2 µL (cDNA or water) + 18 µL master mix = 20 µL total per well, matching the 20 µL per-well reaction table above.</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## QC log</span></span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checkpoint <span class="pp">|</span> Expected <span class="pp">|</span> Observed <span class="pp">|</span> Pass <span class="pp">|</span></span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------|----------|----------|------|</span></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> cDNA dilution <span class="pp">|</span> Clear, no precipitate <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Master mix (per gene) <span class="pp">|</span> Homogeneous, no bubbles <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> No-template controls <span class="pp">|</span> No amplification / undetermined Ct <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Amplification curves <span class="pp">|</span> Sigmoidal, expected Ct range <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a>**Notes / deviations:**</span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>Source: <span class="in">`qPCR.docx`</span> (used as base — <span class="in">`Protocol_for_qPCR.docx`</span> confirmed to be a paragraph-style duplicate of the same content) and <span class="in">`qPCR_Sample_Sheet.xlsx`</span>. No external kit/paper citation given in either source document.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>JP Flores</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,136 @@
+---
+title: "RNA Extraction Protocol"
+subtitle: "RNeasy Mini Kit, on-column DNase I digestion"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Column-based total RNA purification from cell pellets using the Qiagen RNeasy Mini Kit, with an on-column Deoxyribonuclease I (DNase I) digestion step to remove residual genomic DNA. Cells are lysed in Buffer RLT, bound to an RNeasy spin column, washed, DNase-treated on-column, washed again, and eluted in RNase-free water.
+:::
+
+::: {.callout-important}
+## Before starting
+- Label all tubes for every sample, plus Qubit/gel QC tubes.
+- Get ice — samples and DNase I must stay on ice at all times.
+- Make up 70% Ethanol (EtOH) fresh (see reagent calculator below).
+- Prepare the DNase I incubation master mix fresh (DNase I aliquots are stored at −20°C; RDD Buffer is stored at 4°C).
+:::
+
+---
+
+## Configure extraction run
+
+```{ojs}
+//| echo: false
+viewof n_samples   = Inputs.number({label: "Number of samples", value: 8, min: 1, step: 1})
+viewof excess_pct  = Inputs.number({label: "Reagent overage (%)", value: 10, min: 0, max: 30, step: 5})
+viewof elution_vol = Inputs.number({label: "Elution volume (µL RNase-free water/sample)", value: 30, min: 30, max: 50, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 1) => x.toFixed(d)
+
+md`**${n_samples} sample(s) · ${excess_pct}% overage · scale factor ${fmt(scale, 2)}× · eluting in ${elution_vol} µL/sample**`
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+Every buffer volume below is a fixed per-sample amount, so total quantity scales linearly:
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times (1 + overage)$$
+
+**DNase I master mix** (80 µL/sample: 10 µL DNase I + 70 µL RDD Buffer) scales the same way. **Elution volume** is a direct per-sample choice (30–50 µL) and is **not** scaled with overage — it's dispensed individually onto each column's membrane at the end.
+
+Buffer RW1 total per sample sums three separate washes in the protocol (350 + 350 + 700 µL = 1400 µL/sample); Buffer RPE total sums two washes (500 × 2 = 1000 µL/sample).
+:::
+
+---
+
+## Reagents needed (scaled)
+
+```{ojs}
+//| echo: false
+rlt_vol      = 600    // µL/sample
+ethanol_vol  = 600    // µL/sample — 1 volume added to homogenized lysate
+rw1_vol      = 350 + 350 + 700   // µL/sample across 3 washes
+rpe_vol      = 500 * 2           // µL/sample across 2 washes
+dnase_vol    = 10     // µL/sample
+rdd_vol      = 70     // µL/sample
+dnase_mm_vol = dnase_vol + rdd_vol
+
+Inputs.table([
+  {Component: "Buffer RLT (lysis)",             "Per sample (µL)": rlt_vol,      "Total (µL)": fmt(rlt_vol * scale)},
+  {Component: "Ethanol (EtOH), 70%",             "Per sample (µL)": ethanol_vol,  "Total (µL)": fmt(ethanol_vol * scale)},
+  {Component: "Buffer RW1 (all washes)",         "Per sample (µL)": rw1_vol,      "Total (µL)": fmt(rw1_vol * scale)},
+  {Component: "Buffer RPE (both washes)",        "Per sample (µL)": rpe_vol,      "Total (µL)": fmt(rpe_vol * scale)},
+  {Component: "DNase I (from −20°C)",            "Per sample (µL)": dnase_vol,    "Total (µL)": fmt(dnase_vol * scale)},
+  {Component: "RDD Buffer (from 4°C)",           "Per sample (µL)": rdd_vol,      "Total (µL)": fmt(rdd_vol * scale)},
+  {Component: "RNase-free water (elution)",      "Per sample (µL)": elution_vol,  "Total (µL)": fmt(elution_vol * n_samples)}
+], {layout: "auto"})
+```
+
+### DNase I incubation master mix (80 µL/sample)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "DNase I",    "Per reaction (µL)": dnase_vol, "Total (µL)": fmt(dnase_vol * scale)},
+  {Component: "RDD Buffer", "Per reaction (µL)": rdd_vol,   "Total (µL)": fmt(rdd_vol * scale)},
+  {Component: "Total",      "Per reaction (µL)": dnase_mm_vol, "Total (µL)": fmt(dnase_mm_vol * scale)}
+], {layout: "auto"})
+```
+
+---
+
+## RNA purification
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Step: "1", Action: "Add Buffer RLT to spun-down cells; pipette up and down to resuspend", Volume: `${rlt_vol} µL/sample`},
+  {Step: "2", Action: "Move all lysate to a 1.5 mL Eppendorf tube", Volume: "—"},
+  {Step: "3", Action: "Add 1 volume of Ethanol (EtOH), 70%, to the homogenized lysate; mix well by pipetting", Volume: `${ethanol_vol} µL/sample`},
+  {Step: "4", Action: "Transfer up to 600 µL of sample to an RNeasy spin column in a 2 mL collection tube; close lid; centrifuge 15 s at 10,000 rpm. Discard flowthrough, reuse collection tube. Repeat (2×) to load the full lysate", Volume: "≤600 µL/load × 2"},
+  {Step: "5", Action: "Add Buffer RW1 to each column; centrifuge 15 s at 10,000 rpm; discard flowthrough, reuse collection tube", Volume: "350 µL"},
+  {Step: "6", Action: "Add DNase I incubation master mix to each column; leave on the benchtop 15 min", Volume: "80 µL"},
+  {Step: "7", Action: "Add Buffer RW1 to each column; centrifuge 15 s at 10,000 rpm; discard flowthrough, reuse collection tube", Volume: "350 µL"},
+  {Step: "8", Action: "Add Buffer RW1 to the RNeasy spin column; close lid; centrifuge 15 s at 10,000 rpm; discard flowthrough, reuse collection tube", Volume: "700 µL"},
+  {Step: "9", Action: "Add Buffer RPE to the column; close lid; centrifuge 15 s at 10,000 rpm; discard flowthrough, reuse collection tube. Repeat (2×)", Volume: "500 µL × 2"},
+  {Step: "10", Action: "Dry spin: centrifuge at full speed for 1 min in a new collection tube", Volume: "—"},
+  {Step: "11", Action: "Place the column in a new, pre-labeled 1.5 mL collection tube. Add RNase-free water directly to the spin column membrane", Volume: `${elution_vol} µL`},
+  {Step: "12", Action: "Incubate on the benchtop 1 min; centrifuge 1 min at 10,000 rpm to elute", Volume: "—"},
+  {Step: "13", Action: "Quantify each sample (Qubit)", Volume: "—"},
+  {Step: "14", Action: "Store at −80°C in a freezer box", Volume: "—"}
+], {layout: "auto"})
+```
+
+::: {.callout-warning}
+## Keep DNase I and samples on ice
+DNase I must stay on ice at all times when out of the −20°C freezer — it loses activity quickly at room temperature.
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-lysis | Homogeneous lysate, no clumps | | |
+| Post-DNase digestion | Column not dried out during 15 min RT incubation | | |
+| Elution | Visible eluate volume matches target | | |
+| Qubit concentration | Measurable, consistent across replicates | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Qiagen. *RNeasy Mini Kit Handbook.*
+
+<!-- TODO: this is the confirmed, more complete/updated version of this protocol per JP — an older `RNA_Purification.docx` variant exists in the source files and was intentionally not used for this page. -->

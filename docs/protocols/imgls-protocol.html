@@ -1,0 +1,2332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-09">
+
+<title>iPSC-to-Microglia (iMGL) Differentiation Protocol – JP Flores’ Lab Notebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4ee3db49c2535a8f187f0d04f590a1ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JP Flores’ Lab Notebook</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../protocols/index.html"> 
+<span class="menu-text">Protocols</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../experiments/index.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jpflores-13/lab_notebook"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#order-of-imgl-protocol-source-outline-reproduced" id="toc-order-of-imgl-protocol-source-outline-reproduced" class="nav-link active" data-scroll-target="#order-of-imgl-protocol-source-outline-reproduced">Order of iMGL protocol (source outline, reproduced)</a></li>
+  <li><a href="#configure-experiment" id="toc-configure-experiment" class="nav-link" data-scroll-target="#configure-experiment">Configure experiment</a></li>
+  <li><a href="#ipsc-maintenance-phase-day-011" id="toc-ipsc-maintenance-phase-day-011" class="nav-link" data-scroll-target="#ipsc-maintenance-phase-day-011">iPSC maintenance phase (Day 0–11)</a>
+  <ul class="collapse">
+  <li><a href="#day-5-day-10-splitting-step-distinct-from-full-passaging" id="toc-day-5-day-10-splitting-step-distinct-from-full-passaging" class="nav-link" data-scroll-target="#day-5-day-10-splitting-step-distinct-from-full-passaging">Day 5 / Day 10 — “Splitting” step (distinct from full passaging)</a></li>
+  </ul></li>
+  <li><a href="#hpc-differentiation-phase-stemdiff-hematopoietic-kit-day-012" id="toc-hpc-differentiation-phase-stemdiff-hematopoietic-kit-day-012" class="nav-link" data-scroll-target="#hpc-differentiation-phase-stemdiff-hematopoietic-kit-day-012">HPC differentiation phase (STEMdiff™ Hematopoietic Kit, Day 0–12)</a>
+  <ul class="collapse">
+  <li><a href="#passaging-cells-as-aggregates-setting-up-hpc-differentiation" id="toc-passaging-cells-as-aggregates-setting-up-hpc-differentiation" class="nav-link" data-scroll-target="#passaging-cells-as-aggregates-setting-up-hpc-differentiation">Passaging cells as aggregates &amp; setting up HPC differentiation</a></li>
+  <li><a href="#stage-1-day-02" id="toc-stage-1-day-02" class="nav-link" data-scroll-target="#stage-1-day-02">Stage 1 — Day 0–2</a></li>
+  <li><a href="#stage-2-day-312" id="toc-stage-2-day-312" class="nav-link" data-scroll-target="#stage-2-day-312">Stage 2 — Day 3–12</a></li>
+  <li><a href="#day-12-harvest-hematopoietic-cells" id="toc-day-12-harvest-hematopoietic-cells" class="nav-link" data-scroll-target="#day-12-harvest-hematopoietic-cells">Day 12 — Harvest hematopoietic cells</a></li>
+  </ul></li>
+  <li><a href="#microglia-differentiation-phase-day-1236" id="toc-microglia-differentiation-phase-day-1236" class="nav-link" data-scroll-target="#microglia-differentiation-phase-day-1236">Microglia differentiation phase (Day 12–36)</a></li>
+  <li><a href="#microglia-maturation-phase-day-3646" id="toc-microglia-maturation-phase-day-3646" class="nav-link" data-scroll-target="#microglia-maturation-phase-day-3646">Microglia maturation phase (Day 36–46)</a></li>
+  <li><a href="#freezing-hematopoietic-progenitor-cells" id="toc-freezing-hematopoietic-progenitor-cells" class="nav-link" data-scroll-target="#freezing-hematopoietic-progenitor-cells">Freezing hematopoietic progenitor cells</a>
+  <ul class="collapse">
+  <li><a href="#stemcell-protocol" id="toc-stemcell-protocol" class="nav-link" data-scroll-target="#stemcell-protocol">StemCell Protocol</a></li>
+  <li><a href="#mcquade-protocol" id="toc-mcquade-protocol" class="nav-link" data-scroll-target="#mcquade-protocol">McQuade Protocol</a></li>
+  </ul></li>
+  <li><a href="#qc-log" id="toc-qc-log" class="nav-link" data-scroll-target="#qc-log">QC log</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">iPSC-to-Microglia (iMGL) Differentiation Protocol</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">STEMdiff Hematopoietic → Microglia Differentiation → Microglia Maturation</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">
+🖨 Print / Save as PDF
+</button>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Human iPSCs are carried through hematopoietic progenitor cell (HPC) differentiation (STEMdiff Hematopoietic Kit), then microglia differentiation, then microglia maturation, yielding iPSC-derived microglia-like cells (iMGLs) ready for treatment/assay by ~Day 40–46. Source: <code>iMGLs_Protocol.docx</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Day-numbering in the source document
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The source document’s own “Order of iMGL Protocol” outline (reproduced below) restarts or overlaps day counts between phases — most clearly flagged where it explicitly marks the HPC phase start as <strong>“Day 12/Day 0,”</strong> i.e.&nbsp;absolute Day 12 of the whole protocol is simultaneously “Day 0” of the STEMdiff Hematopoietic Kit’s own day count. The Microglia Differentiation and Maturation phases are not given this same dual-labeling in the outline, but the body text’s own day labels within each phase (“Day 12: harvest HPCs,” “Day 24: transfer suspension,” “Day 36: proceed to maturation,” “Day 40–46: mature”) are <strong>internally consistent with each other</strong> and are what this page uses throughout.</p>
+<!-- TODO: confirm with JP whether the outline's phase-start labels (Day 12 for Microglia Differentiation, Day 36 for Maturation) are meant as absolute protocol days or phase-relative days — they read as absolute given the body text lines up with them, but the doc never states this explicitly. -->
+</div>
+</div>
+<hr>
+<section id="order-of-imgl-protocol-source-outline-reproduced" class="level2">
+<h2 class="anchored" data-anchor-id="order-of-imgl-protocol-source-outline-reproduced">Order of iMGL protocol (source outline, reproduced)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 21%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Day</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>iPSC maintenance</td>
+<td>0</td>
+<td>Thaw iPSCs into 1 well</td>
+</tr>
+<tr class="even">
+<td>iPSC maintenance</td>
+<td>1</td>
+<td>Change media</td>
+</tr>
+<tr class="odd">
+<td>iPSC maintenance</td>
+<td>2–4</td>
+<td>Scrape for bad colonies</td>
+</tr>
+<tr class="even">
+<td>iPSC maintenance</td>
+<td>5</td>
+<td>Split iPSCs into 6 wells</td>
+</tr>
+<tr class="odd">
+<td>iPSC maintenance</td>
+<td>6</td>
+<td>Change media</td>
+</tr>
+<tr class="even">
+<td>iPSC maintenance</td>
+<td>7–9</td>
+<td>Scrape for bad colonies</td>
+</tr>
+<tr class="odd">
+<td>iPSC maintenance</td>
+<td>10</td>
+<td>Split iPSCs into 3 different concentrations</td>
+</tr>
+<tr class="even">
+<td>iPSC maintenance</td>
+<td>11</td>
+<td>Change media</td>
+</tr>
+<tr class="odd">
+<td>HPC differentiation</td>
+<td>12 / HPC Day 0</td>
+<td>Confirm aggregates; start HPC phase</td>
+</tr>
+<tr class="even">
+<td>HPC differentiation</td>
+<td>12 (HPC Day 12)</td>
+<td>Harvest HPCs</td>
+</tr>
+<tr class="odd">
+<td>Microglia differentiation</td>
+<td>12 → 24</td>
+<td>STEMdiff Microglia Differentiation Medium</td>
+</tr>
+<tr class="even">
+<td>Microglia maturation</td>
+<td>36 → 40–46</td>
+<td>STEMdiff Microglia Maturation Medium</td>
+</tr>
+<tr class="odd">
+<td>Treatment</td>
+<td>40+</td>
+<td>Treat iMGLs</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="configure-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="configure-experiment">Configure experiment</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="47" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 46;"><span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>viewof n_wells_hpc <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"12-well plate wells (HPC differentiation media prep)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>viewof n_wells_mgl <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"6-well plate wells (microglia differentiation/maturation media prep)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="53" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 52;"><span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>well_area_cm2 <span class="op">=</span> <span class="fl">9.5</span>   <span class="co">// 6-well plate, per-well growth area convention used elsewhere in this lab's protocols (see ens-2d-protocol.qmd)</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_wells_hpc<span class="sc">}</span><span class="vs"> well(s) of 12-well plate (HPC media) · </span><span class="sc">${</span>n_wells_mgl<span class="sc">}</span><span class="vs"> well(s) of 6-well plate (microglia media)**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="ipsc-maintenance-phase-day-011" class="level2">
+<h2 class="anchored" data-anchor-id="ipsc-maintenance-phase-day-011">iPSC maintenance phase (Day 0–11)</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Uses mTeSR1 + Thiazovivin — not plain TeSR-E8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The microglia-differentiation-track iPSCs in this protocol are maintained in <strong>mTeSR™1</strong> (STEMCELL cat#: 5990/85857) with <strong>Thiazovivin</strong> (a ROCK inhibitor, 1000X aliquot, 1 µL/mL final) added to media used for thawing and splitting — not the plain TeSR™-E8 used in the base <a href="../protocols/ipsc-culture-protocol.html">iPSC culture protocol</a>. For Matrigel coating, thawing mechanics, and general passaging technique, see that page — it is not repeated here.</p>
+<!-- Note for JP: iMGLs_Protocol.docx contains its own near-duplicate Matrigel-prep, thawing, and full EDTA-passaging write-ups that closely mirror iPSC_Matrigel.docx / iPSC_Thawing.docx / iPSC_Passaging.docx (with mTeSR1 + Thiazovivin substituted for TeSR-E8). Those duplicated sections are intentionally NOT reproduced on this page to avoid maintaining the same technique in two places — only the deltas specific to this track (media/Thiazovivin, and the distinct "Splitting" step below) are kept here. -->
+</div>
+</div>
+<p>The 15/45-minute incubator rule from the base iPSC protocol applies here too.</p>
+<section id="day-5-day-10-splitting-step-distinct-from-full-passaging" class="level3">
+<h3 class="anchored" data-anchor-id="day-5-day-10-splitting-step-distinct-from-full-passaging">Day 5 / Day 10 — “Splitting” step (distinct from full passaging)</h3>
+<p>This track’s outline calls for a lighter-weight <strong>splitting</strong> step at Day 5 and Day 10 (scan/scrape bad colonies, lift with mTeSR1 + Thiazovivin, replate at 1–2 new densities) rather than the full EDTA passage described in the base protocol:</p>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="78" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 77;"><span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>split_thiazovivin_uL_per_mL <span class="op">=</span> <span class="dv">1</span>   <span class="co">// 1000X, 1 µL/mL final</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"1"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="vs">`Add </span><span class="sc">${</span>split_thiazovivin_uL_per_mL<span class="sc">}</span><span class="vs"> µL Thiazovivin per 1 mL mTeSR1 to a 15 mL conical (1x Thiazovivin)`</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"2"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Vacuum DMEM/F12 from Matrigel-coated wells; add 1 mL/well mTeSR1 + 1x Thiazovivin so wells don't dry out"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"3"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Scan wells; mark and scrape bad colonies"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"4"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Vacuum media; rinse with 2 mL PBS/EDTA and aspirate"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"5"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 2 mL new PBS/EDTA; incubate 3–5 min"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"Longer if plate is less crowded"</span>}<span class="op">,</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"6"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Carefully vacuum PBS/EDTA without disturbing cells"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"7"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL mTeSR1 + 1x Thiazovivin (wide-tip 1000 µL tip); pipette up/down to lift cells into the 15 mL conical; repeat as needed"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"A little roughness is OK if cells resist lifting, but not too much"</span>}<span class="op">,</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"8"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL of cell mixture to each new well; move plate in a + shape (not circular) to mix"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"9"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL fresh mTeSR1 to the original well; return to incubator; do not open incubator for the rest of the day"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Attributed notes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Note from Isha:</strong> Day 1 after plating, the iPSCs are usually very stressed, so a media change will suffice. Scanning and scraping for bad colonies should start on Day 2. This note applies to the iPSC splits as well — the more crowded the plate, the easier it is to pick up the cells.</p>
+<p><strong>Note from Justin:</strong> If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and centrifuge at 200×g for 30 sec.&nbsp;The aggregates pellet while single differentiated cells remain in the supernatant — discard the supernatant and culture the pellet.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="hpc-differentiation-phase-stemdiff-hematopoietic-kit-day-012" class="level2">
+<h2 class="anchored" data-anchor-id="hpc-differentiation-phase-stemdiff-hematopoietic-kit-day-012">HPC differentiation phase (STEMdiff™ Hematopoietic Kit, Day 0–12)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Media prep math audit
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Table 1 of the STEMdiff™ Hematopoietic Kit insert specifies Medium A (45 mL Basal + 225 µL Supplement A) and Medium B (75 mL Basal + 375 µL Supplement B) — both a 1:200 (200X) supplement dilution (<span class="math inline">\(225/45{,}000 = 375/75{,}000 = 1/200\)</span>). The calculator below applies that same 1:200 ratio to whatever basal-medium batch size you enter.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="110" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 109;"><span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>viewof mediumA_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Medium A — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>viewof mediumB_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Medium B — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">75</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="116" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 115;"><span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a>supplement_ratio <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">200</span>   <span class="co">// 200X supplement, from Table 1 of the kit insert</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>mediumA_supp_uL <span class="op">=</span> mediumA_basal_mL <span class="op">*</span> <span class="dv">1000</span> <span class="op">*</span> supplement_ratio</span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>mediumB_supp_uL <span class="op">=</span> mediumB_basal_mL <span class="op">*</span> <span class="dv">1000</span> <span class="op">*</span> supplement_ratio</span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A (Stage 1, Day 0–3)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A (Stage 1, Day 0–3)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Supplement A (200X)"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_supp_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B (Stage 2, Day 3–12)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B (Stage 2, Day 3–12)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Supplement B (200X)"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_supp_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-5-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p>Store complete medium at 2–8°C for up to 3 weeks, or −20°C for up to 6 months. Thaw Basal Medium at RT or overnight at 2–8°C; thaw Supplement A/B at RT or 2–8°C (centrifuge 30 sec if needed to remove liquid from the cap). Warm all media to RT before use; do not leave at RT for extended periods.</p>
+<section id="passaging-cells-as-aggregates-setting-up-hpc-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="passaging-cells-as-aggregates-setting-up-hpc-differentiation">Passaging cells as aggregates &amp; setting up HPC differentiation</h3>
+<ol type="1">
+<li>Prepare Matrigel-coated plates (see <a href="../protocols/ipsc-culture-protocol.html">iPSC culture protocol</a>).</li>
+<li>Perform triplicate aggregate counts: draw a “+” counting grid centered on the bottom of 3 wells of a 96-well flat-bottom plate. Aliquot 40 µL DMEM/F12 into each of the 3 wells, then add 5 µL of aggregate mixture to each. Count aggregates ≥50 µm diameter in each well; average the triplicate to get the <strong>Concentration of Cell Aggregates</strong>.</li>
+<li>Plate 96–196 aggregates/well (10–20 aggregates/cm²) to achieve 40–80 colonies/well (4–10 colonies/cm²) adhered after 24 h — multiple plating densities may need to be tested.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Plating volume calculator
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[Plating\ Volume\ (\mu L) = \frac{Number\ of\ Aggregates\ to\ Plate}{Concentration\ of\ Cell\ Aggregates\ (aggregates/\mu L)}\]</span></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="144" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 143;"><span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>viewof n_aggregates_to_plate <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of aggregates to plate (source range: 96–196)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">146</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">96</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">196</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>viewof aggregate_conc_per_uL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Your measured concentration of cell aggregates (aggregates/µL, from the triplicate count above)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="150" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 149;"><span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>plating_volume_uL <span class="op">=</span> n_aggregates_to_plate <span class="op">/</span> aggregate_conc_per_uL</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Plating volume: </span><span class="sc">${</span><span class="fu">fmt</span>(plating_volume_uL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> µL** of aggregate mixture per well — add to a Matrigel-coated 12-well plate containing 1 mL mTeSR1. If using split ratios instead of a counted plating volume, 1:40 to 1:200 may be required depending on confluence.`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Gently mix the aggregate mixture; add the calculated plating volume to each Matrigel-coated well (1 mL mTeSR1 already in the well).</li>
+<li>Place in the 37°C incubator; move in short back-and-forth/side-to-side motions to distribute aggregates; do not disturb for 24 h. Change media with mTeSR1 after 24 h; do not disturb for another 24 h. Count to confirm aggregates after 48 h.</li>
+</ol>
+</section>
+<section id="stage-1-day-02" class="level3">
+<h3 class="anchored" data-anchor-id="stage-1-day-02">Stage 1 — Day 0–2</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Colony-count thresholds — discrepancy flagged in the source
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The source states two different lower bounds in adjacent paragraphs: “Confirm that <strong>80–160</strong> colonies/well are adhered” (4–10 colonies/cm²), but then “CRITICAL: Do not proceed if cultures have <strong>&lt; 40</strong> colonies or &gt; 160 colonies per well.” Both numbers are reproduced verbatim below.</p>
+<!-- TODO for JP: confirm which lower threshold (80 or 40 colonies/well) is the real go/no-go gate — this changes a safety-relevant QC decision and is not something to guess at. -->
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>Confirm 80–160 colonies/well adhered (4–10 colonies/cm²) — count all colonies, including tiny few-cell ones. To ease counting, replace medium with fresh mTeSR™1/mTeSR™ Plus/TeSR™-E8 first (removes debris). <strong>CRITICAL: do not proceed if &lt; 40 or &gt; 160 colonies/well</strong> (see discrepancy note above) — differentiation will be compromised.</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>Aspirate medium; add 2 mL Medium A/well. Incubate 37°C for 2 days.</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Using a serological or 1 mL pipette, gently remove 1 mL medium/well; discard. Gently add 1 mL Medium A/well. Incubate 37°C for 24 h.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="stage-2-day-312" class="level3">
+<h3 class="anchored" data-anchor-id="stage-2-day-312">Stage 2 — Day 3–12</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>Aspirate medium; gently add 2 mL Medium B/well. Incubate 37°C for 2 days.</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Gently remove 1 mL medium/well; discard. Gently add 1 mL Medium B/well. Incubate 37°C for 2 days.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Floating cells become visible and increase for the rest of the protocol. Keeping the plate flat, gently remove 1 mL medium/well without disturbing the floating population; discard. Add 1 mL Medium B/well. Incubate 37°C for 3 days.</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Keeping the plate flat, gently remove 1 mL medium/well; discard. Add 1 mL Medium B/well. Incubate 37°C for 2 days.</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td><strong>Harvest hematopoietic cells</strong> (see below).</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Optional Day 10 harvest
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Cells may be harvested at Day 10 instead, as described for Day 12. Yield and the proportion of CD34+CD45+ cells will be lower than at Day 12, but CFUs may be present at a higher frequency.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Media “total required” figures don’t match the per-day add volumes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The source states Medium A total required is “1.5 mL per well” (for Day 0 + Day 2) and Medium B total required is “2.5 mL per well” (for Day 3, 5, 7, 10) — but summing the actual per-day add volumes gives 3 mL/well for Medium A (2 mL + 1 mL) and 5 mL/well for Medium B (2 + 1 + 1 + 1 mL), exactly double the stated totals in both cases.</p>
+<!-- TODO for JP: confirm whether the stated "total required" figures are a documentation error (off by 2×) or whether they refer to something else (e.g. a per-column readout from Table 1 rather than the actual sum of dosing steps). This page uses the summed per-day add volumes (3 mL/well A, 5 mL/well B) for planning purposes, scaled by n_wells_hpc below. -->
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="197" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 196;"><span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a>mediumA_per_well_mL <span class="op">=</span> <span class="dv">3</span>     <span class="co">// 2 mL (Day 0) + 1 mL (Day 2) — see discrepancy note above</span></span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a>mediumB_per_well_mL <span class="op">=</span> <span class="dv">5</span>     <span class="co">// 2 + 1 + 1 + 1 mL (Day 3, 5, 7, 10) — see discrepancy note above</span></span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A"</span><span class="op">,</span> <span class="st">"Per well (summed)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>mediumA_per_well_mL<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="st">"Total (this batch)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_per_well_mL <span class="op">*</span> n_wells_hpc<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B"</span><span class="op">,</span> <span class="st">"Per well (summed)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>mediumB_per_well_mL<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="st">"Total (this batch)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_per_well_mL <span class="op">*</span> n_wells_hpc<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="day-12-harvest-hematopoietic-cells" class="level3">
+<h3 class="anchored" data-anchor-id="day-12-harvest-hematopoietic-cells">Day 12 — Harvest hematopoietic cells</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Vigorously pipette (triturate) cells up/down in the well to break them up as needed.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Transfer the cell suspension to a collection tube.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Add 1 mL DMEM/F-12 to the well; triturate vigorously and add to the collection tube.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Repeat step 3.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Centrifuge 300×g, 5 min, RT. Discard the supernatant.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Resuspend the cell pellet in the desired medium for analysis or downstream assays.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="microglia-differentiation-phase-day-1236" class="level2">
+<h2 class="anchored" data-anchor-id="microglia-differentiation-phase-day-1236">Microglia differentiation phase (Day 12–36)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Media prep math audit
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Add 10 mL Supplement 1 and 400 µL Supplement 2 to 90 mL Basal Medium — ratios of 10/90 and 400/90 per mL of basal, applied to whatever batch size you enter below.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="227" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 226;"><span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>viewof diff_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Differentiation — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-9" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="233" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 232;"><span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a>diff_supp1_mL <span class="op">=</span> diff_basal_mL <span class="op">*</span> <span class="dv">10</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a>diff_supp2_uL <span class="op">=</span> diff_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 1"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_supp1_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 2"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_supp2_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p>Store at 2–8°C for up to 4 weeks; warm to 37°C before use.</p>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="246" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 245;"><span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a>viewof diff_seed_cells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Cells seeded per well (source range: 1×10⁵–2×10⁵)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">150000</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">100000</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">200000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">10000</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-11" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="252" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 251;"><span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>diff_seed_density_per_cm2 <span class="op">=</span> diff_seed_cells <span class="op">/</span> well_area_cm2</span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Seeding density: </span><span class="sc">${</span><span class="fu">fmt</span>(diff_seed_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm²** (source target range: 1.1×10⁴–2.2×10⁴ cells/cm² for a 6-well plate, </span><span class="sc">${</span>well_area_cm2<span class="sc">}</span><span class="vs"> cm²/well)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-12-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-12-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>12</td>
+<td>Harvest suspended HPCs (Day 12 of the HPC phase above); count with Trypan Blue + hemocytometer.</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Add the seeded cell number (above) to 1 well of a Matrigel-coated 6-well plate containing 2 mL STEMdiff™ Microglia Differentiation Medium. Incubate 37°C, 5% CO₂.</td>
+</tr>
+<tr class="odd">
+<td>every other day</td>
+<td>Feed by topping up with half the start volume (1 mL) of medium — do <strong>not</strong> remove existing medium.</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>Transfer the entire cell suspension to a 15 mL conical; centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend.</td>
+</tr>
+<tr class="odd">
+<td>24</td>
+<td>Add the cell suspension to 1 well of the <strong>old</strong> Matrigel-coated plate (not a new one) containing 1 mL fresh medium. Incubate.</td>
+</tr>
+<tr class="even">
+<td>every other day, ×12 days</td>
+<td>Feed by topping up with half the start volume (1 mL).</td>
+</tr>
+<tr class="odd">
+<td>36</td>
+<td>Proceed to microglia maturation.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="microglia-maturation-phase-day-3646" class="level2">
+<h2 class="anchored" data-anchor-id="microglia-maturation-phase-day-3646">Microglia maturation phase (Day 36–46)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Media prep math audit
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Add 10 mL Supplement 1, 400 µL Supplement 2, and 400 µL Supplement 3 to 90 mL Basal Medium — same ratios as the Differentiation Medium above, plus Supplement 3 at the same ratio as Supplement 2.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb13" data-startfrom="277" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 276;"><span id="cb13-277"><a href="#cb13-277" aria-hidden="true" tabindex="-1"></a>viewof mat_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Maturation — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-13" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb14" data-startfrom="283" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 282;"><span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>mat_supp1_mL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">10</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a>mat_supp2_uL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a>mat_supp3_uL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 1"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp1_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 2"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp2_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 3"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp3_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-14-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-14-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-14-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-14-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<p>Store at 2–8°C for up to 4 weeks; warm to 37°C before use.</p>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb15" data-startfrom="298" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 297;"><span id="cb15-298"><a href="#cb15-298" aria-hidden="true" tabindex="-1"></a>viewof mat_replate_cells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Cells replated (source target: 1×10⁶; minimum viable: 5×10⁵)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1000000</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">100000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50000</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-15" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb16" data-startfrom="304" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 303;"><span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a>mat_replate_density_per_cm2 <span class="op">=</span> mat_replate_cells <span class="op">/</span> well_area_cm2</span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a>mat_below_min <span class="op">=</span> mat_replate_cells <span class="op">&lt;</span> <span class="dv">500000</span></span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a>mat_below_min</span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">md</span><span class="vs">`::: {.callout-warning}</span></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="vs">**</span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_cells<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells is below the 5×10⁵ minimum.** Replating density = </span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm² — continuing with fewer than 5×10⁵ cells (5.5×10⁴ cells/cm²) may reduce the %CD11b+ yield at the end of maturation.</span></span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="vs">:::`</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">md</span><span class="vs">`**Replating density: </span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm²** (optimal target: 1×10⁵ cells/cm²).`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-16-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-16-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-16-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>36</td>
+<td>Transfer the entire cell suspension to a 15 mL conical.</td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>Add 1 mL/well 1× PBS/EDTA; incubate 4 min. Collect and transfer to the conical. Wash with another 1 mL/well PBS/EDTA; collect and add to the conical.</td>
+</tr>
+<tr class="odd">
+<td>36</td>
+<td>Centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend. Count with Trypan Blue + hemocytometer.</td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>Add the replating cell number (above) to 1 well of the <strong>old</strong> Matrigel plate (not new) containing 1 mL fresh Maturation Medium (target 1×10⁵ cells/cm²). If total well volume &lt; 2 mL, top up to 2 mL. Incubate 37°C, 5% CO₂.</td>
+</tr>
+<tr class="odd">
+<td>every other day</td>
+<td>Feed by topping up with half the start volume (1 mL).</td>
+</tr>
+<tr class="even">
+<td>40–46</td>
+<td>Microglia are mature after 4–10 days in Maturation Medium. Limited capacity for expansion; cell death may increase after 10 days of culture.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Immunocytochemistry cultureware
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If cells are for immunocytochemistry, use cultureware coated with either 10 µg/mL PDL or 1 µg/mL fibronectin instead of Matrigel. For other applications, use Matrigel-coated cultureware.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="freezing-hematopoietic-progenitor-cells" class="level2">
+<h2 class="anchored" data-anchor-id="freezing-hematopoietic-progenitor-cells">Freezing hematopoietic progenitor cells</h2>
+<p>Two methods are given in the source — present both, since they specify different freeze concentrations and cryoprotectants.</p>
+<section id="stemcell-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="stemcell-protocol">StemCell Protocol</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Freeze HPCs on Day 12 in CryoStor CS10 at <strong>1×10⁶ cells/mL</strong>.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>To thaw: thaw cells in DMEM/F-12, collect the cell pellet, then plate into Microglia Differentiation Medium at 1.1×10⁴–2.2×10⁴ cells/cm² (containing 10 µM ROCK inhibitor (ROCKi) for the first feed only).</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mcquade-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="mcquade-protocol">McQuade Protocol</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>HPCs must be frozen at <strong>2–4×10⁶ cells/mL</strong> in BamBanker (Wako).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>If frozen, thaw HPCs directly into microglial differentiation medium and plate on Matrigel-coated plates at <strong>10,000 cells/cm²</strong>.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Note on thaw density
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>More viable when greater densities of HPCs are thawed together (McQuade Protocol note).</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="qc-log" class="level2">
+<h2 class="anchored" data-anchor-id="qc-log">QC log</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Checkpoint</th>
+<th>Expected</th>
+<th>Observed</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Day 0 (HPC phase) colony count</td>
+<td>80–160 colonies/well (flagged range — see note above); hard floor ≥40</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Day 12 HPC yield/morphology</td>
+<td>Floating CD34+CD45+ population present</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Day 24 microglia differentiation transfer</td>
+<td>Even reattachment on old Matrigel plate</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Day 36 maturation replating</td>
+<td>≥5×10⁵ cells (target 1×10⁵ cells/cm²)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Day 40–46 maturation</td>
+<td>CD11b+ yield acceptable</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes / deviations:</strong></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>McQuade Protocol (HPC freezing) attributed by name in the source; full citation not given. <!-- TODO: likely McQuade A, et al. "Development and validation of a simplified method to generate human microglia from pluripotent stem cells." *Mol Neurodegener.* 2018 — confirm with JP before citing formally. --></p>
+<p>Comparison imagery in the source document is captioned “Phanstiel Lab 2019” alongside “McQuade et al 2018 – Stem cell hematopoietic kit,” referencing a published hematopoietic-kit-based iMGL timeline (Day 0/3/7/12/38 phase-contrast panels).</p>
+<!-- TODO: the source refers to "the iPSC to Microglia 2.0 paper" (for the 1 mg/mL Matrigel target used in microglia-track coating) without a full citation — confirm exact reference with JP. -->
+<p>Protocol: source not further specified in the provided document.</p>
+<p>Attributed inline tips: “Isha” and “Justin” (Justin Brumbaugh) — see callouts above.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3dlbGxzX2hwYyA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIjEyLXdlbGwgcGxhdGUgd2VsbHMgKEhQQyBkaWZmZXJlbnRpYXRpb24gbWVkaWEgcHJlcClcIiwgdmFsdWU6IDEsIG1pbjogMSwgc3RlcDogMX0pXG52aWV3b2Ygbl93ZWxsc19tZ2wgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCI2LXdlbGwgcGxhdGUgd2VsbHMgKG1pY3JvZ2xpYSBkaWZmZXJlbnRpYXRpb24vbWF0dXJhdGlvbiBtZWRpYSBwcmVwKVwiLCB2YWx1ZTogMSwgbWluOiAxLCBzdGVwOiAxfSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImZtdCA9ICh4LCBkID0gMikgPT4geC50b0ZpeGVkKGQpXG53ZWxsX2FyZWFfY20yID0gOS41ICAgLy8gNi13ZWxsIHBsYXRlLCBwZXItd2VsbCBncm93dGggYXJlYSBjb252ZW50aW9uIHVzZWQgZWxzZXdoZXJlIGluIHRoaXMgbGFiJ3MgcHJvdG9jb2xzIChzZWUgZW5zLTJkLXByb3RvY29sLnFtZClcblxubWRgKioke25fd2VsbHNfaHBjfSB3ZWxsKHMpIG9mIDEyLXdlbGwgcGxhdGUgKEhQQyBtZWRpYSkgwrcgJHtuX3dlbGxzX21nbH0gd2VsbChzKSBvZiA2LXdlbGwgcGxhdGUgKG1pY3JvZ2xpYSBtZWRpYSkqKmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InNwbGl0X3RoaWF6b3ZpdmluX3VMX3Blcl9tTCA9IDEgICAvLyAxMDAwWCwgMSDCtUwvbUwgZmluYWxcbklucHV0cy50YWJsZShbXG4gIHtTdGVwOiBcIjFcIiwgQWN0aW9uOiBgQWRkICR7c3BsaXRfdGhpYXpvdml2aW5fdUxfcGVyX21MfSDCtUwgVGhpYXpvdml2aW4gcGVyIDEgbUwgbVRlU1IxIHRvIGEgMTUgbUwgY29uaWNhbCAoMXggVGhpYXpvdml2aW4pYCwgRGV0YWlsOiBcIuKAlFwifSxcbiAge1N0ZXA6IFwiMlwiLCBBY3Rpb246IFwiVmFjdXVtIERNRU0vRjEyIGZyb20gTWF0cmlnZWwtY29hdGVkIHdlbGxzOyBhZGQgMSBtTC93ZWxsIG1UZVNSMSArIDF4IFRoaWF6b3ZpdmluIHNvIHdlbGxzIGRvbid0IGRyeSBvdXRcIiwgRGV0YWlsOiBcIuKAlFwifSxcbiAge1N0ZXA6IFwiM1wiLCBBY3Rpb246IFwiU2NhbiB3ZWxsczsgbWFyayBhbmQgc2NyYXBlIGJhZCBjb2xvbmllc1wiLCBEZXRhaWw6IFwi4oCUXCJ9LFxuICB7U3RlcDogXCI0XCIsIEFjdGlvbjogXCJWYWN1dW0gbWVkaWE7IHJpbnNlIHdpdGggMiBtTCBQQlMvRURUQSBhbmQgYXNwaXJhdGVcIiwgRGV0YWlsOiBcIuKAlFwifSxcbiAge1N0ZXA6IFwiNVwiLCBBY3Rpb246IFwiQWRkIDIgbUwgbmV3IFBCUy9FRFRBOyBpbmN1YmF0ZSAz4oCTNSBtaW5cIiwgRGV0YWlsOiBcIkxvbmdlciBpZiBwbGF0ZSBpcyBsZXNzIGNyb3dkZWRcIn0sXG4gIHtTdGVwOiBcIjZcIiwgQWN0aW9uOiBcIkNhcmVmdWxseSB2YWN1dW0gUEJTL0VEVEEgd2l0aG91dCBkaXN0dXJiaW5nIGNlbGxzXCIsIERldGFpbDogXCLigJRcIn0sXG4gIHtTdGVwOiBcIjdcIiwgQWN0aW9uOiBcIkFkZCAxIG1MIG1UZVNSMSArIDF4IFRoaWF6b3ZpdmluICh3aWRlLXRpcCAxMDAwIMK1TCB0aXApOyBwaXBldHRlIHVwL2Rvd24gdG8gbGlmdCBjZWxscyBpbnRvIHRoZSAxNSBtTCBjb25pY2FsOyByZXBlYXQgYXMgbmVlZGVkXCIsIERldGFpbDogXCJBIGxpdHRsZSByb3VnaG5lc3MgaXMgT0sgaWYgY2VsbHMgcmVzaXN0IGxpZnRpbmcsIGJ1dCBub3QgdG9vIG11Y2hcIn0sXG4gIHtTdGVwOiBcIjhcIiwgQWN0aW9uOiBcIkFkZCAxIG1MIG9mIGNlbGwgbWl4dHVyZSB0byBlYWNoIG5ldyB3ZWxsOyBtb3ZlIHBsYXRlIGluIGEgKyBzaGFwZSAobm90IGNpcmN1bGFyKSB0byBtaXhcIiwgRGV0YWlsOiBcIuKAlFwifSxcbiAge1N0ZXA6IFwiOVwiLCBBY3Rpb246IFwiQWRkIDEgbUwgZnJlc2ggbVRlU1IxIHRvIHRoZSBvcmlnaW5hbCB3ZWxsOyByZXR1cm4gdG8gaW5jdWJhdG9yOyBkbyBub3Qgb3BlbiBpbmN1YmF0b3IgZm9yIHRoZSByZXN0IG9mIHRoZSBkYXlcIiwgRGV0YWlsOiBcIuKAlFwifVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIG1lZGl1bUFfYmFzYWxfbUwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJNZWRpdW0gQSDigJQgQmFzYWwgTWVkaXVtIGJhdGNoIChtTClcIiwgdmFsdWU6IDQ1LCBtaW46IDEsIHN0ZXA6IDF9KVxudmlld29mIG1lZGl1bUJfYmFzYWxfbUwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJNZWRpdW0gQiDigJQgQmFzYWwgTWVkaXVtIGJhdGNoIChtTClcIiwgdmFsdWU6IDc1LCBtaW46IDEsIHN0ZXA6IDF9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoic3VwcGxlbWVudF9yYXRpbyA9IDEvMjAwICAgLy8gMjAwWCBzdXBwbGVtZW50LCBmcm9tIFRhYmxlIDEgb2YgdGhlIGtpdCBpbnNlcnRcblxubWVkaXVtQV9zdXBwX3VMID0gbWVkaXVtQV9iYXNhbF9tTCAqIDEwMDAgKiBzdXBwbGVtZW50X3JhdGlvXG5tZWRpdW1CX3N1cHBfdUwgPSBtZWRpdW1CX2Jhc2FsX21MICogMTAwMCAqIHN1cHBsZW1lbnRfcmF0aW9cblxuSW5wdXRzLnRhYmxlKFtcbiAge01lZGl1bTogXCJNZWRpdW0gQSAoU3RhZ2UgMSwgRGF5IDDigJMzKVwiLCBDb21wb25lbnQ6IFwiU1RFTWRpZmbihKIgSGVtYXRvcG9pZXRpYyBCYXNhbCBNZWRpdW1cIiwgVm9sdW1lOiBgJHtmbXQobWVkaXVtQV9iYXNhbF9tTCwxKX0gbUxgfSxcbiAge01lZGl1bTogXCJNZWRpdW0gQSAoU3RhZ2UgMSwgRGF5IDDigJMzKVwiLCBDb21wb25lbnQ6IFwiU1RFTWRpZmbihKIgSGVtYXRvcG9pZXRpYyBTdXBwbGVtZW50IEEgKDIwMFgpXCIsIFZvbHVtZTogYCR7Zm10KG1lZGl1bUFfc3VwcF91TCwwKX0gwrVMYH0sXG4gIHtNZWRpdW06IFwiTWVkaXVtIEIgKFN0YWdlIDIsIERheSAz4oCTMTIpXCIsIENvbXBvbmVudDogXCJTVEVNZGlmZuKEoiBIZW1hdG9wb2lldGljIEJhc2FsIE1lZGl1bVwiLCBWb2x1bWU6IGAke2ZtdChtZWRpdW1CX2Jhc2FsX21MLDEpfSBtTGB9LFxuICB7TWVkaXVtOiBcIk1lZGl1bSBCIChTdGFnZSAyLCBEYXkgM+KAkzEyKVwiLCBDb21wb25lbnQ6IFwiU1RFTWRpZmbihKIgSGVtYXRvcG9pZXRpYyBTdXBwbGVtZW50IEIgKDIwMFgpXCIsIFZvbHVtZTogYCR7Zm10KG1lZGl1bUJfc3VwcF91TCwwKX0gwrVMYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX2FnZ3JlZ2F0ZXNfdG9fcGxhdGUgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJOdW1iZXIgb2YgYWdncmVnYXRlcyB0byBwbGF0ZSAoc291cmNlIHJhbmdlOiA5NuKAkzE5NilcIiwgdmFsdWU6IDE0NiwgbWluOiA5NiwgbWF4OiAxOTYsIHN0ZXA6IDF9KVxudmlld29mIGFnZ3JlZ2F0ZV9jb25jX3Blcl91TCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIllvdXIgbWVhc3VyZWQgY29uY2VudHJhdGlvbiBvZiBjZWxsIGFnZ3JlZ2F0ZXMgKGFnZ3JlZ2F0ZXMvwrVMLCBmcm9tIHRoZSB0cmlwbGljYXRlIGNvdW50IGFib3ZlKVwiLCB2YWx1ZTogNSwgbWluOiAwLjEsIHN0ZXA6IDAuMX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJwbGF0aW5nX3ZvbHVtZV91TCA9IG5fYWdncmVnYXRlc190b19wbGF0ZSAvIGFnZ3JlZ2F0ZV9jb25jX3Blcl91TFxuXG5tZGAqKlBsYXRpbmcgdm9sdW1lOiAke2ZtdChwbGF0aW5nX3ZvbHVtZV91TCwxKX0gwrVMKiogb2YgYWdncmVnYXRlIG1peHR1cmUgcGVyIHdlbGwg4oCUIGFkZCB0byBhIE1hdHJpZ2VsLWNvYXRlZCAxMi13ZWxsIHBsYXRlIGNvbnRhaW5pbmcgMSBtTCBtVGVTUjEuIElmIHVzaW5nIHNwbGl0IHJhdGlvcyBpbnN0ZWFkIG9mIGEgY291bnRlZCBwbGF0aW5nIHZvbHVtZSwgMTo0MCB0byAxOjIwMCBtYXkgYmUgcmVxdWlyZWQgZGVwZW5kaW5nIG9uIGNvbmZsdWVuY2UuYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC04IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWVkaXVtQV9wZXJfd2VsbF9tTCA9IDMgICAgIC8vIDIgbUwgKERheSAwKSArIDEgbUwgKERheSAyKSDigJQgc2VlIGRpc2NyZXBhbmN5IG5vdGUgYWJvdmVcbm1lZGl1bUJfcGVyX3dlbGxfbUwgPSA1ICAgICAvLyAyICsgMSArIDEgKyAxIG1MIChEYXkgMywgNSwgNywgMTApIOKAlCBzZWUgZGlzY3JlcGFuY3kgbm90ZSBhYm92ZVxuXG5JbnB1dHMudGFibGUoW1xuICB7TWVkaXVtOiBcIk1lZGl1bSBBXCIsIFwiUGVyIHdlbGwgKHN1bW1lZClcIjogYCR7bWVkaXVtQV9wZXJfd2VsbF9tTH0gbUxgLCBcIlRvdGFsICh0aGlzIGJhdGNoKVwiOiBgJHtmbXQobWVkaXVtQV9wZXJfd2VsbF9tTCAqIG5fd2VsbHNfaHBjLDEpfSBtTGB9LFxuICB7TWVkaXVtOiBcIk1lZGl1bSBCXCIsIFwiUGVyIHdlbGwgKHN1bW1lZClcIjogYCR7bWVkaXVtQl9wZXJfd2VsbF9tTH0gbUxgLCBcIlRvdGFsICh0aGlzIGJhdGNoKVwiOiBgJHtmbXQobWVkaXVtQl9wZXJfd2VsbF9tTCAqIG5fd2VsbHNfaHBjLDEpfSBtTGB9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTkiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgZGlmZl9iYXNhbF9tTCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIlNURU1kaWZm4oSiIE1pY3JvZ2xpYSBEaWZmZXJlbnRpYXRpb24g4oCUIEJhc2FsIE1lZGl1bSBiYXRjaCAobUwpXCIsIHZhbHVlOiA5MCwgbWluOiAxLCBzdGVwOiAxfSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTAiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJkaWZmX3N1cHAxX21MID0gZGlmZl9iYXNhbF9tTCAqIDEwLzkwXG5kaWZmX3N1cHAyX3VMID0gZGlmZl9iYXNhbF9tTCAqIDQwMC85MFxuXG5JbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIlNURU1kaWZm4oSiIE1pY3JvZ2xpYSBCYXNhbCBNZWRpdW1cIiwgVm9sdW1lOiBgJHtmbXQoZGlmZl9iYXNhbF9tTCwxKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJTdXBwbGVtZW50IDFcIiwgVm9sdW1lOiBgJHtmbXQoZGlmZl9zdXBwMV9tTCwyKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJTdXBwbGVtZW50IDJcIiwgVm9sdW1lOiBgJHtmbXQoZGlmZl9zdXBwMl91TCwwKX0gwrVMYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTEiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgZGlmZl9zZWVkX2NlbGxzID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiQ2VsbHMgc2VlZGVkIHBlciB3ZWxsIChzb3VyY2UgcmFuZ2U6IDHDlzEw4oG14oCTMsOXMTDigbUpXCIsIHZhbHVlOiAxNTAwMDAsIG1pbjogMTAwMDAwLCBtYXg6IDIwMDAwMCwgc3RlcDogMTAwMDB9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImRpZmZfc2VlZF9kZW5zaXR5X3Blcl9jbTIgPSBkaWZmX3NlZWRfY2VsbHMgLyB3ZWxsX2FyZWFfY20yXG5cbm1kYCoqU2VlZGluZyBkZW5zaXR5OiAke2ZtdChkaWZmX3NlZWRfZGVuc2l0eV9wZXJfY20yLDApfSBjZWxscy9jbcKyKiogKHNvdXJjZSB0YXJnZXQgcmFuZ2U6IDEuMcOXMTDigbTigJMyLjLDlzEw4oG0IGNlbGxzL2NtwrIgZm9yIGEgNi13ZWxsIHBsYXRlLCAke3dlbGxfYXJlYV9jbTJ9IGNtwrIvd2VsbClgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTEzIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIG1hdF9iYXNhbF9tTCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIlNURU1kaWZm4oSiIE1pY3JvZ2xpYSBNYXR1cmF0aW9uIOKAlCBCYXNhbCBNZWRpdW0gYmF0Y2ggKG1MKVwiLCB2YWx1ZTogOTAsIG1pbjogMSwgc3RlcDogMX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTE0IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWF0X3N1cHAxX21MID0gbWF0X2Jhc2FsX21MICogMTAvOTBcbm1hdF9zdXBwMl91TCA9IG1hdF9iYXNhbF9tTCAqIDQwMC85MFxubWF0X3N1cHAzX3VMID0gbWF0X2Jhc2FsX21MICogNDAwLzkwXG5cbklucHV0cy50YWJsZShbXG4gIHtDb21wb25lbnQ6IFwiU1RFTWRpZmbihKIgTWljcm9nbGlhIEJhc2FsIE1lZGl1bVwiLCBWb2x1bWU6IGAke2ZtdChtYXRfYmFzYWxfbUwsMSl9IG1MYH0sXG4gIHtDb21wb25lbnQ6IFwiU3VwcGxlbWVudCAxXCIsIFZvbHVtZTogYCR7Zm10KG1hdF9zdXBwMV9tTCwyKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJTdXBwbGVtZW50IDJcIiwgVm9sdW1lOiBgJHtmbXQobWF0X3N1cHAyX3VMLDApfSDCtUxgfSxcbiAge0NvbXBvbmVudDogXCJTdXBwbGVtZW50IDNcIiwgVm9sdW1lOiBgJHtmbXQobWF0X3N1cHAzX3VMLDApfSDCtUxgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtYXRfcmVwbGF0ZV9jZWxscyA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkNlbGxzIHJlcGxhdGVkIChzb3VyY2UgdGFyZ2V0OiAxw5cxMOKBtjsgbWluaW11bSB2aWFibGU6IDXDlzEw4oG1KVwiLCB2YWx1ZTogMTAwMDAwMCwgbWluOiAxMDAwMDAsIHN0ZXA6IDUwMDAwfSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJtYXRfcmVwbGF0ZV9kZW5zaXR5X3Blcl9jbTIgPSBtYXRfcmVwbGF0ZV9jZWxscyAvIHdlbGxfYXJlYV9jbTJcbm1hdF9iZWxvd19taW4gPSBtYXRfcmVwbGF0ZV9jZWxscyA8IDUwMDAwMFxuXG5tYXRfYmVsb3dfbWluXG4gID8gbWRgOjo6IHsuY2FsbG91dC13YXJuaW5nfVxuKioke2ZtdChtYXRfcmVwbGF0ZV9jZWxscywwKX0gY2VsbHMgaXMgYmVsb3cgdGhlIDXDlzEw4oG1IG1pbmltdW0uKiogUmVwbGF0aW5nIGRlbnNpdHkgPSAke2ZtdChtYXRfcmVwbGF0ZV9kZW5zaXR5X3Blcl9jbTIsMCl9IGNlbGxzL2NtwrIg4oCUIGNvbnRpbnVpbmcgd2l0aCBmZXdlciB0aGFuIDXDlzEw4oG1IGNlbGxzICg1LjXDlzEw4oG0IGNlbGxzL2NtwrIpIG1heSByZWR1Y2UgdGhlICVDRDExYisgeWllbGQgYXQgdGhlIGVuZCBvZiBtYXR1cmF0aW9uLlxuOjo6YFxuICA6IG1kYCoqUmVwbGF0aW5nIGRlbnNpdHk6ICR7Zm10KG1hdF9yZXBsYXRlX2RlbnNpdHlfcGVyX2NtMiwwKX0gY2VsbHMvY23CsioqIChvcHRpbWFsIHRhcmdldDogMcOXMTDigbUgY2VsbHMvY23CsikuYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3dlbGxzX2hwYycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3dlbGxzX21nbCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtZWRpdW1BX2Jhc2FsX21MJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ21lZGl1bUJfYmFzYWxfbUwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9hZ2dyZWdhdGVzX3RvX3BsYXRlJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2FnZ3JlZ2F0ZV9jb25jX3Blcl91TCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdkaWZmX2Jhc2FsX21MJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2RpZmZfc2VlZF9jZWxscycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdtYXRfYmFzYWxfbUwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbWF0X3JlcGxhdGVfY2VsbHMnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../protocols";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "iPSC-to-Microglia (iMGL) Differentiation Protocol"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "STEMdiff Hematopoietic → Microglia Differentiation → Microglia Maturation"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"window.print()"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"float:right;margin-bottom:1rem"</span><span class="dt">&gt;</span>🖨 Print / Save as PDF<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Human iPSCs are carried through hematopoietic progenitor cell (HPC) differentiation (STEMdiff Hematopoietic Kit), then microglia differentiation, then microglia maturation, yielding iPSC-derived microglia-like cells (iMGLs) ready for treatment/assay by ~Day 40–46. Source: <span class="in">`iMGLs_Protocol.docx`</span>.</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Day-numbering in the source document</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>The source document's own "Order of iMGL Protocol" outline (reproduced below) restarts or overlaps day counts between phases — most clearly flagged where it explicitly marks the HPC phase start as **"Day 12/Day 0,"** i.e. absolute Day 12 of the whole protocol is simultaneously "Day 0" of the STEMdiff Hematopoietic Kit's own day count. The Microglia Differentiation and Maturation phases are not given this same dual-labeling in the outline, but the body text's own day labels within each phase ("Day 12: harvest HPCs," "Day 24: transfer suspension," "Day 36: proceed to maturation," "Day 40–46: mature") are **internally consistent with each other** and are what this page uses throughout.</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: confirm with JP whether the outline's phase-start labels (Day 12 for Microglia Differentiation, Day 36 for Maturation) are meant as absolute protocol days or phase-relative days — they read as absolute given the body text lines up with them, but the doc never states this explicitly. --&gt;</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Order of iMGL protocol (source outline, reproduced)</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Phase <span class="pp">|</span> Day <span class="pp">|</span> Milestone <span class="pp">|</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="pp">|-------|-----|-----------|</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 0 <span class="pp">|</span> Thaw iPSCs into 1 well <span class="pp">|</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 1 <span class="pp">|</span> Change media <span class="pp">|</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 2–4 <span class="pp">|</span> Scrape for bad colonies <span class="pp">|</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 5 <span class="pp">|</span> Split iPSCs into 6 wells <span class="pp">|</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 6 <span class="pp">|</span> Change media <span class="pp">|</span></span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 7–9 <span class="pp">|</span> Scrape for bad colonies <span class="pp">|</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 10 <span class="pp">|</span> Split iPSCs into 3 different concentrations <span class="pp">|</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> iPSC maintenance <span class="pp">|</span> 11 <span class="pp">|</span> Change media <span class="pp">|</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> HPC differentiation <span class="pp">|</span> 12 / HPC Day 0 <span class="pp">|</span> Confirm aggregates; start HPC phase <span class="pp">|</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> HPC differentiation <span class="pp">|</span> 12 (HPC Day 12) <span class="pp">|</span> Harvest HPCs <span class="pp">|</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Microglia differentiation <span class="pp">|</span> 12 → 24 <span class="pp">|</span> STEMdiff Microglia Differentiation Medium <span class="pp">|</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Microglia maturation <span class="pp">|</span> 36 → 40–46 <span class="pp">|</span> STEMdiff Microglia Maturation Medium <span class="pp">|</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Treatment <span class="pp">|</span> 40+ <span class="pp">|</span> Treat iMGLs <span class="pp">|</span></span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configure experiment</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>viewof n_wells_hpc <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"12-well plate wells (HPC differentiation media prep)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>viewof n_wells_mgl <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"6-well plate wells (microglia differentiation/maturation media prep)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>well_area_cm2 <span class="op">=</span> <span class="fl">9.5</span>   <span class="co">// 6-well plate, per-well growth area convention used elsewhere in this lab's protocols (see ens-2d-protocol.qmd)</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_wells_hpc<span class="sc">}</span><span class="vs"> well(s) of 12-well plate (HPC media) · </span><span class="sc">${</span>n_wells_mgl<span class="sc">}</span><span class="vs"> well(s) of 6-well plate (microglia media)**`</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## iPSC maintenance phase (Day 0–11)</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uses mTeSR1 + Thiazovivin — not plain TeSR-E8</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>The microglia-differentiation-track iPSCs in this protocol are maintained in **mTeSR™1** (STEMCELL cat#: 5990/85857) with **Thiazovivin** (a ROCK inhibitor, 1000X aliquot, 1 µL/mL final) added to media used for thawing and splitting — not the plain TeSR™-E8 used in the base <span class="co">[</span><span class="ot">iPSC culture protocol</span><span class="co">](ipsc-culture-protocol.qmd)</span>. For Matrigel coating, thawing mechanics, and general passaging technique, see that page — it is not repeated here.</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Note for JP: iMGLs_Protocol.docx contains its own near-duplicate Matrigel-prep, thawing, and full EDTA-passaging write-ups that closely mirror iPSC_Matrigel.docx / iPSC_Thawing.docx / iPSC_Passaging.docx (with mTeSR1 + Thiazovivin substituted for TeSR-E8). Those duplicated sections are intentionally NOT reproduced on this page to avoid maintaining the same technique in two places — only the deltas specific to this track (media/Thiazovivin, and the distinct "Splitting" step below) are kept here. --&gt;</span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>The 15/45-minute incubator rule from the base iPSC protocol applies here too.</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Day 5 / Day 10 — "Splitting" step (distinct from full passaging)</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>This track's outline calls for a lighter-weight **splitting** step at Day 5 and Day 10 (scan/scrape bad colonies, lift with mTeSR1 + Thiazovivin, replate at 1–2 new densities) rather than the full EDTA passage described in the base protocol:</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>split_thiazovivin_uL_per_mL <span class="op">=</span> <span class="dv">1</span>   <span class="co">// 1000X, 1 µL/mL final</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"1"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="vs">`Add </span><span class="sc">${</span>split_thiazovivin_uL_per_mL<span class="sc">}</span><span class="vs"> µL Thiazovivin per 1 mL mTeSR1 to a 15 mL conical (1x Thiazovivin)`</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"2"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Vacuum DMEM/F12 from Matrigel-coated wells; add 1 mL/well mTeSR1 + 1x Thiazovivin so wells don't dry out"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"3"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Scan wells; mark and scrape bad colonies"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"4"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Vacuum media; rinse with 2 mL PBS/EDTA and aspirate"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"5"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 2 mL new PBS/EDTA; incubate 3–5 min"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"Longer if plate is less crowded"</span>}<span class="op">,</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"6"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Carefully vacuum PBS/EDTA without disturbing cells"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"7"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL mTeSR1 + 1x Thiazovivin (wide-tip 1000 µL tip); pipette up/down to lift cells into the 15 mL conical; repeat as needed"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"A little roughness is OK if cells resist lifting, but not too much"</span>}<span class="op">,</span></span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"8"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL of cell mixture to each new well; move plate in a + shape (not circular) to mix"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"9"</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> <span class="st">"Add 1 mL fresh mTeSR1 to the original well; return to incubator; do not open incubator for the rest of the day"</span><span class="op">,</span> <span class="dt">Detail</span><span class="op">:</span> <span class="st">"—"</span>}</span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Attributed notes</span></span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>**Note from Isha:** Day 1 after plating, the iPSCs are usually very stressed, so a media change will suffice. Scanning and scraping for bad colonies should start on Day 2. This note applies to the iPSC splits as well — the more crowded the plate, the easier it is to pick up the cells.</span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>**Note from Justin:** If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and centrifuge at 200×g for 30 sec. The aggregates pellet while single differentiated cells remain in the supernatant — discard the supernatant and culture the pellet.</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## HPC differentiation phase (STEMdiff™ Hematopoietic Kit, Day 0–12)</span></span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a><span class="fu">## Media prep math audit</span></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>Table 1 of the STEMdiff™ Hematopoietic Kit insert specifies Medium A (45 mL Basal + 225 µL Supplement A) and Medium B (75 mL Basal + 375 µL Supplement B) — both a 1:200 (200X) supplement dilution ($225/45{,}000 = 375/75{,}000 = 1/200$). The calculator below applies that same 1:200 ratio to whatever basal-medium batch size you enter.</span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>viewof mediumA_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Medium A — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">45</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>viewof mediumB_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Medium B — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">75</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a>supplement_ratio <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">200</span>   <span class="co">// 200X supplement, from Table 1 of the kit insert</span></span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a>mediumA_supp_uL <span class="op">=</span> mediumA_basal_mL <span class="op">*</span> <span class="dv">1000</span> <span class="op">*</span> supplement_ratio</span>
+<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a>mediumB_supp_uL <span class="op">=</span> mediumB_basal_mL <span class="op">*</span> <span class="dv">1000</span> <span class="op">*</span> supplement_ratio</span>
+<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A (Stage 1, Day 0–3)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A (Stage 1, Day 0–3)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Supplement A (200X)"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_supp_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B (Stage 2, Day 3–12)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B (Stage 2, Day 3–12)"</span><span class="op">,</span> <span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Hematopoietic Supplement B (200X)"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_supp_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a>Store complete medium at 2–8°C for up to 3 weeks, or −20°C for up to 6 months. Thaw Basal Medium at RT or overnight at 2–8°C; thaw Supplement A/B at RT or 2–8°C (centrifuge 30 sec if needed to remove liquid from the cap). Warm all media to RT before use; do not leave at RT for extended periods.</span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### Passaging cells as aggregates &amp; setting up HPC differentiation</span></span>
+<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Prepare Matrigel-coated plates (see <span class="co">[</span><span class="ot">iPSC culture protocol</span><span class="co">](ipsc-culture-protocol.qmd)</span>).</span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Perform triplicate aggregate counts: draw a "+" counting grid centered on the bottom of 3 wells of a 96-well flat-bottom plate. Aliquot 40 µL DMEM/F12 into each of the 3 wells, then add 5 µL of aggregate mixture to each. Count aggregates ≥50 µm diameter in each well; average the triplicate to get the **Concentration of Cell Aggregates**.</span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Plate 96–196 aggregates/well (10–20 aggregates/cm²) to achieve 40–80 colonies/well (4–10 colonies/cm²) adhered after 24 h — multiple plating densities may need to be tested.</span>
+<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plating volume calculator</span></span>
+<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>$$Plating\ Volume\ (\mu L) = \frac{Number\ of\ Aggregates\ to\ Plate}{Concentration\ of\ Cell\ Aggregates\ (aggregates/\mu L)}$$</span>
+<span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a>viewof n_aggregates_to_plate <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of aggregates to plate (source range: 96–196)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">146</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">96</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">196</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a>viewof aggregate_conc_per_uL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Your measured concentration of cell aggregates (aggregates/µL, from the triplicate count above)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span>})</span>
+<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a>plating_volume_uL <span class="op">=</span> n_aggregates_to_plate <span class="op">/</span> aggregate_conc_per_uL</span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Plating volume: </span><span class="sc">${</span><span class="fu">fmt</span>(plating_volume_uL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> µL** of aggregate mixture per well — add to a Matrigel-coated 12-well plate containing 1 mL mTeSR1. If using split ratios instead of a counted plating volume, 1:40 to 1:200 may be required depending on confluence.`</span></span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Gently mix the aggregate mixture; add the calculated plating volume to each Matrigel-coated well (1 mL mTeSR1 already in the well).</span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Place in the 37°C incubator; move in short back-and-forth/side-to-side motions to distribute aggregates; do not disturb for 24 h. Change media with mTeSR1 after 24 h; do not disturb for another 24 h. Count to confirm aggregates after 48 h.</span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stage 1 — Day 0–2</span></span>
+<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## Colony-count thresholds — discrepancy flagged in the source</span></span>
+<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a>The source states two different lower bounds in adjacent paragraphs: "Confirm that **80–160** colonies/well are adhered" (4–10 colonies/cm²), but then "CRITICAL: Do not proceed if cultures have **&lt; 40** colonies or &gt; 160 colonies per well." Both numbers are reproduced verbatim below.</span>
+<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co"> for JP: confirm which lower threshold (80 or 40 colonies/well) is the real go/no-go gate — this changes a safety-relevant QC decision and is not something to guess at. --&gt;</span></span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0 <span class="pp">|</span> Confirm 80–160 colonies/well adhered (4–10 colonies/cm²) — count all colonies, including tiny few-cell ones. To ease counting, replace medium with fresh mTeSR™1/mTeSR™ Plus/TeSR™-E8 first (removes debris). **CRITICAL: do not proceed if &lt; 40 or &gt; 160 colonies/well** (see discrepancy note above) — differentiation will be compromised. <span class="pp">|</span></span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0 <span class="pp">|</span> Aspirate medium; add 2 mL Medium A/well. Incubate 37°C for 2 days. <span class="pp">|</span></span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Using a serological or 1 mL pipette, gently remove 1 mL medium/well; discard. Gently add 1 mL Medium A/well. Incubate 37°C for 24 h. <span class="pp">|</span></span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stage 2 — Day 3–12</span></span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Aspirate medium; gently add 2 mL Medium B/well. Incubate 37°C for 2 days. <span class="pp">|</span></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Gently remove 1 mL medium/well; discard. Gently add 1 mL Medium B/well. Incubate 37°C for 2 days. <span class="pp">|</span></span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Floating cells become visible and increase for the rest of the protocol. Keeping the plate flat, gently remove 1 mL medium/well without disturbing the floating population; discard. Add 1 mL Medium B/well. Incubate 37°C for 3 days. <span class="pp">|</span></span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 10 <span class="pp">|</span> Keeping the plate flat, gently remove 1 mL medium/well; discard. Add 1 mL Medium B/well. Incubate 37°C for 2 days. <span class="pp">|</span></span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 <span class="pp">|</span> **Harvest hematopoietic cells** (see below). <span class="pp">|</span></span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Optional Day 10 harvest</span></span>
+<span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a>Cells may be harvested at Day 10 instead, as described for Day 12. Yield and the proportion of CD34+CD45+ cells will be lower than at Day 12, but CFUs may be present at a higher frequency.</span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Media "total required" figures don't match the per-day add volumes</span></span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>The source states Medium A total required is "1.5 mL per well" (for Day 0 + Day 2) and Medium B total required is "2.5 mL per well" (for Day 3, 5, 7, 10) — but summing the actual per-day add volumes gives 3 mL/well for Medium A (2 mL + 1 mL) and 5 mL/well for Medium B (2 + 1 + 1 + 1 mL), exactly double the stated totals in both cases.</span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co"> for JP: confirm whether the stated "total required" figures are a documentation error (off by 2×) or whether they refer to something else (e.g. a per-column readout from Table 1 rather than the actual sum of dosing steps). This page uses the summed per-day add volumes (3 mL/well A, 5 mL/well B) for planning purposes, scaled by n_wells_hpc below. --&gt;</span></span>
+<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a>mediumA_per_well_mL <span class="op">=</span> <span class="dv">3</span>     <span class="co">// 2 mL (Day 0) + 1 mL (Day 2) — see discrepancy note above</span></span>
+<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a>mediumB_per_well_mL <span class="op">=</span> <span class="dv">5</span>     <span class="co">// 2 + 1 + 1 + 1 mL (Day 3, 5, 7, 10) — see discrepancy note above</span></span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium A"</span><span class="op">,</span> <span class="st">"Per well (summed)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>mediumA_per_well_mL<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="st">"Total (this batch)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumA_per_well_mL <span class="op">*</span> n_wells_hpc<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Medium</span><span class="op">:</span> <span class="st">"Medium B"</span><span class="op">,</span> <span class="st">"Per well (summed)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>mediumB_per_well_mL<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="st">"Total (this batch)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mediumB_per_well_mL <span class="op">*</span> n_wells_hpc<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a><span class="fu">### Day 12 — Harvest hematopoietic cells</span></span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Vigorously pipette (triturate) cells up/down in the well to break them up as needed. <span class="pp">|</span></span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Transfer the cell suspension to a collection tube. <span class="pp">|</span></span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Add 1 mL DMEM/F-12 to the well; triturate vigorously and add to the collection tube. <span class="pp">|</span></span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Repeat step 3. <span class="pp">|</span></span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Centrifuge 300×g, 5 min, RT. Discard the supernatant. <span class="pp">|</span></span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Resuspend the cell pellet in the desired medium for analysis or downstream assays. <span class="pp">|</span></span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="fu">## Microglia differentiation phase (Day 12–36)</span></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a><span class="fu">## Media prep math audit</span></span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>Add 10 mL Supplement 1 and 400 µL Supplement 2 to 90 mL Basal Medium — ratios of 10/90 and 400/90 per mL of basal, applied to whatever batch size you enter below.</span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>viewof diff_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Differentiation — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>diff_supp1_mL <span class="op">=</span> diff_basal_mL <span class="op">*</span> <span class="dv">10</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a>diff_supp2_uL <span class="op">=</span> diff_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 1"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_supp1_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 2"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(diff_supp2_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a>Store at 2–8°C for up to 4 weeks; warm to 37°C before use.</span>
+<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a>viewof diff_seed_cells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Cells seeded per well (source range: 1×10⁵–2×10⁵)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">150000</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">100000</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">200000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">10000</span>})</span>
+<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a>diff_seed_density_per_cm2 <span class="op">=</span> diff_seed_cells <span class="op">/</span> well_area_cm2</span>
+<span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-278"><a href="#cb17-278" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Seeding density: </span><span class="sc">${</span><span class="fu">fmt</span>(diff_seed_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm²** (source target range: 1.1×10⁴–2.2×10⁴ cells/cm² for a 6-well plate, </span><span class="sc">${</span>well_area_cm2<span class="sc">}</span><span class="vs"> cm²/well)`</span></span>
+<span id="cb17-279"><a href="#cb17-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-280"><a href="#cb17-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-281"><a href="#cb17-281" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb17-282"><a href="#cb17-282" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb17-283"><a href="#cb17-283" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 <span class="pp">|</span> Harvest suspended HPCs (Day 12 of the HPC phase above); count with Trypan Blue + hemocytometer. <span class="pp">|</span></span>
+<span id="cb17-284"><a href="#cb17-284" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 <span class="pp">|</span> Add the seeded cell number (above) to 1 well of a Matrigel-coated 6-well plate containing 2 mL STEMdiff™ Microglia Differentiation Medium. Incubate 37°C, 5% CO₂. <span class="pp">|</span></span>
+<span id="cb17-285"><a href="#cb17-285" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> every other day <span class="pp">|</span> Feed by topping up with half the start volume (1 mL) of medium — do **not** remove existing medium. <span class="pp">|</span></span>
+<span id="cb17-286"><a href="#cb17-286" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 24 <span class="pp">|</span> Transfer the entire cell suspension to a 15 mL conical; centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend. <span class="pp">|</span></span>
+<span id="cb17-287"><a href="#cb17-287" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 24 <span class="pp">|</span> Add the cell suspension to 1 well of the **old** Matrigel-coated plate (not a new one) containing 1 mL fresh medium. Incubate. <span class="pp">|</span></span>
+<span id="cb17-288"><a href="#cb17-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> every other day, ×12 days <span class="pp">|</span> Feed by topping up with half the start volume (1 mL). <span class="pp">|</span></span>
+<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 36 <span class="pp">|</span> Proceed to microglia maturation. <span class="pp">|</span></span>
+<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-291"><a href="#cb17-291" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-292"><a href="#cb17-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a><span class="fu">## Microglia maturation phase (Day 36–46)</span></span>
+<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## Media prep math audit</span></span>
+<span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a>Add 10 mL Supplement 1, 400 µL Supplement 2, and 400 µL Supplement 3 to 90 mL Basal Medium — same ratios as the Differentiation Medium above, plus Supplement 3 at the same ratio as Supplement 2.</span>
+<span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-302"><a href="#cb17-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a>viewof mat_basal_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Maturation — Basal Medium batch (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">90</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-306"><a href="#cb17-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-309"><a href="#cb17-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-310"><a href="#cb17-310" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-311"><a href="#cb17-311" aria-hidden="true" tabindex="-1"></a>mat_supp1_mL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">10</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb17-312"><a href="#cb17-312" aria-hidden="true" tabindex="-1"></a>mat_supp2_uL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb17-313"><a href="#cb17-313" aria-hidden="true" tabindex="-1"></a>mat_supp3_uL <span class="op">=</span> mat_basal_mL <span class="op">*</span> <span class="dv">400</span><span class="op">/</span><span class="dv">90</span></span>
+<span id="cb17-314"><a href="#cb17-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-315"><a href="#cb17-315" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb17-316"><a href="#cb17-316" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"STEMdiff™ Microglia Basal Medium"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_basal_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-317"><a href="#cb17-317" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 1"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp1_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb17-318"><a href="#cb17-318" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 2"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp2_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb17-319"><a href="#cb17-319" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Supplement 3"</span><span class="op">,</span> <span class="dt">Volume</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(mat_supp3_uL<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb17-320"><a href="#cb17-320" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb17-321"><a href="#cb17-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-322"><a href="#cb17-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-323"><a href="#cb17-323" aria-hidden="true" tabindex="-1"></a>Store at 2–8°C for up to 4 weeks; warm to 37°C before use.</span>
+<span id="cb17-324"><a href="#cb17-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-327"><a href="#cb17-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-328"><a href="#cb17-328" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-329"><a href="#cb17-329" aria-hidden="true" tabindex="-1"></a>viewof mat_replate_cells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Cells replated (source target: 1×10⁶; minimum viable: 5×10⁵)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1000000</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">100000</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50000</span>})</span>
+<span id="cb17-330"><a href="#cb17-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-331"><a href="#cb17-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-334"><a href="#cb17-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb17-335"><a href="#cb17-335" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb17-336"><a href="#cb17-336" aria-hidden="true" tabindex="-1"></a>mat_replate_density_per_cm2 <span class="op">=</span> mat_replate_cells <span class="op">/</span> well_area_cm2</span>
+<span id="cb17-337"><a href="#cb17-337" aria-hidden="true" tabindex="-1"></a>mat_below_min <span class="op">=</span> mat_replate_cells <span class="op">&lt;</span> <span class="dv">500000</span></span>
+<span id="cb17-338"><a href="#cb17-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-339"><a href="#cb17-339" aria-hidden="true" tabindex="-1"></a>mat_below_min</span>
+<span id="cb17-340"><a href="#cb17-340" aria-hidden="true" tabindex="-1"></a>  <span class="op">?</span> <span class="fu">md</span><span class="vs">`::: {.callout-warning}</span></span>
+<span id="cb17-341"><a href="#cb17-341" aria-hidden="true" tabindex="-1"></a><span class="vs">**</span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_cells<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells is below the 5×10⁵ minimum.** Replating density = </span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm² — continuing with fewer than 5×10⁵ cells (5.5×10⁴ cells/cm²) may reduce the %CD11b+ yield at the end of maturation.</span></span>
+<span id="cb17-342"><a href="#cb17-342" aria-hidden="true" tabindex="-1"></a><span class="vs">:::`</span></span>
+<span id="cb17-343"><a href="#cb17-343" aria-hidden="true" tabindex="-1"></a>  <span class="op">:</span> <span class="fu">md</span><span class="vs">`**Replating density: </span><span class="sc">${</span><span class="fu">fmt</span>(mat_replate_density_per_cm2<span class="op">,</span><span class="dv">0</span>)<span class="sc">}</span><span class="vs"> cells/cm²** (optimal target: 1×10⁵ cells/cm²).`</span></span>
+<span id="cb17-344"><a href="#cb17-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-345"><a href="#cb17-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-346"><a href="#cb17-346" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb17-347"><a href="#cb17-347" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb17-348"><a href="#cb17-348" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 36 <span class="pp">|</span> Transfer the entire cell suspension to a 15 mL conical. <span class="pp">|</span></span>
+<span id="cb17-349"><a href="#cb17-349" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 36 <span class="pp">|</span> Add 1 mL/well 1× PBS/EDTA; incubate 4 min. Collect and transfer to the conical. Wash with another 1 mL/well PBS/EDTA; collect and add to the conical. <span class="pp">|</span></span>
+<span id="cb17-350"><a href="#cb17-350" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 36 <span class="pp">|</span> Centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend. Count with Trypan Blue + hemocytometer. <span class="pp">|</span></span>
+<span id="cb17-351"><a href="#cb17-351" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 36 <span class="pp">|</span> Add the replating cell number (above) to 1 well of the **old** Matrigel plate (not new) containing 1 mL fresh Maturation Medium (target 1×10⁵ cells/cm²). If total well volume &lt; 2 mL, top up to 2 mL. Incubate 37°C, 5% CO₂. <span class="pp">|</span></span>
+<span id="cb17-352"><a href="#cb17-352" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> every other day <span class="pp">|</span> Feed by topping up with half the start volume (1 mL). <span class="pp">|</span></span>
+<span id="cb17-353"><a href="#cb17-353" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 40–46 <span class="pp">|</span> Microglia are mature after 4–10 days in Maturation Medium. Limited capacity for expansion; cell death may increase after 10 days of culture. <span class="pp">|</span></span>
+<span id="cb17-354"><a href="#cb17-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-355"><a href="#cb17-355" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb17-356"><a href="#cb17-356" aria-hidden="true" tabindex="-1"></a><span class="fu">## Immunocytochemistry cultureware</span></span>
+<span id="cb17-357"><a href="#cb17-357" aria-hidden="true" tabindex="-1"></a>If cells are for immunocytochemistry, use cultureware coated with either 10 µg/mL PDL or 1 µg/mL fibronectin instead of Matrigel. For other applications, use Matrigel-coated cultureware.</span>
+<span id="cb17-358"><a href="#cb17-358" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-359"><a href="#cb17-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-360"><a href="#cb17-360" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-361"><a href="#cb17-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-362"><a href="#cb17-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## Freezing hematopoietic progenitor cells</span></span>
+<span id="cb17-363"><a href="#cb17-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-364"><a href="#cb17-364" aria-hidden="true" tabindex="-1"></a>Two methods are given in the source — present both, since they specify different freeze concentrations and cryoprotectants.</span>
+<span id="cb17-365"><a href="#cb17-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-366"><a href="#cb17-366" aria-hidden="true" tabindex="-1"></a><span class="fu">### StemCell Protocol</span></span>
+<span id="cb17-367"><a href="#cb17-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-368"><a href="#cb17-368" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb17-369"><a href="#cb17-369" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb17-370"><a href="#cb17-370" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Freeze HPCs on Day 12 in CryoStor CS10 at **1×10⁶ cells/mL**. <span class="pp">|</span></span>
+<span id="cb17-371"><a href="#cb17-371" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> To thaw: thaw cells in DMEM/F-12, collect the cell pellet, then plate into Microglia Differentiation Medium at 1.1×10⁴–2.2×10⁴ cells/cm² (containing 10 µM ROCK inhibitor (ROCKi) for the first feed only). <span class="pp">|</span></span>
+<span id="cb17-372"><a href="#cb17-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-373"><a href="#cb17-373" aria-hidden="true" tabindex="-1"></a><span class="fu">### McQuade Protocol</span></span>
+<span id="cb17-374"><a href="#cb17-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-375"><a href="#cb17-375" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb17-376"><a href="#cb17-376" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb17-377"><a href="#cb17-377" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> HPCs must be frozen at **2–4×10⁶ cells/mL** in BamBanker (Wako). <span class="pp">|</span></span>
+<span id="cb17-378"><a href="#cb17-378" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> If frozen, thaw HPCs directly into microglial differentiation medium and plate on Matrigel-coated plates at **10,000 cells/cm²**. <span class="pp">|</span></span>
+<span id="cb17-379"><a href="#cb17-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-380"><a href="#cb17-380" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb17-381"><a href="#cb17-381" aria-hidden="true" tabindex="-1"></a><span class="fu">## Note on thaw density</span></span>
+<span id="cb17-382"><a href="#cb17-382" aria-hidden="true" tabindex="-1"></a>More viable when greater densities of HPCs are thawed together (McQuade Protocol note).</span>
+<span id="cb17-383"><a href="#cb17-383" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-384"><a href="#cb17-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-385"><a href="#cb17-385" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-386"><a href="#cb17-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-387"><a href="#cb17-387" aria-hidden="true" tabindex="-1"></a><span class="fu">## QC log</span></span>
+<span id="cb17-388"><a href="#cb17-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-389"><a href="#cb17-389" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checkpoint <span class="pp">|</span> Expected <span class="pp">|</span> Observed <span class="pp">|</span> Pass <span class="pp">|</span></span>
+<span id="cb17-390"><a href="#cb17-390" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------|----------|----------|------|</span></span>
+<span id="cb17-391"><a href="#cb17-391" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day 0 (HPC phase) colony count <span class="pp">|</span> 80–160 colonies/well (flagged range — see note above); hard floor ≥40 <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb17-392"><a href="#cb17-392" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day 12 HPC yield/morphology <span class="pp">|</span> Floating CD34+CD45+ population present <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb17-393"><a href="#cb17-393" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day 24 microglia differentiation transfer <span class="pp">|</span> Even reattachment on old Matrigel plate <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb17-394"><a href="#cb17-394" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day 36 maturation replating <span class="pp">|</span> ≥5×10⁵ cells (target 1×10⁵ cells/cm²) <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb17-395"><a href="#cb17-395" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day 40–46 maturation <span class="pp">|</span> CD11b+ yield acceptable <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb17-396"><a href="#cb17-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-397"><a href="#cb17-397" aria-hidden="true" tabindex="-1"></a>**Notes / deviations:**</span>
+<span id="cb17-398"><a href="#cb17-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-399"><a href="#cb17-399" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb17-400"><a href="#cb17-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-401"><a href="#cb17-401" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb17-402"><a href="#cb17-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-403"><a href="#cb17-403" aria-hidden="true" tabindex="-1"></a>McQuade Protocol (HPC freezing) attributed by name in the source; full citation not given. <span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: likely McQuade A, et al. "Development and validation of a simplified method to generate human microglia from pluripotent stem cells." *Mol Neurodegener.* 2018 — confirm with JP before citing formally. --&gt;</span></span>
+<span id="cb17-404"><a href="#cb17-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-405"><a href="#cb17-405" aria-hidden="true" tabindex="-1"></a>Comparison imagery in the source document is captioned "Phanstiel Lab 2019" alongside "McQuade et al 2018 – Stem cell hematopoietic kit," referencing a published hematopoietic-kit-based iMGL timeline (Day 0/3/7/12/38 phase-contrast panels).</span>
+<span id="cb17-406"><a href="#cb17-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-407"><a href="#cb17-407" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: the source refers to "the iPSC to Microglia 2.0 paper" (for the 1 mg/mL Matrigel target used in microglia-track coating) without a full citation — confirm exact reference with JP. --&gt;</span></span>
+<span id="cb17-408"><a href="#cb17-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-409"><a href="#cb17-409" aria-hidden="true" tabindex="-1"></a>Protocol: source not further specified in the provided document.</span>
+<span id="cb17-410"><a href="#cb17-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-411"><a href="#cb17-411" aria-hidden="true" tabindex="-1"></a>Attributed inline tips: "Isha" and "Justin" (Justin Brumbaugh) — see callouts above.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>JP Flores</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

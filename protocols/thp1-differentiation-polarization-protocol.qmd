@@ -1,0 +1,368 @@
+---
+title: "THP-1 Differentiation & Polarization Protocol"
+subtitle: "PMA-induced M0 macrophage differentiation, then M1 (LPS + IFNγ) / M2 (IL-4 + IL-13) polarization"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+THP-1 monocytes are differentiated into resting M0 macrophages with phorbol 12-myristate 13-acetate (PMA), rested, then split into unstimulated (M0), classically-activated (M1, lipopolysaccharide (LPS) + interferon gamma (IFNγ)), and alternatively-activated (M2, interleukin-4 (IL-4) + interleukin-13 (IL-13)) arms.
+
+This page combines three source documents:
+
+- **`Differentiation_THP1s.docx`** — an older, vessel-agnostic PMA differentiation write-up (T-175 flask scale, fill-in-the-blank worksheet style). Used below as the **legacy/flask-scale workflow**.
+- **`THP1_Polarization_Protocol.docx`** — the current, validated day-by-day 6-well-plate workflow carrying M0 macrophages through to M1 and M2 polarization. Used below as the **standard workflow**.
+- **`THP1_Polarization_Volumes.xlsx`** — a 3-sheet vessel-volume calculator (PMA Calc, LPS Calc, IFNg Calc) reproduced as the reactive calculator in this page. Its worked example (6-well plate, defaults below) reproduces every volume printed in `THP1_Polarization_Protocol.docx`'s vessel table exactly, so the two source documents are internally consistent.
+
+<!-- TODO: the two source protocols differ in PMA regimen — Differentiation_THP1s.docx implies a single ~72 h PMA treatment at an unspecified (fill-in-the-blank) concentration in a T-175 flask, while THP1_Polarization_Protocol.docx uses 25 nM PMA for 24 h followed by a 3-day rest in a 6-well plate before polarization. Both are preserved below as separate workflows — confirm with JP which is the lab's current standard if only one should remain. -->
+:::
+
+::: {.callout-important}
+## Before starting
+- Prepare all stocks and further dilutions under a chemical fume hood.
+- PMA is a tumor promoter/protein kinase C activator — handle stock and working dilutions with gloves and avoid skin contact.
+- LPS (lipopolysaccharide) is a bacterial endotoxin — treat as a biohazard reagent per your institution's guidelines.
+- All cytokine/PMA aliquots are stored at −20°C; the working PMA and LPS dilutions below are made fresh from frozen aliquots on the day of use.
+- Warm RPMI/FCS media to 37°C before adding to cells; do not warm PMA, LPS, or cytokine stocks above room temperature.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof vessel          = Inputs.select(["24-well", "6-well", "T-25", "T-175", "T-525"], {label: "Culture vessel", value: "6-well"})
+viewof pma_final_nM    = Inputs.number({label: "PMA final concentration (nM)", value: 25, min: 1, step: 1})
+viewof lps_final_ngmL  = Inputs.number({label: "LPS final concentration (ng/mL)", value: 10, min: 0.1, step: 0.5})
+viewof ifng_final_ngmL = Inputs.number({label: "IFNγ final concentration (ng/mL)", value: 20, min: 0.1, step: 1})
+viewof il4_final_ngmL  = Inputs.number({label: "IL-4 final concentration (ng/mL)", value: 25, min: 0.1, step: 1})
+viewof il13_final_ngmL = Inputs.number({label: "IL-13 final concentration (ng/mL)", value: 25, min: 0.1, step: 1})
+viewof stock_mult      = Inputs.number({label: "Stock-prep batch multiplier (× the standard recipe below)", value: 1, min: 0.1, step: 0.1})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+vessel_table = ({
+  "24-well": {mL: 1.0,   cells: 200000,    wells: 24, lps_dilution: "2x"},
+  "6-well":  {mL: 5.0,   cells: 1000000,   wells: 6,  lps_dilution: "2x"},
+  "T-25":    {mL: 12.5,  cells: 2500000,   wells: 1,  lps_dilution: "1x"},
+  "T-175":   {mL: 92.0,  cells: 18400000,  wells: 1,  lps_dilution: "1x"},
+  "T-525":   {mL: 276.0, cells: 55200000,  wells: 1,  lps_dilution: "1x"}
+})
+
+v = vessel_table[vessel]
+
+md`**Vessel: ${vessel} (${fmt(v.mL,1)} mL, ~${v.cells.toLocaleString()} cells) · PMA ${pma_final_nM} nM · LPS ${lps_final_ngmL} ng/mL · IFNγ ${ifng_final_ngmL} ng/mL · IL-4 ${il4_final_ngmL} ng/mL · IL-13 ${il13_final_ngmL} ng/mL · stock batch ×${fmt(stock_mult,1)}**`
+```
+
+::: {.callout-tip collapse="true"}
+## Reproducing the source calculator (math audit)
+All volumes below are derived, never hardcoded, from the same relationship used in `THP1_Polarization_Volumes.xlsx`:
+
+$$V_{stock\ to\ add\ (\mu L)} = \frac{C_{final} \times (V_{vessel,\ mL} \times 1000)}{C_{stock\ used}}$$
+
+PMA's stock concentration is back-calculated from mass and molarity:
+
+$$C_{PMA\ stock} = \frac{mass\ (g)/volume\ (L)}{MW_{PMA}\ (616.83\ g/mol)}, \qquad C_{working} = \frac{C_{stock}}{10}\ \text{(1:10 dilution)}$$
+
+LPS uses one of two serial 1:100 dilutions of its 1 mg/mL stock depending on vessel size — smaller vessels (24-well, 6-well) draw from the more dilute "2x dil" stock (100 ng/mL) so pipetting volumes stay reasonable; larger vessels (T-25/T-175/T-525) draw from the "1x dil" stock (10 µg/mL). This matches `vessel_table.lps_dilution` above.
+
+Plugging in the defaults (6-well, PMA 25 nM, LPS 10 ng/mL, IFNγ 20 ng/mL) reproduces the source spreadsheet and `THP1_Polarization_Protocol.docx`'s printed table (7.72 µL PMA, 500 µL LPS, 10 µL IFNγ) exactly.
+
+<!-- TODO: IL-4/IL-13 default of 25 ng/mL is back-derived by me from THP1_Polarization_Protocol.docx's fixed vessel table (12.5 µL of 10 µg/mL stock into 5 mL for a 6-well = 25 ng/mL final, consistent across all four vessel rows in that table) — the source docx and xlsx do not state a target concentration for IL-4/IL-13 explicitly, only fixed volumes. This IL-4/IL-13 calculator section is not in the source xlsx; I added it to match the reactive, non-hardcoded pattern used for PMA/LPS/IFNγ. Confirm 25 ng/mL is intentional before relying on it for a new vessel size. -->
+:::
+
+---
+
+## Stock solution prep
+
+Make once; store single-use aliquots at −20°C. Scale the whole batch with the multiplier above if you need more aliquots than the standard recipe yields.
+
+### PMA stock — 100 µg/mL (162 µM) in DMSO
+
+```{ojs}
+//| echo: false
+pma_MW              = 616.83
+pma_mass_mg         = 1.0 * stock_mult
+pma_dmso_mL         = 10.0 * stock_mult
+pma_conc_gL         = pma_mass_mg / pma_dmso_mL           // mg/mL == g/L
+pma_molarity_uM     = (pma_conc_gL / pma_MW) * 1000
+pma_stock_aliquot_uL = 50
+pma_stock_aliquots  = (pma_dmso_mL * 1000) / pma_stock_aliquot_uL
+
+Inputs.table([
+  {Component: "12-O-tetradecanoylphorbol-13-acetate (PMA), lyophilized", Amount: `${fmt(pma_mass_mg,1)} mg` },
+  {Component: "Dimethyl sulfoxide (DMSO)", Amount: `${fmt(pma_dmso_mL,1)} mL` },
+  {Component: "Resulting stock concentration", Amount: `100 µg/mL (${fmt(pma_molarity_uM,1)} µM)` },
+  {Component: "Single-use aliquots", Amount: `${fmt(pma_stock_aliquots,0)} aliquots of ${pma_stock_aliquot_uL} µL, −20°C` }
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Working (1:10) PMA dilution
+Per `THP1_Polarization_Protocol.docx`, the working dilution is made fresh in RPMI/FCS media (not DMSO) immediately before treating cells: **1:10 dilution of the 100 µg/mL stock in RPMI/FCS → 10 µg/mL working stock.**
+:::
+
+```{ojs}
+//| echo: false
+pma_working_stock_nM = pma_molarity_uM * 1000 / 10   // 1:10 dilution, µM → nM
+
+md`**Working PMA stock (1:10 in RPMI/FCS): ≈${fmt(pma_working_stock_nM,0)} nM** — this is the value used as $C_{stock}$ for the vessel calculator below.`
+```
+
+### LPS stock — 1 mg/mL in RPMI/FCS
+
+```{ojs}
+//| echo: false
+lps_mass_mg          = 10.0 * stock_mult
+lps_rpmi_mL          = 10.0 * stock_mult
+lps_conc_mgmL        = lps_mass_mg / lps_rpmi_mL
+lps_stock_aliquot_uL = 500
+lps_stock_aliquots   = (lps_rpmi_mL * 1000) / lps_stock_aliquot_uL
+
+Inputs.table([
+  {Component: "Lipopolysaccharide (LPS) from *Escherichia coli*, lyophilized", Amount: `${fmt(lps_mass_mg,1)} mg` },
+  {Component: "RPMI/FCS media", Amount: `${fmt(lps_rpmi_mL,1)} mL` },
+  {Component: "Resulting stock concentration", Amount: `${fmt(lps_conc_mgmL,2)} mg/mL` },
+  {Component: "Single-use aliquots", Amount: `${fmt(lps_stock_aliquots,0)} aliquots of ${lps_stock_aliquot_uL} µL, −20°C` }
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Working LPS dilutions (both made fresh in RPMI/FCS)
+Two serial 1:100 dilutions from the 1 mg/mL stock, both in RPMI/FCS:
+:::
+
+```{ojs}
+//| echo: false
+lps_1x_ngmL = (lps_conc_mgmL / 100) * 1e6   // "1x dil" — mg/mL → ng/mL
+lps_2x_ngmL = (lps_1x_ngmL / 100)            // "2x dil" — further 1:100 of the 1x dilution
+
+Inputs.table([
+  {Dilution: "Stock (1x 1:100 dilution)", "Concentration": `${fmt(lps_1x_ngmL/1000,1)} µg/mL (${fmt(lps_1x_ngmL,0)} ng/mL)`, "Used for": "T-25, T-175, T-525"},
+  {Dilution: "Stock (2x 1:100 dilution)", "Concentration": `${fmt(lps_2x_ngmL,1)} ng/mL`,                                    "Used for": "24-well, 6-well"}
+], {layout: "auto"})
+```
+
+### IFNγ (interferon gamma) stock — 10 µg/mL in PBS + BSA carrier
+
+::: {.callout-note collapse="true"}
+## BSA carrier concentration — flagged discrepancy
+The source spreadsheet labels this carrier "PBS + 1% BSA," but back-calculating from the docx recipe (100 µL of 20 mg/mL BSA into a 2.0 mL final volume) gives **2 mg BSA / 2.0 mL = 0.1% w/v**, not 1%. The same 20 mg/mL BSA stock and dilution ratio is used for the IL-4 and IL-13 carriers below, which also work out to 0.1% w/v.
+
+<!-- TODO: confirm with JP whether "1% BSA" in the source spreadsheet is a labeling error (should read 0.1%) or whether a different BSA stock/volume was actually used at the bench. Presented here as "PBS + BSA carrier" pending that confirmation. -->
+:::
+
+```{ojs}
+//| echo: false
+ifng_mass_ug          = 20.0 * stock_mult
+ifng_carrier_mL        = 2.0 * stock_mult
+ifng_conc_ugmL         = ifng_mass_ug / ifng_carrier_mL
+ifng_conc_ngmL         = ifng_conc_ugmL * 1000
+ifng_small_aliquot_uL  = 20
+ifng_large_aliquot_uL  = 200
+ifng_small_aliquots    = (ifng_carrier_mL * 1000) / ifng_small_aliquot_uL
+
+Inputs.table([
+  {Component: "Recombinant human interferon gamma (IFNγ), lyophilized", Amount: `${fmt(ifng_mass_ug,1)} µg` },
+  {Component: "PBS + BSA carrier (see note above)", Amount: `${fmt(ifng_carrier_mL,2)} mL` },
+  {Component: "Resulting stock concentration", Amount: `${fmt(ifng_conc_ugmL,1)} µg/mL (${fmt(ifng_conc_ngmL,0)} ng/mL)` },
+  {Component: "Single-use aliquots", Amount: `${fmt(ifng_small_aliquots,0)} aliquots of ${ifng_small_aliquot_uL} µL (or ${ifng_large_aliquot_uL} µL large aliquots), −20°C` }
+], {layout: "auto"})
+```
+
+No further dilution is made — IFNγ is added to media directly from this stock.
+
+### IL-4 and IL-13 stocks — 10 µg/mL in PBS + BSA carrier (for M2 polarization)
+
+```{ojs}
+//| echo: false
+il4_mass_ug          = 5.0 * stock_mult
+il4_carrier_mL       = 0.5 * stock_mult
+il4_conc_ugmL        = il4_mass_ug / il4_carrier_mL
+il4_conc_ngmL        = il4_conc_ugmL * 1000
+il4_aliquot_uL       = 25
+il4_aliquots         = (il4_carrier_mL * 1000) / il4_aliquot_uL
+
+il13_mass_ug         = 2.0 * stock_mult
+il13_carrier_mL      = 0.2 * stock_mult
+il13_conc_ugmL       = il13_mass_ug / il13_carrier_mL
+il13_conc_ngmL       = il13_conc_ugmL * 1000
+il13_aliquot_uL      = 10
+il13_aliquots        = (il13_carrier_mL * 1000) / il13_aliquot_uL
+
+Inputs.table([
+  {Component: "Recombinant human interleukin-4 (IL-4), lyophilized",  Amount: `${fmt(il4_mass_ug,1)} µg`,  "PBS + BSA carrier": `${fmt(il4_carrier_mL,2)} mL`,  "Stock conc.": `${fmt(il4_conc_ugmL,1)} µg/mL`,  Aliquots: `${fmt(il4_aliquots,0)} × ${il4_aliquot_uL} µL` },
+  {Component: "Recombinant human interleukin-13 (IL-13), lyophilized", Amount: `${fmt(il13_mass_ug,1)} µg`, "PBS + BSA carrier": `${fmt(il13_carrier_mL,2)} mL`, "Stock conc.": `${fmt(il13_conc_ugmL,1)} µg/mL`, Aliquots: `${fmt(il13_aliquots,0)} × ${il13_aliquot_uL} µL` }
+], {layout: "auto"})
+```
+
+### RPMI/FCS base media (all workflows)
+
+| Component | Amount |
+|-----------|--------|
+| RPMI 1640 w/L-Glutamine-Bicarbonate | 500 mL |
+| Fetal bovine serum (FBS, heat-inactivated) | 50 mL |
+| Penicillin/Streptomycin (100×) | 5 mL |
+
+FBS and Penicillin/Streptomycin are stored as frozen aliquots (50 mL and 5 mL respectively) and thawed into RPMI as needed.
+
+---
+
+## Vessel dosing calculator
+
+This reactive table gives the volume of each working stock to add for the vessel and final concentrations configured above — used in both the Day 1 PMA treatment and the Day 5 M1/M2 polarization steps below.
+
+```{ojs}
+//| echo: false
+pma_add_uL  = pma_final_nM * (v.mL * 1000) / pma_working_stock_nM
+
+lps_stock_used_ngmL = v.lps_dilution === "2x" ? lps_2x_ngmL : lps_1x_ngmL
+lps_add_uL  = lps_final_ngmL * (v.mL * 1000) / lps_stock_used_ngmL
+
+ifng_add_uL = ifng_final_ngmL * (v.mL * 1000) / ifng_conc_ngmL
+il4_add_uL  = il4_final_ngmL  * (v.mL * 1000) / il4_conc_ngmL
+il13_add_uL = il13_final_ngmL * (v.mL * 1000) / il13_conc_ngmL
+
+Inputs.table([
+  {Reagent: "PMA (from 1:10 working stock)",  "Add per vessel": `${fmt(pma_add_uL,2)} µL`,  "Final conc.": `${pma_final_nM} nM`,   Notes: `${vessel} — ${fmt(v.mL,1)} mL culture volume` },
+  {Reagent: `LPS (from "${v.lps_dilution} dil" stock, ${fmt(lps_stock_used_ngmL,1)} ng/mL)`, "Add per vessel": `${fmt(lps_add_uL,2)} µL`, "Final conc.": `${lps_final_ngmL} ng/mL`, Notes: "M1 polarization only" },
+  {Reagent: "IFNγ (from 10 µg/mL stock)",      "Add per vessel": `${fmt(ifng_add_uL,2)} µL`, "Final conc.": `${ifng_final_ngmL} ng/mL`, Notes: "M1 polarization only" },
+  {Reagent: "IL-4 (from 10 µg/mL stock)",       "Add per vessel": `${fmt(il4_add_uL,2)} µL`,  "Final conc.": `${il4_final_ngmL} ng/mL`,  Notes: "M2 polarization only" },
+  {Reagent: "IL-13 (from 10 µg/mL stock)",      "Add per vessel": `${fmt(il13_add_uL,2)} µL`, "Final conc.": `${il13_final_ngmL} ng/mL`, Notes: "M2 polarization only" }
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Reference table (all vessels, calculator defaults)
+Vessel reference volumes and cell counts used by the calculator above — from `THP1_Polarization_Volumes.xlsx`:
+
+| Vessel | Culture volume | Seeding density | LPS dilution used |
+|--------|-----------------|------------------|--------------------|
+| 24-well | 1.0 mL | 200,000 cells | 2x dil (100 ng/mL stock) |
+| 6-well | 5.0 mL | 1,000,000 cells | 2x dil (100 ng/mL stock) |
+| T-25 | 12.5 mL | 2,500,000 cells | 1x dil (10 µg/mL stock) |
+| T-175 | 92.0 mL | 18,400,000 cells | 1x dil (10 µg/mL stock) |
+| T-525 | 276.0 mL | 55,200,000 cells | 1x dil (10 µg/mL stock) |
+:::
+
+---
+
+## M0 differentiation (PMA)
+
+### Standard workflow — 6-well plate, 25 nM PMA (from `THP1_Polarization_Protocol.docx`)
+
+::: {.callout-important}
+## Before the experiment
+Grow THP-1 cells to a density of 1×10⁶ cells/mL in RPMI/FCS media.
+:::
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Day: "Day 1", Step: "1", Action: `Add ${fmt(v.mL - (v.mL/5),1)} mL RPMI/FCS to each well` , Detail: `(4 mL/well at 6-well scale; scale by vessel)` },
+  {Day: "Day 1", Step: "2", Action: "Dilute PMA 1:10 in RPMI/FCS (100 µg/mL stock → 10 µg/mL working)", Detail: "Fresh" },
+  {Day: "Day 1", Step: "3", Action: `Add cell suspension to a final density of ~${v.cells.toLocaleString()} cells (${fmt(v.mL/5,2)} mL of 1×10⁶ cells/mL stock at 6-well scale)`, Detail: "Scale by vessel" },
+  {Day: "Day 1", Step: "4", Action: `Once settled, treat immediately with ${fmt(pma_add_uL,2)} µL of 10 µg/mL PMA working stock (final ${pma_final_nM} nM); incubate 24 h`, Detail: "37°C, 5% CO₂" },
+  {Day: "Day 2", Step: "5", Action: "Aspirate PMA-containing media; wash once with fresh RPMI/FCS (or PBS)", Detail: "—" },
+  {Day: "Day 2", Step: "6", Action: `Add ${fmt(v.mL,1)} mL fresh RPMI/FCS`, Detail: "Rest period begins" },
+  {Day: "Day 2", Step: "7", Action: "Let cells rest for 3 days before polarization", Detail: "Undisturbed, 37°C" }
+], {layout: "auto"})
+```
+
+::: {.callout-note collapse="true"}
+## Alternative final concentration noted in the source
+`THP1_Polarization_Protocol.docx` also notes that for a **100 nM** final PMA concentration (instead of the 25 nM default above), use 30.8 µL of the 10 µg/mL working stock at 6-well scale — consistent with the calculator above if you raise `pma_final_nM` to 100.
+:::
+
+### Legacy/flask-scale workflow (from `Differentiation_THP1s.docx`)
+
+::: {.callout-note}
+This is an older, vessel-agnostic write-up (originally a fill-in-the-blank bench worksheet targeting **T-175 flasks**) that predates the 6-well/day-by-day standard above. The blanks in the original are answered here by the reactive calculator — select "T-175" in **Configure experiment** to match its materials list.
+
+<!-- TODO: the original worksheet's final incubation step says "Incubate cells in T125 flask" while its Materials and Reagents list specifies "Corning® T175 flasks" — likely a typo for T-175. Presented here as T-175 to match Materials; confirm with JP if a T-125 flask was actually used. -->
+:::
+
+| Step | Action |
+|------|--------|
+| 1 | Count THP-1 cells; determine density (cells/mL) and viability (%) |
+| 2 | Determine volume of cell suspension needed for 1×10⁶ cells/mL in the target flask volume |
+| 3 | Calculate the volume of 100 µg/mL PMA stock needed for the target final PMA concentration (see calculator above) |
+| 4 | Spin down cells; resuspend in fresh RPMI/FCS media + calculated PMA volume |
+| 5 | Incubate in flask at 37°C for 72 hours |
+
+---
+
+## M1 polarization (LPS + IFNγ) — Day 5–6
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Day: "Day 5", Step: "1", Action: "Aspirate old media", Detail: "—" },
+  {Day: "Day 5", Step: "2", Action: `Add ${fmt(v.mL,1)} mL fresh RPMI/FCS to each M1 well`, Detail: "—" },
+  {Day: "Day 5", Step: "3", Action: `Add ${fmt(lps_add_uL,2)} µL LPS (from "${v.lps_dilution} dil" stock, final ${lps_final_ngmL} ng/mL)`, Detail: "See vessel calculator above" },
+  {Day: "Day 5", Step: "4", Action: `Add ${fmt(ifng_add_uL,2)} µL IFNγ (from 10 µg/mL stock, final ${ifng_final_ngmL} ng/mL)`, Detail: "Treat 24 h" },
+  {Day: "Day 6", Step: "5", Action: "Harvest M1 cells and isolate RNA", Detail: "—" }
+], {layout: "auto"})
+```
+
+## M2 polarization (IL-4 + IL-13) — Day 5–8
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Day: "Day 5", Step: "1", Action: "Aspirate old media", Detail: "—" },
+  {Day: "Day 5", Step: "2", Action: `Add ${fmt(v.mL,1)} mL fresh RPMI/FCS to each M2 well`, Detail: "—" },
+  {Day: "Day 5", Step: "3", Action: `Add ${fmt(il4_add_uL,2)} µL IL-4 (from 10 µg/mL stock, final ${il4_final_ngmL} ng/mL)`, Detail: "See vessel calculator above" },
+  {Day: "Day 5", Step: "4", Action: `Add ${fmt(il13_add_uL,2)} µL IL-13 (from 10 µg/mL stock, final ${il13_final_ngmL} ng/mL)`, Detail: "Treat 72 h" },
+  {Day: "Day 8", Step: "5", Action: "Harvest M2 cells and isolate RNA", Detail: "—" }
+], {layout: "auto"})
+```
+
+## M0 (unstimulated) arm
+
+On Day 5, M0 wells are harvested directly (RNA isolation) without any polarizing stimulus — they represent the resting-macrophage baseline for the M1/M2 comparison.
+
+---
+
+## Full timeline (reference)
+
+| Day | M0 wells | M1 wells | M2 wells |
+|-----|----------|----------|----------|
+| Before | Grow THP-1 to 1×10⁶ cells/mL | — | — |
+| 1 | Plate + PMA treatment (24 h) | Plate + PMA treatment (24 h) | Plate + PMA treatment (24 h) |
+| 2 | Wash; fresh RPMI/FCS; rest begins | Wash; fresh RPMI/FCS; rest begins | Wash; fresh RPMI/FCS; rest begins |
+| 5 | **Harvest, isolate RNA** | Treat with LPS + IFNγ (24 h) | Treat with IL-4 + IL-13 (72 h) |
+| 6 | — | **Harvest, isolate RNA** | — |
+| 8 | — | — | **Harvest, isolate RNA** |
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Pre-treatment THP-1 density/viability | ≥90% viable, log-phase growth | | |
+| Post-PMA (Day 2) morphology | Adherent, spread macrophage-like morphology | | |
+| Post-rest (Day 5) morphology | Stable adherent M0 monolayer, no detachment | | |
+| M1 morphology (Day 6) | Rounded, activated morphology | | |
+| M2 morphology (Day 8) | Elongated/spindle activated morphology | | |
+| RNA yield/quality (all arms) | RIN ≥ 7 | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Genin M, Clément F, Fattaccioli A, Raes M, Michiels C. "M1 and M2 macrophages derived from THP-1 cells differentially modulate the response of cancer cells to etoposide." *BMC Cancer.* 2015.
+
+Protocol (`THP1_Polarization_Protocol.docx`) adapted by Natalie Hewitt Valentin, rewritten by Katie Metz.
+
+<!-- TODO: Differentiation_THP1s.docx (legacy/flask-scale workflow) has no attribution or citation in the source document — confirm origin with JP. -->
+Protocol (`Differentiation_THP1s.docx`): source not specified in provided document.

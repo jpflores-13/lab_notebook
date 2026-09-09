@@ -1,0 +1,285 @@
+---
+title: "Fixing & Staining Adherent Cells for Imaging"
+subtitle: "Ibidi 8-well immunofluorescence protocol"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Adherent cells are cultured in an Ibidi µ-treated 8-well coverslip culture system, fixed in 4% formaldehyde, and — if primary/secondary antibody staining is needed — permeabilized, blocked, stained, and mounted for fluorescent microscopy. If imaging without antibodies, fixed cells can go straight to mounting.
+:::
+
+::: {.callout-important}
+## Before starting
+- All fixation steps (formaldehyde) must be performed in a **fume hood**.
+- You must be trained by the imaging core before using the fluorescent microscope.
+- Keep Blocking buffer, Wash buffer, Permeabilization solution, and 0.1% Bovine Serum Albumin (BSA) in Phosphate-Buffered Saline (PBS) refrigerated at 4°C.
+- Fixed (unstained) cells can be stored at 4°C up to a week after the post-fix PBS washes.
+:::
+
+---
+
+## Materials & Reagents
+
+| Item | Vendor | Cat # |
+|------|--------|-------|
+| Ibidi µ-treated 8-well coverslip culture system | Fisher Scientific | 50-305-795 |
+| Formaldehyde, 16% | Fisher Scientific | 28908 |
+| Dulbecco's Phosphate-Buffered Saline (DPBS), 1X, w/o Ca²⁺/Mg²⁺ | Sigma-Aldrich | PBS2541 |
+| Tween-20 | Sigma-Aldrich | P9416-100ML |
+| Triton X-100, 10% | Sigma-Aldrich | 93443-100ML |
+| Bovine Serum Albumin (BSA) | — | — |
+| Primary antibody | — | — |
+| Secondary antibody | — | — |
+| Mounting media (with or without 4′,6-diamidino-2-phenylindole, DAPI) | — | — |
+
+**Equipment:** fume hood, aspirator/vacuum, nutator/rocker, cell culture hood, fluorescent microscope (imaging-core trained use only).
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_wells        = Inputs.number({label: "Number of Ibidi wells", value: 8, min: 1, max: 96, step: 1})
+viewof batch_vol_mL    = Inputs.number({label: "Working-buffer batch volume (mL) — Blocking / Wash / Permeabilization / 4% fixative", value: 50, min: 5, step: 5})
+viewof diluent_vol_mL  = Inputs.number({label: "0.1% BSA in PBS diluent — standing-stock batch volume (mL)", value: 500, min: 50, step: 50})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+md`**${n_wells} well(s) · ${fmt(batch_vol_mL, 0)} mL working-buffer batches · ${fmt(diluent_vol_mL, 0)} mL diluent stock**`
+```
+
+::: {.callout-tip collapse="true"}
+## Why two separate batch inputs?
+Blocking buffer, Wash buffer, Permeabilization solution, and the 4% formaldehyde fixative are made fresh in working-size batches (source default ~50 mL) and refrigerated. The 0.1% BSA/PBS diluent is a standing stock used to dilute both primary and secondary antibodies — the source makes this one in bulk (500 mL) since it's consumed slowly, a few hundred µL at a time, across many staining runs. Scale either input independently; the ratios below hold regardless of batch size.
+:::
+
+---
+
+## Stock solutions
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+All four working buffers scale linearly off the source recipe's own ratio, preserving each stated final concentration:
+
+$$V_{component} = V_{batch} \times \frac{V_{component,\ source}}{V_{total,\ source}}$$
+
+- Blocking buffer (2% BSA in PBS): 1 g BSA / 50 mL → BSA (g) $= 0.02 \times V_{batch}$
+- Wash buffer (0.05% Tween-20 in PBS): 25 µL Tween-20 / 50 mL → Tween-20 (µL) $= 0.5 \times V_{batch}$
+- Permeabilization solution (0.5% Triton X-100 in PBS, from 10% stock): 2.5 mL 10% Triton stock / 50 mL → stock (mL) $= 0.05 \times V_{batch}$
+- 4% formaldehyde fixative (from 16% stock): 10 mL 16% stock / 40 mL → stock (mL) $= 0.25 \times V_{batch}$
+- 0.1% BSA in PBS (diluent): 0.5 g BSA / 500 mL → BSA (g) $= 0.001 \times V_{diluent}$
+:::
+
+**Blocking buffer (2% BSA in 1X PBS)**
+
+```{ojs}
+//| echo: false
+block_bsa_g = 0.02 * batch_vol_mL
+block_pbs_mL = batch_vol_mL * (49 / 50)   // preserves the source's 49 mL PBS : 1 g BSA : 50 mL total ratio
+
+Inputs.table([
+  {Component: "1X Phosphate-Buffered Saline (PBS)", "Amount": `${fmt(block_pbs_mL)} mL`},
+  {Component: "Bovine Serum Albumin (BSA)",          "Amount": `${fmt(block_bsa_g)} g`}
+], {layout: "auto"})
+```
+
+Gently rock to dissolve.
+
+**Wash buffer (1X PBS-T, 0.05% Tween-20)**
+
+```{ojs}
+//| echo: false
+wash_tween_uL = 0.5 * batch_vol_mL
+
+Inputs.table([
+  {Component: "1X Phosphate-Buffered Saline (PBS)", "Amount": `to ${fmt(batch_vol_mL)} mL`},
+  {Component: "Tween-20, 100%",                       "Amount": `${fmt(wash_tween_uL)} µL`}
+], {layout: "auto"})
+```
+
+**Permeabilization solution (0.5% Triton X-100 in 1X PBS)**
+
+```{ojs}
+//| echo: false
+perm_triton_mL = 0.05 * batch_vol_mL
+perm_pbs_mL    = batch_vol_mL - perm_triton_mL
+
+Inputs.table([
+  {Component: "1X Phosphate-Buffered Saline (PBS)", "Amount": `${fmt(perm_pbs_mL)} mL`},
+  {Component: "Triton X-100, 10%",                    "Amount": `${fmt(perm_triton_mL)} mL`}
+], {layout: "auto"})
+```
+
+**0.1% BSA in 1X PBS (antibody diluent — standing stock)**
+
+```{ojs}
+//| echo: false
+diluent_bsa_g = 0.001 * diluent_vol_mL
+diluent_pbs_mL = diluent_vol_mL   // BSA mass is a negligible addition to the 500 mL PBS base, per source
+
+Inputs.table([
+  {Component: "1X Phosphate-Buffered Saline (PBS)", "Amount": `${fmt(diluent_pbs_mL)} mL`},
+  {Component: "Bovine Serum Albumin (BSA)",          "Amount": `${fmt(diluent_bsa_g)} g`}
+], {layout: "auto"})
+```
+
+**4% formaldehyde fixative (diluted from 16% stock)**
+
+```{ojs}
+//| echo: false
+fix_formaldehyde_mL = 0.25 * batch_vol_mL
+fix_pbs_mL          = batch_vol_mL - fix_formaldehyde_mL
+
+Inputs.table([
+  {Component: "Formaldehyde, 16%",                   "Amount": `${fmt(fix_formaldehyde_mL)} mL`},
+  {Component: "1X Phosphate-Buffered Saline (PBS)",  "Amount": `${fmt(fix_pbs_mL)} mL`}
+], {layout: "auto"})
+```
+
+All four working buffers keep refrigerated at 4°C.
+
+---
+
+## Antibody master mixes
+
+::: {.callout-note collapse="true"}
+## Math audit — antibody master mixes
+Both dilutions scale directly with the number of wells, at the source's stated per-well volumes (no additional pipetting excess is specified for either antibody step in the source):
+
+$$V_{Ab} = V_{Ab,\ per\ well} \times N_{wells} \qquad V_{diluent} = V_{diluent,\ per\ well} \times N_{wells}$$
+
+Primary: 1:100 dilution, 2 µL antibody + 198 µL 0.1% BSA/PBS per well (200 µL/well total) — matches the source's 6-well worked example (12 µL Ab + 1188 µL diluent) exactly.
+
+Secondary: 1:2000 dilution, stated as "0.1 µL antibody + 200 µL diluent, 200 µL per well" — but 0.1 + 200 = 200.1, not 200. The source's own 25-well worked example (2.5 µL Ab + 4997 µL diluent) only reconciles if the per-well diluent is actually **199.9 µL** (200 µL total − 0.1 µL antibody), which is what's used below so that each well totals exactly 200 µL.
+:::
+
+**Primary antibody (1:100, 2 µL Ab + 198 µL diluent per well)**
+
+```{ojs}
+//| echo: false
+primary_ab_uL       = 2 * n_wells
+primary_diluent_uL  = 198 * n_wells
+
+Inputs.table([
+  {Component: "Primary antibody",              "Per well (µL)": 2,   "Total (µL)": fmt(primary_ab_uL)},
+  {Component: "0.1% BSA in 1X PBS",             "Per well (µL)": 198, "Total (µL)": fmt(primary_diluent_uL)},
+  {Component: "Total volume",                   "Per well (µL)": 200, "Total (µL)": fmt(primary_ab_uL + primary_diluent_uL)}
+], {layout: "auto"})
+```
+
+Incubate 3 hr at room temperature, or overnight at 4°C.
+
+**Secondary antibody (1:2000, 0.1 µL Ab + 199.9 µL diluent per well)**
+
+```{ojs}
+//| echo: false
+secondary_ab_uL      = 0.1 * n_wells
+secondary_diluent_uL = 199.9 * n_wells
+
+Inputs.table([
+  {Component: "Secondary antibody",             "Per well (µL)": 0.1,   "Total (µL)": fmt(secondary_ab_uL, 2)},
+  {Component: "0.1% BSA in 1X PBS",              "Per well (µL)": 199.9, "Total (µL)": fmt(secondary_diluent_uL, 1)},
+  {Component: "Total volume",                    "Per well (µL)": 200,   "Total (µL)": fmt(secondary_ab_uL + secondary_diluent_uL, 1)}
+], {layout: "auto"})
+```
+
+Incubate 1 hr at room temperature, in the dark.
+
+---
+
+## Protocol
+
+### Culture & seeding
+
+| Step | Action | Volume |
+|------|--------|--------|
+| 1 | Culture cells until ~80% confluent in standard adherent plates | — |
+| 2 | Vacuum media, wash with 1X PBS, vacuum PBS, lift cells with trypsin | — |
+| 3 | Pipette cells into Ibidi chamber wells; incubate overnight (or seed and grow to desired confluence) | 0.3 mL/well |
+
+### Fixation (~10–20 min)
+
+::: {.callout-warning}
+## Fume hood required
+All formaldehyde steps must be performed in a fume hood.
+:::
+
+```{ojs}
+//| echo: false
+fix_total_mL = 0.5 * n_wells   // assumed volume/well matches permeabilization/blocking step size; adjust if your wells differ
+
+Inputs.table([
+  {Step: "4", Action: "Remove media, wash 1X PBS, fix in 4% formaldehyde, 10 min RT",       Detail: "In fume hood; increase to 20 min if needed"},
+  {Step: "5", Action: "Discard formaldehyde solution appropriately; wash wells 1X PBS ×3",    Detail: "—"}
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Not staining with antibodies?
+If imaging without antibodies, skip permeabilization/blocking/staining below and go straight to mounting.
+:::
+
+### Permeabilization, blocking & staining
+
+```{ojs}
+//| echo: false
+perm_total_mL  = 0.5 * n_wells
+block_total_mL = 0.5 * n_wells
+
+Inputs.table([
+  {Step: "6", Action: "Permeabilize: add permeabilization solution, 10 min RT (up to 30 min if needed)", Volume: `0.5 mL/well · ${fmt(perm_total_mL)} mL total for ${n_wells} well(s)`},
+  {Step: "7", Action: "Discard; wash 1X PBS ×3",                                                           Volume: "—"},
+  {Step: "8", Action: "Block: add blocking buffer, 30 min RT",                                             Volume: `0.5 mL/well · ${fmt(block_total_mL)} mL total for ${n_wells} well(s)`},
+  {Step: "9", Action: "Incubate with primary antibody master mix (above)",                                 Volume: "200 µL/well"},
+  {Step: "10", Action: "Discard; wash with Wash buffer ×3",                                                Volume: "—"},
+  {Step: "11", Action: "Incubate with secondary antibody master mix (above), dark",                        Volume: "200 µL/well"},
+  {Step: "12", Action: "Wash with Wash buffer ×3, then 1X PBS ×1",                                         Volume: "—"}
+], {layout: "auto"})
+```
+
+### Mounting & imaging
+
+| Step | Action |
+|------|--------|
+| 13 | Mount in mounting medium (± DAPI); carefully place coverslip, avoiding air bubbles |
+| 14 | Let slide sit RT overnight in the dark; image the following day (or store at 4°C for several days before imaging) |
+
+::: {.callout-important}
+## Checklist
+- [ ] Fixation time: _______ min
+- [ ] Permeabilized: yes / no
+- [ ] Primary antibody: _______ — dilution used: _______
+- [ ] Secondary antibody: _______ — dilution used: _______
+- [ ] Imaged on: _______
+:::
+
+::: {.callout-tip collapse="true"}
+## Protocol history
+Initial protocol written by ZD (1/27/23); revised for fixing in media and seeding cultures (2/28/23); ammonium chloride (NH₄Cl) quench step removed (6/21/23); blocking extended to 30 min and permeabilization set to 0.5% Triton X-100 to match the Young lab's MED1 antibody protocol (7/12/23).
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-fix cell morphology | Intact, adherent | | |
+| Post-permeabilization | No cell loss | | |
+| Primary/secondary staining | Specific signal, low background | | |
+| Mounted slide | No air bubbles under coverslip | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Protocol: source not specified in provided document. Written by ZD (1/27/23), revised through 7/12/23; transcribed by JP Flores.

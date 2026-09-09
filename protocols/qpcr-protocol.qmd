@@ -1,0 +1,157 @@
+---
+title: "TaqMan qPCR Protocol"
+subtitle: "Plate setup + reactive mastermix/plate calculator (qPCR.docx + qPCR_Sample_Sheet.xlsx)"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+TaqMan-based qPCR from diluted cDNA: dilute cDNA 1:5, build one master mix per target gene (primer/probe + 2X TaqMan PCR Master Mix + water), load 2 µL diluted cDNA (or 2 µL water for no-template controls) into each well followed by 18 µL master mix, then spin and run. This page merges two near-identical source documents (`qPCR.docx` and `Protocol_for_qPCR.docx` — confirmed by diff to differ only in paragraph styling, not content) and embeds the logic of `qPCR_Sample_Sheet.xlsx` as a reactive calculator below, generalized to any samples/genes/replicates rather than the specific genes (IL1B, β-Actin, AP-1) and 0h–24h timepoint series used as the worked example in the source spreadsheet.
+:::
+
+::: {.callout-important}
+## Before starting
+- Get ice; thaw cDNA samples.
+- While thawing, prepare PCR strip tubes for 1:5 cDNA dilutions.
+- Know your sample count, target gene count, and desired replicate/control counts before building master mixes (see calculator below).
+- Pipette diluted cDNA and water controls into the **very bottom** of each well; pipette master mix against the **side** of the well.
+:::
+
+---
+
+## Configure qPCR run
+
+```{ojs}
+//| echo: false
+viewof n_samples        = Inputs.number({label: "Number of biological samples (excluding water controls)", value: 24, min: 1, step: 1})
+viewof n_replicates      = Inputs.number({label: "Replicates per sample × gene (wells)", value: 2, min: 1, step: 1})
+viewof gene_names_text   = Inputs.text({label: "Target gene names (comma-separated, optional — leave blank to use generic names)", value: "", placeholder: "e.g. IL1B, B-Actin, AP-1"})
+viewof n_genes           = Inputs.number({label: "Number of target genes (used only if names above are blank)", value: 3, min: 1, step: 1})
+viewof n_water_controls  = Inputs.number({label: "No-template (water) control wells per gene", value: 2, min: 0, step: 1})
+viewof excess            = Inputs.number({label: "Master mix excess multiplier", value: 1.25, min: 1, max: 2, step: 0.05})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+genes = gene_names_text.trim()
+  ? gene_names_text.split(",").map(s => s.trim()).filter(Boolean)
+  : Array.from({length: n_genes}, (_, i) => `Gene ${i + 1}`)
+
+wells_per_gene = n_samples * n_replicates + n_water_controls
+total_wells    = wells_per_gene * genes.length
+
+md`**${n_samples} sample(s) × ${n_replicates} replicate(s) + ${n_water_controls} water control(s) = ${wells_per_gene} well(s)/gene × ${genes.length} gene(s) = ${total_wells} total well(s)** · excess ×${excess}`
+```
+
+```{ojs}
+//| echo: false
+total_wells > 96
+  ? md`::: {.callout-warning}
+**Exceeds one 96-well plate.** ${total_wells} total wells requested — split across multiple 96-well plates, or use a 384-well plate/block if your instrument supports it.
+:::`
+  : md``
+```
+
+::: {.callout-tip collapse="true"}
+## Example use case from the source spreadsheet
+The original `qPCR_Sample_Sheet.xlsx` worked example ran a 6-timepoint series (0h, 0.5h, 1h, 4h, 6h, 24h) across 3 CRISPR'd clones + 1 WT control, each in duplicate, against 3 genes (IL1B, β-Actin, AP-1/FOS) — i.e. 4 conditions × 6 timepoints = 24 samples, 2 replicates, 3 genes, plus water and extra controls. Reproduce that specific layout by setting samples = 24, replicates = 2, genes = "IL1B, B-Actin, AP-1". This is mentioned as an example only — nothing about gene identity or timepoints is hardcoded into the calculator itself.
+:::
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+**Per-well TaqMan reaction (20 µL total, fixed ratio — single source of truth below):**
+
+$$V_{well} = V_{cDNA} + V_{probe} + V_{TaqMan\;MM} + V_{water} = 2 + 1 + 10 + 7 = 20\;\mu L$$
+
+**Wells needed per gene** (includes water controls, which use the same master mix but 2 µL water instead of cDNA):
+
+$$W_{gene} = N_{samples} \times N_{replicates} + N_{water\;controls}$$
+
+**Master mix per gene** (primer/probe + TaqMan MM + water only — cDNA/water is pipetted directly into the well, not part of the master mix):
+
+$$V_{component,\;total} = V_{component,\;well} \times W_{gene} \times excess$$
+
+This reproduces the source spreadsheet's `EXCESS × replicates × SUM(per-well column)` formula, generalized so `replicates` is a single user-supplied parameter (technical + biological wells per sample) rather than a second hardcoded multiplier layered on top of the per-well list.
+:::
+
+---
+
+## cDNA dilution (1:5)
+
+```{ojs}
+//| echo: false
+md`**${n_samples} dilution tube(s):** add 20 µL H₂O + 5 µL cDNA to each (1:5 dilution).`
+```
+
+---
+
+## Master mix per gene
+
+```{ojs}
+//| echo: false
+cdna_vol   = 2    // µL diluted cDNA per well (pipetted directly, not part of master mix)
+probe_vol  = 1    // µL TaqMan primer/probe (20X) per well
+taqman_vol = 10   // µL 2X TaqMan PCR Master Mix per well
+water_vol  = 7    // µL water per well (part of the combined master mix)
+well_total = cdna_vol + probe_vol + taqman_vol + water_vol   // = 20 µL
+
+Inputs.table(
+  genes.map(g => ({
+    Gene: g,
+    "Wells needed (incl. water ctrls)": wells_per_gene,
+    "Primer/Probe 20X total (µL)": fmt(probe_vol  * wells_per_gene * excess),
+    "2X TaqMan PCR Master Mix total (µL)": fmt(taqman_vol * wells_per_gene * excess),
+    "Water total (µL)": fmt(water_vol * wells_per_gene * excess),
+    "Combined master mix total (µL)": fmt((probe_vol + taqman_vol + water_vol) * wells_per_gene * excess)
+  })),
+  {layout: "auto"}
+)
+```
+
+```{ojs}
+//| echo: false
+grand_total_mm = genes.length * (probe_vol + taqman_vol + water_vol) * wells_per_gene * excess
+
+md`**Grand total master mix across all ${genes.length} gene(s): ${fmt(grand_total_mm)} µL**`
+```
+
+---
+
+## Plate setup
+
+| Step | Action |
+|------|--------|
+| 1 | Carefully add 2 µL diluted cDNA to its respective well — pipette into the very bottom of the well |
+| 2 | Add 2 µL H₂O to the no-template control wells |
+| 3 | Carefully add 18 µL of the appropriate gene's master mix to each well — pipette against the side of the well |
+| 4 | Cover the plate; vortex |
+| 5 | Spin at 2000×g for 5 min |
+| 6 | Place into qPCR machine |
+
+::: {.callout-tip collapse="true"}
+## Per-well volume check
+2 µL (cDNA or water) + 18 µL master mix = 20 µL total per well, matching the 20 µL per-well reaction table above.
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| cDNA dilution | Clear, no precipitate | | |
+| Master mix (per gene) | Homogeneous, no bubbles | | |
+| No-template controls | No amplification / undetermined Ct | | |
+| Amplification curves | Sigmoidal, expected Ct range | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Source: `qPCR.docx` (used as base — `Protocol_for_qPCR.docx` confirmed to be a paragraph-style duplicate of the same content) and `qPCR_Sample_Sheet.xlsx`. No external kit/paper citation given in either source document.

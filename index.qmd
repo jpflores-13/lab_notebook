@@ -1,65 +1,46 @@
 ---
-title: "Welcome!"
-subtitle: ""
+title: "Lab notebook"
 date: today
 ---
 
-A living record of wet lab experiments and protocols.
-Not a computational notebook — that lives separately.
+This is a living record of wet lab experiments, protocols, and reading notes.
+It is not a computational notebook, that lives separately.
 Every experiment entry is one `.qmd` file per run, committed to git when complete.
 
 ## Quick links
 
 | Section | What's in it |
 |---------|-------------|
-| [Protocols](protocols/index.qmd) | Interactive calculators — set inputs, volumes update live, print to PDF |
+| [Protocols](protocols/index.qmd) | Shiny QMDs — configure inputs, print to PDF, take to bench |
 | [Experiments](experiments/index.qmd) | One entry per experiment run, filed by date |
 
 ## How to use this notebook
 
-**Printing a protocol:**
-
-Open any protocol page, set your sample count and parameters — all volumes update
-instantly in the browser. Hit **🖨 Print / Save as PDF** for a bench copy.
-
 **Starting a new experiment:**
 
 ```bash
+# Copy the relevant template
 cp experiments/_templates/HiC_entry_template.qmd \
    experiments/$(date +%Y-%m-%d)_HiC-[target]-[celltype].qmd
-```
 
-Fill in each day's section at the bench. When the experiment is fully done:
+# Open in Positron and fill in the planning section
+# Then each evening: fill in that day's section, save
 
-```bash
+# When the experiment is fully done:
 git add experiments/YYYY-MM-DD_HiC-target-celltype.qmd
 git commit -m "Hi-C [target] [celltype] — [one-line result summary]"
-git push
+```
+
+**Printing a protocol:**
+
+```bash
+quarto serve protocols/HiC_protocol.qmd
+# Configure Shiny inputs in browser → Cmd+P → Save as PDF
 ```
 
 **Rebuilding the site:**
 
 ```bash
-quarto render && git add docs/ && git commit -m "rebuild" && git push
-```
-
-## Recent experiments
-
-```{r}
-#| output: asis
-library(fs)
-library(tidyverse)
-
-entries <- dir_ls("experiments", glob = "*.qmd", recurse = FALSE) |>
-  path_file() |>
-  discard(~ str_starts(., "_") | str_starts(., "index"))
-
-if (length(entries) == 0) {
-  cat("_No experiment entries yet. Run your first experiment!_\n")
-} else {
-  entries |>
-    sort(decreasing = TRUE) |>
-    head(10) |>
-    walk(~ cat(paste0("- [", path_ext_remove(.), "](experiments/", ., ")\n")))
-}
+quarto render
+# Open _site/index.html in browser
 ```

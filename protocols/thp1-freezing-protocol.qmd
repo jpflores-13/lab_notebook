@@ -1,0 +1,123 @@
+---
+title: "THP-1 Freezing Protocol"
+subtitle: "Cryopreservation for liquid nitrogen storage"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+THP-1 culture stocks are pelleted, resuspended in freezing media (90% Fetal Bovine Serum (FBS) / 10% Dimethyl Sulfoxide (DMSO)), aliquoted into cryogenic storage vials, cooled at a controlled rate in a Mr. Frosty freezing container at −80°C for 24 hr, then moved to liquid nitrogen (LN₂) storage.
+:::
+
+::: {.callout-important}
+## Before starting
+- Prepare freezing media stock under the hood.
+- Cap cryovials carefully — do not touch the internal thread to any surface.
+:::
+
+---
+
+## Materials & Reagents
+
+| Item | Vendor | Cat # |
+|------|--------|-------|
+| THP-1 cells | ATCC | TIB-202 |
+| Fetal Bovine Serum (FBS), heat-inactivated by manufacturer, frozen in 50 mL aliquots | Thermo Fisher Scientific (Gibco™) | 10500064 |
+| Dimethyl Sulfoxide (DMSO) | Fisher Scientific | BP231-100 |
+| Cryogenic storage vials, 2.0 mL, internally threaded, round-bottom | Fisherbrand™ | 12-567-501 |
+| Mr. Frosty Freezing Container | Fisher Scientific | 15-350-50 |
+| Isopropanol | Fisher Scientific | 2618-500 |
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_vials         = Inputs.number({label: "Number of cryovials to freeze", value: 4, min: 1, step: 1})
+viewof cells_per_vial_M = Inputs.number({label: "Cells per vial (×10⁶)", value: 5, min: 1, step: 0.5})
+viewof excess_pct       = Inputs.number({label: "Extra overage on freezing media (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+total_cells_M = n_vials * cells_per_vial_M
+scale         = n_vials * (1 + excess_pct / 100)
+
+md`**${n_vials} vial(s) · ${cells_per_vial_M}M cells/vial (${fmt(total_cells_M, 1)}M total) · ${excess_pct}% overage**`
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+Freezing media is aliquoted at 1 mL per vial (source example: "9 mL FBS + 1 mL DMSO" = 10 vials' worth at 90:10):
+
+$$V_{total} = 1\;mL \times N_{vials} \times (1+overage)$$
+$$V_{FBS} = 0.90 \times V_{total} \qquad V_{DMSO} = 0.10 \times V_{total}$$
+:::
+
+**Freezing media (90% FBS / 10% DMSO)**
+
+```{ojs}
+//| echo: false
+freeze_total_mL = 1 * scale
+freeze_fbs_mL   = 0.90 * freeze_total_mL
+freeze_dmso_mL  = 0.10 * freeze_total_mL
+
+Inputs.table([
+  {Component: "Fetal Bovine Serum (FBS)",   "Per vial (mL)": 0.90, "Total (mL)": fmt(freeze_fbs_mL)},
+  {Component: "Dimethyl Sulfoxide (DMSO)",  "Per vial (mL)": 0.10, "Total (mL)": fmt(freeze_dmso_mL)},
+  {Component: "Total",                       "Per vial (mL)": 1.00, "Total (mL)": fmt(freeze_total_mL)}
+], {layout: "auto"})
+```
+
+Prepare under the hood.
+
+---
+
+## Protocol (~40 min + 24 hr at −80°C)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Step: "1", Action: "Determine cell density", Detail: "—"},
+  {Step: "2", Action: `Transfer culture for ~${fmt(total_cells_M, 1)}M cells total into sterile 50 mL conical(s)`, Detail: `${cells_per_vial_M}M cells/vial × ${n_vials} vial(s)`},
+  {Step: "3", Action: "Centrifuge 1200 RPM (300×g), 5 min, room temperature", Detail: "—"},
+  {Step: "4", Action: "Pour off supernatant; resuspend pellet in freezing media", Detail: `${fmt(freeze_total_mL)} mL total (1 mL/vial)`},
+  {Step: "5", Action: "Aliquot 1 mL cell suspension per cryovial; cap carefully", Detail: "Do not touch internal thread to any surface"},
+  {Step: "6", Action: "Place vials into Mr. Frosty filled with isopropanol", Detail: "—"},
+  {Step: "7", Action: "Close Mr. Frosty; place at −80°C for 24 hr", Detail: "Controlled-rate cooling"},
+  {Step: "8", Action: "Transfer vials from Mr. Frosty to LN₂ storage (Locator Jr.)", Detail: "After 24 hr"}
+], {layout: "auto"})
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] Cell density/count recorded: _______
+- [ ] Vials capped without touching internal thread
+- [ ] Mr. Frosty placed at −80°C at: _______
+- [ ] Transferred to LN₂ storage at: _______
+:::
+
+---
+
+## QC log
+
+| Vial # | Cells frozen | Passage # | Viability at freeze | Notes |
+|--------|--------------|-----------|----------------------|-------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Protocol written by Kamisha Woolery.
+
+<!-- Source note: two near-identical source documents (Freezing_Protocol_THP1.docx and Freezing_THP1.docx) were found for this protocol — their body text is word-for-word identical (verified by diff). This page consolidates them into a single source. -->

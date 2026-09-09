@@ -1,0 +1,334 @@
+---
+title: "iPSC Culture Protocol"
+subtitle: "Matrigel coating, thawing, passaging, and freezing of human iPSCs in TeSR-E8"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Human iPSCs are maintained on Matrigel-coated cultureware in TeSR-E8 media and passaged non-enzymatically (no Dispase). This page combines four source documents into one reference: **Matrigel coating** (`iPSC_Matrigel.docx`), **thawing** (`iPSC_Thawing.docx`), **passaging** (`iPSC_Passaging.docx` — two methods: EDTA and ReLeSR), and **freezing** (`iPSC_Freezing.docx` — two methods: EDTA/DMSO and ReLeSR/CryoStor10).
+:::
+
+::: {.callout-important}
+## Before starting — the 15/45 incubator rule
+This rule recurs in every source document and applies throughout **all** sections below:
+
+> Every time iPSCs come out of the incubator, set a timer for **15 minutes (up to 20 minutes)**. After that, cells must go back into the incubator for **at least 45 minutes** before being removed again. Uneven distribution of aggregates, or extended time outside the incubator, increases spontaneous differentiation.
+
+Other standing rules:
+
+- Warm TeSR-E8 to room temperature (15–25°C) before use — **never** in a 37°C water bath.
+- Use 2 mL serological pipettes (not P1000 tips) when handling cell aggregates, to minimize aggregate breakage.
+- Enzymatic dissociation reagents (e.g. Dispase) are **not** recommended with TeSR-E8 — this protocol uses only non-enzymatic methods (EDTA or ReLeSR).
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_wells = Inputs.number({label: "Number of 6-well-plate wells being processed", value: 6, min: 1, step: 1})
+viewof n_vials = Inputs.number({label: "Number of cryovials (thawing / freezing)", value: 1, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+md`**${n_wells} well(s) (coating/passaging/freezing scale) · ${n_vials} vial(s) (thawing/freezing scale)** — all master volumes below scale from these two inputs; edit and every downstream table updates.`
+```
+
+---
+
+## Matrigel coating
+
+::: {.callout-tip collapse="true"}
+## Why the aliquot volume isn't a fixed number
+Matrigel's protein concentration varies lot to lot, so the volume of a thawed aliquot needed to reach a given final concentration is lot-dependent. Enter your current lot's stock concentration below (from its Certificate of Analysis) and the calculator derives the correct aliquot volume — never assume a previous lot's number still applies.
+:::
+
+```{ojs}
+//| echo: false
+viewof matrigel_target_mgmL = Inputs.number({label: "Target final Matrigel concentration (mg/mL) — 0.35 for iPSC, 1.0 for microglia differentiation", value: 0.35, min: 0.05, step: 0.05})
+viewof matrigel_lot_mgmL    = Inputs.number({label: "Matrigel lot stock concentration (mg/mL, from Certificate of Analysis)", value: 9.0, min: 1, step: 0.1})
+```
+
+```{ojs}
+//| echo: false
+matrigel_soln_mL_per_well = 1.5
+matrigel_total_soln_mL    = matrigel_soln_mL_per_well * n_wells
+matrigel_aliquot_mL       = matrigel_target_mgmL * matrigel_total_soln_mL / matrigel_lot_mgmL
+matrigel_dmemf12_mL       = matrigel_total_soln_mL - matrigel_aliquot_mL
+
+Inputs.table([
+  {Component: "Total coating solution needed", Amount: `${fmt(matrigel_total_soln_mL,2)} mL (${matrigel_soln_mL_per_well} mL/well × ${n_wells} wells)`},
+  {Component: "Matrigel aliquot to thaw",       Amount: `${fmt(matrigel_aliquot_mL,3)} mL`},
+  {Component: "DMEM/F12 to dilute to volume",   Amount: `${fmt(matrigel_dmemf12_mL,2)} mL`}
+], {layout: "auto"})
+```
+
+::: {.callout-note collapse="true"}
+## mTeSR1 Certificate-of-Analysis shortcut
+If using with mTeSR1 media, the manual's own example aliquot size is typically 270–350 µL per 25 mL DMEM/F12 — follow the dilution factor printed on that lot's Certificate of Analysis rather than the calculator above if the two disagree.
+:::
+
+### Making single-use Matrigel aliquots
+
+| Day | Step |
+|-----|------|
+| −1 | Thaw Matrigel by submerging the vial in ice, in a 4°C fridge, overnight. Pre-cool tubes and pipette tips. |
+| 0 | Swirl the thawed vial to disperse evenly; keep on ice. Spray the Matrigel container and ice bucket with 70% ethanol before placing in the hood. Switch tips/pipettes whenever Matrigel clogs. Refreeze aliquots immediately after making them. |
+
+::: {.callout-tip collapse="true"}
+## Sizing aliquots for different final concentrations
+Per Justin Brumbaugh: for standard iPSC culture, freeze pure Matrigel aliquots sized to coat 2× 6-well plates at 1.5 mL/well, final 0.35 mg/mL. For microglia differentiation, the *iPSC-to-Microglia 2.0* paper's protocol uses 1 mg/mL final — size aliquots accordingly using the calculator above with `matrigel_target_mgmL` set to 1.0.
+:::
+
+### Using a Matrigel aliquot to coat plates
+
+| Day | Step |
+|-----|------|
+| −1 | Thaw one aliquot on ice in a 4°C fridge overnight. Pre-cool tips/pipettes. |
+| 0 | Add the aliquot to the calculated volume of DMEM/F12 (table above) to reach the target concentration. Spread 1.5 mL Matrigel solution per well of a 6-well plate with a pre-cooled pipette (switch pipette if clogging). Incubate the coated plate at room temperature (15–25°C) for **≥1 hour** before use. |
+
+::: {.callout-warning}
+## Do not scratch the coating
+Aspirate the remaining liquid just before use, taking care that the pipette tip does not scratch the coated surface. Store coated plates with the liquid still on (not aspirated) in the incubator for up to 1 week, or until dry patches start to appear — do **not** store in the fridge, as its gas environment differs from the incubator.
+:::
+
+---
+
+## Thawing
+
+::: {.callout-important}
+## 1 hour before, or the day before
+Coat 2 wells of a 6-well plate with Matrigel (see above) per cryovial being thawed.
+:::
+
+```{ojs}
+//| echo: false
+viewof dropwise_teSR_mL_per_vial = Inputs.number({label: "Warm TeSR-E8 added dropwise per vial (mL, source range 5–7)", value: 6, min: 5, max: 7, step: 0.5})
+```
+
+```{ojs}
+//| echo: false
+thaw_dropwise_total_mL = dropwise_teSR_mL_per_vial * n_vials
+thaw_resuspend_total_mL = 1 * n_vials
+thaw_wells_needed = 2 * n_vials
+
+Inputs.table([
+  {Item: "Wells to pre-coat with Matrigel", Amount: `${thaw_wells_needed} wells (2/vial)`},
+  {Item: "Warm TeSR-E8 for dropwise addition", Amount: `${fmt(thaw_dropwise_total_mL,1)} mL (${dropwise_teSR_mL_per_vial} mL/vial × ${n_vials} vial(s))`},
+  {Item: "TeSR-E8 for pellet resuspension", Amount: `${fmt(thaw_resuspend_total_mL,1)} mL (1 mL/vial)`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Have tubes, warmed TeSR-E8, and pre-coated plates ready before starting — work quickly. |
+| 2 | Quickly thaw the cryovial in a **37°C water bath** (actual water, not a bead bath) by continuously gently shaking until only a small frozen pellet remains. |
+| 3 | Remove from bath; wipe with 70% ethanol. |
+| 4 | Use a 2 mL serological pipette (not a 1 mL pipettor) to transfer cryovial contents to a 15 mL conical tube. |
+| 5 | Add warm TeSR-E8 dropwise (volume above), gently mixing. |
+| 6 | Centrifuge 300×g, 5 min, RT. |
+| 7 | Aspirate medium, leaving the pellet intact; gently resuspend in 1 mL TeSR-E8 with a 2 mL serological pipette — maintain aggregates but break up big chunks (unbroken chunks promote differentiation). Don't pipette the whole volume up/down; avoid bubbles. |
+| 8 | Transfer 0.5 mL cell mixture per well of the pre-coated plate (2 wells/vial). More aggregates are needed post-thaw than during routine passaging. |
+| 9 | Place the plate in the 37°C incubator; move in quick, short back-and-forth/side-to-side motions to distribute aggregates, then do **not** disturb for 24 hours. |
+
+::: {.callout-tip collapse="true"}
+## Day 1 onward
+Perform daily medium changes with TeSR-E8, visually assessing growth/differentiation until the next passage. Manual colony selection may be needed the next day or after 2 days to remove differentiated cells. Undifferentiated (dense-centered) colonies may be ready to passage ~1–2 days post-thaw.
+
+If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and spin 200×g for 30 sec — aggregates pellet while single differentiated cells stay in the supernatant; discard the supernatant and culture the pellet (per Justin Brumbaugh).
+
+If only a few undifferentiated colonies are seen post-thaw, it may be necessary to select only those colonies and replate them (without splitting) into a same-size well on a newly coated plate (per the TeSR manual).
+
+Once ready to split: Justin's ratio is 1:4–1:8 every 2–3 days; Rose's ratio is ~1:12 (1 well expanded into 12 wells of a 6-well plate). Cells are usable for experiments or freezing once healthy — normally after ≥2 splits.
+:::
+
+---
+
+## Passaging
+
+Passage every time cells are ready (dense, undifferentiated colonies) — respect the 15/45 incubator rule above throughout.
+
+### Method A — EDTA
+
+**EDTA dissociation buffer** (500 mL batch, store 4°C):
+
+| Component | Amount |
+|-----------|--------|
+| 0.5 M EDTA, pH ~7.4 | 500 µL |
+| NaCl | 0.9 g |
+| Ca²⁺/Mg²⁺-free PBS (Invitrogen #14190) | to 500 mL |
+
+Sterilize by filtration.
+
+```{ojs}
+//| echo: false
+edta_rinse_mL_per_well = 1
+edta_sit_mL_per_well   = 1.5
+edta_neutralize_mL_per_well = 4
+
+Inputs.table([
+  {Step: "Rinse ×2 (wash out Mg²⁺/Ca²⁺)", "Per well": `${edta_rinse_mL_per_well} mL`, Total: `${fmt(edta_rinse_mL_per_well * n_wells,1)} mL per rinse (×2 rinses)`},
+  {Step: "3rd EDTA addition — let sit 4–5 min", "Per well": `${edta_sit_mL_per_well} mL`, Total: `${fmt(edta_sit_mL_per_well * n_wells,1)} mL`},
+  {Step: "Neutralize with fresh media (max pipetting speed)", "Per well": `${edta_neutralize_mL_per_well} mL`, Total: `${fmt(edta_neutralize_mL_per_well * n_wells,1)} mL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Have a Matrigel-coated plate ready; warm TeSR-E8 and EDTA dissociation media to RT (do not warm TeSR-E8 in a 37°C bath). |
+| 2 | Optionally mark/remove differentiated colonies in the morning (respect the 15/45 incubator rule). |
+| 3 | Rinse wells with room-temp EDTA medium (table above) to wash out Mg²⁺/Ca²⁺; discard. |
+| 4 | Repeat the rinse once more. |
+| 5 | Add EDTA medium a third time (table above); let sit 4–5 min (longer → tiny 3–5-cell colonies; a first split off feeders may need more time). During the wait, aspirate marked differentiated colonies by inclining the plate and vacuuming gently with a glass pipette — careful not to break the Matrigel coat; incline back between colonies to keep EDTA covering the plate and avoid drying. Endpoint cue: a hazy appearance by eye, or colony edges visibly peeling under the scope. |
+| 6 | Aspirate the EDTA; add neutralizing media (table above) at max pipetting speed to gently disperse cells — Mg²⁺/Ca²⁺ in the media neutralizes the EDTA. Do **not** scrape cells off the bottom (causes differentiation/death). |
+| 7 | Mix the suspension gently; plate at the desired split ratio (1:4 to 1:8); discard unused suspension. |
+| 8 | Place in the incubator; rock back-and-forth/side-to-side to distribute; let sit undisturbed overnight for maximum attachment. |
+
+::: {.callout-note collapse="true"}
+## Citation for this method
+Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. "Chemically defined conditions for human iPS cell derivation and culture." *Nature Methods.* 2011 Apr 10;8(4):424–429.
+:::
+
+### Method B — ReLeSR
+
+ReLeSR is an enzyme-free reagent for aggregate dissociation without manual colony selection or scraping — recommended when first culturing a new line in TeSR-E8. Volumes below are per 1 well of a 6-well plate, scaled by `n_wells`.
+
+```{ojs}
+//| echo: false
+relesr_wash_mL_per_well = 1
+relesr_reagent_mL_per_well = 1
+relesr_teSR_mL_per_well = 1
+
+Inputs.table([
+  {Step: "D-PBS wash", "Per well": `${relesr_wash_mL_per_well} mL`, Total: `${fmt(relesr_wash_mL_per_well * n_wells,1)} mL`},
+  {Step: "ReLeSR (aspirate within 1 min, leave thin film)", "Per well": `${relesr_reagent_mL_per_well} mL`, Total: `${fmt(relesr_reagent_mL_per_well * n_wells,1)} mL`},
+  {Step: "TeSR-E8 to detach colonies", "Per well": `${relesr_teSR_mL_per_well} mL`, Total: `${fmt(relesr_teSR_mL_per_well * n_wells,1)} mL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Coat new plates with Matrigel ≥1 h before passaging; warm TeSR-E8 to RT (not a 37°C bath). |
+| 2 | Wash cells with D-PBS (table above); aspirate. No need to remove differentiated regions first. |
+| 3 | Add ReLeSR (table above); aspirate again within 1 minute, leaving colonies with just a thin film. |
+| 4 | Incubate at RT for **7–9 min** — optimal time is line-dependent; determine empirically the first time using a new line. |
+| 5 | Add TeSR-E8 (table above). Detach colonies by holding the plate with one hand and firmly tapping the side with the other for ~30–60 sec. |
+| 6 | Gently transfer to a 15 mL conical tube; centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol during the spin. |
+| 7 | Aspirate supernatant without disturbing the pellet; resuspend in TeSR-E8 using a 2 mL serological pipette, gently, avoiding bubbles. |
+| 8 | If colonies are too big, pipette up/down 2–3× (5 mL serological pipette in a conical, or once directly in the well) to break to ~50–200 µm aggregates. |
+| 9 | Plate the aggregate mixture onto pre-coated wells containing TeSR-E8 at the desired density — cultures can typically be split every 4–7 days at 1:10 to 1:50 (Justin recommends 1:4–1:8, Rose recommends ~1:12); adjust ratio at the next passage if colonies were too dense or sparse. |
+| 10 | Place in the 37°C incubator; quick short back-and-forth/side-to-side motions to distribute; do not disturb for 24 hours. |
+| 11 | Perform daily medium changes with TeSR-E8; monitor growth/differentiation. If a colony shows any differentiated cells, remove the whole colony (as in the EDTA method's colony-removal step). |
+
+::: {.callout-warning}
+## Ambiguity flagged in the source document
+`iPSC_Passaging.docx`'s ReLeSR section describes, immediately after colony detachment and centrifugation, resuspending the pellet "in cold (2–8°C) CryoStor CS10... minimize aggregate breakup" — which is a **freezing** step, not a continued-culture passaging step. It is unclear whether this paragraph in the source was meant to describe (a) passaging cells forward into a new plate (in which case the pellet should be resuspended in TeSR-E8, not CryoStor, as presented in Steps 7–9 above), or (b) an abbreviated pointer to the freezing workflow that happens to follow the same detachment steps.
+
+<!-- TODO for JP: confirm whether the CryoStor CS10 resuspension line in iPSC_Passaging.docx was a copy/paste artifact from iPSC_Freezing.docx, or an intentional note that ReLeSR-detached cells are sometimes taken directly to freezing rather than replated. This page presents the "passage to continue culturing" interpretation (TeSR-E8 resuspend + replate) as the main ReLeSR passaging workflow, and keeps the CryoStor/freeze version entirely inside the Freezing section below — verify this reconciliation is correct before treating either section as final. -->
+:::
+
+---
+
+## Freezing
+
+Cryopreserve at the normal passaging timepoint. Each vial = aggregates from 1 well of a 6-well plate (CryoStor method) or half a well (EDTA method) — adjust for other cultureware. Use 2 mL pipettes, not tips, to avoid disrupting aggregates.
+
+### Method A — EDTA and DMSO
+
+```{ojs}
+//| echo: false
+freeze_edta_dmso_mL_per_well = 1     // 20% DMSO-in-TeSR-E8, per well
+freeze_edta_teSR_mL_per_well = 1     // TeSR-E8 added dropwise, per well
+freeze_edta_vials_per_well   = 2     // final DMSO 10%
+
+freeze_edta_dmso_total_mL = freeze_edta_dmso_mL_per_well * n_wells
+freeze_edta_teSR_total_mL = freeze_edta_teSR_mL_per_well * n_wells
+freeze_edta_vials_total   = freeze_edta_vials_per_well * n_wells
+
+Inputs.table([
+  {Item: "20% DMSO-in-TeSR-E8 (+1 extra)", Amount: `${fmt(freeze_edta_dmso_total_mL,1)} mL (${freeze_edta_dmso_mL_per_well} mL/well)`},
+  {Item: "TeSR-E8 (added dropwise after)",  Amount: `${fmt(freeze_edta_teSR_total_mL,1)} mL (${freeze_edta_teSR_mL_per_well} mL/well)`},
+  {Item: "Labeled cryovials needed",         Amount: `${freeze_edta_vials_total} vials (${freeze_edta_vials_per_well}/well, final 10% DMSO)`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Aliquot TeSR-E8 and EDTA dissociation media; warm both to RT (do not warm TeSR-E8 in a 37°C bath). |
+| 2 | Prep supplies: Mr. Frosty freezing container, labeled cryovials (table above), 20% DMSO-in-TeSR-E8, and normal TeSR-E8. |
+| 3 | Optionally mark differentiated colonies in the morning (respect the 15/45 incubator rule). |
+| 4 | Wash with EDTA dissociation media ×2 to fully remove Mg²⁺/Ca²⁺; discard. |
+| 5 | Add EDTA media a third time; let sit 4–5 min (longer → tiny 3–5-cell colonies). During the wait, aspirate marked differentiated colonies as in the Passaging (EDTA) section above. |
+| 6 | Aspirate EDTA; add TeSR-E8 at max speed to gently disperse cells; transfer gently to a 15 mL conical (careful not to over-break colonies — Mg²⁺/Ca²⁺ now neutralizes the EDTA). Do not scrape cells off the bottom. |
+| 7 | Centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol before opening, during the spin. |
+| 8 | Gently aspirate supernatant without disturbing the pellet; resuspend in 20% DMSO-in-TeSR-E8 (table above) using a 2 mL serological pipette, minimizing aggregate breakup, gentle, avoiding bubbles. |
+| 9 | Add TeSR-E8 (table above) dropwise; mix once gently up/down; transfer 1 mL per cryovial (2 vials/well, final DMSO concentration 10%). |
+| 10 | Freeze in a Mr. Frosty at −80°C overnight; transfer to liquid N₂ the next day. |
+
+### Method B — ReLeSR and CryoStor10
+
+```{ojs}
+//| echo: false
+freeze_relesr_wash_mL_per_well = 1
+freeze_relesr_reagent_mL_per_well = 1
+freeze_relesr_teSR_mL_per_well = 1
+freeze_relesr_cryostor_mL_per_well = 1
+freeze_relesr_vials_per_well = 1
+
+Inputs.table([
+  {Item: "D-PBS wash", Amount: `${fmt(freeze_relesr_wash_mL_per_well * n_wells,1)} mL`},
+  {Item: "ReLeSR", Amount: `${fmt(freeze_relesr_reagent_mL_per_well * n_wells,1)} mL`},
+  {Item: "TeSR-E8 to detach colonies", Amount: `${fmt(freeze_relesr_teSR_mL_per_well * n_wells,1)} mL`},
+  {Item: "Cold (2–8°C) CryoStor CS10", Amount: `${fmt(freeze_relesr_cryostor_mL_per_well * n_wells,1)} mL`},
+  {Item: "Labeled cryovials needed", Amount: `${freeze_relesr_vials_per_well * n_wells} vials (${freeze_relesr_vials_per_well}/well)`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Aliquot and warm TeSR-E8 to RT (not a 37°C bath). |
+| 2 | Wash with D-PBS (table above); aspirate — no need to remove differentiated regions. |
+| 3 | Add ReLeSR (table above); aspirate within 1 min, leaving a thin film. |
+| 4 | Incubate at RT for **7–9 min** (line-dependent — determine empirically for a new line). |
+| 5 | Add TeSR-E8 (table above); detach colonies by tapping the plate side firmly for 30–60 sec. |
+| 6 | Gently transfer to a 15 mL conical; centrifuge 300×g, 5 min, RT. Wipe the vial with ethanol during the spin. |
+| 7 | Gently aspirate supernatant without disturbing the pellet; resuspend in cold CryoStor CS10 (table above) using a 2 mL serological pipette — gentle, minimize breakup, avoid bubbles. |
+| 8 | Transfer 1 mL cell-aggregates-in-CryoStor per labeled cryovial using a 2 mL pipette. |
+| 9 | Freeze in a Mr. Frosty at −80°C overnight; transfer to liquid N₂ the next day. |
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Matrigel coating | Even coat, no dry patches before use | | |
+| Post-thaw Day 1 morphology | Aggregates attached, evenly distributed | | |
+| Pre-passage colony morphology | Dense-centered, undifferentiated colonies | | |
+| Post-passage overnight attachment | Even attachment, no floating aggregates | | |
+| Post-freeze viability (next thaw) | Normal recovery, ≥1–2 wells/vial | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. "Chemically defined conditions for human iPS cell derivation and culture." *Nature Methods.* 2011 Apr 10;8(4):424–429.
+
+Matrigel protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.
+
+Thawing protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.
+
+Passaging protocol: mTeSR manual (ReLeSR method) and Justin Brumbaugh (EDTA method), adapted by Yoseli Quiroga, February 2019.
+
+Freezing protocol: Justin Brumbaugh (EDTA/DMSO method) and mTeSR manual (ReLeSR/CryoStor10 method), adapted by Yoseli Quiroga, February 2019.
+
+Additional split-ratio guidance attributed in-line to "Justin" (Justin Brumbaugh) and "Rose."

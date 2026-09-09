@@ -1,0 +1,137 @@
+---
+title: "cDNA Synthesis Protocol"
+subtitle: "iScript cDNA Synthesis Kit (Bio-Rad, cat #1708891)"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Reverse-transcribes extracted RNA into cDNA using the iScript cDNA Synthesis Kit. RNA input volume is back-calculated from your sample's measured concentration to hit a fixed target mass in a 15 µL final reaction volume, then a 5x iScript Reaction Mix + iScript Reverse Transcriptase master mix is added and run on a 3-step thermal cycler protocol.
+:::
+
+::: {.callout-important}
+## Before starting
+- Have your RNA concentration (ng/µL, e.g. from Nanodrop or Qubit) for each sample on hand — needed for the input volume calculator below.
+- Prepare the iScript master mix fresh, on ice, immediately before use.
+- Pre-program the thermal cycler with the 4-step protocol below.
+:::
+
+---
+
+## Configure run
+
+```{ojs}
+//| echo: false
+viewof n_samples    = Inputs.number({label: "Number of samples", value: 1, min: 1, max: 96, step: 1})
+viewof excess_pct   = Inputs.number({label: "Extra overage on master mix (%)", value: 10, min: 0, max: 30, step: 5})
+viewof final_vol_uL = Inputs.number({label: "Final RNA + water volume before master mix (µL)", value: 15, min: 5, step: 1})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 2) => x.toFixed(d)
+
+md`**${n_samples} sample(s) · ${excess_pct}% master mix overage · ${final_vol_uL} µL RNA+water per reaction**`
+```
+
+<!-- TODO: excess_pct defaults to this lab's standard 10% master-mix overage convention (used elsewhere in this notebook) — the source docx does not itself specify an overage percentage for this protocol. Adjust freely. -->
+
+---
+
+## RNA input calculator
+
+::: {.callout-note collapse="true"}
+## Math audit — how the RNA/water volumes are calculated
+The source protocol reads: *"Calculate the volume of RNA needed for 1g and add water to 15µl final volume"* — **"1g" is almost certainly a typo for 1 µg** (a target RNA mass of 1 gram is not physically sensible for a bench RNA extraction; 1 µg is the standard iScript input and matches the embedded calculator spreadsheet found inside the source `.docx`, which computes `=1000/[conc. ng/µL]` — i.e. µL needed for 1000 ng = 1 µg). This is corrected below; flagging visibly per house convention rather than silently changing the source or preserving the apparent error.
+
+$$V_{RNA} = \frac{Mass_{target}\;(ng)}{C_{RNA}\;(ng/\mu L)} \qquad V_{water} = V_{final} - V_{RNA}$$
+
+If $V_{RNA} > V_{final}$, the target mass is not reachable at that final volume and concentration — dilute less, use more RNA-concentrated input, or accept a lower input mass.
+:::
+
+```{ojs}
+//| echo: false
+viewof target_mass_ug = Inputs.number({label: "Target RNA mass (µg) — corrected from source's \"1g\"", value: 1, min: 0.01, step: 0.1})
+viewof rna_conc_ng_uL  = Inputs.number({label: "RNA concentration (ng/µL)", value: 100, min: 0.1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+rna_vol_uL   = (target_mass_ug * 1000) / rna_conc_ng_uL
+water_vol_uL = final_vol_uL - rna_vol_uL
+
+rna_vol_uL > final_vol_uL
+  ? md`::: {.callout-warning}
+**Not reachable at this concentration.** ${fmt(rna_vol_uL)} µL of RNA would be needed to hit ${target_mass_ug} µg, which exceeds the ${final_vol_uL} µL final volume. Use a higher-concentration RNA prep, lower the target mass, or increase the final volume.
+:::`
+  : Inputs.table([
+      {Component: "RNA sample", "Volume (µL)": fmt(rna_vol_uL)},
+      {Component: "Nuclease-free water", "Volume (µL)": fmt(water_vol_uL)},
+      {Component: `Total (in PCR tube, per sample)`, "Volume (µL)": fmt(final_vol_uL)}
+    ], {layout: "auto"})
+```
+
+---
+
+## Master mix
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "5x iScript Reaction Mix",     "1x (µL)": 4, [`${n_samples}x + ${excess_pct}% (µL)`]: fmt(4 * scale)},
+  {Component: "iScript Reverse Transcriptase", "1x (µL)": 1, [`${n_samples}x + ${excess_pct}% (µL)`]: fmt(1 * scale)},
+  {Component: "Total",                        "1x (µL)": 5, [`${n_samples}x + ${excess_pct}% (µL)`]: fmt(5 * scale)}
+], {layout: "auto"})
+```
+
+Aliquot **5 µL** of master mix into each PCR tube. Be careful not to touch the samples with the tip — change tips between samples if this happens.
+
+---
+
+## Protocol
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | Calculate RNA volume for your target mass; add nuclease-free water to final volume in a PCR tube | See calculator above |
+| 2 | Prepare 5x iScript Reaction Mix + iScript Reverse Transcriptase master mix | See table above |
+| 3 | Aliquot 5 µL master mix into each PCR tube | Avoid touching sample; change tips if contacted |
+| 4 | Run the complete reaction mix on a thermal cycler | See program below |
+| 5 | Store cDNA | −20°C |
+
+### Thermal cycler program
+
+| Step | Time | Temperature |
+|------|------|-------------|
+| Priming | 5 min | 25°C |
+| Reverse transcription | 20 min | 46°C |
+| RT inactivation | 1 min | 95°C |
+| Hold | Forever | 4°C |
+
+::: {.callout-important}
+## Checklist
+- [ ] RNA input volume calculated per sample (see calculator)
+- [ ] Master mix kept on ice until aliquoted
+- [ ] Thermal cycler program confirmed (25°C/5 min → 46°C/20 min → 95°C/1 min → 4°C hold)
+- [ ] cDNA stored at −20°C
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| RNA input concentration | Recorded per sample | | |
+| Post-RT tube inspection | No visible precipitate/bubbles | | |
+| cDNA storage | −20°C, dated | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Bio-Rad iScript cDNA Synthesis Kit (cat #1708891), manufacturer's instructions. Protocol: source lab not specified in the provided document; transcribed as-is.

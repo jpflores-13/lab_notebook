@@ -1,0 +1,146 @@
+---
+title: "Thawing THP-1 & K562 Suspension Cultures"
+subtitle: "From liquid nitrogen storage"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+THP-1 and K562 cryovials are thawed in a 37°C water bath, diluted into fresh RPMI 1640 media, pelleted to remove residual Dimethyl Sulfoxide (DMSO), and transferred to a T25 flask to recover. The two source protocols (`Thawing_K562.docx`, `Thawing_THP1.docx`) are otherwise identical — merged here into one page with a cell-line toggle.
+:::
+
+::: {.callout-important}
+## Before starting
+- Warm RPMI/FBS media in a 37°C water bath.
+- Keep the cryovial on ice while transferring it from the liquid nitrogen (LN₂) container to the water bath.
+- Thaw just until mostly thawed, with some ice still remaining, then remove immediately.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof cell_line       = Inputs.select(["THP-1", "K562"], {label: "Cell line"})
+viewof media_batch_mL  = Inputs.number({label: "RPMI/FBS media batch volume (mL)", value: 555, min: 55, step: 55})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 1) => x.toFixed(d)
+
+md`**Thawing: ${cell_line} · media batch: ${fmt(media_batch_mL, 0)} mL**`
+```
+
+```{ojs}
+//| echo: false
+cell_line === "K562"
+  ? md`::: {.callout-note}
+## Source catalog number — likely copy/paste error
+The K562 source document (\`Thawing_K562.docx\`) lists the same ATCC catalog number as the THP-1 protocol (ATCC® TIB-202™, which is actually THP-1's catalog number). ATCC's standard catalog number for K562 is **CCL-243**.
+
+<!-- TODO: confirm the correct catalog number against the physical vial label / lab inventory with JP — CCL-243 is from general knowledge (ATCC catalog), not stated in the source document. -->
+:::`
+  : md``
+```
+
+---
+
+## Materials & Reagents
+
+| Item | Vendor | Cat # |
+|------|--------|-------|
+| THP-1 or K562 cells, stored in liquid nitrogen | ATCC | TIB-202 (THP-1) / CCL-243 (K562) |
+| Fetal Bovine Serum (FBS), heat-inactivated by manufacturer, frozen in 50 mL aliquots | Thermo Fisher Scientific (Gibco™) | 10500064 |
+| Penicillin/Streptomycin solution (100X), stabilized, frozen in 5 mL aliquots | Sigma-Aldrich | P4333 |
+| RPMI 1640 w/ L-Glutamine-Bicarbonate | Sigma-Aldrich | R8758 |
+| T25 Flask | VWR | 29186-010 |
+
+::: {.callout-tip collapse="true"}
+## FBS vs. FCS
+The THP-1 source document labels its media recipe "RPMI/FCS" (Fetal Calf Serum) rather than "RPMI/FBS" — FCS and Fetal Bovine Serum (FBS) are synonyms for the same reagent (Thermo Fisher Gibco™ 10500064 in both source protocols). Standardized to FBS throughout this page.
+:::
+
+---
+
+## RPMI/FBS media
+
+::: {.callout-note collapse="true"}
+## Math audit
+Base recipe: 500 mL RPMI + 50 mL FBS (10%) + 5 mL Penicillin/Streptomycin (0.9%), 555 mL total — scales linearly:
+
+$$V_{RPMI} = V_{batch} \times \frac{500}{555} \qquad V_{FBS} = V_{batch} \times \frac{50}{555} \qquad V_{P/S} = V_{batch} \times \frac{5}{555}$$
+:::
+
+```{ojs}
+//| echo: false
+media_rpmi_mL = media_batch_mL * (500 / 555)
+media_fbs_mL  = media_batch_mL * (50 / 555)
+media_ps_mL   = media_batch_mL * (5 / 555)
+
+Inputs.table([
+  {Component: "RPMI 1640 w/ L-Glutamine-Bicarbonate",  "Volume (mL)": fmt(media_rpmi_mL)},
+  {Component: "Fetal Bovine Serum (FBS)",                "Volume (mL)": fmt(media_fbs_mL)},
+  {Component: "Penicillin/Streptomycin (100X)",          "Volume (mL)": fmt(media_ps_mL)},
+  {Component: "Total",                                    "Volume (mL)": fmt(media_batch_mL, 0)}
+], {layout: "auto"})
+```
+
+Prepare under the hood.
+
+---
+
+## Protocol (~20 min + monitoring)
+
+```{ojs}
+//| echo: false
+cell_line === "THP-1"
+  ? md`::: {.callout-tip}
+## THP-1: keep the vial on ice during transfer
+Get a bucket of ice to keep the cryogenic vial on when transferring it from the LN₂ container to the water bath. (This step is specific to the THP-1 source protocol — not stated for K562, but there's no reason not to apply it to either line.)
+:::`
+  : md``
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Warm media in 37°C water bath |
+| 2 | Thaw cryogenic storage vial in water bath — remove once mostly thawed but some ice still remains |
+| 3 | Carefully open vial; add cells to 9 mL fresh media in a 15 mL conical tube; gently pipette to mix |
+| 4 | Spin 1000 RPM, 5 min; discard supernatant |
+| 5 | Add 10 mL fresh media |
+| 6 | Transfer to a T25 flask |
+| 7 | Take a small sample for cell counting |
+| 8 | Place T25 flask in incubator; monitor growth |
+| 9 | Split / add fresh media once culture reaches ~1 × 10⁶ cells/mL |
+
+```{ojs}
+//| echo: false
+md`::: {.callout-important}
+## Checklist
+- [ ] Cell line: **${cell_line}** — confirmed on vial label
+- [ ] Post-thaw count: _______ cells/mL, _______ % viability
+- [ ] Keep culture between **4 × 10⁵ and 1 × 10⁶ cells/mL** for optimal growth
+:::`
+```
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-thaw viability | High (line-dependent) | | |
+| Attachment/growth by 24–48 hr | Steady proliferation, no clumping | | |
+| Density at first split | 4 × 10⁵–1 × 10⁶ cells/mL | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Protocol written by Kamisha Woolery. Merged from `Thawing_K562.docx` and `Thawing_THP1.docx` by JP Flores.

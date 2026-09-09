@@ -1,0 +1,137 @@
+---
+title: "Index Combination Checker"
+subtitle: "TruSeq Nano Set A color-balance validator for pooled sequencing indices"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+This is a standalone reactive tool, not a bench protocol — it checks whether a chosen set of TruSeq Nano Set A indices is safe to pool on an Illumina run. Illumina's sequencer base-calling relies on seeing a mix of red/green (or, on two-channel instruments, distinguishable) signal at every cycle; if **every** pooled index shares the same base at a given position within the index read, that position has no color diversity and can fail to call correctly. The rule (from Illumina's Index Adapters Pooling Guide): at **each of the 6 index positions**, the pooled set must contain **at least one index with an A or C** at that position **and at least one index with a T or G**. This tool reproduces that logic (the source spreadsheet's `COUNTIF`-based validation) for any set of indices you select below.
+:::
+
+::: {.callout-important}
+## Before starting
+- This checks **color balance only** — it does not check for index sequence collisions, i5/i7 pairing, or demultiplexing edit-distance requirements. Cross-check those separately.
+- Reproduced from `Index_Combinations.xlsx`, TruSeq Nano Set A lookup (12 indices).
+:::
+
+---
+
+## Index lookup — TruSeq Nano Set A
+
+```{ojs}
+//| echo: false
+all_indices = [
+  {name: "AD002", seq: "CGATGT"},
+  {name: "AD004", seq: "TGACCA"},
+  {name: "AD005", seq: "ACAGTG"},
+  {name: "AD006", seq: "GCCAAT"},
+  {name: "AD007", seq: "CAGATC"},
+  {name: "AD012", seq: "CTTGTA"},
+  {name: "AD013", seq: "AGTCAA"},
+  {name: "AD014", seq: "AGTTCC"},
+  {name: "AD015", seq: "ATGTCA"},
+  {name: "AD016", seq: "CCGTCC"},
+  {name: "AD018", seq: "GTCCGC"},
+  {name: "AD019", seq: "GTGAAA"}
+]
+
+Inputs.table(all_indices, {layout: "auto"})
+```
+
+---
+
+## Choose indices to pool
+
+```{ojs}
+//| echo: false
+viewof chosen_indices = Inputs.checkbox(all_indices, {label: "Chosen indices", format: d => `${d.name} — ${d.seq}`, value: [all_indices[0], all_indices[1], all_indices[2], all_indices[3], all_indices[4], all_indices[5], all_indices[6], all_indices[7]]})
+```
+
+```{ojs}
+//| echo: false
+positions = [0, 1, 2, 3, 4, 5]
+
+color_check = positions.map(i => {
+  const bases = chosen_indices.map(idx => idx.seq[i]);
+  const hasAC = bases.some(b => b === "A" || b === "C");
+  const hasTG = bases.some(b => b === "T" || b === "G");
+  return { position: i + 1, bases: bases.join(""), hasAC, hasTG, ok: hasAC && hasTG };
+})
+
+all_ok = chosen_indices.length >= 2 && color_check.every(r => r.ok)
+```
+
+```{ojs}
+//| echo: false
+chosen_indices.length < 2
+  ? md`::: {.callout-tip}
+Select at least 2 indices to check color balance.
+:::`
+  : all_ok
+    ? md`::: {.callout-note}
+## ✅ Good combination!
+${chosen_indices.map(d => d.name).join(", ")} — all 6 index positions have color diversity (at least one A/C and one T/G at every position).
+:::`
+    : md`::: {.callout-warning}
+## 🛑 BAD COMBINATION!!!
+${chosen_indices.map(d => d.name).join(", ")} — the following position(s) fail color balance: ${color_check.filter(r => !r.ok).map(r => `**position ${r.position}** (needs ${!r.hasAC ? "A/C" : "T/G"}; bases seen: ${r.bases})`).join("; ")}. Swap in a different index to fix these positions.
+:::`
+```
+
+### Per-position base composition
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  color_check.map(r => ({
+    Position: r.position,
+    "Bases at this position (chosen indices, in order)": r.bases,
+    "Has A/C?": r.hasAC ? "✓" : "✗",
+    "Has T/G?": r.hasTG ? "✓" : "✗",
+    "Balanced?": r.ok ? "✓" : "✗"
+  })),
+  {layout: "auto"}
+)
+```
+
+::: {.callout-tip collapse="true"}
+## Improvement over the source spreadsheet
+`Index_Combinations.xlsx` validated only the first 8 pasted rows (its `COUNTIF` ranges were hardcoded to `G5:G12`) — a 9th or later pasted index was silently ignored by the "VERDICT" formula even though it appeared in the "chosen indices" list. This tool checks **every** index you select, with no fixed row cap.
+:::
+
+---
+
+## Known valid combinations (reference)
+
+Reproduced from the source spreadsheet's example valid pools. "any" means any additional index may be added in that slot without breaking color balance for the indices already listed.
+
+| Pool size | Valid index combination |
+|-----------|--------------------------|
+| 2 | AD006 + AD012 |
+| 2 | AD005 + AD019 |
+| 3 | AD006 + AD012 + any |
+| 3 | AD005 + AD019 + any |
+| 3 | AD002 + AD007 + AD019 |
+| 3 | AD005 + AD006 + AD015 |
+| 4 | AD006 + AD012 + any + any |
+| 4 | AD005 + AD019 + any + any |
+| 4 | AD002 + AD007 + AD019 + any |
+| 4 | AD005 + AD006 + AD015 + any |
+| 4 | AD005 + AD006 + AD012 + AD019 |
+| 4 | AD002 + AD004 + AD007 + AD016 |
+| 6 | AD006 + AD007 + AD013 + AD015 + AD018 + AD019 |
+| 6 | AD006 + AD007 + AD013 + AD016 + AD018 + AD019 |
+| 6 | AD004 + AD006 + AD007 + AD016 + AD018 + AD019 |
+| 6 | AD004 + AD005 + AD006 + AD007 + AD018 + AD019 |
+| 8 | AD002 + AD004 + AD005 + AD006 + AD007 + AD016 + AD018 + AD019 |
+
+---
+
+## References
+
+Illumina. *Index Adapters Pooling Guide*, "Color Balance" section. Document 1000000041074 v05. <https://support.illumina.com/content/dam/illumina-support/documents/documentation/chemistry_documentation/experiment-design/index-adapters-pooling-guide-1000000041074-05.pdf>
+
+Source: `Index_Combinations.xlsx` (TruSeq Nano Set A index/sequence lookup and known valid combinations table).

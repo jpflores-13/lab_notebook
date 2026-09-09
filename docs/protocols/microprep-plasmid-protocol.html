@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-09">
+
+<title>Plasmid Microprep Protocol – JP Flores’ Lab Notebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4ee3db49c2535a8f187f0d04f590a1ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JP Flores’ Lab Notebook</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../protocols/index.html"> 
+<span class="menu-text">Protocols</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../experiments/index.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jpflores-13/lab_notebook"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configure-microprep-run" id="toc-configure-microprep-run" class="nav-link active" data-scroll-target="#configure-microprep-run">Configure microprep run</a></li>
+  <li><a href="#reagents-needed-scaled" id="toc-reagents-needed-scaled" class="nav-link" data-scroll-target="#reagents-needed-scaled">Reagents needed (scaled)</a></li>
+  <li><a href="#protocol" id="toc-protocol" class="nav-link" data-scroll-target="#protocol">Protocol</a></li>
+  <li><a href="#qc-log" id="toc-qc-log" class="nav-link" data-scroll-target="#qc-log">QC log</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Plasmid Microprep Protocol</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Fast alkaline-lysis miniprep for 1 mL cultures · 2-day protocol</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">
+🖨 Print / Save as PDF
+</button>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fast, small-scale alkaline-lysis plasmid prep (“microprep”) from 1 mL overnight bacterial cultures — no spin-column kit required. Cells are lysed with Solutions I/II/III, plasmid DNA is cleared with two chloroform extractions, precipitated with ethanol, dried, and resuspended in a small volume of water. Runs over 2 days: Day 1 inoculate and grow overnight; Day 2 microprep.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Before starting
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Day 1: inoculate 1 mL LB media (with the appropriate antibiotic) per clone from a single CFU; grow overnight at 37°C, 200 rpm.</li>
+<li>Reserve 50 µL of each overnight culture in a separate tube as a glycerol-stock source before proceeding — the rest goes into the microprep.</li>
+<li>Make <strong>Solution II fresh</strong> immediately before use.</li>
+<li>Pre-chill absolute ethanol at −20°C.</li>
+<li>Set the dry bath to 55°C for the drying step.</li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="configure-microprep-run" class="level2">
+<h2 class="anchored" data-anchor-id="configure-microprep-run">Configure microprep run</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="29" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 28;"><span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>viewof n_samples   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of cultures (clones)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">96</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>viewof excess_pct  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Reagent overage (%)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="35" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> n_samples <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> excess_pct <span class="op">/</span> <span class="dv">100</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>fmt   <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">1</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> culture(s) · </span><span class="sc">${</span>excess_pct<span class="sc">}</span><span class="vs">% overage · scale factor </span><span class="sc">${</span><span class="fu">fmt</span>(scale<span class="op">,</span> <span class="dv">2</span>)<span class="sc">}</span><span class="vs">×**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Math audit — how every volume is calculated
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Every reagent below is dispensed per-tube at a fixed per-sample volume, so total quantity to have on hand scales linearly:</p>
+<p><span class="math display">\[V_{total} = V_{per\_sample} \times N_{samples} \times (1 + overage)\]</span></p>
+<p>Only Solution I + RNase A (added together and vortexed in Step 4) is realistically premixed as a shared master mix — Solutions II and III, chloroform, and ethanol are added directly per-tube during the prep, so the table below is an ordering/prep quantity calculator rather than a single combined master mix.</p>
+<p>Ethanol precipitation volume is calculated as a configurable fraction (0.8–1×) of the ~450 µL supernatant volume carried through the two chloroform extractions, per the source protocol’s “0.8-1 volume” instruction.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="reagents-needed-scaled" class="level2">
+<h2 class="anchored" data-anchor-id="reagents-needed-scaled">Reagents needed (scaled)</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="57" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 56;"><span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>viewof ethanol_fraction <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Ethanol precipitation fraction (0.8–1× supernatant volume)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.9</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="63" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>sol1_vol        <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>rnase_vol       <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>sol2_vol        <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>sol3_vol        <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>chloroform_vol  <span class="op">=</span> <span class="dv">450</span>   <span class="co">// per extraction; two extractions performed</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>supernatant_vol <span class="op">=</span> <span class="dv">450</span>   <span class="co">// approx. volume carried to ethanol precipitation</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>ethanol_vol     <span class="op">=</span> supernatant_vol <span class="op">*</span> ethanol_fraction</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution I"</span><span class="op">,</span>                 <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol1_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>             <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol1_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"RNase A"</span><span class="op">,</span>                     <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>rnase_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>             <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(rnase_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution II (fresh)"</span><span class="op">,</span>         <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol2_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>              <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol2_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution III"</span><span class="op">,</span>                <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol3_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>              <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol3_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Chloroform"</span><span class="op">,</span>                  <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`~</span><span class="sc">${</span>chloroform_vol<span class="sc">}</span><span class="vs"> µL × 2 extractions`</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(chloroform_vol <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Absolute Ethanol"</span><span class="op">,</span>            <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`~</span><span class="sc">${</span><span class="fu">fmt</span>(ethanol_vol)<span class="sc">}</span><span class="vs"> µL (</span><span class="sc">${</span>ethanol_fraction<span class="sc">}</span><span class="vs">× supernatant)`</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(ethanol_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Bidistilled water (resuspension)"</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"20 µL"</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What are Solutions I, II, and III?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<!-- TODO: the source document does not give recipes for Solutions I, II, and III — these read as the classic alkaline-lysis miniprep buffers (Birnboim & Doly-style), but confirm exact composition/pH with JP before relying on this for a new prep of these solutions:
+- Solution I (resuspension): typically ~50 mM glucose, 25 mM Tris-HCl, 10 mM EDTA
+- Solution II (lysis, made fresh): typically 0.2 N NaOH, 1% SDS (Sodium Dodecyl Sulfate)
+- Solution III (neutralization): typically ~3 M potassium acetate, adjusted to ~pH 5.5 with glacial acetic acid
+This block is general background, not sourced from the uploaded protocol. -->
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="protocol" class="level2">
+<h2 class="anchored" data-anchor-id="protocol">Protocol</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+<th>Volume</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Inoculate LB media with a pure CFU (from LB agar or frozen glycerol stock) + antibiotic; incubate overnight at 37°C, 200 rpm</td>
+<td>1 mL LB + 10 µL antibiotic</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Reserve 50 µL of culture in a separate autoclaved tube for future glycerol-stock purposes; use the rest for the microprep</td>
+<td>0.5 mL tube</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Centrifuge at maximum speed for 2 min; discard supernatant</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Resuspend the pellet by vortexing in Solution I + RNase A</td>
+<td>100 µL Solution I + 1 µL RNase A</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add fresh Solution II; mix gently</td>
+<td>200 µL</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Add Solution III; mix gently</td>
+<td>150 µL</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Centrifuge for 10 min at maximum speed</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Transfer the <strong>supernatant</strong> to a new tube with 1 volume of chloroform; mix gently; centrifuge 5 min at maximum speed</td>
+<td>~450 µL chloroform</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Repeat the chloroform extraction (Step 8)</td>
+<td>~450 µL chloroform</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Transfer the <strong>supernatant</strong> to a new tube with 0.8–1 volume of absolute ethanol; mix gently; incubate at −20°C for 20 min</td>
+<td>0.8–1× supernatant vol (see reagent table above)</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Centrifuge for 5 min at maximum speed; discard supernatant</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>A small white pellet may be visible at this point; if not, continue and check DNA concentration at the end</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>13</td>
+<td>Dry slowly at 55°C in a dry bath</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>14</td>
+<td>Resuspend the pellet in bidistilled water; store at −20°C</td>
+<td>20 µL</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>No visible pellet after Step 11?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The source protocol notes this is not necessarily a failure — continue the prep and check the DNA concentration (e.g., Nanodrop/Qubit) at the end before troubleshooting.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="qc-log" class="level2">
+<h2 class="anchored" data-anchor-id="qc-log">QC log</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Checkpoint</th>
+<th>Expected</th>
+<th>Observed</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Post-Solution III spin</td>
+<td>Clear supernatant, compact debris pellet</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Post-chloroform extraction</td>
+<td>Clean phase separation</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Post-ethanol precipitation</td>
+<td>Visible white pellet (or check by concentration)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Final DNA concentration</td>
+<td>Measurable by Nanodrop/Qubit</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes / deviations:</strong></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<!-- TODO: no citation, kit name, or lab of origin was given in the source document — this is a generic alkaline-lysis "fast miniprep," not a commercial kit protocol. Confirm attribution with JP. -->
+<p>Protocol: source not specified in provided document.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3NhbXBsZXMgICA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIk51bWJlciBvZiBjdWx0dXJlcyAoY2xvbmVzKVwiLCB2YWx1ZTogOCwgbWluOiAxLCBtYXg6IDk2LCBzdGVwOiAxfSlcbnZpZXdvZiBleGNlc3NfcGN0ICA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIlJlYWdlbnQgb3ZlcmFnZSAoJSlcIiwgdmFsdWU6IDEwLCBtaW46IDAsIG1heDogMzAsIHN0ZXA6IDV9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoic2NhbGUgPSBuX3NhbXBsZXMgKiAoMSArIGV4Y2Vzc19wY3QgLyAxMDApXG5mbXQgICA9ICh4LCBkID0gMSkgPT4geC50b0ZpeGVkKGQpXG5cbm1kYCoqJHtuX3NhbXBsZXN9IGN1bHR1cmUocykgwrcgJHtleGNlc3NfcGN0fSUgb3ZlcmFnZSDCtyBzY2FsZSBmYWN0b3IgJHtmbXQoc2NhbGUsIDIpfcOXKipgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgZXRoYW5vbF9mcmFjdGlvbiA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkV0aGFub2wgcHJlY2lwaXRhdGlvbiBmcmFjdGlvbiAoMC444oCTMcOXIHN1cGVybmF0YW50IHZvbHVtZSlcIiwgdmFsdWU6IDAuOSwgbWluOiAwLjgsIG1heDogMSwgc3RlcDogMC4wNX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJzb2wxX3ZvbCAgICAgICAgPSAxMDBcbnJuYXNlX3ZvbCAgICAgICA9IDFcbnNvbDJfdm9sICAgICAgICA9IDIwMFxuc29sM192b2wgICAgICAgID0gMTUwXG5jaGxvcm9mb3JtX3ZvbCAgPSA0NTAgICAvLyBwZXIgZXh0cmFjdGlvbjsgdHdvIGV4dHJhY3Rpb25zIHBlcmZvcm1lZFxuc3VwZXJuYXRhbnRfdm9sID0gNDUwICAgLy8gYXBwcm94LiB2b2x1bWUgY2FycmllZCB0byBldGhhbm9sIHByZWNpcGl0YXRpb25cbmV0aGFub2xfdm9sICAgICA9IHN1cGVybmF0YW50X3ZvbCAqIGV0aGFub2xfZnJhY3Rpb25cblxuSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJTb2x1dGlvbiBJXCIsICAgICAgICAgICAgICAgICBcIlBlciBzYW1wbGVcIjogYCR7c29sMV92b2x9IMK1TGAsICAgICAgICAgICAgIFwiVG90YWwgKHNjYWxlZClcIjogYCR7Zm10KHNvbDFfdm9sICogc2NhbGUpfSDCtUxgfSxcbiAge0NvbXBvbmVudDogXCJSTmFzZSBBXCIsICAgICAgICAgICAgICAgICAgICAgXCJQZXIgc2FtcGxlXCI6IGAke3JuYXNlX3ZvbH0gwrVMYCwgICAgICAgICAgICAgXCJUb3RhbCAoc2NhbGVkKVwiOiBgJHtmbXQocm5hc2Vfdm9sICogc2NhbGUpfSDCtUxgfSxcbiAge0NvbXBvbmVudDogXCJTb2x1dGlvbiBJSSAoZnJlc2gpXCIsICAgICAgICAgXCJQZXIgc2FtcGxlXCI6IGAke3NvbDJfdm9sfSDCtUxgLCAgICAgICAgICAgICAgXCJUb3RhbCAoc2NhbGVkKVwiOiBgJHtmbXQoc29sMl92b2wgKiBzY2FsZSl9IMK1TGB9LFxuICB7Q29tcG9uZW50OiBcIlNvbHV0aW9uIElJSVwiLCAgICAgICAgICAgICAgICBcIlBlciBzYW1wbGVcIjogYCR7c29sM192b2x9IMK1TGAsICAgICAgICAgICAgICBcIlRvdGFsIChzY2FsZWQpXCI6IGAke2ZtdChzb2wzX3ZvbCAqIHNjYWxlKX0gwrVMYH0sXG4gIHtDb21wb25lbnQ6IFwiQ2hsb3JvZm9ybVwiLCAgICAgICAgICAgICAgICAgIFwiUGVyIHNhbXBsZVwiOiBgfiR7Y2hsb3JvZm9ybV92b2x9IMK1TCDDlyAyIGV4dHJhY3Rpb25zYCwgXCJUb3RhbCAoc2NhbGVkKVwiOiBgJHtmbXQoY2hsb3JvZm9ybV92b2wgKiAyICogc2NhbGUpfSDCtUxgfSxcbiAge0NvbXBvbmVudDogXCJBYnNvbHV0ZSBFdGhhbm9sXCIsICAgICAgICAgICAgXCJQZXIgc2FtcGxlXCI6IGB+JHtmbXQoZXRoYW5vbF92b2wpfSDCtUwgKCR7ZXRoYW5vbF9mcmFjdGlvbn3DlyBzdXBlcm5hdGFudClgLCBcIlRvdGFsIChzY2FsZWQpXCI6IGAke2ZtdChldGhhbm9sX3ZvbCAqIHNjYWxlKX0gwrVMYH0sXG4gIHtDb21wb25lbnQ6IFwiQmlkaXN0aWxsZWQgd2F0ZXIgKHJlc3VzcGVuc2lvbilcIiwgXCJQZXIgc2FtcGxlXCI6IFwiMjAgwrVMXCIsIFwiVG90YWwgKHNjYWxlZClcIjogYCR7Zm10KDIwICogc2NhbGUpfSDCtUxgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3NhbXBsZXMnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZXhjZXNzX3BjdCcpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdldGhhbm9sX2ZyYWN0aW9uJykifV19
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../protocols";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Plasmid Microprep Protocol"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Fast alkaline-lysis miniprep for 1 mL cultures · 2-day protocol"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"window.print()"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"float:right;margin-bottom:1rem"</span><span class="dt">&gt;</span>🖨 Print / Save as PDF<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>A fast, small-scale alkaline-lysis plasmid prep ("microprep") from 1 mL overnight bacterial cultures — no spin-column kit required. Cells are lysed with Solutions I/II/III, plasmid DNA is cleared with two chloroform extractions, precipitated with ethanol, dried, and resuspended in a small volume of water. Runs over 2 days: Day 1 inoculate and grow overnight; Day 2 microprep.</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before starting</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Day 1: inoculate 1 mL LB media (with the appropriate antibiotic) per clone from a single CFU; grow overnight at 37°C, 200 rpm.</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reserve 50 µL of each overnight culture in a separate tube as a glycerol-stock source before proceeding — the rest goes into the microprep.</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make **Solution II fresh** immediately before use.</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pre-chill absolute ethanol at −20°C.</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Set the dry bath to 55°C for the drying step.</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configure microprep run</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>viewof n_samples   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of cultures (clones)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">96</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>viewof excess_pct  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Reagent overage (%)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> n_samples <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> excess_pct <span class="op">/</span> <span class="dv">100</span>)</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>fmt   <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">1</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> culture(s) · </span><span class="sc">${</span>excess_pct<span class="sc">}</span><span class="vs">% overage · scale factor </span><span class="sc">${</span><span class="fu">fmt</span>(scale<span class="op">,</span> <span class="dv">2</span>)<span class="sc">}</span><span class="vs">×**`</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## Math audit — how every volume is calculated</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>Every reagent below is dispensed per-tube at a fixed per-sample volume, so total quantity to have on hand scales linearly:</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>$$V_{total} = V_{per<span class="sc">\_</span>sample} \times N_{samples} \times (1 + overage)$$</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>Only Solution I + RNase A (added together and vortexed in Step 4) is realistically premixed as a shared master mix — Solutions II and III, chloroform, and ethanol are added directly per-tube during the prep, so the table below is an ordering/prep quantity calculator rather than a single combined master mix.</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>Ethanol precipitation volume is calculated as a configurable fraction (0.8–1×) of the ~450 µL supernatant volume carried through the two chloroform extractions, per the source protocol's "0.8-1 volume" instruction.</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reagents needed (scaled)</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>viewof ethanol_fraction <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Ethanol precipitation fraction (0.8–1× supernatant volume)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.9</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>sol1_vol        <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>rnase_vol       <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>sol2_vol        <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>sol3_vol        <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>chloroform_vol  <span class="op">=</span> <span class="dv">450</span>   <span class="co">// per extraction; two extractions performed</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>supernatant_vol <span class="op">=</span> <span class="dv">450</span>   <span class="co">// approx. volume carried to ethanol precipitation</span></span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>ethanol_vol     <span class="op">=</span> supernatant_vol <span class="op">*</span> ethanol_fraction</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution I"</span><span class="op">,</span>                 <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol1_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>             <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol1_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"RNase A"</span><span class="op">,</span>                     <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>rnase_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>             <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(rnase_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution II (fresh)"</span><span class="op">,</span>         <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol2_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>              <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol2_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Solution III"</span><span class="op">,</span>                <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>sol3_vol<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>              <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(sol3_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Chloroform"</span><span class="op">,</span>                  <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`~</span><span class="sc">${</span>chloroform_vol<span class="sc">}</span><span class="vs"> µL × 2 extractions`</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(chloroform_vol <span class="op">*</span> <span class="dv">2</span> <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Absolute Ethanol"</span><span class="op">,</span>            <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`~</span><span class="sc">${</span><span class="fu">fmt</span>(ethanol_vol)<span class="sc">}</span><span class="vs"> µL (</span><span class="sc">${</span>ethanol_fraction<span class="sc">}</span><span class="vs">× supernatant)`</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(ethanol_vol <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Bidistilled water (resuspension)"</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"20 µL"</span><span class="op">,</span> <span class="st">"Total (scaled)"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> scale)<span class="sc">}</span><span class="vs"> µL`</span>}</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a><span class="fu">## What are Solutions I, II, and III?</span></span>
+<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: the source document does not give recipes for Solutions I, II, and III — these read as the classic alkaline-lysis miniprep buffers (Birnboim &amp; Doly-style), but confirm exact composition/pH with JP before relying on this for a new prep of these solutions:</span></span>
+<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a><span class="co">- Solution I (resuspension): typically ~50 mM glucose, 25 mM Tris-HCl, 10 mM EDTA</span></span>
+<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="co">- Solution II (lysis, made fresh): typically 0.2 N NaOH, 1% SDS (Sodium Dodecyl Sulfate)</span></span>
+<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="co">- Solution III (neutralization): typically ~3 M potassium acetate, adjusted to ~pH 5.5 with glacial acetic acid</span></span>
+<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="co">This block is general background, not sourced from the uploaded protocol. --&gt;</span></span>
+<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a><span class="fu">## Protocol</span></span>
+<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span> Volume <span class="pp">|</span></span>
+<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|--------|</span></span>
+<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Inoculate LB media with a pure CFU (from LB agar or frozen glycerol stock) + antibiotic; incubate overnight at 37°C, 200 rpm <span class="pp">|</span> 1 mL LB + 10 µL antibiotic <span class="pp">|</span></span>
+<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Reserve 50 µL of culture in a separate autoclaved tube for future glycerol-stock purposes; use the rest for the microprep <span class="pp">|</span> 0.5 mL tube <span class="pp">|</span></span>
+<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Centrifuge at maximum speed for 2 min; discard supernatant <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Resuspend the pellet by vortexing in Solution I + RNase A <span class="pp">|</span> 100 µL Solution I + 1 µL RNase A <span class="pp">|</span></span>
+<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add fresh Solution II; mix gently <span class="pp">|</span> 200 µL <span class="pp">|</span></span>
+<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Add Solution III; mix gently <span class="pp">|</span> 150 µL <span class="pp">|</span></span>
+<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Centrifuge for 10 min at maximum speed <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> Transfer the **supernatant** to a new tube with 1 volume of chloroform; mix gently; centrifuge 5 min at maximum speed <span class="pp">|</span> ~450 µL chloroform <span class="pp">|</span></span>
+<span id="cb5-113"><a href="#cb5-113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 9 <span class="pp">|</span> Repeat the chloroform extraction (Step 8) <span class="pp">|</span> ~450 µL chloroform <span class="pp">|</span></span>
+<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 10 <span class="pp">|</span> Transfer the **supernatant** to a new tube with 0.8–1 volume of absolute ethanol; mix gently; incubate at −20°C for 20 min <span class="pp">|</span> 0.8–1× supernatant vol (see reagent table above) <span class="pp">|</span></span>
+<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 11 <span class="pp">|</span> Centrifuge for 5 min at maximum speed; discard supernatant <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 12 <span class="pp">|</span> A small white pellet may be visible at this point; if not, continue and check DNA concentration at the end <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 13 <span class="pp">|</span> Dry slowly at 55°C in a dry bath <span class="pp">|</span> — <span class="pp">|</span></span>
+<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 14 <span class="pp">|</span> Resuspend the pellet in bidistilled water; store at −20°C <span class="pp">|</span> 20 µL <span class="pp">|</span></span>
+<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## No visible pellet after Step 11?</span></span>
+<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a>The source protocol notes this is not necessarily a failure — continue the prep and check the DNA concentration (e.g., Nanodrop/Qubit) at the end before troubleshooting.</span>
+<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## QC log</span></span>
+<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checkpoint <span class="pp">|</span> Expected <span class="pp">|</span> Observed <span class="pp">|</span> Pass <span class="pp">|</span></span>
+<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------|----------|----------|------|</span></span>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-Solution III spin <span class="pp">|</span> Clear supernatant, compact debris pellet <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-chloroform extraction <span class="pp">|</span> Clean phase separation <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-ethanol precipitation <span class="pp">|</span> Visible white pellet (or check by concentration) <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Final DNA concentration <span class="pp">|</span> Measurable by Nanodrop/Qubit <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a>**Notes / deviations:**</span>
+<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: no citation, kit name, or lab of origin was given in the source document — this is a generic alkaline-lysis "fast miniprep," not a commercial kit protocol. Confirm attribution with JP. --&gt;</span></span>
+<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a>Protocol: source not specified in provided document.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>JP Flores</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

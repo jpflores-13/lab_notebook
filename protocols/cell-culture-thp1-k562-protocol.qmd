@@ -1,0 +1,157 @@
+---
+title: "THP-1 & K562 Suspension Culture Maintenance"
+subtitle: "Routine Monday/Wednesday/Friday splitting schedule"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+THP-1 and K562 are suspension lines split on a fixed **Monday/Wednesday/Friday** schedule to target lines-specific seeding densities (below). Splitting volume is not fixed — base it on whatever experiments are planned for the week (T25 flask max 16 mL laying down; T75 flask max 30 mL laying down). Warm media in the bead bath at least 1 hr before splitting (full bottles may need 2 hr).
+:::
+
+::: {.callout-important}
+## Before starting
+- Count and record viability **every** split — keep a spreadsheet (physical or Excel) of density and viability per cell line, especially during an experimental week.
+- Viability >95% is ideal. Below 90%, spin down and resuspend in fresh media.
+- Split low-viability cells to a **low density and small volume**; size down to a smaller flask if necessary.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof cell_line = Inputs.select(["THP-1", "K562"], {label: "Cell line"})
+viewof split_day  = Inputs.select(["Monday/Wednesday", "Friday"], {label: "Split day"})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+// Target seeding density lookup (×10^5 cells/mL) — single source of truth for the reference table below.
+target_density = ({
+  "THP-1":  { "Monday/Wednesday": [4, 5],     "Friday": [3, 3.5] },
+  "K562":   { "Monday/Wednesday": [3, 3],     "Friday": [2, 2] }
+})[cell_line][split_day]
+
+target_density_label = target_density[0] === target_density[1]
+  ? `~${target_density[0]} × 10⁵ cells/mL`
+  : `~${target_density[0]}–${target_density[1]} × 10⁵ cells/mL`
+
+md`**${cell_line} · ${split_day} target: ${target_density_label}**`
+```
+
+---
+
+## Reference — target seeding densities
+
+| Cell line | Monday/Wednesday | Friday |
+|-----------|-------------------|--------|
+| THP-1 | ~4–5 × 10⁵ cells/mL | ~3–3.5 × 10⁵ cells/mL |
+| K562 | ~3 × 10⁵ cells/mL | ~2 × 10⁵ cells/mL |
+
+## Reference — flask volume limits
+
+| Flask | Max volume (laying down) |
+|-------|---------------------------|
+| T25 | 16 mL |
+| T75 | 30 mL |
+
+---
+
+## Dilution calculators
+
+::: {.callout-note collapse="true"}
+## Math audit — both formulas are stated directly in the source protocol, not derived
+
+**To remove some media and replace with new media** (you keep a portion of the current suspension and top it up to a target final volume at a target density):
+
+$$C_1 V_1 = C_2 V_2$$
+
+- $C_1$ = current cell density (from count)
+- $C_2$ = desired cell density
+- $V_2$ = desired final volume
+- Solve for $V_1$ — the volume of **current** suspension to keep. Media to add = $V_2 - V_1$.
+
+$$V_1 = \frac{C_2 V_2}{C_1}$$
+
+**To add fresh media without removing any old media** (top-up in place):
+
+$$\frac{C_1}{V_1} = \frac{C_2}{V_2}$$
+
+- $C_1$ = current cell density
+- $V_1$ = volume of current cell media (your **known, current** volume — "leave this as V" per the source)
+- $C_2$ = desired cell density
+- Solve for $V_2$ — the volume of fresh media to **add**.
+
+$$V_2 = \frac{C_2 V_1}{C_1}$$
+
+<!-- Source typo, fixed here: the original document's instructions for this second formula say "Input C1, C2, and V2, cross multiply, and solve for V2" — which is self-contradictory (V2 can't be both an input and the solved unknown). Based on the formula's own variable definitions ("V1 = volume of current cell media, leave this as V"), V1 is the known input here and V2 is the unknown being solved for; that reading is reproduced above. -->
+:::
+
+### Calculator 1 — remove & replace media (C₁V₁ = C₂V₂)
+
+```{ojs}
+//| echo: false
+viewof calcA_c1 = Inputs.number({label: "C1 — current density (×10⁵ cells/mL)", value: 8, min: 0.01, step: 0.1})
+viewof calcA_c2 = Inputs.number({label: "C2 — desired density (×10⁵ cells/mL)", value: 4, min: 0.01, step: 0.1})
+viewof calcA_v2 = Inputs.number({label: "V2 — desired final volume (mL)", value: 10, min: 0.1, step: 0.5})
+```
+
+```{ojs}
+//| echo: false
+calcA_v1 = (calcA_c2 * calcA_v2) / calcA_c1
+calcA_media_to_add = calcA_v2 - calcA_v1
+
+calcA_v1 > calcA_v2
+  ? md`::: {.callout-warning}
+**Not achievable.** Solving gives $V_1$ = ${fmt(calcA_v1)} mL, which exceeds the desired final volume ($V_2$ = ${fmt(calcA_v2)} mL) — your current density is already at or below the target. Lower $C_2$, raise $V_2$, or just add fresh media directly (Calculator 2) instead.
+:::`
+  : Inputs.table([
+      {Quantity: "Keep this much of your current suspension (V1)", "Volume (mL)": fmt(calcA_v1)},
+      {Quantity: "Top up with fresh media", "Volume (mL)": fmt(calcA_media_to_add)},
+      {Quantity: "Final volume (V2)", "Volume (mL)": fmt(calcA_v2)}
+    ], {layout: "auto"})
+```
+
+### Calculator 2 — top up without removing media (C₁/V₁ = C₂/V₂)
+
+```{ojs}
+//| echo: false
+viewof calcB_c1 = Inputs.number({label: "C1 — current density (×10⁵ cells/mL)", value: 8, min: 0.01, step: 0.1})
+viewof calcB_c2 = Inputs.number({label: "C2 — desired density (×10⁵ cells/mL)", value: 4, min: 0.01, step: 0.1})
+viewof calcB_v1 = Inputs.number({label: "V1 — current culture volume (mL)", value: 10, min: 0.1, step: 0.5})
+```
+
+```{ojs}
+//| echo: false
+calcB_v2 = (calcB_c2 * calcB_v1) / calcB_c1
+
+Inputs.table([
+  {Quantity: "Current volume (V1, unchanged)", "Volume (mL)": fmt(calcB_v1)},
+  {Quantity: "Fresh media to add (V2)", "Volume (mL)": fmt(calcB_v2)},
+  {Quantity: "New total volume", "Volume (mL)": fmt(calcB_v1 + calcB_v2)}
+], {layout: "auto"})
+```
+
+---
+
+## QC log
+
+| Date | Cell line | Density / Viability | Split to __ in __ mL |
+|------|-----------|----------------------|------------------------|
+| | | | |
+| | | | |
+| | | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Protocol: source not specified in provided document; transcribed as-is by JP Flores.

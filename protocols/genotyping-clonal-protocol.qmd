@@ -1,0 +1,159 @@
+---
+title: "Clonal Genotyping Protocol"
+subtitle: "QuickExtract DNA prep + EconoTaq PCR genotyping of single-clone colonies"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Genomic DNA extraction and PCR genotyping of single-clone expansion colonies, at least 4 weeks after single-clone seeding. Part A extracts crude genomic DNA directly from a small culture volume using Epicentre QuickExtract™ DNA Extraction Solution 1.0 (no column cleanup). Part B PCR-genotypes that DNA with EconoTaq® PLUS GREEN 2X Master Mix and clone-specific primers, visualized on a 2% agarose gel.
+:::
+
+::: {.callout-important}
+## Before starting
+- Thaw QuickExtract (QE) Buffer before starting.
+- Set centrifuge to room temperature, 8000 rpm.
+- All PCR preparation (Part B) should be completed **on ice**.
+- Have your 96-well V-bottom plate and 8-well PCR tube strips ready.
+:::
+
+---
+
+## Configure genotyping run
+
+```{ojs}
+//| echo: false
+viewof n_clones    = Inputs.number({label: "Number of clones (wells) to genotype", value: 24, min: 1, max: 96, step: 1})
+viewof excess_pct  = Inputs.number({label: "Master mix overage (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = n_clones * (1 + excess_pct / 100)
+fmt   = (x, d = 1) => x.toFixed(d)
+
+md`**${n_clones} clone(s) · ${excess_pct}% overage · scale factor ${fmt(scale, 2)}×**`
+```
+
+```{ojs}
+//| echo: false
+n_clones > 96
+  ? md`::: {.callout-warning}
+**Exceeds one 96-well plate.** ${n_clones} clones will not fit in a single 96-well V-bottom plate — split the extraction across multiple plates.
+:::`
+  : md``
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+Every scaled volume below uses the same linear formula:
+
+$$V_{total} = V_{per\_well} \times N_{clones} \times (1 + overage)$$
+
+QuickExtract Buffer (30 µL/well) and the PCR master mix components both scale this way. Template DNA (QE DNA) is **not** part of the master mix — it differs per clone and is added individually to each reaction.
+:::
+
+---
+
+## Part A: DNA extraction
+
+```{ojs}
+//| echo: false
+qe_vol_per_well = 30   // µL QuickExtract Buffer per well
+qe_total        = qe_vol_per_well * scale
+
+md`**QuickExtract Buffer needed: ${fmt(qe_total)} µL** (${qe_vol_per_well} µL/well × ${n_clones} clone(s), ${excess_pct}% overage)`
+```
+
+| Step | Action | Volume |
+|------|--------|--------|
+| 1 | In tissue culture hood, pipet culture up and down to mix | — |
+| 2 | Transfer culture volume to an appropriate 1.5 mL microcentrifuge tube | 1 mL/sample |
+| 3 | Centrifuge 8000 rpm, 5 min, room temperature | — |
+| 4 | Carefully tilt tube and pipet off supernatant — do not disturb the cell pellet | — |
+| 5 | Wash with Phosphate-Buffered Saline (PBS) | 1 mL/sample |
+| 6 | Centrifuge 8000 rpm, 5 min, room temperature | — |
+| 7 | Carefully tilt tube and pipet off supernatant — do not disturb the cell pellet | — |
+| 8 | Add QuickExtract buffer per well — **do not mix** | 30 µL/well |
+| 9 | Place at 37°C for 10 min | — |
+| 10 | Pipet cell suspension up and down | — |
+| 11 | Collect suspension; transfer to 8-well PCR tube strips | — |
+| 12 | Vortex 15 sec; briefly centrifuge | — |
+| 13 | Place in thermocycler at 65°C for 6 min | — |
+| 14 | Vortex 15 sec; briefly centrifuge | — |
+| 15 | Place in thermocycler at 98°C for 2 min | — |
+| 16 | Move on to Part B, or store samples at −20°C | — |
+
+::: {.callout-tip collapse="true"}
+## Stopping point
+Extracted DNA is stable at −20°C if you need to pause between Part A and Part B.
+:::
+
+---
+
+## Part B: PCR
+
+::: {.callout-important}
+All PCR preparation should be completed **on ice**.
+:::
+
+### Master mix
+
+```{ojs}
+//| echo: false
+pcr_components = [
+  {Component: "2X EconoTaq PLUS GREEN Master Mix", "Per reaction (µL)": 10},
+  {Component: "Primer A (10 µM)",                   "Per reaction (µL)": 2},
+  {Component: "Primer B (10 µM)",                   "Per reaction (µL)": 2},
+  {Component: "Nuclease-Free Water",                "Per reaction (µL)": 4}
+]
+mm_per_rxn = pcr_components.reduce((s, r) => s + r["Per reaction (µL)"], 0)
+
+Inputs.table(
+  pcr_components
+    .map(r => ({ ...r, [`${fmt(scale, 2)}× + overage (µL)`]: fmt(r["Per reaction (µL)"] * scale) }))
+    .concat([{ Component: "Total master mix", "Per reaction (µL)": mm_per_rxn, [`${fmt(scale, 2)}× + overage (µL)`]: fmt(mm_per_rxn * scale) }]),
+  { layout: "auto" }
+)
+```
+
+Add **18 µL** master mix + **2 µL** QE DNA (template, added individually per well) = **20 µL** total reaction — reproducing the source's 20 µL reaction table exactly.
+
+::: {.callout-tip collapse="true"}
+## Pipetting order
+Add items to each PCR reaction in the order listed: master mix components first, then QE DNA last, on ice.
+:::
+
+### Thermocycler program: "Econotaq – Genotyping"
+
+| Cycle step | Temp. | Time | Cycles |
+|------------|-------|------|--------|
+| Initial denaturation | 98°C | 30 s | 1 |
+| Denaturation / Annealing / Extension | 98°C / primer T~m~ / 72°C | 30 s / 30 s / 2 min | 25 |
+| Final extension / Hold | 72°C / 4°C | 10 min / hold | 1 |
+
+<!-- TODO: source gives annealing temperature as "primer Tm" without a specific value — set per your primer pair's melting temperature. -->
+
+Visualize on a 2% agarose gel.
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| QE extraction (Part A) | Clear lysate, no visible debris | | |
+| PCR amplification | Band at expected size | | |
+| Negative/water control | No band | | |
+| Gel image | Bands consistent with expected genotype | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+<!-- TODO: no external kit manual or paper was cited in the source document beyond the reagent catalog numbers — add if JP wants a formal citation. -->
+Protocol: source not specified beyond reagent catalog numbers (Lucigen QuickExtract DNA Extraction Solution 1.0, cat #: QE09050; EconoTaq PLUS GREEN 2X Master Mix, cat #: 30033-2). Protocol adapted by Kamisha Woolery.

@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-09">
+
+<title>iPSC Culture Protocol – JP Flores’ Lab Notebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4ee3db49c2535a8f187f0d04f590a1ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JP Flores’ Lab Notebook</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../protocols/index.html"> 
+<span class="menu-text">Protocols</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../experiments/index.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jpflores-13/lab_notebook"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configure-experiment" id="toc-configure-experiment" class="nav-link active" data-scroll-target="#configure-experiment">Configure experiment</a></li>
+  <li><a href="#matrigel-coating" id="toc-matrigel-coating" class="nav-link" data-scroll-target="#matrigel-coating">Matrigel coating</a>
+  <ul class="collapse">
+  <li><a href="#making-single-use-matrigel-aliquots" id="toc-making-single-use-matrigel-aliquots" class="nav-link" data-scroll-target="#making-single-use-matrigel-aliquots">Making single-use Matrigel aliquots</a></li>
+  <li><a href="#using-a-matrigel-aliquot-to-coat-plates" id="toc-using-a-matrigel-aliquot-to-coat-plates" class="nav-link" data-scroll-target="#using-a-matrigel-aliquot-to-coat-plates">Using a Matrigel aliquot to coat plates</a></li>
+  </ul></li>
+  <li><a href="#thawing" id="toc-thawing" class="nav-link" data-scroll-target="#thawing">Thawing</a></li>
+  <li><a href="#passaging" id="toc-passaging" class="nav-link" data-scroll-target="#passaging">Passaging</a>
+  <ul class="collapse">
+  <li><a href="#method-a-edta" id="toc-method-a-edta" class="nav-link" data-scroll-target="#method-a-edta">Method A — EDTA</a></li>
+  <li><a href="#method-b-relesr" id="toc-method-b-relesr" class="nav-link" data-scroll-target="#method-b-relesr">Method B — ReLeSR</a></li>
+  </ul></li>
+  <li><a href="#freezing" id="toc-freezing" class="nav-link" data-scroll-target="#freezing">Freezing</a>
+  <ul class="collapse">
+  <li><a href="#method-a-edta-and-dmso" id="toc-method-a-edta-and-dmso" class="nav-link" data-scroll-target="#method-a-edta-and-dmso">Method A — EDTA and DMSO</a></li>
+  <li><a href="#method-b-relesr-and-cryostor10" id="toc-method-b-relesr-and-cryostor10" class="nav-link" data-scroll-target="#method-b-relesr-and-cryostor10">Method B — ReLeSR and CryoStor10</a></li>
+  </ul></li>
+  <li><a href="#qc-log" id="toc-qc-log" class="nav-link" data-scroll-target="#qc-log">QC log</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">iPSC Culture Protocol</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Matrigel coating, thawing, passaging, and freezing of human iPSCs in TeSR-E8</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">
+🖨 Print / Save as PDF
+</button>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Human iPSCs are maintained on Matrigel-coated cultureware in TeSR-E8 media and passaged non-enzymatically (no Dispase). This page combines four source documents into one reference: <strong>Matrigel coating</strong> (<code>iPSC_Matrigel.docx</code>), <strong>thawing</strong> (<code>iPSC_Thawing.docx</code>), <strong>passaging</strong> (<code>iPSC_Passaging.docx</code> — two methods: EDTA and ReLeSR), and <strong>freezing</strong> (<code>iPSC_Freezing.docx</code> — two methods: EDTA/DMSO and ReLeSR/CryoStor10).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Before starting — the 15/45 incubator rule
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This rule recurs in every source document and applies throughout <strong>all</strong> sections below:</p>
+<blockquote class="blockquote">
+<p>Every time iPSCs come out of the incubator, set a timer for <strong>15 minutes (up to 20 minutes)</strong>. After that, cells must go back into the incubator for <strong>at least 45 minutes</strong> before being removed again. Uneven distribution of aggregates, or extended time outside the incubator, increases spontaneous differentiation.</p>
+</blockquote>
+<p>Other standing rules:</p>
+<ul>
+<li>Warm TeSR-E8 to room temperature (15–25°C) before use — <strong>never</strong> in a 37°C water bath.</li>
+<li>Use 2 mL serological pipettes (not P1000 tips) when handling cell aggregates, to minimize aggregate breakage.</li>
+<li>Enzymatic dissociation reagents (e.g.&nbsp;Dispase) are <strong>not</strong> recommended with TeSR-E8 — this protocol uses only non-enzymatic methods (EDTA or ReLeSR).</li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="configure-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="configure-experiment">Configure experiment</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="33" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 32;"><span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>viewof n_wells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of 6-well-plate wells being processed"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>viewof n_vials <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of cryovials (thawing / freezing)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="39" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 38;"><span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_wells<span class="sc">}</span><span class="vs"> well(s) (coating/passaging/freezing scale) · </span><span class="sc">${</span>n_vials<span class="sc">}</span><span class="vs"> vial(s) (thawing/freezing scale)** — all master volumes below scale from these two inputs; edit and every downstream table updates.`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="matrigel-coating" class="level2">
+<h2 class="anchored" data-anchor-id="matrigel-coating">Matrigel coating</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Why the aliquot volume isn’t a fixed number
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Matrigel’s protein concentration varies lot to lot, so the volume of a thawed aliquot needed to reach a given final concentration is lot-dependent. Enter your current lot’s stock concentration below (from its Certificate of Analysis) and the calculator derives the correct aliquot volume — never assume a previous lot’s number still applies.</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="55" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 54;"><span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>viewof matrigel_target_mgmL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Target final Matrigel concentration (mg/mL) — 0.35 for iPSC, 1.0 for microglia differentiation"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.35</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.05</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>viewof matrigel_lot_mgmL    <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Matrigel lot stock concentration (mg/mL, from Certificate of Analysis)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">9.0</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="61" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 60;"><span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>matrigel_soln_mL_per_well <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>matrigel_total_soln_mL    <span class="op">=</span> matrigel_soln_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>matrigel_aliquot_mL       <span class="op">=</span> matrigel_target_mgmL <span class="op">*</span> matrigel_total_soln_mL <span class="op">/</span> matrigel_lot_mgmL</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>matrigel_dmemf12_mL       <span class="op">=</span> matrigel_total_soln_mL <span class="op">-</span> matrigel_aliquot_mL</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Total coating solution needed"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_total_soln_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>matrigel_soln_mL_per_well<span class="sc">}</span><span class="vs"> mL/well × </span><span class="sc">${</span>n_wells<span class="sc">}</span><span class="vs"> wells)`</span>}<span class="op">,</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Matrigel aliquot to thaw"</span><span class="op">,</span>       <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_aliquot_mL<span class="op">,</span><span class="dv">3</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"DMEM/F12 to dilute to volume"</span><span class="op">,</span>   <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_dmemf12_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>mTeSR1 Certificate-of-Analysis shortcut
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If using with mTeSR1 media, the manual’s own example aliquot size is typically 270–350 µL per 25 mL DMEM/F12 — follow the dilution factor printed on that lot’s Certificate of Analysis rather than the calculator above if the two disagree.</p>
+</div>
+</div>
+</div>
+<section id="making-single-use-matrigel-aliquots" class="level3">
+<h3 class="anchored" data-anchor-id="making-single-use-matrigel-aliquots">Making single-use Matrigel aliquots</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>−1</td>
+<td>Thaw Matrigel by submerging the vial in ice, in a 4°C fridge, overnight. Pre-cool tubes and pipette tips.</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>Swirl the thawed vial to disperse evenly; keep on ice. Spray the Matrigel container and ice bucket with 70% ethanol before placing in the hood. Switch tips/pipettes whenever Matrigel clogs. Refreeze aliquots immediately after making them.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Sizing aliquots for different final concentrations
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Per Justin Brumbaugh: for standard iPSC culture, freeze pure Matrigel aliquots sized to coat 2× 6-well plates at 1.5 mL/well, final 0.35 mg/mL. For microglia differentiation, the <em>iPSC-to-Microglia 2.0</em> paper’s protocol uses 1 mg/mL final — size aliquots accordingly using the calculator above with <code>matrigel_target_mgmL</code> set to 1.0.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="using-a-matrigel-aliquot-to-coat-plates" class="level3">
+<h3 class="anchored" data-anchor-id="using-a-matrigel-aliquot-to-coat-plates">Using a Matrigel aliquot to coat plates</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Day</th>
+<th>Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>−1</td>
+<td>Thaw one aliquot on ice in a 4°C fridge overnight. Pre-cool tips/pipettes.</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>Add the aliquot to the calculated volume of DMEM/F12 (table above) to reach the target concentration. Spread 1.5 mL Matrigel solution per well of a 6-well plate with a pre-cooled pipette (switch pipette if clogging). Incubate the coated plate at room temperature (15–25°C) for <strong>≥1 hour</strong> before use.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Do not scratch the coating
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aspirate the remaining liquid just before use, taking care that the pipette tip does not scratch the coated surface. Store coated plates with the liquid still on (not aspirated) in the incubator for up to 1 week, or until dry patches start to appear — do <strong>not</strong> store in the fridge, as its gas environment differs from the incubator.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="thawing" class="level2">
+<h2 class="anchored" data-anchor-id="thawing">Thawing</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>1 hour before, or the day before
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Coat 2 wells of a 6-well plate with Matrigel (see above) per cryovial being thawed.</p>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="112" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 111;"><span id="cb5-112"><a href="#cb5-112" aria-hidden="true" tabindex="-1"></a>viewof dropwise_teSR_mL_per_vial <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Warm TeSR-E8 added dropwise per vial (mL, source range 5–7)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">7</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.5</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="118" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 117;"><span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>thaw_dropwise_total_mL <span class="op">=</span> dropwise_teSR_mL_per_vial <span class="op">*</span> n_vials</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>thaw_resuspend_total_mL <span class="op">=</span> <span class="dv">1</span> <span class="op">*</span> n_vials</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>thaw_wells_needed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> n_vials</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Wells to pre-coat with Matrigel"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>thaw_wells_needed<span class="sc">}</span><span class="vs"> wells (2/vial)`</span>}<span class="op">,</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Warm TeSR-E8 for dropwise addition"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(thaw_dropwise_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>dropwise_teSR_mL_per_vial<span class="sc">}</span><span class="vs"> mL/vial × </span><span class="sc">${</span>n_vials<span class="sc">}</span><span class="vs"> vial(s))`</span>}<span class="op">,</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 for pellet resuspension"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(thaw_resuspend_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (1 mL/vial)`</span>}</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Have tubes, warmed TeSR-E8, and pre-coated plates ready before starting — work quickly.</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Quickly thaw the cryovial in a <strong>37°C water bath</strong> (actual water, not a bead bath) by continuously gently shaking until only a small frozen pellet remains.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Remove from bath; wipe with 70% ethanol.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Use a 2 mL serological pipette (not a 1 mL pipettor) to transfer cryovial contents to a 15 mL conical tube.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add warm TeSR-E8 dropwise (volume above), gently mixing.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Centrifuge 300×g, 5 min, RT.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Aspirate medium, leaving the pellet intact; gently resuspend in 1 mL TeSR-E8 with a 2 mL serological pipette — maintain aggregates but break up big chunks (unbroken chunks promote differentiation). Don’t pipette the whole volume up/down; avoid bubbles.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Transfer 0.5 mL cell mixture per well of the pre-coated plate (2 wells/vial). More aggregates are needed post-thaw than during routine passaging.</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Place the plate in the 37°C incubator; move in quick, short back-and-forth/side-to-side motions to distribute aggregates, then do <strong>not</strong> disturb for 24 hours.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Day 1 onward
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Perform daily medium changes with TeSR-E8, visually assessing growth/differentiation until the next passage. Manual colony selection may be needed the next day or after 2 days to remove differentiated cells. Undifferentiated (dense-centered) colonies may be ready to passage ~1–2 days post-thaw.</p>
+<p>If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and spin 200×g for 30 sec — aggregates pellet while single differentiated cells stay in the supernatant; discard the supernatant and culture the pellet (per Justin Brumbaugh).</p>
+<p>If only a few undifferentiated colonies are seen post-thaw, it may be necessary to select only those colonies and replate them (without splitting) into a same-size well on a newly coated plate (per the TeSR manual).</p>
+<p>Once ready to split: Justin’s ratio is 1:4–1:8 every 2–3 days; Rose’s ratio is ~1:12 (1 well expanded into 12 wells of a 6-well plate). Cells are usable for experiments or freezing once healthy — normally after ≥2 splits.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="passaging" class="level2">
+<h2 class="anchored" data-anchor-id="passaging">Passaging</h2>
+<p>Passage every time cells are ready (dense, undifferentiated colonies) — respect the 15/45 incubator rule above throughout.</p>
+<section id="method-a-edta" class="level3">
+<h3 class="anchored" data-anchor-id="method-a-edta">Method A — EDTA</h3>
+<p><strong>EDTA dissociation buffer</strong> (500 mL batch, store 4°C):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.5 M EDTA, pH ~7.4</td>
+<td>500 µL</td>
+</tr>
+<tr class="even">
+<td>NaCl</td>
+<td>0.9 g</td>
+</tr>
+<tr class="odd">
+<td>Ca²⁺/Mg²⁺-free PBS (Invitrogen #14190)</td>
+<td>to 500 mL</td>
+</tr>
+</tbody>
+</table>
+<p>Sterilize by filtration.</p>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="172" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 171;"><span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>edta_rinse_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>edta_sit_mL_per_well   <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>edta_neutralize_mL_per_well <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"Rinse ×2 (wash out Mg²⁺/Ca²⁺)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_rinse_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_rinse_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL per rinse (×2 rinses)`</span>}<span class="op">,</span></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"3rd EDTA addition — let sit 4–5 min"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_sit_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_sit_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"Neutralize with fresh media (max pipetting speed)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_neutralize_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_neutralize_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-7-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Have a Matrigel-coated plate ready; warm TeSR-E8 and EDTA dissociation media to RT (do not warm TeSR-E8 in a 37°C bath).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Optionally mark/remove differentiated colonies in the morning (respect the 15/45 incubator rule).</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Rinse wells with room-temp EDTA medium (table above) to wash out Mg²⁺/Ca²⁺; discard.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Repeat the rinse once more.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add EDTA medium a third time (table above); let sit 4–5 min (longer → tiny 3–5-cell colonies; a first split off feeders may need more time). During the wait, aspirate marked differentiated colonies by inclining the plate and vacuuming gently with a glass pipette — careful not to break the Matrigel coat; incline back between colonies to keep EDTA covering the plate and avoid drying. Endpoint cue: a hazy appearance by eye, or colony edges visibly peeling under the scope.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Aspirate the EDTA; add neutralizing media (table above) at max pipetting speed to gently disperse cells — Mg²⁺/Ca²⁺ in the media neutralizes the EDTA. Do <strong>not</strong> scrape cells off the bottom (causes differentiation/death).</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Mix the suspension gently; plate at the desired split ratio (1:4 to 1:8); discard unused suspension.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Place in the incubator; rock back-and-forth/side-to-side to distribute; let sit undisturbed overnight for maximum attachment.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Citation for this method
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. “Chemically defined conditions for human iPS cell derivation and culture.” <em>Nature Methods.</em> 2011 Apr 10;8(4):424–429.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="method-b-relesr" class="level3">
+<h3 class="anchored" data-anchor-id="method-b-relesr">Method B — ReLeSR</h3>
+<p>ReLeSR is an enzyme-free reagent for aggregate dissociation without manual colony selection or scraping — recommended when first culturing a new line in TeSR-E8. Volumes below are per 1 well of a 6-well plate, scaled by <code>n_wells</code>.</p>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="205" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 204;"><span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>relesr_wash_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a>relesr_reagent_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>relesr_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"D-PBS wash"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_wash_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_wash_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"ReLeSR (aspirate within 1 min, leave thin film)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_reagent_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_reagent_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"TeSR-E8 to detach colonies"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_teSR_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_teSR_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-8-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Coat new plates with Matrigel ≥1 h before passaging; warm TeSR-E8 to RT (not a 37°C bath).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Wash cells with D-PBS (table above); aspirate. No need to remove differentiated regions first.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Add ReLeSR (table above); aspirate again within 1 minute, leaving colonies with just a thin film.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Incubate at RT for <strong>7–9 min</strong> — optimal time is line-dependent; determine empirically the first time using a new line.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add TeSR-E8 (table above). Detach colonies by holding the plate with one hand and firmly tapping the side with the other for ~30–60 sec.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Gently transfer to a 15 mL conical tube; centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol during the spin.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Aspirate supernatant without disturbing the pellet; resuspend in TeSR-E8 using a 2 mL serological pipette, gently, avoiding bubbles.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>If colonies are too big, pipette up/down 2–3× (5 mL serological pipette in a conical, or once directly in the well) to break to ~50–200 µm aggregates.</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Plate the aggregate mixture onto pre-coated wells containing TeSR-E8 at the desired density — cultures can typically be split every 4–7 days at 1:10 to 1:50 (Justin recommends 1:4–1:8, Rose recommends ~1:12); adjust ratio at the next passage if colonies were too dense or sparse.</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Place in the 37°C incubator; quick short back-and-forth/side-to-side motions to distribute; do not disturb for 24 hours.</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Perform daily medium changes with TeSR-E8; monitor growth/differentiation. If a colony shows any differentiated cells, remove the whole colony (as in the EDTA method’s colony-removal step).</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ambiguity flagged in the source document
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>iPSC_Passaging.docx</code>’s ReLeSR section describes, immediately after colony detachment and centrifugation, resuspending the pellet “in cold (2–8°C) CryoStor CS10… minimize aggregate breakup” — which is a <strong>freezing</strong> step, not a continued-culture passaging step. It is unclear whether this paragraph in the source was meant to describe (a) passaging cells forward into a new plate (in which case the pellet should be resuspended in TeSR-E8, not CryoStor, as presented in Steps 7–9 above), or (b) an abbreviated pointer to the freezing workflow that happens to follow the same detachment steps.</p>
+<!-- TODO for JP: confirm whether the CryoStor CS10 resuspension line in iPSC_Passaging.docx was a copy/paste artifact from iPSC_Freezing.docx, or an intentional note that ReLeSR-detached cells are sometimes taken directly to freezing rather than replated. This page presents the "passage to continue culturing" interpretation (TeSR-E8 resuspend + replate) as the main ReLeSR passaging workflow, and keeps the CryoStor/freeze version entirely inside the Freezing section below — verify this reconciliation is correct before treating either section as final. -->
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="freezing" class="level2">
+<h2 class="anchored" data-anchor-id="freezing">Freezing</h2>
+<p>Cryopreserve at the normal passaging timepoint. Each vial = aggregates from 1 well of a 6-well plate (CryoStor method) or half a well (EDTA method) — adjust for other cultureware. Use 2 mL pipettes, not tips, to avoid disrupting aggregates.</p>
+<section id="method-a-edta-and-dmso" class="level3">
+<h3 class="anchored" data-anchor-id="method-a-edta-and-dmso">Method A — EDTA and DMSO</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="247" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 246;"><span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a>freeze_edta_dmso_mL_per_well <span class="op">=</span> <span class="dv">1</span>     <span class="co">// 20% DMSO-in-TeSR-E8, per well</span></span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a>freeze_edta_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span>     <span class="co">// TeSR-E8 added dropwise, per well</span></span>
+<span id="cb9-249"><a href="#cb9-249" aria-hidden="true" tabindex="-1"></a>freeze_edta_vials_per_well   <span class="op">=</span> <span class="dv">2</span>     <span class="co">// final DMSO 10%</span></span>
+<span id="cb9-250"><a href="#cb9-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a>freeze_edta_dmso_total_mL <span class="op">=</span> freeze_edta_dmso_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a>freeze_edta_teSR_total_mL <span class="op">=</span> freeze_edta_teSR_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a>freeze_edta_vials_total   <span class="op">=</span> freeze_edta_vials_per_well <span class="op">*</span> n_wells</span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"20% DMSO-in-TeSR-E8 (+1 extra)"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_edta_dmso_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>freeze_edta_dmso_mL_per_well<span class="sc">}</span><span class="vs"> mL/well)`</span>}<span class="op">,</span></span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 (added dropwise after)"</span><span class="op">,</span>  <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_edta_teSR_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>freeze_edta_teSR_mL_per_well<span class="sc">}</span><span class="vs"> mL/well)`</span>}<span class="op">,</span></span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Labeled cryovials needed"</span><span class="op">,</span>         <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>freeze_edta_vials_total<span class="sc">}</span><span class="vs"> vials (</span><span class="sc">${</span>freeze_edta_vials_per_well<span class="sc">}</span><span class="vs">/well, final 10% DMSO)`</span>}</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-7" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Aliquot TeSR-E8 and EDTA dissociation media; warm both to RT (do not warm TeSR-E8 in a 37°C bath).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Prep supplies: Mr.&nbsp;Frosty freezing container, labeled cryovials (table above), 20% DMSO-in-TeSR-E8, and normal TeSR-E8.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Optionally mark differentiated colonies in the morning (respect the 15/45 incubator rule).</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Wash with EDTA dissociation media ×2 to fully remove Mg²⁺/Ca²⁺; discard.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add EDTA media a third time; let sit 4–5 min (longer → tiny 3–5-cell colonies). During the wait, aspirate marked differentiated colonies as in the Passaging (EDTA) section above.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Aspirate EDTA; add TeSR-E8 at max speed to gently disperse cells; transfer gently to a 15 mL conical (careful not to over-break colonies — Mg²⁺/Ca²⁺ now neutralizes the EDTA). Do not scrape cells off the bottom.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol before opening, during the spin.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Gently aspirate supernatant without disturbing the pellet; resuspend in 20% DMSO-in-TeSR-E8 (table above) using a 2 mL serological pipette, minimizing aggregate breakup, gentle, avoiding bubbles.</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Add TeSR-E8 (table above) dropwise; mix once gently up/down; transfer 1 mL per cryovial (2 vials/well, final DMSO concentration 10%).</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Freeze in a Mr.&nbsp;Frosty at −80°C overnight; transfer to liquid N₂ the next day.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="method-b-relesr-and-cryostor10" class="level3">
+<h3 class="anchored" data-anchor-id="method-b-relesr-and-cryostor10">Method B — ReLeSR and CryoStor10</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="279" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 278;"><span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a>freeze_relesr_wash_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>freeze_relesr_reagent_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a>freeze_relesr_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>freeze_relesr_cryostor_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a>freeze_relesr_vials_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"D-PBS wash"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_wash_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"ReLeSR"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_reagent_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 to detach colonies"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_teSR_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Cold (2–8°C) CryoStor CS10"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_cryostor_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Labeled cryovials needed"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>freeze_relesr_vials_per_well <span class="op">*</span> n_wells<span class="sc">}</span><span class="vs"> vials (</span><span class="sc">${</span>freeze_relesr_vials_per_well<span class="sc">}</span><span class="vs">/well)`</span>}</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-10-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Aliquot and warm TeSR-E8 to RT (not a 37°C bath).</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Wash with D-PBS (table above); aspirate — no need to remove differentiated regions.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Add ReLeSR (table above); aspirate within 1 min, leaving a thin film.</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Incubate at RT for <strong>7–9 min</strong> (line-dependent — determine empirically for a new line).</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Add TeSR-E8 (table above); detach colonies by tapping the plate side firmly for 30–60 sec.</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Gently transfer to a 15 mL conical; centrifuge 300×g, 5 min, RT. Wipe the vial with ethanol during the spin.</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Gently aspirate supernatant without disturbing the pellet; resuspend in cold CryoStor CS10 (table above) using a 2 mL serological pipette — gentle, minimize breakup, avoid bubbles.</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Transfer 1 mL cell-aggregates-in-CryoStor per labeled cryovial using a 2 mL pipette.</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Freeze in a Mr.&nbsp;Frosty at −80°C overnight; transfer to liquid N₂ the next day.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="qc-log" class="level2">
+<h2 class="anchored" data-anchor-id="qc-log">QC log</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Checkpoint</th>
+<th>Expected</th>
+<th>Observed</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Matrigel coating</td>
+<td>Even coat, no dry patches before use</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Post-thaw Day 1 morphology</td>
+<td>Aggregates attached, evenly distributed</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Pre-passage colony morphology</td>
+<td>Dense-centered, undifferentiated colonies</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Post-passage overnight attachment</td>
+<td>Even attachment, no floating aggregates</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Post-freeze viability (next thaw)</td>
+<td>Normal recovery, ≥1–2 wells/vial</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes / deviations:</strong></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. “Chemically defined conditions for human iPS cell derivation and culture.” <em>Nature Methods.</em> 2011 Apr 10;8(4):424–429.</p>
+<p>Matrigel protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.</p>
+<p>Thawing protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.</p>
+<p>Passaging protocol: mTeSR manual (ReLeSR method) and Justin Brumbaugh (EDTA method), adapted by Yoseli Quiroga, February 2019.</p>
+<p>Freezing protocol: Justin Brumbaugh (EDTA/DMSO method) and mTeSR manual (ReLeSR/CryoStor10 method), adapted by Yoseli Quiroga, February 2019.</p>
+<p>Additional split-ratio guidance attributed in-line to “Justin” (Justin Brumbaugh) and “Rose.”</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3dlbGxzID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIDYtd2VsbC1wbGF0ZSB3ZWxscyBiZWluZyBwcm9jZXNzZWRcIiwgdmFsdWU6IDYsIG1pbjogMSwgc3RlcDogMX0pXG52aWV3b2Ygbl92aWFscyA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIk51bWJlciBvZiBjcnlvdmlhbHMgKHRoYXdpbmcgLyBmcmVlemluZylcIiwgdmFsdWU6IDEsIG1pbjogMSwgc3RlcDogMX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJmbXQgPSAoeCwgZCA9IDIpID0+IHgudG9GaXhlZChkKVxuXG5tZGAqKiR7bl93ZWxsc30gd2VsbChzKSAoY29hdGluZy9wYXNzYWdpbmcvZnJlZXppbmcgc2NhbGUpIMK3ICR7bl92aWFsc30gdmlhbChzKSAodGhhd2luZy9mcmVlemluZyBzY2FsZSkqKiDigJQgYWxsIG1hc3RlciB2b2x1bWVzIGJlbG93IHNjYWxlIGZyb20gdGhlc2UgdHdvIGlucHV0czsgZWRpdCBhbmQgZXZlcnkgZG93bnN0cmVhbSB0YWJsZSB1cGRhdGVzLmBcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBtYXRyaWdlbF90YXJnZXRfbWdtTCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIlRhcmdldCBmaW5hbCBNYXRyaWdlbCBjb25jZW50cmF0aW9uIChtZy9tTCkg4oCUIDAuMzUgZm9yIGlQU0MsIDEuMCBmb3IgbWljcm9nbGlhIGRpZmZlcmVudGlhdGlvblwiLCB2YWx1ZTogMC4zNSwgbWluOiAwLjA1LCBzdGVwOiAwLjA1fSlcbnZpZXdvZiBtYXRyaWdlbF9sb3RfbWdtTCAgICA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIk1hdHJpZ2VsIGxvdCBzdG9jayBjb25jZW50cmF0aW9uIChtZy9tTCwgZnJvbSBDZXJ0aWZpY2F0ZSBvZiBBbmFseXNpcylcIiwgdmFsdWU6IDkuMCwgbWluOiAxLCBzdGVwOiAwLjF9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoibWF0cmlnZWxfc29sbl9tTF9wZXJfd2VsbCA9IDEuNVxubWF0cmlnZWxfdG90YWxfc29sbl9tTCAgICA9IG1hdHJpZ2VsX3NvbG5fbUxfcGVyX3dlbGwgKiBuX3dlbGxzXG5tYXRyaWdlbF9hbGlxdW90X21MICAgICAgID0gbWF0cmlnZWxfdGFyZ2V0X21nbUwgKiBtYXRyaWdlbF90b3RhbF9zb2xuX21MIC8gbWF0cmlnZWxfbG90X21nbUxcbm1hdHJpZ2VsX2RtZW1mMTJfbUwgICAgICAgPSBtYXRyaWdlbF90b3RhbF9zb2xuX21MIC0gbWF0cmlnZWxfYWxpcXVvdF9tTFxuXG5JbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIlRvdGFsIGNvYXRpbmcgc29sdXRpb24gbmVlZGVkXCIsIEFtb3VudDogYCR7Zm10KG1hdHJpZ2VsX3RvdGFsX3NvbG5fbUwsMil9IG1MICgke21hdHJpZ2VsX3NvbG5fbUxfcGVyX3dlbGx9IG1ML3dlbGwgw5cgJHtuX3dlbGxzfSB3ZWxscylgfSxcbiAge0NvbXBvbmVudDogXCJNYXRyaWdlbCBhbGlxdW90IHRvIHRoYXdcIiwgICAgICAgQW1vdW50OiBgJHtmbXQobWF0cmlnZWxfYWxpcXVvdF9tTCwzKX0gbUxgfSxcbiAge0NvbXBvbmVudDogXCJETUVNL0YxMiB0byBkaWx1dGUgdG8gdm9sdW1lXCIsICAgQW1vdW50OiBgJHtmbXQobWF0cmlnZWxfZG1lbWYxMl9tTCwyKX0gbUxgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIGRyb3B3aXNlX3RlU1JfbUxfcGVyX3ZpYWwgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJXYXJtIFRlU1ItRTggYWRkZWQgZHJvcHdpc2UgcGVyIHZpYWwgKG1MLCBzb3VyY2UgcmFuZ2UgNeKAkzcpXCIsIHZhbHVlOiA2LCBtaW46IDUsIG1heDogNywgc3RlcDogMC41fSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InRoYXdfZHJvcHdpc2VfdG90YWxfbUwgPSBkcm9wd2lzZV90ZVNSX21MX3Blcl92aWFsICogbl92aWFsc1xudGhhd19yZXN1c3BlbmRfdG90YWxfbUwgPSAxICogbl92aWFsc1xudGhhd193ZWxsc19uZWVkZWQgPSAyICogbl92aWFsc1xuXG5JbnB1dHMudGFibGUoW1xuICB7SXRlbTogXCJXZWxscyB0byBwcmUtY29hdCB3aXRoIE1hdHJpZ2VsXCIsIEFtb3VudDogYCR7dGhhd193ZWxsc19uZWVkZWR9IHdlbGxzICgyL3ZpYWwpYH0sXG4gIHtJdGVtOiBcIldhcm0gVGVTUi1FOCBmb3IgZHJvcHdpc2UgYWRkaXRpb25cIiwgQW1vdW50OiBgJHtmbXQodGhhd19kcm9wd2lzZV90b3RhbF9tTCwxKX0gbUwgKCR7ZHJvcHdpc2VfdGVTUl9tTF9wZXJfdmlhbH0gbUwvdmlhbCDDlyAke25fdmlhbHN9IHZpYWwocykpYH0sXG4gIHtJdGVtOiBcIlRlU1ItRTggZm9yIHBlbGxldCByZXN1c3BlbnNpb25cIiwgQW1vdW50OiBgJHtmbXQodGhhd19yZXN1c3BlbmRfdG90YWxfbUwsMSl9IG1MICgxIG1ML3ZpYWwpYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImVkdGFfcmluc2VfbUxfcGVyX3dlbGwgPSAxXG5lZHRhX3NpdF9tTF9wZXJfd2VsbCAgID0gMS41XG5lZHRhX25ldXRyYWxpemVfbUxfcGVyX3dlbGwgPSA0XG5cbklucHV0cy50YWJsZShbXG4gIHtTdGVwOiBcIlJpbnNlIMOXMiAod2FzaCBvdXQgTWfCsuKBui9DYcKy4oG6KVwiLCBcIlBlciB3ZWxsXCI6IGAke2VkdGFfcmluc2VfbUxfcGVyX3dlbGx9IG1MYCwgVG90YWw6IGAke2ZtdChlZHRhX3JpbnNlX21MX3Blcl93ZWxsICogbl93ZWxscywxKX0gbUwgcGVyIHJpbnNlICjDlzIgcmluc2VzKWB9LFxuICB7U3RlcDogXCIzcmQgRURUQSBhZGRpdGlvbiDigJQgbGV0IHNpdCA04oCTNSBtaW5cIiwgXCJQZXIgd2VsbFwiOiBgJHtlZHRhX3NpdF9tTF9wZXJfd2VsbH0gbUxgLCBUb3RhbDogYCR7Zm10KGVkdGFfc2l0X21MX3Blcl93ZWxsICogbl93ZWxscywxKX0gbUxgfSxcbiAge1N0ZXA6IFwiTmV1dHJhbGl6ZSB3aXRoIGZyZXNoIG1lZGlhIChtYXggcGlwZXR0aW5nIHNwZWVkKVwiLCBcIlBlciB3ZWxsXCI6IGAke2VkdGFfbmV1dHJhbGl6ZV9tTF9wZXJfd2VsbH0gbUxgLCBUb3RhbDogYCR7Zm10KGVkdGFfbmV1dHJhbGl6ZV9tTF9wZXJfd2VsbCAqIG5fd2VsbHMsMSl9IG1MYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtOCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InJlbGVzcl93YXNoX21MX3Blcl93ZWxsID0gMVxucmVsZXNyX3JlYWdlbnRfbUxfcGVyX3dlbGwgPSAxXG5yZWxlc3JfdGVTUl9tTF9wZXJfd2VsbCA9IDFcblxuSW5wdXRzLnRhYmxlKFtcbiAge1N0ZXA6IFwiRC1QQlMgd2FzaFwiLCBcIlBlciB3ZWxsXCI6IGAke3JlbGVzcl93YXNoX21MX3Blcl93ZWxsfSBtTGAsIFRvdGFsOiBgJHtmbXQocmVsZXNyX3dhc2hfbUxfcGVyX3dlbGwgKiBuX3dlbGxzLDEpfSBtTGB9LFxuICB7U3RlcDogXCJSZUxlU1IgKGFzcGlyYXRlIHdpdGhpbiAxIG1pbiwgbGVhdmUgdGhpbiBmaWxtKVwiLCBcIlBlciB3ZWxsXCI6IGAke3JlbGVzcl9yZWFnZW50X21MX3Blcl93ZWxsfSBtTGAsIFRvdGFsOiBgJHtmbXQocmVsZXNyX3JlYWdlbnRfbUxfcGVyX3dlbGwgKiBuX3dlbGxzLDEpfSBtTGB9LFxuICB7U3RlcDogXCJUZVNSLUU4IHRvIGRldGFjaCBjb2xvbmllc1wiLCBcIlBlciB3ZWxsXCI6IGAke3JlbGVzcl90ZVNSX21MX3Blcl93ZWxsfSBtTGAsIFRvdGFsOiBgJHtmbXQocmVsZXNyX3RlU1JfbUxfcGVyX3dlbGwgKiBuX3dlbGxzLDEpfSBtTGB9XG5dLCB7bGF5b3V0OiBcImF1dG9cIn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTkiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJmcmVlemVfZWR0YV9kbXNvX21MX3Blcl93ZWxsID0gMSAgICAgLy8gMjAlIERNU08taW4tVGVTUi1FOCwgcGVyIHdlbGxcbmZyZWV6ZV9lZHRhX3RlU1JfbUxfcGVyX3dlbGwgPSAxICAgICAvLyBUZVNSLUU4IGFkZGVkIGRyb3B3aXNlLCBwZXIgd2VsbFxuZnJlZXplX2VkdGFfdmlhbHNfcGVyX3dlbGwgICA9IDIgICAgIC8vIGZpbmFsIERNU08gMTAlXG5cbmZyZWV6ZV9lZHRhX2Rtc29fdG90YWxfbUwgPSBmcmVlemVfZWR0YV9kbXNvX21MX3Blcl93ZWxsICogbl93ZWxsc1xuZnJlZXplX2VkdGFfdGVTUl90b3RhbF9tTCA9IGZyZWV6ZV9lZHRhX3RlU1JfbUxfcGVyX3dlbGwgKiBuX3dlbGxzXG5mcmVlemVfZWR0YV92aWFsc190b3RhbCAgID0gZnJlZXplX2VkdGFfdmlhbHNfcGVyX3dlbGwgKiBuX3dlbGxzXG5cbklucHV0cy50YWJsZShbXG4gIHtJdGVtOiBcIjIwJSBETVNPLWluLVRlU1ItRTggKCsxIGV4dHJhKVwiLCBBbW91bnQ6IGAke2ZtdChmcmVlemVfZWR0YV9kbXNvX3RvdGFsX21MLDEpfSBtTCAoJHtmcmVlemVfZWR0YV9kbXNvX21MX3Blcl93ZWxsfSBtTC93ZWxsKWB9LFxuICB7SXRlbTogXCJUZVNSLUU4IChhZGRlZCBkcm9wd2lzZSBhZnRlcilcIiwgIEFtb3VudDogYCR7Zm10KGZyZWV6ZV9lZHRhX3RlU1JfdG90YWxfbUwsMSl9IG1MICgke2ZyZWV6ZV9lZHRhX3RlU1JfbUxfcGVyX3dlbGx9IG1ML3dlbGwpYH0sXG4gIHtJdGVtOiBcIkxhYmVsZWQgY3J5b3ZpYWxzIG5lZWRlZFwiLCAgICAgICAgIEFtb3VudDogYCR7ZnJlZXplX2VkdGFfdmlhbHNfdG90YWx9IHZpYWxzICgke2ZyZWV6ZV9lZHRhX3ZpYWxzX3Blcl93ZWxsfS93ZWxsLCBmaW5hbCAxMCUgRE1TTylgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImZyZWV6ZV9yZWxlc3Jfd2FzaF9tTF9wZXJfd2VsbCA9IDFcbmZyZWV6ZV9yZWxlc3JfcmVhZ2VudF9tTF9wZXJfd2VsbCA9IDFcbmZyZWV6ZV9yZWxlc3JfdGVTUl9tTF9wZXJfd2VsbCA9IDFcbmZyZWV6ZV9yZWxlc3JfY3J5b3N0b3JfbUxfcGVyX3dlbGwgPSAxXG5mcmVlemVfcmVsZXNyX3ZpYWxzX3Blcl93ZWxsID0gMVxuXG5JbnB1dHMudGFibGUoW1xuICB7SXRlbTogXCJELVBCUyB3YXNoXCIsIEFtb3VudDogYCR7Zm10KGZyZWV6ZV9yZWxlc3Jfd2FzaF9tTF9wZXJfd2VsbCAqIG5fd2VsbHMsMSl9IG1MYH0sXG4gIHtJdGVtOiBcIlJlTGVTUlwiLCBBbW91bnQ6IGAke2ZtdChmcmVlemVfcmVsZXNyX3JlYWdlbnRfbUxfcGVyX3dlbGwgKiBuX3dlbGxzLDEpfSBtTGB9LFxuICB7SXRlbTogXCJUZVNSLUU4IHRvIGRldGFjaCBjb2xvbmllc1wiLCBBbW91bnQ6IGAke2ZtdChmcmVlemVfcmVsZXNyX3RlU1JfbUxfcGVyX3dlbGwgKiBuX3dlbGxzLDEpfSBtTGB9LFxuICB7SXRlbTogXCJDb2xkICgy4oCTOMKwQykgQ3J5b1N0b3IgQ1MxMFwiLCBBbW91bnQ6IGAke2ZtdChmcmVlemVfcmVsZXNyX2NyeW9zdG9yX21MX3Blcl93ZWxsICogbl93ZWxscywxKX0gbUxgfSxcbiAge0l0ZW06IFwiTGFiZWxlZCBjcnlvdmlhbHMgbmVlZGVkXCIsIEFtb3VudDogYCR7ZnJlZXplX3JlbGVzcl92aWFsc19wZXJfd2VsbCAqIG5fd2VsbHN9IHZpYWxzICgke2ZyZWV6ZV9yZWxlc3JfdmlhbHNfcGVyX3dlbGx9L3dlbGwpYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl93ZWxscycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3ZpYWxzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ21hdHJpZ2VsX3RhcmdldF9tZ21MJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ21hdHJpZ2VsX2xvdF9tZ21MJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2Ryb3B3aXNlX3RlU1JfbUxfcGVyX3ZpYWwnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../protocols";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "iPSC Culture Protocol"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Matrigel coating, thawing, passaging, and freezing of human iPSCs in TeSR-E8"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"window.print()"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"float:right;margin-bottom:1rem"</span><span class="dt">&gt;</span>🖨 Print / Save as PDF<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>Human iPSCs are maintained on Matrigel-coated cultureware in TeSR-E8 media and passaged non-enzymatically (no Dispase). This page combines four source documents into one reference: **Matrigel coating** (`iPSC_Matrigel.docx`), **thawing** (`iPSC_Thawing.docx`), **passaging** (`iPSC_Passaging.docx` — two methods: EDTA and ReLeSR), and **freezing** (<span class="in">`iPSC_Freezing.docx`</span> — two methods: EDTA/DMSO and ReLeSR/CryoStor10).</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before starting — the 15/45 incubator rule</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>This rule recurs in every source document and applies throughout **all** sections below:</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Every time iPSCs come out of the incubator, set a timer for **15 minutes (up to 20 minutes)**. After that, cells must go back into the incubator for **at least 45 minutes** before being removed again. Uneven distribution of aggregates, or extended time outside the incubator, increases spontaneous differentiation.</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>Other standing rules:</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Warm TeSR-E8 to room temperature (15–25°C) before use — **never** in a 37°C water bath.</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use 2 mL serological pipettes (not P1000 tips) when handling cell aggregates, to minimize aggregate breakage.</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Enzymatic dissociation reagents (e.g. Dispase) are **not** recommended with TeSR-E8 — this protocol uses only non-enzymatic methods (EDTA or ReLeSR).</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configure experiment</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>viewof n_wells <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of 6-well-plate wells being processed"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>viewof n_vials <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of cryovials (thawing / freezing)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>fmt <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_wells<span class="sc">}</span><span class="vs"> well(s) (coating/passaging/freezing scale) · </span><span class="sc">${</span>n_vials<span class="sc">}</span><span class="vs"> vial(s) (thawing/freezing scale)** — all master volumes below scale from these two inputs; edit and every downstream table updates.`</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Matrigel coating</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why the aliquot volume isn't a fixed number</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>Matrigel's protein concentration varies lot to lot, so the volume of a thawed aliquot needed to reach a given final concentration is lot-dependent. Enter your current lot's stock concentration below (from its Certificate of Analysis) and the calculator derives the correct aliquot volume — never assume a previous lot's number still applies.</span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>viewof matrigel_target_mgmL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Target final Matrigel concentration (mg/mL) — 0.35 for iPSC, 1.0 for microglia differentiation"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.35</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="fl">0.05</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>viewof matrigel_lot_mgmL    <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Matrigel lot stock concentration (mg/mL, from Certificate of Analysis)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">9.0</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span>})</span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>matrigel_soln_mL_per_well <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>matrigel_total_soln_mL    <span class="op">=</span> matrigel_soln_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>matrigel_aliquot_mL       <span class="op">=</span> matrigel_target_mgmL <span class="op">*</span> matrigel_total_soln_mL <span class="op">/</span> matrigel_lot_mgmL</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>matrigel_dmemf12_mL       <span class="op">=</span> matrigel_total_soln_mL <span class="op">-</span> matrigel_aliquot_mL</span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Total coating solution needed"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_total_soln_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>matrigel_soln_mL_per_well<span class="sc">}</span><span class="vs"> mL/well × </span><span class="sc">${</span>n_wells<span class="sc">}</span><span class="vs"> wells)`</span>}<span class="op">,</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Matrigel aliquot to thaw"</span><span class="op">,</span>       <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_aliquot_mL<span class="op">,</span><span class="dv">3</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"DMEM/F12 to dilute to volume"</span><span class="op">,</span>   <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(matrigel_dmemf12_mL<span class="op">,</span><span class="dv">2</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## mTeSR1 Certificate-of-Analysis shortcut</span></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>If using with mTeSR1 media, the manual's own example aliquot size is typically 270–350 µL per 25 mL DMEM/F12 — follow the dilution factor printed on that lot's Certificate of Analysis rather than the calculator above if the two disagree.</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Making single-use Matrigel aliquots</span></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> −1 <span class="pp">|</span> Thaw Matrigel by submerging the vial in ice, in a 4°C fridge, overnight. Pre-cool tubes and pipette tips. <span class="pp">|</span></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0 <span class="pp">|</span> Swirl the thawed vial to disperse evenly; keep on ice. Spray the Matrigel container and ice bucket with 70% ethanol before placing in the hood. Switch tips/pipettes whenever Matrigel clogs. Refreeze aliquots immediately after making them. <span class="pp">|</span></span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sizing aliquots for different final concentrations</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a>Per Justin Brumbaugh: for standard iPSC culture, freeze pure Matrigel aliquots sized to coat 2× 6-well plates at 1.5 mL/well, final 0.35 mg/mL. For microglia differentiation, the *iPSC-to-Microglia 2.0* paper's protocol uses 1 mg/mL final — size aliquots accordingly using the calculator above with <span class="in">`matrigel_target_mgmL`</span> set to 1.0.</span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### Using a Matrigel aliquot to coat plates</span></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Day <span class="pp">|</span> Step <span class="pp">|</span></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----|------|</span></span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> −1 <span class="pp">|</span> Thaw one aliquot on ice in a 4°C fridge overnight. Pre-cool tips/pipettes. <span class="pp">|</span></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0 <span class="pp">|</span> Add the aliquot to the calculated volume of DMEM/F12 (table above) to reach the target concentration. Spread 1.5 mL Matrigel solution per well of a 6-well plate with a pre-cooled pipette (switch pipette if clogging). Incubate the coated plate at room temperature (15–25°C) for **≥1 hour** before use. <span class="pp">|</span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="fu">## Do not scratch the coating</span></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>Aspirate the remaining liquid just before use, taking care that the pipette tip does not scratch the coated surface. Store coated plates with the liquid still on (not aspirated) in the incubator for up to 1 week, or until dry patches start to appear — do **not** store in the fridge, as its gas environment differs from the incubator.</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## Thawing</span></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1 hour before, or the day before</span></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a>Coat 2 wells of a 6-well plate with Matrigel (see above) per cryovial being thawed.</span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a>viewof dropwise_teSR_mL_per_vial <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Warm TeSR-E8 added dropwise per vial (mL, source range 5–7)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">6</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">7</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.5</span>})</span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a>thaw_dropwise_total_mL <span class="op">=</span> dropwise_teSR_mL_per_vial <span class="op">*</span> n_vials</span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a>thaw_resuspend_total_mL <span class="op">=</span> <span class="dv">1</span> <span class="op">*</span> n_vials</span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a>thaw_wells_needed <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> n_vials</span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Wells to pre-coat with Matrigel"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>thaw_wells_needed<span class="sc">}</span><span class="vs"> wells (2/vial)`</span>}<span class="op">,</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Warm TeSR-E8 for dropwise addition"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(thaw_dropwise_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>dropwise_teSR_mL_per_vial<span class="sc">}</span><span class="vs"> mL/vial × </span><span class="sc">${</span>n_vials<span class="sc">}</span><span class="vs"> vial(s))`</span>}<span class="op">,</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 for pellet resuspension"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(thaw_resuspend_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (1 mL/vial)`</span>}</span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Have tubes, warmed TeSR-E8, and pre-coated plates ready before starting — work quickly. <span class="pp">|</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Quickly thaw the cryovial in a **37°C water bath** (actual water, not a bead bath) by continuously gently shaking until only a small frozen pellet remains. <span class="pp">|</span></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Remove from bath; wipe with 70% ethanol. <span class="pp">|</span></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Use a 2 mL serological pipette (not a 1 mL pipettor) to transfer cryovial contents to a 15 mL conical tube. <span class="pp">|</span></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add warm TeSR-E8 dropwise (volume above), gently mixing. <span class="pp">|</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Centrifuge 300×g, 5 min, RT. <span class="pp">|</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Aspirate medium, leaving the pellet intact; gently resuspend in 1 mL TeSR-E8 with a 2 mL serological pipette — maintain aggregates but break up big chunks (unbroken chunks promote differentiation). Don't pipette the whole volume up/down; avoid bubbles. <span class="pp">|</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> Transfer 0.5 mL cell mixture per well of the pre-coated plate (2 wells/vial). More aggregates are needed post-thaw than during routine passaging. <span class="pp">|</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 9 <span class="pp">|</span> Place the plate in the 37°C incubator; move in quick, short back-and-forth/side-to-side motions to distribute aggregates, then do **not** disturb for 24 hours. <span class="pp">|</span></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip collapse="true"}</span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="fu">## Day 1 onward</span></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>Perform daily medium changes with TeSR-E8, visually assessing growth/differentiation until the next passage. Manual colony selection may be needed the next day or after 2 days to remove differentiated cells. Undifferentiated (dense-centered) colonies may be ready to passage ~1–2 days post-thaw.</span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and spin 200×g for 30 sec — aggregates pellet while single differentiated cells stay in the supernatant; discard the supernatant and culture the pellet (per Justin Brumbaugh).</span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>If only a few undifferentiated colonies are seen post-thaw, it may be necessary to select only those colonies and replate them (without splitting) into a same-size well on a newly coated plate (per the TeSR manual).</span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a>Once ready to split: Justin's ratio is 1:4–1:8 every 2–3 days; Rose's ratio is ~1:12 (1 well expanded into 12 wells of a 6-well plate). Cells are usable for experiments or freezing once healthy — normally after ≥2 splits.</span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Passaging</span></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a>Passage every time cells are ready (dense, undifferentiated colonies) — respect the 15/45 incubator rule above throughout.</span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### Method A — EDTA</span></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a>**EDTA dissociation buffer** (500 mL batch, store 4°C):</span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> Amount <span class="pp">|</span></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----------|--------|</span></span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.5 M EDTA, pH ~7.4 <span class="pp">|</span> 500 µL <span class="pp">|</span></span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> NaCl <span class="pp">|</span> 0.9 g <span class="pp">|</span></span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Ca²⁺/Mg²⁺-free PBS (Invitrogen #14190) <span class="pp">|</span> to 500 mL <span class="pp">|</span></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a>Sterilize by filtration.</span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a>edta_rinse_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a>edta_sit_mL_per_well   <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a>edta_neutralize_mL_per_well <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"Rinse ×2 (wash out Mg²⁺/Ca²⁺)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_rinse_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_rinse_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL per rinse (×2 rinses)`</span>}<span class="op">,</span></span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"3rd EDTA addition — let sit 4–5 min"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_sit_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_sit_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"Neutralize with fresh media (max pipetting speed)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>edta_neutralize_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(edta_neutralize_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Have a Matrigel-coated plate ready; warm TeSR-E8 and EDTA dissociation media to RT (do not warm TeSR-E8 in a 37°C bath). <span class="pp">|</span></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Optionally mark/remove differentiated colonies in the morning (respect the 15/45 incubator rule). <span class="pp">|</span></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Rinse wells with room-temp EDTA medium (table above) to wash out Mg²⁺/Ca²⁺; discard. <span class="pp">|</span></span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Repeat the rinse once more. <span class="pp">|</span></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add EDTA medium a third time (table above); let sit 4–5 min (longer → tiny 3–5-cell colonies; a first split off feeders may need more time). During the wait, aspirate marked differentiated colonies by inclining the plate and vacuuming gently with a glass pipette — careful not to break the Matrigel coat; incline back between colonies to keep EDTA covering the plate and avoid drying. Endpoint cue: a hazy appearance by eye, or colony edges visibly peeling under the scope. <span class="pp">|</span></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Aspirate the EDTA; add neutralizing media (table above) at max pipetting speed to gently disperse cells — Mg²⁺/Ca²⁺ in the media neutralizes the EDTA. Do **not** scrape cells off the bottom (causes differentiation/death). <span class="pp">|</span></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Mix the suspension gently; plate at the desired split ratio (1:4 to 1:8); discard unused suspension. <span class="pp">|</span></span>
+<span id="cb11-206"><a href="#cb11-206" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> Place in the incubator; rock back-and-forth/side-to-side to distribute; let sit undisturbed overnight for maximum attachment. <span class="pp">|</span></span>
+<span id="cb11-207"><a href="#cb11-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-208"><a href="#cb11-208" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb11-209"><a href="#cb11-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## Citation for this method</span></span>
+<span id="cb11-210"><a href="#cb11-210" aria-hidden="true" tabindex="-1"></a>Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. "Chemically defined conditions for human iPS cell derivation and culture." *Nature Methods.* 2011 Apr 10;8(4):424–429.</span>
+<span id="cb11-211"><a href="#cb11-211" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-212"><a href="#cb11-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-213"><a href="#cb11-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### Method B — ReLeSR</span></span>
+<span id="cb11-214"><a href="#cb11-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-215"><a href="#cb11-215" aria-hidden="true" tabindex="-1"></a>ReLeSR is an enzyme-free reagent for aggregate dissociation without manual colony selection or scraping — recommended when first culturing a new line in TeSR-E8. Volumes below are per 1 well of a 6-well plate, scaled by <span class="in">`n_wells`</span>.</span>
+<span id="cb11-216"><a href="#cb11-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-219"><a href="#cb11-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-220"><a href="#cb11-220" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-221"><a href="#cb11-221" aria-hidden="true" tabindex="-1"></a>relesr_wash_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-222"><a href="#cb11-222" aria-hidden="true" tabindex="-1"></a>relesr_reagent_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-223"><a href="#cb11-223" aria-hidden="true" tabindex="-1"></a>relesr_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-224"><a href="#cb11-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-225"><a href="#cb11-225" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-226"><a href="#cb11-226" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"D-PBS wash"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_wash_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_wash_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-227"><a href="#cb11-227" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"ReLeSR (aspirate within 1 min, leave thin film)"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_reagent_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_reagent_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-228"><a href="#cb11-228" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Step</span><span class="op">:</span> <span class="st">"TeSR-E8 to detach colonies"</span><span class="op">,</span> <span class="st">"Per well"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>relesr_teSR_mL_per_well<span class="sc">}</span><span class="vs"> mL`</span><span class="op">,</span> <span class="dt">Total</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(relesr_teSR_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb11-229"><a href="#cb11-229" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-230"><a href="#cb11-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-231"><a href="#cb11-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-232"><a href="#cb11-232" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb11-233"><a href="#cb11-233" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb11-234"><a href="#cb11-234" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Coat new plates with Matrigel ≥1 h before passaging; warm TeSR-E8 to RT (not a 37°C bath). <span class="pp">|</span></span>
+<span id="cb11-235"><a href="#cb11-235" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Wash cells with D-PBS (table above); aspirate. No need to remove differentiated regions first. <span class="pp">|</span></span>
+<span id="cb11-236"><a href="#cb11-236" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Add ReLeSR (table above); aspirate again within 1 minute, leaving colonies with just a thin film. <span class="pp">|</span></span>
+<span id="cb11-237"><a href="#cb11-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Incubate at RT for **7–9 min** — optimal time is line-dependent; determine empirically the first time using a new line. <span class="pp">|</span></span>
+<span id="cb11-238"><a href="#cb11-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add TeSR-E8 (table above). Detach colonies by holding the plate with one hand and firmly tapping the side with the other for ~30–60 sec. <span class="pp">|</span></span>
+<span id="cb11-239"><a href="#cb11-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Gently transfer to a 15 mL conical tube; centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol during the spin. <span class="pp">|</span></span>
+<span id="cb11-240"><a href="#cb11-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Aspirate supernatant without disturbing the pellet; resuspend in TeSR-E8 using a 2 mL serological pipette, gently, avoiding bubbles. <span class="pp">|</span></span>
+<span id="cb11-241"><a href="#cb11-241" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> If colonies are too big, pipette up/down 2–3× (5 mL serological pipette in a conical, or once directly in the well) to break to ~50–200 µm aggregates. <span class="pp">|</span></span>
+<span id="cb11-242"><a href="#cb11-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 9 <span class="pp">|</span> Plate the aggregate mixture onto pre-coated wells containing TeSR-E8 at the desired density — cultures can typically be split every 4–7 days at 1:10 to 1:50 (Justin recommends 1:4–1:8, Rose recommends ~1:12); adjust ratio at the next passage if colonies were too dense or sparse. <span class="pp">|</span></span>
+<span id="cb11-243"><a href="#cb11-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 10 <span class="pp">|</span> Place in the 37°C incubator; quick short back-and-forth/side-to-side motions to distribute; do not disturb for 24 hours. <span class="pp">|</span></span>
+<span id="cb11-244"><a href="#cb11-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 11 <span class="pp">|</span> Perform daily medium changes with TeSR-E8; monitor growth/differentiation. If a colony shows any differentiated cells, remove the whole colony (as in the EDTA method's colony-removal step). <span class="pp">|</span></span>
+<span id="cb11-245"><a href="#cb11-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ambiguity flagged in the source document</span></span>
+<span id="cb11-248"><a href="#cb11-248" aria-hidden="true" tabindex="-1"></a><span class="in">`iPSC_Passaging.docx`</span>'s ReLeSR section describes, immediately after colony detachment and centrifugation, resuspending the pellet "in cold (2–8°C) CryoStor CS10... minimize aggregate breakup" — which is a **freezing** step, not a continued-culture passaging step. It is unclear whether this paragraph in the source was meant to describe (a) passaging cells forward into a new plate (in which case the pellet should be resuspended in TeSR-E8, not CryoStor, as presented in Steps 7–9 above), or (b) an abbreviated pointer to the freezing workflow that happens to follow the same detachment steps.</span>
+<span id="cb11-249"><a href="#cb11-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-250"><a href="#cb11-250" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co"> for JP: confirm whether the CryoStor CS10 resuspension line in iPSC_Passaging.docx was a copy/paste artifact from iPSC_Freezing.docx, or an intentional note that ReLeSR-detached cells are sometimes taken directly to freezing rather than replated. This page presents the "passage to continue culturing" interpretation (TeSR-E8 resuspend + replate) as the main ReLeSR passaging workflow, and keeps the CryoStor/freeze version entirely inside the Freezing section below — verify this reconciliation is correct before treating either section as final. --&gt;</span></span>
+<span id="cb11-251"><a href="#cb11-251" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb11-252"><a href="#cb11-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-253"><a href="#cb11-253" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-254"><a href="#cb11-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-255"><a href="#cb11-255" aria-hidden="true" tabindex="-1"></a><span class="fu">## Freezing</span></span>
+<span id="cb11-256"><a href="#cb11-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-257"><a href="#cb11-257" aria-hidden="true" tabindex="-1"></a>Cryopreserve at the normal passaging timepoint. Each vial = aggregates from 1 well of a 6-well plate (CryoStor method) or half a well (EDTA method) — adjust for other cultureware. Use 2 mL pipettes, not tips, to avoid disrupting aggregates.</span>
+<span id="cb11-258"><a href="#cb11-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-259"><a href="#cb11-259" aria-hidden="true" tabindex="-1"></a><span class="fu">### Method A — EDTA and DMSO</span></span>
+<span id="cb11-260"><a href="#cb11-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-263"><a href="#cb11-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-264"><a href="#cb11-264" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-265"><a href="#cb11-265" aria-hidden="true" tabindex="-1"></a>freeze_edta_dmso_mL_per_well <span class="op">=</span> <span class="dv">1</span>     <span class="co">// 20% DMSO-in-TeSR-E8, per well</span></span>
+<span id="cb11-266"><a href="#cb11-266" aria-hidden="true" tabindex="-1"></a>freeze_edta_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span>     <span class="co">// TeSR-E8 added dropwise, per well</span></span>
+<span id="cb11-267"><a href="#cb11-267" aria-hidden="true" tabindex="-1"></a>freeze_edta_vials_per_well   <span class="op">=</span> <span class="dv">2</span>     <span class="co">// final DMSO 10%</span></span>
+<span id="cb11-268"><a href="#cb11-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-269"><a href="#cb11-269" aria-hidden="true" tabindex="-1"></a>freeze_edta_dmso_total_mL <span class="op">=</span> freeze_edta_dmso_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb11-270"><a href="#cb11-270" aria-hidden="true" tabindex="-1"></a>freeze_edta_teSR_total_mL <span class="op">=</span> freeze_edta_teSR_mL_per_well <span class="op">*</span> n_wells</span>
+<span id="cb11-271"><a href="#cb11-271" aria-hidden="true" tabindex="-1"></a>freeze_edta_vials_total   <span class="op">=</span> freeze_edta_vials_per_well <span class="op">*</span> n_wells</span>
+<span id="cb11-272"><a href="#cb11-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-273"><a href="#cb11-273" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-274"><a href="#cb11-274" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"20% DMSO-in-TeSR-E8 (+1 extra)"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_edta_dmso_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>freeze_edta_dmso_mL_per_well<span class="sc">}</span><span class="vs"> mL/well)`</span>}<span class="op">,</span></span>
+<span id="cb11-275"><a href="#cb11-275" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 (added dropwise after)"</span><span class="op">,</span>  <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_edta_teSR_total_mL<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL (</span><span class="sc">${</span>freeze_edta_teSR_mL_per_well<span class="sc">}</span><span class="vs"> mL/well)`</span>}<span class="op">,</span></span>
+<span id="cb11-276"><a href="#cb11-276" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Labeled cryovials needed"</span><span class="op">,</span>         <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>freeze_edta_vials_total<span class="sc">}</span><span class="vs"> vials (</span><span class="sc">${</span>freeze_edta_vials_per_well<span class="sc">}</span><span class="vs">/well, final 10% DMSO)`</span>}</span>
+<span id="cb11-277"><a href="#cb11-277" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-278"><a href="#cb11-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-279"><a href="#cb11-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-280"><a href="#cb11-280" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb11-281"><a href="#cb11-281" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb11-282"><a href="#cb11-282" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Aliquot TeSR-E8 and EDTA dissociation media; warm both to RT (do not warm TeSR-E8 in a 37°C bath). <span class="pp">|</span></span>
+<span id="cb11-283"><a href="#cb11-283" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Prep supplies: Mr. Frosty freezing container, labeled cryovials (table above), 20% DMSO-in-TeSR-E8, and normal TeSR-E8. <span class="pp">|</span></span>
+<span id="cb11-284"><a href="#cb11-284" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Optionally mark differentiated colonies in the morning (respect the 15/45 incubator rule). <span class="pp">|</span></span>
+<span id="cb11-285"><a href="#cb11-285" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Wash with EDTA dissociation media ×2 to fully remove Mg²⁺/Ca²⁺; discard. <span class="pp">|</span></span>
+<span id="cb11-286"><a href="#cb11-286" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add EDTA media a third time; let sit 4–5 min (longer → tiny 3–5-cell colonies). During the wait, aspirate marked differentiated colonies as in the Passaging (EDTA) section above. <span class="pp">|</span></span>
+<span id="cb11-287"><a href="#cb11-287" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Aspirate EDTA; add TeSR-E8 at max speed to gently disperse cells; transfer gently to a 15 mL conical (careful not to over-break colonies — Mg²⁺/Ca²⁺ now neutralizes the EDTA). Do not scrape cells off the bottom. <span class="pp">|</span></span>
+<span id="cb11-288"><a href="#cb11-288" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Centrifuge 300×g, 5 min, RT. Wipe the vial with 70% ethanol before opening, during the spin. <span class="pp">|</span></span>
+<span id="cb11-289"><a href="#cb11-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> Gently aspirate supernatant without disturbing the pellet; resuspend in 20% DMSO-in-TeSR-E8 (table above) using a 2 mL serological pipette, minimizing aggregate breakup, gentle, avoiding bubbles. <span class="pp">|</span></span>
+<span id="cb11-290"><a href="#cb11-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 9 <span class="pp">|</span> Add TeSR-E8 (table above) dropwise; mix once gently up/down; transfer 1 mL per cryovial (2 vials/well, final DMSO concentration 10%). <span class="pp">|</span></span>
+<span id="cb11-291"><a href="#cb11-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 10 <span class="pp">|</span> Freeze in a Mr. Frosty at −80°C overnight; transfer to liquid N₂ the next day. <span class="pp">|</span></span>
+<span id="cb11-292"><a href="#cb11-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-293"><a href="#cb11-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Method B — ReLeSR and CryoStor10</span></span>
+<span id="cb11-294"><a href="#cb11-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-297"><a href="#cb11-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb11-298"><a href="#cb11-298" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb11-299"><a href="#cb11-299" aria-hidden="true" tabindex="-1"></a>freeze_relesr_wash_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-300"><a href="#cb11-300" aria-hidden="true" tabindex="-1"></a>freeze_relesr_reagent_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-301"><a href="#cb11-301" aria-hidden="true" tabindex="-1"></a>freeze_relesr_teSR_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-302"><a href="#cb11-302" aria-hidden="true" tabindex="-1"></a>freeze_relesr_cryostor_mL_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-303"><a href="#cb11-303" aria-hidden="true" tabindex="-1"></a>freeze_relesr_vials_per_well <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-304"><a href="#cb11-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-305"><a href="#cb11-305" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb11-306"><a href="#cb11-306" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"D-PBS wash"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_wash_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-307"><a href="#cb11-307" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"ReLeSR"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_reagent_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-308"><a href="#cb11-308" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"TeSR-E8 to detach colonies"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_teSR_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-309"><a href="#cb11-309" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Cold (2–8°C) CryoStor CS10"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(freeze_relesr_cryostor_mL_per_well <span class="op">*</span> n_wells<span class="op">,</span><span class="dv">1</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb11-310"><a href="#cb11-310" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Item</span><span class="op">:</span> <span class="st">"Labeled cryovials needed"</span><span class="op">,</span> <span class="dt">Amount</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>freeze_relesr_vials_per_well <span class="op">*</span> n_wells<span class="sc">}</span><span class="vs"> vials (</span><span class="sc">${</span>freeze_relesr_vials_per_well<span class="sc">}</span><span class="vs">/well)`</span>}</span>
+<span id="cb11-311"><a href="#cb11-311" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb11-312"><a href="#cb11-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-313"><a href="#cb11-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-314"><a href="#cb11-314" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Step <span class="pp">|</span> Action <span class="pp">|</span></span>
+<span id="cb11-315"><a href="#cb11-315" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------|</span></span>
+<span id="cb11-316"><a href="#cb11-316" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 <span class="pp">|</span> Aliquot and warm TeSR-E8 to RT (not a 37°C bath). <span class="pp">|</span></span>
+<span id="cb11-317"><a href="#cb11-317" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 2 <span class="pp">|</span> Wash with D-PBS (table above); aspirate — no need to remove differentiated regions. <span class="pp">|</span></span>
+<span id="cb11-318"><a href="#cb11-318" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 3 <span class="pp">|</span> Add ReLeSR (table above); aspirate within 1 min, leaving a thin film. <span class="pp">|</span></span>
+<span id="cb11-319"><a href="#cb11-319" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 4 <span class="pp">|</span> Incubate at RT for **7–9 min** (line-dependent — determine empirically for a new line). <span class="pp">|</span></span>
+<span id="cb11-320"><a href="#cb11-320" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 5 <span class="pp">|</span> Add TeSR-E8 (table above); detach colonies by tapping the plate side firmly for 30–60 sec. <span class="pp">|</span></span>
+<span id="cb11-321"><a href="#cb11-321" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 6 <span class="pp">|</span> Gently transfer to a 15 mL conical; centrifuge 300×g, 5 min, RT. Wipe the vial with ethanol during the spin. <span class="pp">|</span></span>
+<span id="cb11-322"><a href="#cb11-322" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 7 <span class="pp">|</span> Gently aspirate supernatant without disturbing the pellet; resuspend in cold CryoStor CS10 (table above) using a 2 mL serological pipette — gentle, minimize breakup, avoid bubbles. <span class="pp">|</span></span>
+<span id="cb11-323"><a href="#cb11-323" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 8 <span class="pp">|</span> Transfer 1 mL cell-aggregates-in-CryoStor per labeled cryovial using a 2 mL pipette. <span class="pp">|</span></span>
+<span id="cb11-324"><a href="#cb11-324" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 9 <span class="pp">|</span> Freeze in a Mr. Frosty at −80°C overnight; transfer to liquid N₂ the next day. <span class="pp">|</span></span>
+<span id="cb11-325"><a href="#cb11-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-326"><a href="#cb11-326" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-327"><a href="#cb11-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-328"><a href="#cb11-328" aria-hidden="true" tabindex="-1"></a><span class="fu">## QC log</span></span>
+<span id="cb11-329"><a href="#cb11-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-330"><a href="#cb11-330" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checkpoint <span class="pp">|</span> Expected <span class="pp">|</span> Observed <span class="pp">|</span> Pass <span class="pp">|</span></span>
+<span id="cb11-331"><a href="#cb11-331" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------|----------|----------|------|</span></span>
+<span id="cb11-332"><a href="#cb11-332" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Matrigel coating <span class="pp">|</span> Even coat, no dry patches before use <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb11-333"><a href="#cb11-333" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-thaw Day 1 morphology <span class="pp">|</span> Aggregates attached, evenly distributed <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb11-334"><a href="#cb11-334" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Pre-passage colony morphology <span class="pp">|</span> Dense-centered, undifferentiated colonies <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb11-335"><a href="#cb11-335" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-passage overnight attachment <span class="pp">|</span> Even attachment, no floating aggregates <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb11-336"><a href="#cb11-336" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-freeze viability (next thaw) <span class="pp">|</span> Normal recovery, ≥1–2 wells/vial <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb11-337"><a href="#cb11-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-338"><a href="#cb11-338" aria-hidden="true" tabindex="-1"></a>**Notes / deviations:**</span>
+<span id="cb11-339"><a href="#cb11-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-340"><a href="#cb11-340" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb11-341"><a href="#cb11-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-342"><a href="#cb11-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb11-343"><a href="#cb11-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-344"><a href="#cb11-344" aria-hidden="true" tabindex="-1"></a>Chen G, Gulbranson DR, Hou Z, Bolin JM, Ruotti V, Probasco MD, Smuga-Otto K, Howden SE, Diol NR, Propson NE, Wagner R, Lee GO, Antosiewicz-Bourget J, Teng JMC, Thomson JA. "Chemically defined conditions for human iPS cell derivation and culture." *Nature Methods.* 2011 Apr 10;8(4):424–429.</span>
+<span id="cb11-345"><a href="#cb11-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-346"><a href="#cb11-346" aria-hidden="true" tabindex="-1"></a>Matrigel protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.</span>
+<span id="cb11-347"><a href="#cb11-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-348"><a href="#cb11-348" aria-hidden="true" tabindex="-1"></a>Thawing protocol: adapted by Yoseli Quiroga with suggestions from Justin Brumbaugh, February 2019.</span>
+<span id="cb11-349"><a href="#cb11-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-350"><a href="#cb11-350" aria-hidden="true" tabindex="-1"></a>Passaging protocol: mTeSR manual (ReLeSR method) and Justin Brumbaugh (EDTA method), adapted by Yoseli Quiroga, February 2019.</span>
+<span id="cb11-351"><a href="#cb11-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-352"><a href="#cb11-352" aria-hidden="true" tabindex="-1"></a>Freezing protocol: Justin Brumbaugh (EDTA/DMSO method) and mTeSR manual (ReLeSR/CryoStor10 method), adapted by Yoseli Quiroga, February 2019.</span>
+<span id="cb11-353"><a href="#cb11-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-354"><a href="#cb11-354" aria-hidden="true" tabindex="-1"></a>Additional split-ratio guidance attributed in-line to "Justin" (Justin Brumbaugh) and "Rose."</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>JP Flores</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

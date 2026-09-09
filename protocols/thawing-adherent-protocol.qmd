@@ -1,0 +1,121 @@
+---
+title: "Thawing Protocol — Adherent Cells"
+subtitle: "From liquid nitrogen storage"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+General thawing protocol for adherent cell lines stored in liquid nitrogen (LN₂). Cells are thawed in a 37°C bath, diluted into fresh complete media, pelleted to remove residual Dimethyl Sulfoxide (DMSO), and plated into a 100 mm culture dish.
+:::
+
+::: {.callout-important}
+## Before starting
+- Warm complete media in a 37°C water bath or bead bath. If only a bead bath is available, add a container of water and warm it to 37°C as well.
+- Prepare complete media stock under the hood.
+- Spray the cryovial with ethanol before opening it in the culture hood.
+:::
+
+---
+
+## Materials & Reagents
+
+| Item | Vendor | Cat # |
+|------|--------|-------|
+| Cell line of interest, stored in liquid nitrogen | — | — |
+| Fetal Bovine Serum (FBS), heat-inactivated by manufacturer, frozen in 50 mL aliquots | Thermo Fisher Scientific (Gibco™) | 10500064 |
+| Penicillin/Streptomycin solution (100X), stabilized, frozen in 5 mL aliquots | Sigma-Aldrich | P4333 |
+| Base media appropriate to cell line (Dulbecco's Modified Eagle Medium (DMEM), RPMI 1640, or other) | — | — |
+| Corning TC-Treated Culture Dishes, 100 mm | Fisher Scientific | 08-772-22 |
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof base_media    = Inputs.select(["DMEM", "RPMI", "Other"], {label: "Base media"})
+viewof media_batch_mL = Inputs.number({label: "Complete media batch volume (mL)", value: 555, min: 55, step: 55})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 1) => x.toFixed(d)
+
+md`**Base media: ${base_media} · complete media batch: ${fmt(media_batch_mL, 0)} mL**`
+```
+
+---
+
+## Complete media (10% FBS, 1% Penicillin/Streptomycin)
+
+::: {.callout-note collapse="true"}
+## Math audit
+Base recipe: 500 mL base media + 50 mL FBS (10%) + 5 mL Penicillin/Streptomycin (0.9%), 555 mL total — scales linearly:
+
+$$V_{base} = V_{batch} \times \frac{500}{555} \qquad V_{FBS} = V_{batch} \times \frac{50}{555} \qquad V_{P/S} = V_{batch} \times \frac{5}{555}$$
+:::
+
+```{ojs}
+//| echo: false
+media_base_mL = media_batch_mL * (500 / 555)
+media_fbs_mL  = media_batch_mL * (50 / 555)
+media_ps_mL   = media_batch_mL * (5 / 555)
+
+Inputs.table([
+  {Component: `Base media (${base_media})`,              "Volume (mL)": fmt(media_base_mL)},
+  {Component: "Fetal Bovine Serum (FBS)",                  "Volume (mL)": fmt(media_fbs_mL)},
+  {Component: "Penicillin/Streptomycin (100X)",            "Volume (mL)": fmt(media_ps_mL)},
+  {Component: "Total",                                      "Volume (mL)": fmt(media_batch_mL, 0)}
+], {layout: "auto"})
+```
+
+Prepare under the hood.
+
+---
+
+## Protocol (~20 min)
+
+| Step | Action |
+|------|--------|
+| 1 | Warm media in 37°C water or bead bath |
+| 2 | Thaw cryogenic storage vial in water bath — remove once mostly thawed but some ice still remains |
+| 3 | Spray vial with ethanol; carefully open and add cells to 9 mL fresh media in a 15 mL conical tube; gently pipette to mix |
+| 4 | Spin 300×g, 5 min; discard supernatant |
+| 5 | Add 10 mL fresh media |
+| 6 | Transfer to a 100 mm dish |
+
+::: {.callout-note}
+## Source typo, fixed here
+The source document reads "Transfer to the 10mm dish," which conflicts with the dish listed in Materials & Reagents (100 mm Corning TC-Treated Culture Dishes). Corrected to **100 mm dish** above.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Cell line: _______
+- [ ] Base media used: _______
+- [ ] Post-thaw viability: _______ %
+- [ ] Plated in 100 mm dish at: _______
+:::
+
+<!-- TODO: source protocol ends at plating (step 6) — no post-thaw growth/split guidance was given for adherent lines. Add cell-line-specific monitoring/splitting notes with JP if needed. -->
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-thaw viability | High, line-dependent | | |
+| Attachment by 24 hr | Cells adhered, spreading | | |
+| Confluence check | Steady growth, no contamination | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Protocol written by Kamisha Woolery.

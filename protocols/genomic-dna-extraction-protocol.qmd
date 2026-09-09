@@ -1,0 +1,145 @@
+---
+title: "Genomic DNA Extraction Protocol"
+subtitle: "QIAamp DNA Mini Kit (Qiagen, cat #51304) — cultured cell input"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Isolates genomic DNA from cultured cells (source protocol notes THP1 media on refeed) using the QIAamp DNA Mini Kit: Proteinase K + Buffer AL lysis, ethanol precipitation conditioning, spin-column binding, two washes (Buffer AW1, AW2), and water elution. No stock solutions need to be prepared ahead of time — every reagent ships ready-to-use in the kit.
+:::
+
+::: {.callout-important}
+## Before starting
+- Turn on the heat block to **56°C**.
+- Confirm 96–100% ethanol is on hand (not included in the kit).
+- Have DNA LoBind microcentrifuge tubes ready for the final elution step.
+:::
+
+---
+
+## Configure run
+
+```{ojs}
+//| echo: false
+viewof n_samples  = Inputs.number({label: "Number of samples", value: 1, min: 1, max: 50, step: 1})
+viewof excess_pct = Inputs.number({label: "Extra overage on master reagent totals (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 1) => x.toFixed(d)
+
+md`**${n_samples} sample(s) · ${excess_pct}% overage on Proteinase K / Buffer AL / ethanol totals**`
+```
+
+::: {.callout-tip collapse="true"}
+## Why overage on kit buffers at all?
+Buffer AL, AW1, AW2, and Proteinase K are ready-to-use kit reagents added to individual tubes/columns, not pooled into a shared master mix. The totals below are for **planning/aliquoting purposes** (how much to pull from the stock bottle for a batch of N samples) rather than a mix you physically combine — pipetting loss across repeated aliquoting is the reason for the overage, same convention as this notebook's other reagent tables. Buffer AW1, AW2, and elution water are not pooled ahead of time in the source protocol; the totals for those below assume you may want to pre-aliquot rather than pipette straight from the stock bottle per column.
+:::
+
+---
+
+## Materials & reagents
+
+| Item | Catalog # |
+|------|-----------|
+| QIAamp DNA Mini Kit (50) | Qiagen 51304 |
+| 96–100% Ethanol | Fisher Scientific (not kit-supplied) |
+| 1X Phosphate-Buffered Saline (PBS) — cell culture grade | Fisher Scientific MT21040CV |
+| Nuclease-Free Water | — |
+
+---
+
+## Reagent volumes
+
+::: {.callout-note collapse="true"}
+## Math audit — how the totals are calculated
+All per-column reagent volumes are stated directly in the source protocol (not derived): 20 µL Proteinase K, 200 µL Buffer AL, 200 µL ethanol, 500 µL Buffer AW1, 500 µL Buffer AW2, 100 µL elution water — all per sample, fixed regardless of cell input. Batch totals for ordering/pre-aliquoting scale as:
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times (1+overage)$$
+
+Elution water is kept **exact** (×N only, no overage) since eluate volume is precise per column and any water not fully used is simply discarded — no benefit to over-preparing it.
+:::
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "QIAGEN Proteinase K",  "Per sample (µL)": 20,  "Total (µL)": fmt(20 * scale)},
+  {Component: "Buffer AL",             "Per sample (µL)": 200, "Total (µL)": fmt(200 * scale)},
+  {Component: "Ethanol (96–100%)",     "Per sample (µL)": 200, "Total (µL)": fmt(200 * scale)},
+  {Component: "Buffer AW1",            "Per sample (µL)": 500, "Total (µL)": fmt(500 * scale)},
+  {Component: "Buffer AW2",            "Per sample (µL)": 500, "Total (µL)": fmt(500 * scale)},
+  {Component: "Nuclease-free water (elution — exact, no overage)", "Per sample (µL)": 100, "Total (µL)": fmt(100 * n_samples)}
+], {layout: "auto"})
+```
+
+---
+
+## Protocol
+
+### Part A: Isolate genomic DNA
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Step: "1",  Action: "Turn on heat block to 56°C",                                                                 Detail: "—"},
+  {Step: "2",  Action: "Add 1 mL of cell culture to a 2 mL tube; replace with 1.5 mL fresh media",                   Detail: "Source used THP1 media — substitute for your line"},
+  {Step: "3",  Action: "Centrifuge cell suspension 8000 rpm, 5 min, room temperature",                               Detail: "—"},
+  {Step: "4",  Action: "Aspirate supernatant",                                                                        Detail: "—"},
+  {Step: "5",  Action: "Resuspend pellet in Phosphate-Buffered Saline (PBS) to 200 µL final; transfer to 1.5 mL tube", Detail: "—"},
+  {Step: "6",  Action: "Add 20 µL QIAGEN Proteinase K",                                                               Detail: "—"},
+  {Step: "7",  Action: "Add 200 µL Buffer AL; mix by pulse-vortexing 15 sec",                                        Detail: "—"},
+  {Step: "8",  Action: "Incubate at 56°C for 10 min",                                                                 Detail: "—"},
+  {Step: "9",  Action: "Briefly centrifuge tube",                                                                     Detail: "—"},
+  {Step: "10", Action: "Add 200 µL ethanol (96–100%); mix by pulse-vortexing 15 sec",                                Detail: "—"},
+  {Step: "11", Action: "Briefly centrifuge tube",                                                                     Detail: "—"},
+  {Step: "12", Action: "Apply mixture to QIAamp Mini spin column (2 mL collection tube), without wetting rim",       Detail: "Close cap; centrifuge 8000 rpm (6000×g), 1 min"},
+  {Step: "13", Action: "Place column in clean 2 mL collection tube; discard filtrate tube",                          Detail: "—"},
+  {Step: "14", Action: "Add 500 µL Buffer AW1 without wetting rim; close cap",                                       Detail: "Centrifuge 8000 rpm (6000×g), 1 min"},
+  {Step: "15", Action: "Place column in clean 2 mL collection tube; discard filtrate tube",                          Detail: "—"},
+  {Step: "16", Action: "Add 500 µL Buffer AW2 without wetting rim; close cap",                                       Detail: "Centrifuge full speed (14,000 rpm), 3 min"},
+  {Step: "17", Action: "Place column in new 1.5 mL tube; discard old collection tube",                               Detail: "Centrifuge full speed, 1 min (dry spin)"},
+  {Step: "18", Action: "Place column in a clean 1.5 mL DNA LoBind tube; discard filtrate tube",                      Detail: "—"},
+  {Step: "19", Action: "Add 100 µL nuclease-free water without wetting rim",                                         Detail: "—"},
+  {Step: "20", Action: "Incubate at RT for 5 min",                                                                    Detail: "Then centrifuge 8000 rpm (6000×g), 2 min"},
+  {Step: "21", Action: "Quantify DNA using Qubit",                                                                    Detail: "—"}
+], {layout: "auto"})
+```
+
+::: {.callout-warning}
+## Do not wet the column rim
+Buffers AW1, AW2, and the final elution water must all be pipetted directly onto the membrane without touching the rim of the spin column — buffer trapped in the rim threads can carry over into the eluate and interfere with downstream enzymatic reactions.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Heat block at 56°C confirmed before lysis step
+- [ ] Proteinase K + Buffer AL lysis complete (56°C, 10 min)
+- [ ] Buffer AW1 and AW2 washes both performed at correct speeds/times
+- [ ] Dry spin performed before final elution
+- [ ] Eluted in 100 µL nuclease-free water; 5 min RT incubation before final spin
+- [ ] Qubit quantification recorded
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Cell pellet after wash | Visible, no lysis before Proteinase K step | | |
+| Post-lysis mixture | Clear, no visible clumps | | |
+| Qubit concentration | Detectable, appropriate for downstream use | | |
+| A260/A280 (if measured) | ~1.8 | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+QIAGEN. *QIAamp DNA Mini and Blood Mini Handbook*, kit cat #51304. Protocol: source lab not specified in the provided document; transcribed as-is.

@@ -1,0 +1,115 @@
+---
+title: "384-to-96 Well Block Swap"
+subtitle: "QuantStudio 6 qPCR machine — sample block, heated cover, and plate adapter swap"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+The QuantStudio 6 qPCR machine ships with interchangeable 384-well and 96-well hardware: a sample block, a heated cover, and a plate adapter. Switching formats means physically swapping all three, in order, while the machine is powered off — the instrument detects a mismatched plate adapter on restart and prompts you to correct it.
+
+Quick notes from Susan D'Costa; if any changes need to be made, update this page directly.
+:::
+
+::: {.callout-important}
+## Before starting
+- Confirm the 96-well sample block, heated cover, and plate adapter are available in the machine's drawer before powering down.
+- Have a clean, dry bench surface ready for the removed 384-well block.
+- Have the antistatic red bag (stored in the drawer) ready for the unused block.
+:::
+
+---
+
+## Configure swap record
+
+```{ojs}
+//| echo: false
+viewof technician  = Inputs.text({label: "Technician performing swap", placeholder: "e.g. Susan D'Costa"})
+viewof swap_date    = Inputs.date({label: "Date performed", value: new Date()})
+viewof swap_direction = Inputs.select(["384-well → 96-well", "96-well → 384-well (reverse)"], {label: "Swap direction"})
+```
+
+```{ojs}
+//| echo: false
+md`**${swap_direction}** performed by **${technician || "_______"}** on **${swap_date ? swap_date.toLocaleDateString() : "_______"}**`
+```
+
+::: {.callout-tip collapse="true"}
+## Reverse direction (96 → 384)
+The source protocol documents the 384→96 direction only. The same physical steps apply in reverse (swap sample block, heated cover, and plate adapter back to the 384-well hardware) — substitute "384-well" for "96-well" throughout the steps below when reversing.
+
+<!-- TODO: reverse-direction steps are inferred by symmetry, not explicitly documented in the source. Confirm with JP or Susan D'Costa if the reverse swap has any asymmetric steps (e.g. different torque/seating check) before relying on this for a 96→384 swap. -->
+:::
+
+---
+
+## Protocol
+
+### 1. Power down
+
+| Step | Action |
+|------|--------|
+| 1 | Switch off the blue "Power Off" button on the qPCR machine screen |
+| 2 | Switch off the physical power switch behind the machine |
+| 3 | Open the instrument door |
+
+### 2. Change the sample block
+
+| Step | Action |
+|------|--------|
+| 4a | Pull out the lower box (sample block); place on a clean, dry lab bench |
+| 4b | Replace with the other block from the drawer — make sure it lines up and clicks into place |
+| 4c | Place the block that is not in use in the antistatic red bag and return it to the drawer |
+
+### 3. Change the heated cover
+
+| Step | Action |
+|------|--------|
+| 5a | Unlock the heated cover (above the sample block) by pinching and pulling it out |
+| 5b | Place it in the black box in the drawer; replace with the 96-well heated cover |
+| 5c | Push the 96-well heated cover gently into the system until the handle locks into place |
+
+### 4. Restart & correct the plate adapter
+
+| Step | Action |
+|------|--------|
+| 6 | Close the door |
+| 7 | Restart the machine using the switch behind the qPCR machine |
+| 8a | The instrument will report the plate adapter does not match — press **OK** and the tray arm will open |
+| 8b | Remove the 384-well plate adapter and replace with the 96-well plate adapter |
+| 8c | From the main menu, touch the tray/eject button to close the tray |
+
+::: {.callout-warning}
+## Do not skip the plate adapter swap
+Running a 96-well plate with the 384-well plate adapter still installed (or vice versa) will cause incorrect well alignment and failed/garbage reads. Always confirm the adapter matches the block and heated cover before running a plate.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Sample block swapped and clicked into place
+- [ ] Unused block bagged (antistatic) and returned to drawer
+- [ ] Heated cover swapped and locked into place
+- [ ] Plate adapter swapped to match new block
+- [ ] Instrument restarted with no format-mismatch warning remaining
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Sample block seated | Clicks fully into place, level | | |
+| Heated cover seated | Handle locks, no gap | | |
+| Plate adapter matches block | No mismatch warning on restart | | |
+| First run after swap | Normal well detection, no flagged wells | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Thermo Fisher Scientific. *QuantStudio 6/7 Flex Real-Time PCR System — Maintenance Guide* (manual referenced in source document; see Thermo Fisher document #4489821). Quick notes: Susan D'Costa.

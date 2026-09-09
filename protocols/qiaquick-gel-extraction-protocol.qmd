@@ -1,0 +1,153 @@
+---
+title: "QIAquick Gel Extraction Protocol"
+subtitle: "QIAGEN QIAquick Gel Extraction Kit (cat #28704)"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Excises a DNA fragment from an agarose gel, dissolves it in Buffer QG (a chaotropic solubilization/binding buffer), and purifies it over a QIAquick spin column: bind, wash with ethanol-containing Buffer PE, dry-spin, and elute in water.
+:::
+
+::: {.callout-important}
+## Before starting
+- Confirm ethanol has been added to Buffer PE before use (per the kit's first-use instructions — Buffer PE ships as a concentrate).
+- Max gel slice per column: **400 mg**.
+- Have a clean razor blade for excising gel fragments.
+:::
+
+---
+
+## Configure run
+
+```{ojs}
+//| echo: false
+viewof n_samples   = Inputs.number({label: "Number of samples", value: 1, min: 1, max: 48, step: 1})
+viewof gel_mg      = Inputs.number({label: "Gel slice weight per sample (mg)", value: 100, min: 1, max: 400, step: 10})
+viewof gel_pct     = Inputs.select(["Standard (≤~1.5%) — 3 volumes Buffer QG", "2% agarose — 6 volumes Buffer QG"], {label: "Agarose gel percentage"})
+viewof seq_grade   = Inputs.toggle({label: "Sequencing-grade DNA (extra Buffer QG wash)", value: false})
+viewof excess_pct  = Inputs.number({label: "Extra overage on totals for ordering/pipetting loss (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 1) => x.toFixed(d)
+qg_multiplier = gel_pct.startsWith("2%") ? 6 : 3
+
+md`**${n_samples} sample(s) · ${fmt(gel_mg, 0)} mg gel/sample · ${qg_multiplier} volumes Buffer QG · ${excess_pct}% overage**`
+```
+
+```{ojs}
+//| echo: false
+gel_mg > 400
+  ? md`::: {.callout-warning}
+**Exceeds max gel slice per column (400 mg).** At ${fmt(gel_mg, 0)} mg, split this sample across multiple columns before proceeding.
+:::`
+  : md``
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how Buffer QG and isopropanol volumes are calculated
+The source protocol gives the ratio directly (not derived): *"Add 3 volumes Buffer QG to 1 volume gel (e.g., 100 mg gel ≈ 100 µL QG)"* — i.e. 1 mg of gel slice is treated as ≈1 µL by volume (standard aqueous-gel density assumption used throughout QIAGEN kit documentation), and for 2% gels the source specifies 6 volumes instead of 3:
+
+$$V_{QG} = k \times gel_{mg} \qquad k = \begin{cases}3 & \text{gel} \le \sim\!1.5\%\\ 6 & \text{gel} = 2\%\end{cases}$$
+
+Isopropanol is added at "1 gel volume" — i.e. equal to the gel weight in mg treated as µL:
+
+$$V_{isopropanol} = 1 \times gel_{mg}$$
+
+Per-sample totals for ordering/aliquoting purposes then scale as $V \times N_{samples} \times (1+overage)$, same convention as this notebook's other master-mix tables.
+:::
+
+---
+
+## Reagent volumes
+
+```{ojs}
+//| echo: false
+qg_per_sample = qg_multiplier * gel_mg
+iso_per_sample = 1 * gel_mg
+qg_wash_per_sample = seq_grade ? 500 : 0
+pe_per_sample = 750
+elution_per_sample = 30
+
+Inputs.table([
+  {Component: `Buffer QG (${qg_multiplier}× gel volume)`, "Per sample (µL)": fmt(qg_per_sample, 0), "Total (µL)": fmt(qg_per_sample * scale)},
+  {Component: "Isopropanol (1× gel volume)",              "Per sample (µL)": fmt(iso_per_sample, 0), "Total (µL)": fmt(iso_per_sample * scale)},
+  {Component: seq_grade ? "Buffer QG — extra sequencing-grade wash" : "Buffer QG — extra sequencing-grade wash (not used)", "Per sample (µL)": seq_grade ? 500 : 0, "Total (µL)": seq_grade ? fmt(qg_wash_per_sample * scale) : "—"},
+  {Component: "Buffer PE (with ethanol added)",            "Per sample (µL)": pe_per_sample, "Total (µL)": fmt(pe_per_sample * scale)},
+  {Component: "Water (elution — exact, no excess)",        "Per sample (µL)": elution_per_sample, "Total (µL)": fmt(elution_per_sample * n_samples)}
+], {layout: "auto"})
+```
+
+```{ojs}
+//| echo: false
+seq_grade
+  ? md`::: {.callout-note}
+**Sequencing-grade wash enabled.** An extra 500 µL Buffer QG wash (Step 8 below) is added before the Buffer PE wash — recommended by the source protocol when the eluted DNA will be used for sequencing.
+:::`
+  : md``
+```
+
+::: {.callout-tip collapse="true"}
+## If the mixture isn't yellow after dissolving
+Buffer QG contains a pH indicator; the sample should turn/stay **yellow** once fully dissolved. If it is orange or violet, the pH is too high for optimal DNA binding — add **10 µL of 3M sodium acetate, pH 5.0** and mix before proceeding to the isopropanol step.
+:::
+
+---
+
+## Protocol
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Step: "1",  Action: "Excise the DNA fragment from the agarose gel with a clean razor blade",                                    Detail: "—"},
+  {Step: "2",  Action: "Weigh empty tube, then tube+gel slice; subtract to get gel weight",                                        Detail: `Target this session: ${fmt(gel_mg, 0)} mg/sample`},
+  {Step: "3",  Action: `Add Buffer QG — ${fmt(qg_per_sample, 0)} µL/sample (${qg_multiplier}× gel volume)`,                        Detail: "Buffer QG — note: source doc typo \"Buffer GQ\" corrected to Buffer QG (QIAGEN's actual buffer name)"},
+  {Step: "4",  Action: "Incubate 50°C for 10 min until gel slice fully dissolved",                                                  Detail: "Vortex every 2–3 min"},
+  {Step: "5",  Action: "Confirm mixture is yellow; if not, add 10 µL 3M sodium acetate pH 5.0 and mix",                            Detail: "See tip above"},
+  {Step: "6",  Action: `Add isopropanol — ${fmt(iso_per_sample, 0)} µL/sample (1× gel volume) and mix`,                            Detail: "—"},
+  {Step: "7",  Action: "Apply sample to QIAquick column (2 mL collection tube); centrifuge 1 min at 13,000 rpm",                    Detail: "Discard flowthrough. If total volume >800 µL, load and spin again"},
+  {Step: "8",  Action: seq_grade ? "Add 500 µL Buffer QG to column; centrifuge 1 min at 13,000 rpm (sequencing-grade DNA only)" : "Skip — sequencing-grade wash not selected this run", Detail: seq_grade ? "Discard flowthrough" : "—"},
+  {Step: "9",  Action: "Add 750 µL Buffer PE to column; let stand 2–3 min; centrifuge 1 min at 13,000 rpm",                        Detail: "Discard flowthrough"},
+  {Step: "10", Action: "Dry spin to remove residual wash buffer",                                                                   Detail: "—"},
+  {Step: "11", Action: "Place column in a clean 1.5 mL tube; add 30 µL water to elute",                                            Detail: "Let stand ≥1 min at RT before spinning"},
+  {Step: "12", Action: "Centrifuge 1 min at 13,000 rpm",                                                                            Detail: "Eluate is your purified DNA"}
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## On the "13,000×rpm" speed
+The source document writes speeds as "13000xrpm" throughout — this is standardized above to **13,000 rpm** (rpm, not × g; QIAGEN's own protocol lists this as ~17,900 × g depending on rotor radius). No value was changed, only the unit notation cleaned up.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Gel slice weighed: _______ mg
+- [ ] Mixture yellow after dissolving (or sodium acetate added)
+- [ ] Column loaded, no overflow past 800 µL/spin
+- [ ] Buffer PE wash complete, dry spin performed
+- [ ] Eluted in 30 µL water, ≥1 min RT incubation before final spin
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Gel slice weight | ≤400 mg | | |
+| Dissolved mixture color | Yellow | | |
+| Eluate concentration (Qubit/Nanodrop) | Detectable, appropriate for downstream use | | |
+| Eluate purity (A260/A280, if measured) | ~1.8 | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+QIAGEN. *QIAquick Gel Extraction Kit Protocol* (QIAquick Spin Handbook), kit cat #28704. Protocol: source lab not specified in the provided document; transcribed as-is.

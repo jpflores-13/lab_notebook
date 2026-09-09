@@ -12,6 +12,26 @@ Interactive protocol calculators — set your sample count and volumes scale aut
 | [CUT&RUN](cnr-protocol.qmd) | Chromatin profiling | Skene et al. 2018 |
 | [CitraPrep nuclei isolation](citraprep-protocol.qmd) | Single-nucleus prep | Source not specified |
 | [Chromium GEM-X Single Cell 3' v4](gemx-3p-protocol.qmd) | scRNA-seq library prep | 10x Genomics CG000731 Rev B |
+| [CUT&RUN — HCT116 (H3K27ac/HA, DCA)](cnr-hct116-dca-protocol.qmd) | Chromatin profiling | EpiCypher CUTANA CUT&RUN + Library Prep Kit manuals |
+| [THP-1 & K562 culture maintenance](cell-culture-thp1-k562-protocol.qmd) | Cell culture | Source not specified |
+| [Fixing & staining for imaging](fixing-staining-imaging-protocol.qmd) | Cell biology / imaging | Source not specified |
+| [THP-1 freezing](thp1-freezing-protocol.qmd) | Cryopreservation | Kamisha Woolery |
+| [Thawing THP-1 & K562](thawing-suspension-protocol.qmd) | Cryopreservation | Kamisha Woolery |
+| [Thawing adherent cells](thawing-adherent-protocol.qmd) | Cryopreservation | Kamisha Woolery |
+| [TapeStation HS D1000 ScreenTape](tapestation-hs-d1000-protocol.qmd) | QC / library prep | Agilent HS D1000 ScreenTape kit manual |
+| [cDNA synthesis](cdna-synthesis-protocol.qmd) | Molecular biology | Source not specified (Bio-Rad iScript kit) |
+| [Switching 384- to 96-well format](switching-384-to-96-protocol.qmd) | Equipment SOP | Source not specified |
+| [QIAquick gel extraction](qiaquick-gel-extraction-protocol.qmd) | DNA purification | QIAGEN QIAquick Gel Extraction Kit manual |
+| [Genomic DNA extraction](genomic-dna-extraction-protocol.qmd) | DNA extraction | QIAGEN QIAamp DNA kit manual |
+| [Clonal genotyping](genotyping-clonal-protocol.qmd) | Genotyping | Source not specified |
+| [Plasmid microprep](microprep-plasmid-protocol.qmd) | Plasmid prep | Source not specified |
+| [PCR — genomic DNA (± DMSO)](pcr-genomic-dna-protocol.qmd) | Molecular biology | Source not specified |
+| [qPCR](qpcr-protocol.qmd) | Gene expression | Source not specified |
+| [Index combination checker](index-combination-checker.qmd) | Sequencing QC tool | Illumina Index Adapters Pooling Guide |
+| [RNA extraction — RNeasy Mini Kit](rna-extraction-rneasy-protocol.qmd) | RNA extraction | QIAGEN RNeasy Mini Kit manual |
+| [THP-1 differentiation & polarization](thp1-differentiation-polarization-protocol.qmd) | Cell biology | Source not specified |
+| [iPSC culture](ipsc-culture-protocol.qmd) | Stem cell culture | Yoseli Quiroga / Justin Brumbaugh, adapted from STEMCELL TeSR-E8/mTeSR manuals |
+| [iPSC-derived microglia (iMGL) differentiation](imgls-protocol.qmd) | Stem cell differentiation | Adapted from STEMCELL STEMdiff Hematopoietic & Microglia kit manuals |
 
 ## Adding a new protocol
 

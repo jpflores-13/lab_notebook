@@ -1,0 +1,147 @@
+---
+title: "TapeStation HS D1000 Protocol"
+subtitle: "Agilent High Sensitivity D1000 ScreenTape Assay · 2200 TapeStation"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+The High Sensitivity D1000 ScreenTape assay determines the average fragment size and concentration of DNA samples on the Agilent 2200 TapeStation. Samples are mixed with HS D1000 Sample Buffer, vortexed, spun down, and loaded directly onto the instrument alongside an (optional) ladder — no gel to pour, no post-run imaging steps.
+:::
+
+::: {.callout-important}
+## Before starting
+- Launch the 2200 TapeStation Controller Software and load the High Sensitivity D1000 ScreenTape device + loading tips into the instrument.
+- Allow HS D1000 Reagents (Ladder and Sample Buffer) to equilibrate at **room temperature for 30 min** before use.
+- Vortex all reagents before use.
+- Have an IKA vortexer with 96-well adaptor ready (2000 rpm).
+:::
+
+---
+
+## Configure run
+
+```{ojs}
+//| echo: false
+viewof n_samples    = Inputs.number({label: "Number of samples", value: 8, min: 1, max: 16, step: 1})
+viewof include_ladder = Inputs.toggle({label: "Include ladder lane", value: true})
+viewof excess_pct   = Inputs.number({label: "Extra overage on Sample Buffer master mix (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = 1 + excess_pct / 100
+fmt   = (x, d = 2) => x.toFixed(d)
+
+md`**${n_samples} sample(s)${include_ladder ? " + 1 ladder lane" : ""} · ${excess_pct}% overage on Sample Buffer**`
+```
+
+<!-- TODO: the source Quick Guide doesn't state a max samples/tape figure — 16 lanes is the standard Agilent D1000 ScreenTape cassette capacity (general product knowledge), not a value taken from the uploaded docx. Confirm against your specific ScreenTape lot if this matters. -->
+
+::: {.callout-tip collapse="true"}
+## Why a Sample Buffer "master mix" at all?
+The source protocol describes mixing Sample Buffer + DNA one tube at a time (3 µL + 1 µL). Since Sample Buffer is identical across every sample, it's more efficient to pre-aliquot a single Sample Buffer master mix (scaled to your sample count + overage) rather than pipetting 3 µL from the stock tube per sample. The overage percentage is a bench-practice addition to cover pipetting dead volume — not a value stated in the source document.
+:::
+
+---
+
+## Materials & reagents
+
+| Item | Catalog # |
+|------|-----------|
+| High Sensitivity D1000 ScreenTape | Agilent 5067-5584 |
+| High Sensitivity D1000 Reagents (Ladder and Sample Buffer) | Agilent 5067-5585 |
+| Loading Tips | Agilent 5067-5152 |
+| Optical Tube 8x Strip | Agilent 401428 |
+| Optical Cap 8x Strip | Agilent 401425 |
+
+---
+
+## Sample & ladder preparation
+
+::: {.callout-note collapse="true"}
+## Math audit — how the master mix totals are calculated
+Each sample tube needs 3 µL Sample Buffer + 1 µL DNA (4 µL total load volume). The ladder tube (if run) needs 2 µL Sample Buffer + 2 µL Ladder. Total Sample Buffer to pre-aliquot:
+
+$$V_{SampleBuffer} = \big(3\;\mu L \times N_{samples} + 2\;\mu L \times \mathbb{1}_{ladder}\big) \times (1 + overage)$$
+
+DNA input volume is fixed at 1 µL/sample regardless of concentration — this assay does not back-calculate a target mass, unlike, e.g., the cDNA synthesis RNA input step.
+:::
+
+```{ojs}
+//| echo: false
+sample_buffer_total = (3 * n_samples + (include_ladder ? 2 : 0)) * scale
+
+Inputs.table([
+  {Component: "HS D1000 Sample Buffer", "Per reaction (µL)": "3 (samples) / 2 (ladder)", "Total to aliquot (µL)": fmt(sample_buffer_total)},
+  {Component: "HS D1000 Ladder",        "Per reaction (µL)": include_ladder ? "2 (ladder tube only)" : "not used", "Total to aliquot (µL)": include_ladder ? "2" : "—"}
+], {layout: "auto"})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Tube: "Each sample", "Sample Buffer (µL)": 3, "Input (µL)": "1 µL DNA sample", "Total (µL)": 4},
+  {Tube: "Ladder (optional)", "Sample Buffer (µL)": 2, "Input (µL)": "2 µL HS D1000 Ladder", "Total (µL)": 4}
+], {layout: "auto"})
+```
+
+<!-- Source note: an earlier revision of this protocol used 2 µL DNA sample + 2 µL Sample Buffer; edited to 1 µL DNA + 3 µL Sample Buffer by Zachary Drum, 8/8/2023. The table above reflects the current (post-edit) recipe. -->
+
+---
+
+## Protocol
+
+### Part A: Prepare the TapeStation system
+
+| Step | Action |
+|------|--------|
+| 1 | Launch the 2200 TapeStation Controller Software |
+| 2 | Load the High Sensitivity D1000 ScreenTape device and loading tips into the 2200 TapeStation instrument |
+
+### Part B: Sample preparation — HS D1000 ScreenTape assay
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Step: "1", Action: "Allow reagents to equilibrate at room temperature", Detail: "30 min"},
+  {Step: "2", Action: "Vortex mix before use", Detail: "—"},
+  {Step: "3", Action: include_ladder ? "Prepare ladder: mix Sample Buffer + Ladder" : "Ladder not run this session", Detail: include_ladder ? "2 µL Sample Buffer + 2 µL Ladder" : "—"},
+  {Step: "4", Action: `Prepare each of ${n_samples} sample(s): mix Sample Buffer + DNA`, Detail: "3 µL Sample Buffer + 1 µL DNA sample"},
+  {Step: "5", Action: "Spin down, then vortex (IKA vortexer + adaptor)", Detail: "2000 rpm, 1 min"},
+  {Step: "6", Action: "Spin down to position sample at the bottom of the tube", Detail: "—"},
+  {Step: "7", Action: "Load samples into the 2200 TapeStation instrument", Detail: "—"},
+  {Step: "8", Action: "Select the required samples in the Controller Software", Detail: "—"},
+  {Step: "9", Action: "Click Start and specify a filename to save results", Detail: "—"}
+], {layout: "auto"})
+```
+
+::: {.callout-important}
+## Checklist
+- [ ] Reagents equilibrated 30 min at RT
+- [ ] All tubes vortexed and spun down before loading
+- [ ] Correct sample layout selected in software before Start
+- [ ] Results file named and saved
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Ladder trace | Clean ladder peaks across full range | | |
+| Sample peak(s) | Expected fragment size(s) | | |
+| Concentration (ng/µL) | Sufficient for downstream use | | |
+| Baseline / smear | No excessive degradation smear | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Agilent Technologies. *High Sensitivity D1000 ScreenTape System Quick Guide.*
+Protocol adapted by Marielle Bond, 02/11/2019. Edited (2 µL → 1 µL DNA input) by Zachary Drum, 8/8/2023.

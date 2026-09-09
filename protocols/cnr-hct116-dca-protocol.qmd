@@ -1,0 +1,642 @@
+---
+title: "CUT&RUN — HCT116 (H3K27ac/HA, DCA)"
+subtitle: "EpiCypher CUTANA CUT&RUN, no crosslinking, with full library prep"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+CUT&RUN in untreated HCT116 (and K562) cells for H3K27ac and HA, no crosslinking. Cells are bound to Concanavalin A (ConA)-coated beads, permeabilized, and incubated with primary antibody overnight; pAG-MNase is then bound and activated with calcium to cleave and release antibody-targeted chromatin. Released DNA is purified with the CUTANA™ DNA Purification Kit, then carried through full CUTANA™ CUT&RUN library prep (End Repair, Adaptor Ligation & U-Excision, DNA Cleanup, Indexing PCR, PCR Cleanup) for sequencing. This is a **separate, more detailed protocol** from this notebook's existing [CUT&RUN protocol](cnr-protocol.qmd) (Skene et al. 2018) — use whichever matches your workflow (EpiCypher CUTANA kit-based here vs. the Phanstiel-lab bench protocol there).
+
+Source document header: *"MOPS: Cut and Run for H3K27ac and HA with no crosslinking"* — written by AP, modified by HK, YQ, ZD, DCA. Adapted from EpiCypher's [CUTANA CUT&RUN protocol](https://www.epicypher.com/content/documents/protocols/cutana-cut&run-protocol.pdf), its [crosslinking modification](https://www.epicypher.com/content/documents/protocols/cut-and-run-cross-linking-protocol.pdf), and the [CUTANA CUT&RUN Library Prep Kit manual](https://www.epicypher.com/content/documents/manuals/14-1001-2-cut-and-run-library-prep-kit-manual.pdf). Troubleshooting guide: [bionordika.no](https://bionordika.no/application/files/6916/0207/4797/86652.pdf).
+:::
+
+::: {.callout-important}
+## Before starting
+- Set centrifuge to 4°C.
+- Prepare Wash Buffer fresh on Day 1 and Day 2 (filter after prep); keep at room temperature (RT).
+- Prepare Digitonin Buffer fresh each day from that day's Wash Buffer; keep at 4°C; discard leftover Wash Buffer after making it.
+- Prepare Antibody Buffer fresh for Day 1; keep on ice.
+- Prepare 8-strip tubes and 1.5 mL tubes for QC checks ahead of time.
+- Record your i5/i7 index assignment **before opening any adapter tubes** — index swaps are invisible until sequencing data arrives.
+- Maintain 4°C during adapter ligation setup — this is the primary source of adapter dimers in library prep.
+- Make fresh 85% ethanol (EtOH) on the day of each cleanup — do not store it.
+:::
+
+---
+
+## Materials & Reagents — Antibodies
+
+| Antibody | Source | Cat # |
+|----------|--------|-------|
+| H3K27Ac | Abcam | ab4729 |
+| IgG | EpiCypher | 13-0042k |
+| H3K4me3 | EpiCypher | 13-0041k |
+| HA (tag) | — | *not specified in source* |
+
+## Materials & Reagents — Buffer components
+
+| Component | Source | Cat # |
+|-----------|--------|-------|
+| 4-(2-Hydroxyethyl)-1-piperazineethanesulfonic acid (HEPES) | Sigma-Aldrich | H3375 |
+| Potassium Chloride (KCl) | Sigma-Aldrich | P3911 |
+| Calcium Chloride (CaCl₂) | Sigma-Aldrich | C1016 |
+| Manganese(II) Chloride (MnCl₂) | Sigma-Aldrich | 203734 |
+| Molecular biology grade water (RNase-, DNase-free) | VWR | VWRV02-0201-0500 |
+| Sodium Chloride (NaCl) | Sigma-Aldrich | S5150-1L |
+| Ethylenediaminetetraacetic acid (EDTA) — prepare 0.5 M stock, pH 8.0 | Sigma-Aldrich | E5134 |
+| Ethylene glycol-bis(β-aminoethyl ether)-N,N,N′,N′-tetraacetic acid (EGTA) — prepare 0.5 M stock, pH 8.0 | Sigma-Aldrich | E3889 |
+| Ribonuclease A (RNase A) | Thermo Fisher Scientific | EN0531 |
+| Glycogen | Sigma-Aldrich (Roche) | 10930193001 |
+| Spermidine trihydrochloride | Sigma-Aldrich | S2501 |
+| Digitonin — store aliquots of 5% stock in Dimethyl Sulfoxide (DMSO) at −20°C | Millipore Sigma | 300410 |
+| Dimethyl Sulfoxide (DMSO) | Sigma-Aldrich | D8418-100ml |
+| cOmplete™ Mini, EDTA-free Protease Inhibitor Cocktail (CPI) | Roche | 11836170001 |
+| Trypan blue | Thermo Fisher Scientific | T10282 |
+
+::: {.callout-tip collapse="true"}
+## 1 M spermidine preparation
+Dissolve 1 g spermidine (MW = 254.63) in 3.93 mL molecular-grade water. Store in single-use aliquots at −20°C for 6 months.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_samples = Inputs.number({label: "Number of CUT&RUN reactions", value: 16, min: 1, max: 96, step: 1})
+viewof ab_target = Inputs.select(["IgG (negative ctrl)", "H3K27ac", "HA"], {label: "Primary antibody target"})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+tot = (per_sample, excess_pct) => per_sample * n_samples * (1 + excess_pct / 100)
+
+md`**${n_samples} reaction(s) · antibody: ${ab_target}**`
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how every excess percentage is applied
+Every master mix in this protocol is scaled with its **own** stated pipetting-error excess, not one global figure — the source document varies this per step:
+
+$$V_{total} = V_{per\_reaction} \times N_{samples} \times (1 + excess)$$
+
+| Master mix | Source excess |
+|------------|----------------|
+| ConA bead activation | **+10%** (stated in table header) |
+| End Repair Master Mix | **+20%** (stated in table header and prose) |
+| Adaptor Ligation Master Mix | **+10%** (stated in table header and prose) |
+| PCR Cleanup 85% EtOH (Section V) | **+25%** (stated explicitly in prose) |
+| Wash Buffer, XL Digitonin Buffer, DNA Cleanup 85% EtOH (Section III) | not stated — default **0%**, editable |
+| Antibody Buffer | not stated as a table excess, but the source's own 4-/8-sample worked examples (220 µL / 440 µL, i.e. 55 µL/rxn) imply **+10%** over the nominal 50 µL/rxn used at the bench — reproduced as the default here |
+
+Each table below has its own `viewof excess_pct` input so you can override any single step without changing the others.
+:::
+
+---
+
+## Day 1 — Cell harvest, ConA bead binding & antibody binding (~2 hr + overnight)
+
+### Buffers (make fresh Day 1)
+
+::: {.callout-note collapse="true"}
+## Math audit — buffer recipes
+Source amounts are given for a 16-reaction batch; scaled here as $V_{per\_reaction} \times N_{samples} \times (1+excess)$, dividing the source's 16-sample total by 16 (and by 1+excess where a table excess was stated) to recover the per-reaction baseline.
+:::
+
+**Wash Buffer** (from XL Pre-Wash Buffer, needed Day 1 & Day 2)
+
+```{ojs}
+//| echo: false
+viewof excess_wash = Inputs.number({label: "Wash Buffer — extra overage (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "XL Pre-Wash Buffer",                    "Per reaction": "1.8 mL",  "Total": `${fmt(tot(1.8, excess_wash))} mL`},
+  {Component: "1 M Spermidine (add fresh)",             "Per reaction": "0.9 µL",  "Total": `${fmt(tot(0.9, excess_wash))} µL`, "Final conc.": "0.5 mM"},
+  {Component: "Protease inhibitor (from 2 mL CPI stock, 25X)", "Per reaction": "72 µL", "Total": `${fmt(tot(72, excess_wash), 0)} µL`}
+], {layout: "auto"})
+```
+
+**XL Digitonin Buffer** (from Wash Buffer above; needed Day 1 & Day 2)
+
+```{ojs}
+//| echo: false
+viewof excess_digitonin = Inputs.number({label: "XL Digitonin Buffer — extra overage (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "XL Wash Buffer (above)",     "Per reaction": "1.4 mL",  "Total": `${fmt(tot(1.4, excess_digitonin))} mL`},
+  {Component: "Digitonin, 5% in DMSO",       "Per reaction": "2.8 µL",  "Total": `${fmt(tot(2.8, excess_digitonin))} µL`, "Final conc.": "0.01%"}
+], {layout: "auto"})
+```
+
+**Antibody Buffer** (Day 1 only; make fresh, keep on ice)
+
+```{ojs}
+//| echo: false
+viewof excess_abbuffer = Inputs.number({label: "Antibody Buffer — extra overage (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+abbuffer_total_uL   = tot(50, excess_abbuffer)   // 50 µL/rxn nominal use; default +10% matches the source's 220 µL/4-sample, 440 µL/8-sample worked examples
+abbuffer_edta_uL    = abbuffer_total_uL * 0.004    // 2 mM final from 0.5 M EDTA stock
+abbuffer_digbuf_uL  = abbuffer_total_uL - abbuffer_edta_uL
+
+Inputs.table([
+  {Component: "Digitonin Buffer (above)",        "Total (µL)": fmt(abbuffer_digbuf_uL)},
+  {Component: "0.5 M EDTA (2 mM final)",           "Total (µL)": fmt(abbuffer_edta_uL, 2)},
+  {Component: "Total",                              "Total (µL)": fmt(abbuffer_total_uL)}
+], {layout: "auto"})
+```
+
+### Activating ConA beads (~20 min)
+
+```{ojs}
+//| echo: false
+viewof excess_cona = Inputs.number({label: "ConA bead activation — extra overage (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "ConA beads",                                  "Per reaction": "10 µL", "Total": `${fmt(tot(10, excess_cona))} µL`},
+  {Component: "Bead Activation Buffer (2× washes)",           "Per reaction": "90.91 µL", "Total": `${fmt(tot(90.9091, excess_cona))} µL`},
+  {Component: "Bead Activation Buffer (final resuspension)",  "Per reaction": "10 µL", "Total": `${fmt(tot(10, excess_cona))} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Gently resuspend ConA beads; transfer volume above (per reaction, batched) to a 1.5 mL tube |
+| 2 | Magnet until slurry clears (30 s–2 min); pipette to remove supernatant |
+| 3 | Add cold Bead Activation Buffer (wash amount above); remove from magnet, mix; return to magnet, remove supernatant. Repeat for 2 total washes |
+| 4 | Resuspend beads in Bead Activation Buffer (final resuspension amount above) |
+| 5 | Keep activated ConA beads on ice until needed |
+
+### Harvest HCT116 cells (~30 min)
+
+| Step | Action |
+|------|--------|
+| 1 | Gently wash cells with 10 mL 1X Phosphate-Buffered Saline (PBS) |
+| 2 | Lift cells with 1 mL 0.05% trypsin per plate, 3 min at 37°C; check for detachment/clumping under the microscope (extend 1 min at 37°C if clumped) |
+| 3 | Add 9 mL media with Fetal Bovine Serum (FBS); count cells to estimate volume needed for 500K cells/replicate |
+| 4 | Make 1.5 mL tubes with 500K cells per replicate |
+| 5 | Centrifuge 10 min at 500×g; remove supernatant |
+
+### Binding cells to ConA beads (~15 min)
+
+| Step | Action |
+|------|--------|
+| 1 | Resuspend cells in 100 µL/reaction RT Wash Buffer; pipette to mix |
+| 2 | Add 10 µL activated ConA beads per 100 µL cell suspension; incubate 10 min RT (cells adsorb to beads) |
+| 3 | Gently vortex (setting #7) to mix |
+
+### Binding of primary antibody (~30 min to overnight)
+
+::: {.callout-tip collapse="true"}
+## QC2/QC3 — confirm bead binding
+Mix 10 µL of each fraction with 10 µL Trypan blue and count. QC2 (unbound fraction, from the pre-antibody-buffer supernatant) should show almost no cells. QC3 (bound fraction, after resuspending in Antibody Buffer) should show mostly blue nuclei/permeabilized cells surrounded by small beads.
+:::
+
+```{ojs}
+//| echo: false
+ab_info = ({
+  "IgG (negative ctrl)": { ug: 1.5, stock_mg_mL: 1,   note: "Working solution diluted from 11 mg/mL stock to 1 mg/mL in Antibody Buffer; lasts up to 1 month at 4°C" },
+  "H3K27ac":              { ug: 1,   stock_mg_mL: 0.9, note: "Lot GR3448944-1, 0.9 mg/mL (batch-dependent, 0.4–1 mg/mL) — confirm against your current lot" },
+  "HA":                   { ug: 0.5, stock_mg_mL: 1,   note: "0.5 µg per 0.5 million cells; freezer stock, do not aliquot" }
+})[ab_target]
+
+ab_vol_per_rxn_uL = ab_info.ug / ab_info.stock_mg_mL
+ab_vol_total_uL   = ab_vol_per_rxn_uL * n_samples
+
+md`**${ab_target}: ${fmt(ab_vol_per_rxn_uL)} µL/reaction × ${n_samples} reaction(s) = ${fmt(ab_vol_total_uL)} µL total.** ${ab_info.note}`
+```
+
+::: {.callout-note collapse="true"}
+## Reference — full antibody dilution table (from source)
+| Antibody | Stock conc. | Working conc. | Location | Target µg/rxn | Volume/rxn | Recommended (source) |
+|----------|-------------|----------------|----------|-----------------|------------|------------------------|
+| IgG | 11 mg/mL | 1 mg/mL (in Antibody Buffer) | Fridge (working solution, ≤1 month) | 1.5 µg | 1.5 µL working solution | 0.5 µg |
+| H3K27ac | 0.4–1 mg/mL (batch-dependent; Lot GR3448944-1 = 0.9 mg/mL) | — | Freezer (aliquots of stock) | 1 µg | 1.1 µL stock | 2 µg for 25 µg chromatin (ChIP) |
+| HA | 1 mg/mL | — | Freezer (do not aliquot) | 0.5 µg per 0.5M cells | 0.5 µL | 0.5 µg per 0.5M cells |
+
+<!-- Source note: the H3K27ac "Recommended" column reads "2ug for 25ug chromatin (ChIP)" — this looks like it may have been copied from a ChIP-seq protocol table rather than written for CUT&RUN, since CUT&RUN doesn't quantify input as µg chromatin. Reproduced verbatim; flag with JP if it should be corrected. -->
+:::
+
+| Step | Action |
+|------|--------|
+| 1 | Magnet until clear; remove and discard supernatant. Save 10 µL for QC2 (unbound fraction) |
+| 2 | Add 50 µL cold Antibody Buffer per reaction quickly (batched: 220 µL for 4 samples, 440 µL for 8 samples); vortex to resuspend evenly. Save 10 µL for QC3 (bound fraction) |
+| 3 | Transfer 50 µL/reaction into 8-strip PCR tubes (continue Day 2 with an 8-strip magnetic rack) |
+| 4 | Add primary antibody (manufacturer's recommended amount, or 0.5 µg if untested) per the calculator above; vortex immediately and thoroughly |
+| 5 | Incubate 8-strip tubes on nutator overnight at 4°C, cap side slightly elevated to keep beads in solution — **do not** use a rotator or flip tubes end-to-end |
+
+::: {.callout-warning}
+## Antibodies stored in glycerol
+Glycerol-stabilized antibody stocks are viscous — aspirate slowly, check the tip for accuracy, and pipette up and down ~3× into the sample to clear residual glycerol from the tip.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Primary antibody: _______ — lot #: _______
+- [ ] QC2 (unbound): _______ cells — QC3 (bound): _______ cells
+- [ ] Tubes on nutator, elevated, 4°C overnight
+:::
+
+---
+
+## Day 2 — pAG-MNase binding, digestion & chromatin release (~5 hr)
+
+::: {.callout-important}
+## Before starting
+Thaw digitonin (RT) and spermidine; prepare fresh Wash Buffer and filter; make Digitonin Buffer and keep on ice (discard leftover Wash Buffer); confirm Stop Buffer is on hand (6 months at 4°C); have 100 mM CaCl₂ ready.
+:::
+
+| Step | Action | Volume |
+|------|--------|--------|
+| 1 | Magnet until slurry clears; remove and discard supernatant | — |
+| 2 | Add cold Digitonin Buffer directly onto beads, on magnet; remove supernatant. Repeat for 2 total washes | 200 µL/reaction |
+| 3 | Resuspend bead-cell slurry; gently vortex | 50 µL/reaction Digitonin Buffer |
+
+::: {.callout-tip collapse="true"}
+## Clumpy beads
+Beads are often clumpy at this point but disperse easily with gentle P200 pipetting. A slightly cut-off pipette tip may help resuspension and preserve delicate cells/nuclei.
+:::
+
+### Binding of pAG-MNase (~30 min)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "pAG-MNase (20X stock)", "Per reaction": "2.5 µL", "Total": `${fmt(tot(2.5, 0))} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Add pAG-MNase (above) to each reaction; gently vortex |
+| 2 | Incubate 10 min RT |
+| 3 | Magnet until slurry clears; remove and discard supernatant |
+| 4 | Add 200 µL cold Digitonin Buffer directly onto beads, on magnet; remove supernatant. Repeat for 2 total washes |
+| 5 | Remove from magnet; add 50 µL cold Digitonin Buffer/reaction; gently vortex |
+
+::: {.callout-warning}
+## To evenly distribute pAG-MNase
+Ensure beads are thoroughly resuspended by gentle vortexing and/or P200 pipetting before and after adding pAG-MNase.
+:::
+
+### Targeted chromatin digestion and release (~3 hr)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "100 mM CaCl₂ (triggers digestion)", "Per reaction": "1 µL",  "Total": `${fmt(tot(1, 0))} µL`},
+  {Component: "Stop Buffer (chelates Ca²⁺)",          "Per reaction": "33 µL", "Total": `${fmt(tot(33, 0))} µL`}
+], {layout: "auto"})
+```
+
+::: {.callout-warning}
+## CaCl₂ triggers digestion immediately
+Once CaCl₂ is added, pAG-MNase tethered to antibody-bound chromatin is active. Work on ice and incubate exactly as specified.
+:::
+
+| Step | Action | Detail |
+|------|--------|--------|
+| 1 | On ice, add 1 µL 100 mM CaCl₂/reaction; gently vortex | Critical step — resuspend beads thoroughly for efficient digestion |
+| 2 | Incubate on nutator, 2 hr at 4°C, tubes slightly elevated/angled | MNase cleaves target chromatin |
+| 3 | Add 33 µL Stop Buffer/reaction; gently vortex | Chelates Ca²⁺, halts MNase |
+| 4 | Incubate 10 min at 37°C in a thermocycler | Releases cleaved chromatin to supernatant; degrades RNA |
+| 5 | Quick spin; magnet until slurry clears | — |
+| 6 | Transfer supernatant (CUT&RUN-enriched DNA) to a new tube; discard ConA beads | — |
+
+::: {.callout-important}
+## Checklist
+- [ ] CaCl₂ added; digestion timer started at: _______
+- [ ] 37°C release incubation complete
+- [ ] Supernatant transferred cleanly; beads discarded
+:::
+
+---
+
+## Day 3 — DNA purification & CUTANA library prep (~5 hr)
+
+::: {.callout-important}
+## Before starting
+Make fresh 85% ethanol (EtOH).
+:::
+
+### DNA Purification (~30 min)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "DNA Binding Buffer (1:5 sample:buffer)", "Per reaction": "420 µL", "Total": `${fmt(tot(420, 0))} µL`},
+  {Component: "DNA Wash Buffer (×2 washes)",              "Per reaction": "200 µL", "Total": `${fmt(tot(200, 0))} µL`},
+  {Component: "DNA Elution Buffer",                        "Per reaction": "12 µL",  "Total": `${fmt(tot(12, 0))} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Magnet until slurry clears; transfer supernatant to a 1.5 mL tube |
+| 2 | Mix CUT&RUN DNA with DNA Binding Buffer (1:5); vortex and load onto a CUTANA™ DNA Purification Kit (EpiCypher 14-0050) column + collection tube |
+| 3 | Centrifuge 30 s at 16,000×g, RT; discard flow-through |
+| 4 | Add DNA Wash Buffer; centrifuge 30 s at 16,000×g, RT; discard flow-through. Repeat for 2 total washes |
+| 5 | Centrifuge again 30 s at 16,000×g, RT to dry the column |
+| 6 | Transfer column to a 1.5 mL tube; add DNA Elution Buffer directly to the column center; let sit 5 min |
+| 7 | Centrifuge 1 min at 16,000×g, RT; discard column, save eluted DNA |
+| 8 | Use 1 µL to quantify via Qubit |
+
+::: {.callout-tip collapse="true"}
+## Typical yields (EpiCypher reference, 500,000 native K562 cells, pre-PCR)
+IgG → ~2–5 ng · H3K4me3 (low-abundance target) → ~5–10 ng · H3K27me3 (high-abundance target) → ~20–50 ng. Success is best judged by target yield exceeding IgG, even slightly, for low-abundance targets. Take Enzyme Repair buffer out of the freezer when Qubiting.
+:::
+
+---
+
+## Library prep
+
+::: {.callout-note}
+## Input
+5 ng input DNA is recommended for most CUT&RUN targets; robust, reliable sequencing data have been obtained down to 0.5 ng. Use as much DNA as possible when yield is limiting.
+:::
+
+::: {.callout-warning}
+## Temperature & reagent handling
+Maintain 4°C during library prep to avoid adapter dimer formation. End Prep Buffer and Ligation Mix can precipitate at −20°C — if observed, bring to RT, gently vortex until dissolved, and return to ice. Mix reactions with three 4-second gentle vortex pulses (setting 7/10), flick/invert 8-strip tubes, and quick spin — this mixes viscous reagents without losing enzyme activity.
+:::
+
+### Input DNA calculator
+
+```{ojs}
+//| echo: false
+viewof cnr_dna_conc     = Inputs.number({label: "Qubit concentration (ng/µL)", value: 0.5, min: 0, step: 0.05})
+viewof cnr_dna_vol_avail = Inputs.number({label: "Purified DNA volume available (µL)", value: 11, min: 0.1, max: 11, step: 0.5})
+```
+
+```{ojs}
+//| echo: false
+cnr_dna_total_ng = cnr_dna_conc * cnr_dna_vol_avail
+
+cnr_dna_total_ng <= 5
+  ? md`::: {.callout-tip}
+**Total yield ${fmt(cnr_dna_total_ng)} ng ≤ 5 ng.** Use the **full** ${fmt(cnr_dna_vol_avail)} µL of purified DNA and top up to 25 µL with 0.1X TE Buffer (add ${fmt(25 - cnr_dna_vol_avail)} µL).
+:::`
+  : md`::: {.callout-tip}
+**Total yield ${fmt(cnr_dna_total_ng)} ng > 5 ng.** Use ${fmt(5 / cnr_dna_conc)} µL of purified DNA (= 5 ng) and top up to 25 µL with 0.1X TE Buffer (add ${fmt(25 - 5 / cnr_dna_conc)} µL).
+:::`
+```
+
+### Section I — End Repair (~75 min)
+
+```{ojs}
+//| echo: false
+viewof excess_endrepair = Inputs.number({label: "End Repair Master Mix — extra overage (%)", value: 20, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "End Prep Buffer",  "Per reaction": "3.5 µL", "Total": `${fmt(tot(3.5, excess_endrepair))} µL`},
+  {Component: "End Prep Enzyme",  "Per reaction": "1.5 µL", "Total": `${fmt(tot(1.5, excess_endrepair))} µL`},
+  {Component: "Total",             "Per reaction": "5 µL",   "Total": `${fmt(tot(5, excess_endrepair))} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Transfer 5 ng CUTANA™ CUT&RUN-enriched DNA to a new 8-strip PCR tube; adjust to 25 µL with 0.1X TE Buffer per the calculator above |
+| 2 | Prepare End Repair Master Mix (above); vortex (setting #7), quick spin, return to ice |
+| 3 | Add 5 µL Master Mix to the 25 µL DNA; pipette to clear tips, vortex, quick spin |
+| 4 | Run the thermocycler program below (heated lid >75°C) |
+
+**End Repair thermocycler program**
+
+| Step | Temperature | Time | Cycles | Notes |
+|------|-------------|------|--------|-------|
+| 1 | 20°C | 20 min | 1 | Reaction temperature |
+| 2 | 65°C | 30 min | 1 | Enzyme activation |
+| 3 | 4°C | ∞ | — | Hold |
+
+### Section II — Adaptor Ligation & U-Excision (~45 min)
+
+```{ojs}
+//| echo: false
+viewof excess_ligation = Inputs.number({label: "Ligation Master Mix — extra overage (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Adapter for Illumina®, 1.5 µM",  "Per reaction": "1.25 µL", "Total": `${fmt(tot(1.25, 0))} µL`},
+  {Component: "Ligation Mix",                     "Per reaction": "15 µL",   "Total": `${fmt(tot(15, excess_ligation))} µL`},
+  {Component: "Ligation Enhancer",                "Per reaction": "0.5 µL",  "Total": `${fmt(tot(0.5, excess_ligation))} µL`},
+  {Component: "U-Excision Enzyme",                "Per reaction": "1 µL",    "Total": `${fmt(tot(1, 0))} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action |
+|------|--------|
+| 1 | Place 8-strip tubes on ice or a pre-chilled aluminum block |
+| 2 | Add 1.25 µL Adapter for Illumina® per reaction, on ice (optimized for 10 ng–0.5 ng inputs) |
+| 3 | Prepare Ligation Master Mix (15 µL Ligation Mix + 0.5 µL Ligation Enhancer, above); vortex (setting #7), quick spin, return to ice |
+| 4 | Add 15.5 µL Ligation Master Mix per reaction on ice; vortex thoroughly, quick spin — pipette slowly, the mix is viscous |
+| 5 | Incubate 15 min at 20°C, no heated lid (final volume 46.75 µL) |
+| 6 | Remove to RT rack; add 1 µL U-Excision Enzyme/reaction; pipette to clear tip, vortex, quick spin (final volume 47.75 µL) |
+| 7 | Incubate 15 min at 37°C, heated lid ≥47°C |
+
+::: {.callout-tip collapse="true"}
+## Safe pause point
+Reactions can be stored at −20°C overnight after Section II.
+:::
+
+### Section III — DNA Cleanup (~15 min)
+
+```{ojs}
+//| echo: false
+viewof excess_cleanup1 = Inputs.number({label: "Section III 85% EtOH — extra overage (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+cleanup1_total_uL = tot(900, excess_cleanup1)
+cleanup1_etoh_uL  = cleanup1_total_uL * 0.85
+cleanup1_water_uL = cleanup1_total_uL * 0.15
+
+Inputs.table([
+  {Component: "100% Ethanol (EtOH)",             "Total": `${fmt(cleanup1_etoh_uL)} µL`},
+  {Component: "Molecular biology grade water",    "Total": `${fmt(cleanup1_water_uL)} µL`},
+  {Component: "= 85% EtOH, total",                 "Total": `${fmt(cleanup1_total_uL)} µL`}
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Pausing after Section III?
+Prepare only 450 µL 85% EtOH per reaction instead of 900 µL if pausing here.
+:::
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| 1 | Vortex SPRIselect reagent thoroughly to resuspend |
+| 2 | Slowly add SPRIselect (1X reaction volume) to each reaction | 47.75 µL |
+| 3 | Vortex, quick spin; incubate 5 min RT | — |
+| 4 🚩 | Magnet 2 min RT; remove and discard supernatant | — |
+| 5 🚩 | On magnet, add 85% EtOH directly onto beads; remove and discard. Repeat for 2 total washes | 180 µL |
+| 6 | Remove from magnet, quick spin, return to magnet, remove residual EtOH | — |
+| 7 | Air dry, caps open, 2 min (do not over-dry — beads should stay dark brown/glossy) | — |
+| 8 🚩 | Add 0.1X TE Buffer to elute | 12 µL |
+| 9 | Vortex until beads resuspended, quick spin; incubate 2 min RT | — |
+| 10 | Magnet 2 min RT | — |
+| 11 🚩 | Transfer 10.5 µL eluted DNA to new 8-strip tubes; discard beads | — |
+
+::: {.callout-warning}
+## Do not discard the supernatant
+After elution, the adapter-ligated DNA is in the supernatant, not on the beads.
+:::
+
+::: {.callout-tip collapse="true"}
+## Safe pause point
+Reactions can be stored at −20°C overnight after Section III.
+:::
+
+### Section IV — Indexing PCR (~30 min)
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "High Fidelity 2X PCR Master Mix",  "Per reaction": "12.5 µL", "Total": `${fmt(tot(12.5, 0))} µL`},
+  {Component: "Assigned i7 primer",                "Per reaction": "1 µL",    "Total": "unique per reaction — not batched"},
+  {Component: "Assigned i5 primer",                "Per reaction": "1 µL",    "Total": "unique per reaction — not batched"}
+], {layout: "auto"})
+```
+
+::: {.callout-warning}
+## Never reuse an index pair within a multiplexed run
+Assign a unique i5/i7 pair to each reaction and mark it consumed on the Primer Tracking Table. If this run will be pooled with others on one sequencing lane/flow cell, coordinate to avoid overlapping pairs.
+:::
+
+::: {.callout-note collapse="true"}
+## i5/i7 set selection rule (from source)
+1. Determine the number of CUT&RUN libraries to multiplex.
+2. Select i7 Set(s) — at least one complete i7 Set must be included per sequencing run.
+3. Work through **all** i5 primer combinations for a given i7 Set before moving to another i7 Set. Select i5 primer(s) to pair with the chosen i7 Set(s) — at least one complete i5 Set must be included per run.
+4. Assign i5/i7 pairs to reactions in a way that simplifies multichannel pipetting.
+5. Add 1 µL assigned i7 primer, then 1 µL assigned i5 primer, to each reaction — change tips between additions to prevent cross-contamination, and discard/replace the i7 tube cap after each use.
+
+Example from source: *"For Run 1, we select the i7.1 & i7.2 Set."*
+
+**Index sets referenced in the source figure** (EpiCypher Dual Index Plate TT Set A):
+
+| i7 Sets | i5 Sets |
+|---------|---------|
+| i7.1 & i7.2 | i5.1 & i5.2 |
+| i7.3 & i7.4 | i5.3 & i5.4 |
+| i7.5 & i7.6 | i5.5 & i5.6 |
+| — | i5.7 & i5.8 |
+
+<!-- TODO: the source document includes a full 96-well diagram mapping i5/i7 well combinations to four sequencing runs (Figure 8) — not reproduced here since it's a diagram, not tabular text. Refer to the source manual or the Protocol Quick-Start Card for the complete chart. -->
+:::
+
+| Step | Action |
+|------|--------|
+| 1 | To each 10.5 µL reaction, add in order: 1 µL i7 primer, 1 µL i5 primer, 12.5 µL High Fidelity 2X PCR Master Mix (mix well before use) |
+| 2 | Vortex to mix; quick spin |
+| 3 | Run the thermocycler program below (heated lid 105°C) |
+
+**Indexing PCR thermocycler program** — designed to enrich 200–700 bp fragments
+
+| Step | Temperature | Time | Cycles | Notes |
+|------|-------------|------|--------|-------|
+| 1 | 98°C | 45 sec | 1 | Hot start activation of DNA Polymerase |
+| 2 | 98°C | 15 sec | 14 | DNA melting |
+| 3 | 60°C | 10 sec | 14 | Hybrid annealing/extension |
+| 4 | 72°C | 60 sec | 1 | Final extension |
+| 5 | 4°C | ∞ | — | Hold |
+
+### Section V — PCR Cleanup (~15 min)
+
+```{ojs}
+//| echo: false
+viewof excess_cleanup2 = Inputs.number({label: "Section V 85% EtOH — extra overage (%)", value: 25, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+cleanup2_total_uL = tot(360, excess_cleanup2)   // 450 µL/rxn stated INCLUDES 25% excess → 360 µL nominal baseline
+cleanup2_etoh_uL  = cleanup2_total_uL * 0.85
+cleanup2_water_uL = cleanup2_total_uL * 0.15
+
+Inputs.table([
+  {Component: "100% Ethanol (EtOH)",             "Total": `${fmt(cleanup2_etoh_uL)} µL`},
+  {Component: "Molecular biology grade water",    "Total": `${fmt(cleanup2_water_uL)} µL`},
+  {Component: "= 85% EtOH, total",                 "Total": `${fmt(cleanup2_total_uL)} µL`}
+], {layout: "auto"})
+```
+
+| Step | Action | Volume/ratio |
+|------|--------|--------|
+| 1 | If starting fresh, continue directly. If starting from DNA frozen after Section III, prepare fresh 85% EtOH (above) | — |
+| 2 | Vortex SPRIselect reagent thoroughly | — |
+| 3 | Slowly add SPRIselect (1X reaction volume) to each reaction | 25 µL |
+| 4 | Vortex, quick spin; incubate 5 min RT (PCR-amplified DNA binds beads) | — |
+| 5 🚩 | Magnet 2 min RT; remove and discard supernatant | — |
+| 6 🚩 | On magnet, add 85% EtOH directly onto beads; remove and discard. Repeat for 2 total washes | 180 µL |
+| 7 | Remove from magnet, quick spin, return to magnet, remove residual EtOH | — |
+| 8 | Air dry, caps open, 2 min | — |
+| 9 🚩 | Add 0.1X TE Buffer to elute | 12 µL |
+| 10 | Vortex until beads resuspended, quick spin; incubate 2 min RT | — |
+| 11 | Magnet 2 min RT | — |
+| 12 🚩 | Transfer 10.5 µL eluted library to new tubes; discard beads | — |
+
+::: {.callout-tip collapse="true"}
+## Safe pause point
+Libraries can be stored at −20°C overnight after Section V.
+:::
+
+### Qubit & TapeStation QC (~1 hr)
+
+| Step | Action |
+|------|--------|
+| 1 | Take out TapeStation reagents when starting Qubit |
+| 2 | Quantify 1 µL purified PCR product via Qubit — typical yield with the CUTANA Library Prep Kit at 5 ng input is ~300–500 ng |
+| 3 | Run 1–2 µL on TapeStation |
+| 4 | Store DNA at −20°C until ready for sequencing |
+
+::: {.callout-note collapse="true"}
+## Sequencing guidance (from source)
+Paired-end sequencing (2 × 50 bp) is recommended to identify sites of MNase cleavage and enable target footprinting (e.g. for transcription factors). 3–8 million reads provides adequate coverage for most targets. This protocol generates nucleosome-resolution data (~170 bp) for transcription factors; prepping subnucleosomal fragments (<120 bp) requires protocol adjustments not detailed in this source (see EpiCypher FAQs).
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| QC2 (unbound fraction) | Almost no cells | | |
+| QC3 (bound fraction) | Mostly blue nuclei surrounded by beads | | |
+| Post-digestion supernatant | Clear | | |
+| Post-purification Qubit | Target > IgG | | |
+| Post-Indexing PCR Qubit | ~300–500 ng (5 ng input) | | |
+| TapeStation peak | Nucleosome-resolution smear (~170 bp for TFs) | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+CUT&RUN protocol adapted from EpiCypher's [CUTANA CUT&RUN protocol](https://www.epicypher.com/content/documents/protocols/cutana-cut&run-protocol.pdf) and its [crosslinking modification](https://www.epicypher.com/content/documents/protocols/cut-and-run-cross-linking-protocol.pdf).
+Library prep protocol adapted from the [CUTANA CUT&RUN Library Prep Kit manual](https://www.epicypher.com/content/documents/manuals/14-1001-2-cut-and-run-library-prep-kit-manual.pdf) (EpiCypher 14-1001-2).
+Troubleshooting guide: [bionordika.no](https://bionordika.no/application/files/6916/0207/4797/86652.pdf).
+Protocol: written by AP; modified by HK, YQ, ZD, DCA. Transcribed by JP Flores.

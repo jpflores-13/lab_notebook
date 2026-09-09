@@ -1,0 +1,135 @@
+---
+title: "Plasmid Microprep Protocol"
+subtitle: "Fast alkaline-lysis miniprep for 1 mL cultures · 2-day protocol"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+A fast, small-scale alkaline-lysis plasmid prep ("microprep") from 1 mL overnight bacterial cultures — no spin-column kit required. Cells are lysed with Solutions I/II/III, plasmid DNA is cleared with two chloroform extractions, precipitated with ethanol, dried, and resuspended in a small volume of water. Runs over 2 days: Day 1 inoculate and grow overnight; Day 2 microprep.
+:::
+
+::: {.callout-important}
+## Before starting
+- Day 1: inoculate 1 mL LB media (with the appropriate antibiotic) per clone from a single CFU; grow overnight at 37°C, 200 rpm.
+- Reserve 50 µL of each overnight culture in a separate tube as a glycerol-stock source before proceeding — the rest goes into the microprep.
+- Make **Solution II fresh** immediately before use.
+- Pre-chill absolute ethanol at −20°C.
+- Set the dry bath to 55°C for the drying step.
+:::
+
+---
+
+## Configure microprep run
+
+```{ojs}
+//| echo: false
+viewof n_samples   = Inputs.number({label: "Number of cultures (clones)", value: 8, min: 1, max: 96, step: 1})
+viewof excess_pct  = Inputs.number({label: "Reagent overage (%)", value: 10, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 1) => x.toFixed(d)
+
+md`**${n_samples} culture(s) · ${excess_pct}% overage · scale factor ${fmt(scale, 2)}×**`
+```
+
+::: {.callout-note collapse="true"}
+## Math audit — how every volume is calculated
+Every reagent below is dispensed per-tube at a fixed per-sample volume, so total quantity to have on hand scales linearly:
+
+$$V_{total} = V_{per\_sample} \times N_{samples} \times (1 + overage)$$
+
+Only Solution I + RNase A (added together and vortexed in Step 4) is realistically premixed as a shared master mix — Solutions II and III, chloroform, and ethanol are added directly per-tube during the prep, so the table below is an ordering/prep quantity calculator rather than a single combined master mix.
+
+Ethanol precipitation volume is calculated as a configurable fraction (0.8–1×) of the ~450 µL supernatant volume carried through the two chloroform extractions, per the source protocol's "0.8-1 volume" instruction.
+:::
+
+---
+
+## Reagents needed (scaled)
+
+```{ojs}
+//| echo: false
+viewof ethanol_fraction = Inputs.number({label: "Ethanol precipitation fraction (0.8–1× supernatant volume)", value: 0.9, min: 0.8, max: 1, step: 0.05})
+```
+
+```{ojs}
+//| echo: false
+sol1_vol        = 100
+rnase_vol       = 1
+sol2_vol        = 200
+sol3_vol        = 150
+chloroform_vol  = 450   // per extraction; two extractions performed
+supernatant_vol = 450   // approx. volume carried to ethanol precipitation
+ethanol_vol     = supernatant_vol * ethanol_fraction
+
+Inputs.table([
+  {Component: "Solution I",                 "Per sample": `${sol1_vol} µL`,             "Total (scaled)": `${fmt(sol1_vol * scale)} µL`},
+  {Component: "RNase A",                     "Per sample": `${rnase_vol} µL`,             "Total (scaled)": `${fmt(rnase_vol * scale)} µL`},
+  {Component: "Solution II (fresh)",         "Per sample": `${sol2_vol} µL`,              "Total (scaled)": `${fmt(sol2_vol * scale)} µL`},
+  {Component: "Solution III",                "Per sample": `${sol3_vol} µL`,              "Total (scaled)": `${fmt(sol3_vol * scale)} µL`},
+  {Component: "Chloroform",                  "Per sample": `~${chloroform_vol} µL × 2 extractions`, "Total (scaled)": `${fmt(chloroform_vol * 2 * scale)} µL`},
+  {Component: "Absolute Ethanol",            "Per sample": `~${fmt(ethanol_vol)} µL (${ethanol_fraction}× supernatant)`, "Total (scaled)": `${fmt(ethanol_vol * scale)} µL`},
+  {Component: "Bidistilled water (resuspension)", "Per sample": "20 µL", "Total (scaled)": `${fmt(20 * scale)} µL`}
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## What are Solutions I, II, and III?
+<!-- TODO: the source document does not give recipes for Solutions I, II, and III — these read as the classic alkaline-lysis miniprep buffers (Birnboim & Doly-style), but confirm exact composition/pH with JP before relying on this for a new prep of these solutions:
+- Solution I (resuspension): typically ~50 mM glucose, 25 mM Tris-HCl, 10 mM EDTA
+- Solution II (lysis, made fresh): typically 0.2 N NaOH, 1% SDS (Sodium Dodecyl Sulfate)
+- Solution III (neutralization): typically ~3 M potassium acetate, adjusted to ~pH 5.5 with glacial acetic acid
+This block is general background, not sourced from the uploaded protocol. -->
+:::
+
+---
+
+## Protocol
+
+| Step | Action | Volume |
+|------|--------|--------|
+| 1 | Inoculate LB media with a pure CFU (from LB agar or frozen glycerol stock) + antibiotic; incubate overnight at 37°C, 200 rpm | 1 mL LB + 10 µL antibiotic |
+| 2 | Reserve 50 µL of culture in a separate autoclaved tube for future glycerol-stock purposes; use the rest for the microprep | 0.5 mL tube |
+| 3 | Centrifuge at maximum speed for 2 min; discard supernatant | — |
+| 4 | Resuspend the pellet by vortexing in Solution I + RNase A | 100 µL Solution I + 1 µL RNase A |
+| 5 | Add fresh Solution II; mix gently | 200 µL |
+| 6 | Add Solution III; mix gently | 150 µL |
+| 7 | Centrifuge for 10 min at maximum speed | — |
+| 8 | Transfer the **supernatant** to a new tube with 1 volume of chloroform; mix gently; centrifuge 5 min at maximum speed | ~450 µL chloroform |
+| 9 | Repeat the chloroform extraction (Step 8) | ~450 µL chloroform |
+| 10 | Transfer the **supernatant** to a new tube with 0.8–1 volume of absolute ethanol; mix gently; incubate at −20°C for 20 min | 0.8–1× supernatant vol (see reagent table above) |
+| 11 | Centrifuge for 5 min at maximum speed; discard supernatant | — |
+| 12 | A small white pellet may be visible at this point; if not, continue and check DNA concentration at the end | — |
+| 13 | Dry slowly at 55°C in a dry bath | — |
+| 14 | Resuspend the pellet in bidistilled water; store at −20°C | 20 µL |
+
+::: {.callout-tip collapse="true"}
+## No visible pellet after Step 11?
+The source protocol notes this is not necessarily a failure — continue the prep and check the DNA concentration (e.g., Nanodrop/Qubit) at the end before troubleshooting.
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-Solution III spin | Clear supernatant, compact debris pellet | | |
+| Post-chloroform extraction | Clean phase separation | | |
+| Post-ethanol precipitation | Visible white pellet (or check by concentration) | | |
+| Final DNA concentration | Measurable by Nanodrop/Qubit | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+<!-- TODO: no citation, kit name, or lab of origin was given in the source document — this is a generic alkaline-lysis "fast miniprep," not a commercial kit protocol. Confirm attribution with JP. -->
+Protocol: source not specified in provided document.

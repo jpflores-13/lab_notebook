@@ -1,0 +1,379 @@
+---
+title: "iPSC-to-Microglia (iMGL) Differentiation Protocol"
+subtitle: "STEMdiff Hematopoietic → Microglia Differentiation → Microglia Maturation"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+Human iPSCs are carried through hematopoietic progenitor cell (HPC) differentiation (STEMdiff Hematopoietic Kit), then microglia differentiation, then microglia maturation, yielding iPSC-derived microglia-like cells (iMGLs) ready for treatment/assay by ~Day 40–46. Source: `iMGLs_Protocol.docx`.
+:::
+
+::: {.callout-warning}
+## Day-numbering in the source document
+The source document's own "Order of iMGL Protocol" outline (reproduced below) restarts or overlaps day counts between phases — most clearly flagged where it explicitly marks the HPC phase start as **"Day 12/Day 0,"** i.e. absolute Day 12 of the whole protocol is simultaneously "Day 0" of the STEMdiff Hematopoietic Kit's own day count. The Microglia Differentiation and Maturation phases are not given this same dual-labeling in the outline, but the body text's own day labels within each phase ("Day 12: harvest HPCs," "Day 24: transfer suspension," "Day 36: proceed to maturation," "Day 40–46: mature") are **internally consistent with each other** and are what this page uses throughout.
+
+<!-- TODO: confirm with JP whether the outline's phase-start labels (Day 12 for Microglia Differentiation, Day 36 for Maturation) are meant as absolute protocol days or phase-relative days — they read as absolute given the body text lines up with them, but the doc never states this explicitly. -->
+:::
+
+---
+
+## Order of iMGL protocol (source outline, reproduced)
+
+| Phase | Day | Milestone |
+|-------|-----|-----------|
+| iPSC maintenance | 0 | Thaw iPSCs into 1 well |
+| iPSC maintenance | 1 | Change media |
+| iPSC maintenance | 2–4 | Scrape for bad colonies |
+| iPSC maintenance | 5 | Split iPSCs into 6 wells |
+| iPSC maintenance | 6 | Change media |
+| iPSC maintenance | 7–9 | Scrape for bad colonies |
+| iPSC maintenance | 10 | Split iPSCs into 3 different concentrations |
+| iPSC maintenance | 11 | Change media |
+| HPC differentiation | 12 / HPC Day 0 | Confirm aggregates; start HPC phase |
+| HPC differentiation | 12 (HPC Day 12) | Harvest HPCs |
+| Microglia differentiation | 12 → 24 | STEMdiff Microglia Differentiation Medium |
+| Microglia maturation | 36 → 40–46 | STEMdiff Microglia Maturation Medium |
+| Treatment | 40+ | Treat iMGLs |
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_wells_hpc = Inputs.number({label: "12-well plate wells (HPC differentiation media prep)", value: 1, min: 1, step: 1})
+viewof n_wells_mgl = Inputs.number({label: "6-well plate wells (microglia differentiation/maturation media prep)", value: 1, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+well_area_cm2 = 9.5   // 6-well plate, per-well growth area convention used elsewhere in this lab's protocols (see ens-2d-protocol.qmd)
+
+md`**${n_wells_hpc} well(s) of 12-well plate (HPC media) · ${n_wells_mgl} well(s) of 6-well plate (microglia media)**`
+```
+
+---
+
+## iPSC maintenance phase (Day 0–11)
+
+::: {.callout-important}
+## Uses mTeSR1 + Thiazovivin — not plain TeSR-E8
+The microglia-differentiation-track iPSCs in this protocol are maintained in **mTeSR™1** (STEMCELL cat#: 5990/85857) with **Thiazovivin** (a ROCK inhibitor, 1000X aliquot, 1 µL/mL final) added to media used for thawing and splitting — not the plain TeSR™-E8 used in the base [iPSC culture protocol](ipsc-culture-protocol.qmd). For Matrigel coating, thawing mechanics, and general passaging technique, see that page — it is not repeated here.
+
+<!-- Note for JP: iMGLs_Protocol.docx contains its own near-duplicate Matrigel-prep, thawing, and full EDTA-passaging write-ups that closely mirror iPSC_Matrigel.docx / iPSC_Thawing.docx / iPSC_Passaging.docx (with mTeSR1 + Thiazovivin substituted for TeSR-E8). Those duplicated sections are intentionally NOT reproduced on this page to avoid maintaining the same technique in two places — only the deltas specific to this track (media/Thiazovivin, and the distinct "Splitting" step below) are kept here. -->
+:::
+
+The 15/45-minute incubator rule from the base iPSC protocol applies here too.
+
+### Day 5 / Day 10 — "Splitting" step (distinct from full passaging)
+
+This track's outline calls for a lighter-weight **splitting** step at Day 5 and Day 10 (scan/scrape bad colonies, lift with mTeSR1 + Thiazovivin, replate at 1–2 new densities) rather than the full EDTA passage described in the base protocol:
+
+```{ojs}
+//| echo: false
+split_thiazovivin_uL_per_mL = 1   // 1000X, 1 µL/mL final
+Inputs.table([
+  {Step: "1", Action: `Add ${split_thiazovivin_uL_per_mL} µL Thiazovivin per 1 mL mTeSR1 to a 15 mL conical (1x Thiazovivin)`, Detail: "—"},
+  {Step: "2", Action: "Vacuum DMEM/F12 from Matrigel-coated wells; add 1 mL/well mTeSR1 + 1x Thiazovivin so wells don't dry out", Detail: "—"},
+  {Step: "3", Action: "Scan wells; mark and scrape bad colonies", Detail: "—"},
+  {Step: "4", Action: "Vacuum media; rinse with 2 mL PBS/EDTA and aspirate", Detail: "—"},
+  {Step: "5", Action: "Add 2 mL new PBS/EDTA; incubate 3–5 min", Detail: "Longer if plate is less crowded"},
+  {Step: "6", Action: "Carefully vacuum PBS/EDTA without disturbing cells", Detail: "—"},
+  {Step: "7", Action: "Add 1 mL mTeSR1 + 1x Thiazovivin (wide-tip 1000 µL tip); pipette up/down to lift cells into the 15 mL conical; repeat as needed", Detail: "A little roughness is OK if cells resist lifting, but not too much"},
+  {Step: "8", Action: "Add 1 mL of cell mixture to each new well; move plate in a + shape (not circular) to mix", Detail: "—"},
+  {Step: "9", Action: "Add 1 mL fresh mTeSR1 to the original well; return to incubator; do not open incubator for the rest of the day", Detail: "—"}
+], {layout: "auto"})
+```
+
+::: {.callout-tip collapse="true"}
+## Attributed notes
+**Note from Isha:** Day 1 after plating, the iPSCs are usually very stressed, so a media change will suffice. Scanning and scraping for bad colonies should start on Day 2. This note applies to the iPSC splits as well — the more crowded the plate, the easier it is to pick up the cells.
+
+**Note from Justin:** If a lot of single-cell differentiation is seen, collect everything into a Falcon tube and centrifuge at 200×g for 30 sec. The aggregates pellet while single differentiated cells remain in the supernatant — discard the supernatant and culture the pellet.
+:::
+
+---
+
+## HPC differentiation phase (STEMdiff™ Hematopoietic Kit, Day 0–12)
+
+::: {.callout-note collapse="true"}
+## Media prep math audit
+Table 1 of the STEMdiff™ Hematopoietic Kit insert specifies Medium A (45 mL Basal + 225 µL Supplement A) and Medium B (75 mL Basal + 375 µL Supplement B) — both a 1:200 (200X) supplement dilution ($225/45{,}000 = 375/75{,}000 = 1/200$). The calculator below applies that same 1:200 ratio to whatever basal-medium batch size you enter.
+:::
+
+```{ojs}
+//| echo: false
+viewof mediumA_basal_mL = Inputs.number({label: "Medium A — Basal Medium batch (mL)", value: 45, min: 1, step: 1})
+viewof mediumB_basal_mL = Inputs.number({label: "Medium B — Basal Medium batch (mL)", value: 75, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+supplement_ratio = 1/200   // 200X supplement, from Table 1 of the kit insert
+
+mediumA_supp_uL = mediumA_basal_mL * 1000 * supplement_ratio
+mediumB_supp_uL = mediumB_basal_mL * 1000 * supplement_ratio
+
+Inputs.table([
+  {Medium: "Medium A (Stage 1, Day 0–3)", Component: "STEMdiff™ Hematopoietic Basal Medium", Volume: `${fmt(mediumA_basal_mL,1)} mL`},
+  {Medium: "Medium A (Stage 1, Day 0–3)", Component: "STEMdiff™ Hematopoietic Supplement A (200X)", Volume: `${fmt(mediumA_supp_uL,0)} µL`},
+  {Medium: "Medium B (Stage 2, Day 3–12)", Component: "STEMdiff™ Hematopoietic Basal Medium", Volume: `${fmt(mediumB_basal_mL,1)} mL`},
+  {Medium: "Medium B (Stage 2, Day 3–12)", Component: "STEMdiff™ Hematopoietic Supplement B (200X)", Volume: `${fmt(mediumB_supp_uL,0)} µL`}
+], {layout: "auto"})
+```
+
+Store complete medium at 2–8°C for up to 3 weeks, or −20°C for up to 6 months. Thaw Basal Medium at RT or overnight at 2–8°C; thaw Supplement A/B at RT or 2–8°C (centrifuge 30 sec if needed to remove liquid from the cap). Warm all media to RT before use; do not leave at RT for extended periods.
+
+### Passaging cells as aggregates & setting up HPC differentiation
+
+1. Prepare Matrigel-coated plates (see [iPSC culture protocol](ipsc-culture-protocol.qmd)).
+2. Perform triplicate aggregate counts: draw a "+" counting grid centered on the bottom of 3 wells of a 96-well flat-bottom plate. Aliquot 40 µL DMEM/F12 into each of the 3 wells, then add 5 µL of aggregate mixture to each. Count aggregates ≥50 µm diameter in each well; average the triplicate to get the **Concentration of Cell Aggregates**.
+3. Plate 96–196 aggregates/well (10–20 aggregates/cm²) to achieve 40–80 colonies/well (4–10 colonies/cm²) adhered after 24 h — multiple plating densities may need to be tested.
+
+::: {.callout-tip collapse="true"}
+## Plating volume calculator
+$$Plating\ Volume\ (\mu L) = \frac{Number\ of\ Aggregates\ to\ Plate}{Concentration\ of\ Cell\ Aggregates\ (aggregates/\mu L)}$$
+:::
+
+```{ojs}
+//| echo: false
+viewof n_aggregates_to_plate = Inputs.number({label: "Number of aggregates to plate (source range: 96–196)", value: 146, min: 96, max: 196, step: 1})
+viewof aggregate_conc_per_uL = Inputs.number({label: "Your measured concentration of cell aggregates (aggregates/µL, from the triplicate count above)", value: 5, min: 0.1, step: 0.1})
+```
+
+```{ojs}
+//| echo: false
+plating_volume_uL = n_aggregates_to_plate / aggregate_conc_per_uL
+
+md`**Plating volume: ${fmt(plating_volume_uL,1)} µL** of aggregate mixture per well — add to a Matrigel-coated 12-well plate containing 1 mL mTeSR1. If using split ratios instead of a counted plating volume, 1:40 to 1:200 may be required depending on confluence.`
+```
+
+4. Gently mix the aggregate mixture; add the calculated plating volume to each Matrigel-coated well (1 mL mTeSR1 already in the well).
+5. Place in the 37°C incubator; move in short back-and-forth/side-to-side motions to distribute aggregates; do not disturb for 24 h. Change media with mTeSR1 after 24 h; do not disturb for another 24 h. Count to confirm aggregates after 48 h.
+
+### Stage 1 — Day 0–2
+
+::: {.callout-warning}
+## Colony-count thresholds — discrepancy flagged in the source
+The source states two different lower bounds in adjacent paragraphs: "Confirm that **80–160** colonies/well are adhered" (4–10 colonies/cm²), but then "CRITICAL: Do not proceed if cultures have **< 40** colonies or > 160 colonies per well." Both numbers are reproduced verbatim below.
+
+<!-- TODO for JP: confirm which lower threshold (80 or 40 colonies/well) is the real go/no-go gate — this changes a safety-relevant QC decision and is not something to guess at. -->
+:::
+
+| Day | Step |
+|-----|------|
+| 0 | Confirm 80–160 colonies/well adhered (4–10 colonies/cm²) — count all colonies, including tiny few-cell ones. To ease counting, replace medium with fresh mTeSR™1/mTeSR™ Plus/TeSR™-E8 first (removes debris). **CRITICAL: do not proceed if < 40 or > 160 colonies/well** (see discrepancy note above) — differentiation will be compromised. |
+| 0 | Aspirate medium; add 2 mL Medium A/well. Incubate 37°C for 2 days. |
+| 2 | Using a serological or 1 mL pipette, gently remove 1 mL medium/well; discard. Gently add 1 mL Medium A/well. Incubate 37°C for 24 h. |
+
+### Stage 2 — Day 3–12
+
+| Day | Step |
+|-----|------|
+| 3 | Aspirate medium; gently add 2 mL Medium B/well. Incubate 37°C for 2 days. |
+| 5 | Gently remove 1 mL medium/well; discard. Gently add 1 mL Medium B/well. Incubate 37°C for 2 days. |
+| 7 | Floating cells become visible and increase for the rest of the protocol. Keeping the plate flat, gently remove 1 mL medium/well without disturbing the floating population; discard. Add 1 mL Medium B/well. Incubate 37°C for 3 days. |
+| 10 | Keeping the plate flat, gently remove 1 mL medium/well; discard. Add 1 mL Medium B/well. Incubate 37°C for 2 days. |
+| 12 | **Harvest hematopoietic cells** (see below). |
+
+::: {.callout-tip collapse="true"}
+## Optional Day 10 harvest
+Cells may be harvested at Day 10 instead, as described for Day 12. Yield and the proportion of CD34+CD45+ cells will be lower than at Day 12, but CFUs may be present at a higher frequency.
+:::
+
+::: {.callout-note collapse="true"}
+## Media "total required" figures don't match the per-day add volumes
+The source states Medium A total required is "1.5 mL per well" (for Day 0 + Day 2) and Medium B total required is "2.5 mL per well" (for Day 3, 5, 7, 10) — but summing the actual per-day add volumes gives 3 mL/well for Medium A (2 mL + 1 mL) and 5 mL/well for Medium B (2 + 1 + 1 + 1 mL), exactly double the stated totals in both cases.
+
+<!-- TODO for JP: confirm whether the stated "total required" figures are a documentation error (off by 2×) or whether they refer to something else (e.g. a per-column readout from Table 1 rather than the actual sum of dosing steps). This page uses the summed per-day add volumes (3 mL/well A, 5 mL/well B) for planning purposes, scaled by n_wells_hpc below. -->
+:::
+
+```{ojs}
+//| echo: false
+mediumA_per_well_mL = 3     // 2 mL (Day 0) + 1 mL (Day 2) — see discrepancy note above
+mediumB_per_well_mL = 5     // 2 + 1 + 1 + 1 mL (Day 3, 5, 7, 10) — see discrepancy note above
+
+Inputs.table([
+  {Medium: "Medium A", "Per well (summed)": `${mediumA_per_well_mL} mL`, "Total (this batch)": `${fmt(mediumA_per_well_mL * n_wells_hpc,1)} mL`},
+  {Medium: "Medium B", "Per well (summed)": `${mediumB_per_well_mL} mL`, "Total (this batch)": `${fmt(mediumB_per_well_mL * n_wells_hpc,1)} mL`}
+], {layout: "auto"})
+```
+
+### Day 12 — Harvest hematopoietic cells
+
+| Step | Action |
+|------|--------|
+| 1 | Vigorously pipette (triturate) cells up/down in the well to break them up as needed. |
+| 2 | Transfer the cell suspension to a collection tube. |
+| 3 | Add 1 mL DMEM/F-12 to the well; triturate vigorously and add to the collection tube. |
+| 4 | Repeat step 3. |
+| 5 | Centrifuge 300×g, 5 min, RT. Discard the supernatant. |
+| 6 | Resuspend the cell pellet in the desired medium for analysis or downstream assays. |
+
+---
+
+## Microglia differentiation phase (Day 12–36)
+
+::: {.callout-note collapse="true"}
+## Media prep math audit
+Add 10 mL Supplement 1 and 400 µL Supplement 2 to 90 mL Basal Medium — ratios of 10/90 and 400/90 per mL of basal, applied to whatever batch size you enter below.
+:::
+
+```{ojs}
+//| echo: false
+viewof diff_basal_mL = Inputs.number({label: "STEMdiff™ Microglia Differentiation — Basal Medium batch (mL)", value: 90, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+diff_supp1_mL = diff_basal_mL * 10/90
+diff_supp2_uL = diff_basal_mL * 400/90
+
+Inputs.table([
+  {Component: "STEMdiff™ Microglia Basal Medium", Volume: `${fmt(diff_basal_mL,1)} mL`},
+  {Component: "Supplement 1", Volume: `${fmt(diff_supp1_mL,2)} mL`},
+  {Component: "Supplement 2", Volume: `${fmt(diff_supp2_uL,0)} µL`}
+], {layout: "auto"})
+```
+
+Store at 2–8°C for up to 4 weeks; warm to 37°C before use.
+
+```{ojs}
+//| echo: false
+viewof diff_seed_cells = Inputs.number({label: "Cells seeded per well (source range: 1×10⁵–2×10⁵)", value: 150000, min: 100000, max: 200000, step: 10000})
+```
+
+```{ojs}
+//| echo: false
+diff_seed_density_per_cm2 = diff_seed_cells / well_area_cm2
+
+md`**Seeding density: ${fmt(diff_seed_density_per_cm2,0)} cells/cm²** (source target range: 1.1×10⁴–2.2×10⁴ cells/cm² for a 6-well plate, ${well_area_cm2} cm²/well)`
+```
+
+| Day | Step |
+|-----|------|
+| 12 | Harvest suspended HPCs (Day 12 of the HPC phase above); count with Trypan Blue + hemocytometer. |
+| 12 | Add the seeded cell number (above) to 1 well of a Matrigel-coated 6-well plate containing 2 mL STEMdiff™ Microglia Differentiation Medium. Incubate 37°C, 5% CO₂. |
+| every other day | Feed by topping up with half the start volume (1 mL) of medium — do **not** remove existing medium. |
+| 24 | Transfer the entire cell suspension to a 15 mL conical; centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend. |
+| 24 | Add the cell suspension to 1 well of the **old** Matrigel-coated plate (not a new one) containing 1 mL fresh medium. Incubate. |
+| every other day, ×12 days | Feed by topping up with half the start volume (1 mL). |
+| 36 | Proceed to microglia maturation. |
+
+---
+
+## Microglia maturation phase (Day 36–46)
+
+::: {.callout-note collapse="true"}
+## Media prep math audit
+Add 10 mL Supplement 1, 400 µL Supplement 2, and 400 µL Supplement 3 to 90 mL Basal Medium — same ratios as the Differentiation Medium above, plus Supplement 3 at the same ratio as Supplement 2.
+:::
+
+```{ojs}
+//| echo: false
+viewof mat_basal_mL = Inputs.number({label: "STEMdiff™ Microglia Maturation — Basal Medium batch (mL)", value: 90, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+mat_supp1_mL = mat_basal_mL * 10/90
+mat_supp2_uL = mat_basal_mL * 400/90
+mat_supp3_uL = mat_basal_mL * 400/90
+
+Inputs.table([
+  {Component: "STEMdiff™ Microglia Basal Medium", Volume: `${fmt(mat_basal_mL,1)} mL`},
+  {Component: "Supplement 1", Volume: `${fmt(mat_supp1_mL,2)} mL`},
+  {Component: "Supplement 2", Volume: `${fmt(mat_supp2_uL,0)} µL`},
+  {Component: "Supplement 3", Volume: `${fmt(mat_supp3_uL,0)} µL`}
+], {layout: "auto"})
+```
+
+Store at 2–8°C for up to 4 weeks; warm to 37°C before use.
+
+```{ojs}
+//| echo: false
+viewof mat_replate_cells = Inputs.number({label: "Cells replated (source target: 1×10⁶; minimum viable: 5×10⁵)", value: 1000000, min: 100000, step: 50000})
+```
+
+```{ojs}
+//| echo: false
+mat_replate_density_per_cm2 = mat_replate_cells / well_area_cm2
+mat_below_min = mat_replate_cells < 500000
+
+mat_below_min
+  ? md`::: {.callout-warning}
+**${fmt(mat_replate_cells,0)} cells is below the 5×10⁵ minimum.** Replating density = ${fmt(mat_replate_density_per_cm2,0)} cells/cm² — continuing with fewer than 5×10⁵ cells (5.5×10⁴ cells/cm²) may reduce the %CD11b+ yield at the end of maturation.
+:::`
+  : md`**Replating density: ${fmt(mat_replate_density_per_cm2,0)} cells/cm²** (optimal target: 1×10⁵ cells/cm²).`
+```
+
+| Day | Step |
+|-----|------|
+| 36 | Transfer the entire cell suspension to a 15 mL conical. |
+| 36 | Add 1 mL/well 1× PBS/EDTA; incubate 4 min. Collect and transfer to the conical. Wash with another 1 mL/well PBS/EDTA; collect and add to the conical. |
+| 36 | Centrifuge 300×g, 5 min. Remove supernatant, leaving ~1 mL on top of the pellet; gently resuspend. Count with Trypan Blue + hemocytometer. |
+| 36 | Add the replating cell number (above) to 1 well of the **old** Matrigel plate (not new) containing 1 mL fresh Maturation Medium (target 1×10⁵ cells/cm²). If total well volume < 2 mL, top up to 2 mL. Incubate 37°C, 5% CO₂. |
+| every other day | Feed by topping up with half the start volume (1 mL). |
+| 40–46 | Microglia are mature after 4–10 days in Maturation Medium. Limited capacity for expansion; cell death may increase after 10 days of culture. |
+
+::: {.callout-tip collapse="true"}
+## Immunocytochemistry cultureware
+If cells are for immunocytochemistry, use cultureware coated with either 10 µg/mL PDL or 1 µg/mL fibronectin instead of Matrigel. For other applications, use Matrigel-coated cultureware.
+:::
+
+---
+
+## Freezing hematopoietic progenitor cells
+
+Two methods are given in the source — present both, since they specify different freeze concentrations and cryoprotectants.
+
+### StemCell Protocol
+
+| Step | Action |
+|------|--------|
+| 1 | Freeze HPCs on Day 12 in CryoStor CS10 at **1×10⁶ cells/mL**. |
+| 2 | To thaw: thaw cells in DMEM/F-12, collect the cell pellet, then plate into Microglia Differentiation Medium at 1.1×10⁴–2.2×10⁴ cells/cm² (containing 10 µM ROCK inhibitor (ROCKi) for the first feed only). |
+
+### McQuade Protocol
+
+| Step | Action |
+|------|--------|
+| 1 | HPCs must be frozen at **2–4×10⁶ cells/mL** in BamBanker (Wako). |
+| 2 | If frozen, thaw HPCs directly into microglial differentiation medium and plate on Matrigel-coated plates at **10,000 cells/cm²**. |
+
+::: {.callout-tip collapse="true"}
+## Note on thaw density
+More viable when greater densities of HPCs are thawed together (McQuade Protocol note).
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Day 0 (HPC phase) colony count | 80–160 colonies/well (flagged range — see note above); hard floor ≥40 | | |
+| Day 12 HPC yield/morphology | Floating CD34+CD45+ population present | | |
+| Day 24 microglia differentiation transfer | Even reattachment on old Matrigel plate | | |
+| Day 36 maturation replating | ≥5×10⁵ cells (target 1×10⁵ cells/cm²) | | |
+| Day 40–46 maturation | CD11b+ yield acceptable | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+McQuade Protocol (HPC freezing) attributed by name in the source; full citation not given. <!-- TODO: likely McQuade A, et al. "Development and validation of a simplified method to generate human microglia from pluripotent stem cells." *Mol Neurodegener.* 2018 — confirm with JP before citing formally. -->
+
+Comparison imagery in the source document is captioned "Phanstiel Lab 2019" alongside "McQuade et al 2018 – Stem cell hematopoietic kit," referencing a published hematopoietic-kit-based iMGL timeline (Day 0/3/7/12/38 phase-contrast panels).
+
+<!-- TODO: the source refers to "the iPSC to Microglia 2.0 paper" (for the 1 mg/mL Matrigel target used in microglia-track coating) without a full citation — confirm exact reference with JP. -->
+
+Protocol: source not further specified in the provided document.
+
+Attributed inline tips: "Isha" and "Justin" (Justin Brumbaugh) — see callouts above.

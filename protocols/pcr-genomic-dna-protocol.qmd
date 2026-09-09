@@ -1,0 +1,242 @@
+---
+title: "Genomic DNA PCR Protocol"
+subtitle: "Phire Hot Start II · standard and DMSO variants merged"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+PCR amplification directly from genomic DNA using Phire Hot Start II DNA Polymerase. This page merges two source documents: the standard protocol (`PCR_Genomic_DNA.docx`) and a variant that adds Dimethylsulfoxide (DMSO) to the reaction to help resolve difficult (e.g. GC-rich or secondary-structure-forming) templates (`PCR_Genomic_DNA_DMSO.docx`). Toggle **Add DMSO** below to switch the master mix and per-reaction recipe between the two — everything else about the protocol is identical between variants.
+:::
+
+::: {.callout-important}
+## Before starting
+- Resuspend and dilute IDT primers to a 10 µM working stock before starting (see calculator below) if you haven't already.
+- All PCR preparation should be completed **on ice**.
+- Know your genomic DNA concentration for each sample before setting up reactions — template volume depends on it.
+- Confirm the thermocycler program **"gDNA PCR New"** is loaded, or set cycling parameters manually per the table below.
+:::
+
+---
+
+## Configure PCR run
+
+```{ojs}
+//| echo: false
+viewof n_samples        = Inputs.number({label: "Number of DNA samples/cell lines", value: 5, min: 1, max: 96, step: 1})
+viewof n_primer_sets     = Inputs.number({label: "Number of primer sets", value: 2, min: 1, max: 12, step: 1})
+viewof include_neg_ctrl  = Inputs.toggle({label: "Include 1 negative (no-template) control per primer set", value: true})
+viewof use_dmso          = Inputs.toggle({label: "Add DMSO", value: false})
+viewof excess_pct        = Inputs.number({label: "Master mix overage (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+fmt = (x, d = 2) => x.toFixed(d)
+
+n_reactions = n_samples * n_primer_sets + (include_neg_ctrl ? n_primer_sets : 0)
+mm_scale    = n_reactions * (1 + excess_pct / 100)
+
+md`**${n_samples} sample(s) × ${n_primer_sets} primer set(s)${include_neg_ctrl ? " + 1 neg. ctrl/primer set" : ""} = ${n_reactions} reaction(s) · ${excess_pct}% overage · scale factor ${fmt(mm_scale, 2)}×**
+
+DMSO: **${use_dmso ? "included" : "not included"}**`
+```
+
+::: {.callout-tip collapse="true"}
+## Source example, generalized
+The source document's worked example was 5 CRISPR'd cell lines × 2 primer sets + 1 negative control per primer set = 10 reactions across 2 master mixes, scaled exactly ×6 with no additional overage. That specific layout is reproduced here as the calculator's defaults (5 samples, 2 primer sets, negative control on, 0% overage) — everything scales from `n_samples`, `n_primer_sets`, and `excess_pct` above rather than being hardcoded, so this works for any sample/primer-set count.
+:::
+
+---
+
+## Primer prep
+
+::: {.callout-note collapse="true"}
+## Math audit — 100 µM resuspension volume
+Lyophilized IDT primers are resuspended to 100 µM using the standard IDT relationship:
+
+$$V_{IDTE\;(\mu L)} = nmol_{primer} \times 10$$
+
+<!-- TODO: the source document gives specific resuspension volumes (305, 292, 311, 326 µL) for 4 named primers from one specific IDT order — those are order-specific synthesis yields (each primer tube ships with its own nmol yield on the Certificate of Analysis), not a general constant. This calculator reproduces the underlying formula rather than hardcoding those 4 example volumes. -->
+:::
+
+```{ojs}
+//| echo: false
+viewof primer_nmol = Inputs.number({label: "Primer yield (nmol, from tube/Certificate of Analysis)", value: 30, min: 1, step: 0.1})
+```
+
+```{ojs}
+//| echo: false
+idte_vol_100uM = primer_nmol * 10
+
+md`**Add ${fmt(idte_vol_100uM)} µL IDTE** to reach a 100 µM stock for a ${primer_nmol} nmol primer tube.`
+```
+
+1. Spin primer tubes down briefly in a mini centrifuge before opening.
+2. Add the calculated IDTE volume; vortex briefly; let sit on the bench ~2–5 min.
+3. Label with date and "100 µM."
+4. Make a 10 µM working stock: add 90 µL nuclease-free water + 10 µL of the 100 µM stock (10× dilution) to a labeled 1.5 mL DNA LoBind tube.
+
+---
+
+## Master mix
+
+::: {.callout-tip collapse="true"}
+## Reagent order
+Add master mix components to each tube **on ice**, in the order listed below.
+:::
+
+```{ojs}
+//| echo: false
+viewof rxn_vol_uL = Inputs.number({label: "Final reaction volume (µL)", value: 20, min: 10, max: 50, step: 1})
+```
+
+```{ojs}
+//| echo: false
+dmso_pct  = 0.015   // 1.5% of final reaction volume, per source
+dmso_vol  = rxn_vol_uL * dmso_pct
+
+base_components = [
+  {Component: "5X Phire Reaction Buffer", "Per reaction (µL)": 4},
+  {Component: "10 mM dNTPs (deoxynucleotide triphosphates)", "Per reaction (µL)": 0.4},
+  {Component: "Forward Primer (10 µM)",   "Per reaction (µL)": 1},
+  {Component: "Reverse Primer (10 µM)",   "Per reaction (µL)": 1}
+]
+dmso_component = { Component: `Dimethylsulfoxide (DMSO) — ${fmt(dmso_pct * 100, 1)}% of final rxn vol`, "Per reaction (µL)": Number(fmt(dmso_vol, 2)) }
+pol_component  = { Component: "Phire Hot Start II DNA Polymerase", "Per reaction (µL)": 0.4 }
+
+mm_rows   = [...base_components, ...(use_dmso ? [dmso_component] : []), pol_component]
+mm_per_rxn = mm_rows.reduce((s, r) => s + r["Per reaction (µL)"], 0)
+
+Inputs.table(
+  mm_rows
+    .map(r => ({ ...r, [`${fmt(mm_scale, 2)}× + overage (µL)`]: fmt(r["Per reaction (µL)"] * mm_scale) }))
+    .concat([{ Component: "Total master mix (per reaction)", "Per reaction (µL)": fmt(mm_per_rxn), [`${fmt(mm_scale, 2)}× + overage (µL)`]: fmt(mm_per_rxn * mm_scale) }]),
+  { layout: "auto" }
+)
+```
+
+```{ojs}
+//| echo: false
+use_dmso
+  ? md`::: {.callout-note}
+**DMSO active.** Master mix volume per reaction is ${fmt(mm_per_rxn, 2)} µL (source: 7.1 µL at the default 20 µL reaction volume) — matches \`PCR_Genomic_DNA_DMSO.docx\` exactly at defaults.
+:::`
+  : md`::: {.callout-note}
+**Standard (no DMSO).** Master mix volume per reaction is ${fmt(mm_per_rxn, 2)} µL (source: 6.8 µL at the default 20 µL reaction volume) — matches \`PCR_Genomic_DNA.docx\` exactly at defaults.
+:::`
+```
+
+### Per-reaction assembly (template + water)
+
+::: {.callout-note collapse="true"}
+## Math audit — template DNA and water-to-volume
+The source document leaves template volume as "Xul," to be filled in after measuring each sample's DNA concentration. This calculator derives it directly instead of leaving it blank:
+
+$$V_{template} = \frac{mass_{target}\;(ng)}{C_{DNA}\;(ng/\mu L)} \qquad V_{water} = V_{rxn} - V_{MM} - V_{template}$$
+:::
+
+```{ojs}
+//| echo: false
+viewof target_dna_ng   = Inputs.number({label: "Target template DNA per reaction (ng)", value: 50, min: 1, step: 1})
+viewof dna_conc_ngul   = Inputs.number({label: "Your DNA stock concentration (ng/µL)", value: 50, min: 0.1, step: 0.1})
+```
+
+```{ojs}
+//| echo: false
+template_vol = target_dna_ng / dna_conc_ngul
+water_vol    = rxn_vol_uL - mm_per_rxn - template_vol
+
+water_vol < 0
+  ? md`::: {.callout-warning}
+**Not achievable at this concentration.** ${fmt(template_vol)} µL of template would be needed, which alone exceeds the ${rxn_vol_uL} µL reaction after master mix (${fmt(mm_per_rxn, 2)} µL). Dilute your DNA stock or increase the reaction volume.
+:::`
+  : Inputs.table([
+      {Component: "Master mix", "Volume (µL)": fmt(mm_per_rxn, 2)},
+      {Component: `Template DNA (${target_dna_ng} ng)`, "Volume (µL)": fmt(template_vol)},
+      {Component: "Nuclease-Free Water (to volume)", "Volume (µL)": fmt(water_vol)},
+      {Component: "Total", "Volume (µL)": fmt(mm_per_rxn + template_vol + water_vol)}
+    ], {layout: "auto"})
+```
+
+Add master mix + water + template DNA to each PCR tube; pipette up and down carefully to mix (avoid bubbles); spin down briefly in a mini centrifuge.
+
+---
+
+## Thermocycler program: "gDNA PCR New"
+
+::: {.callout-note collapse="true"}
+## Math audit — extension time
+The source gives extension time as a range, "10–15s/1kb (min. 1 min)," rather than a fixed value. This calculator uses the upper bound (15 s/kb) and enforces the 1 min floor:
+
+$$t_{extension} = \max(60\;s,\; 15\;s/kb \times L_{amplicon}\;(kb))$$
+
+<!-- TODO: source states a 10–15 s/kb range without specifying which end to default to — 15 s/kb (more conservative) is used here; confirm with JP whether 10 s/kb is preferred for routine genotyping-scale amplicons. -->
+:::
+
+```{ojs}
+//| echo: false
+viewof anneal_temp   = Inputs.number({label: "Annealing temperature (primer Tm, °C)", value: 60, min: 40, max: 72, step: 0.5})
+viewof amplicon_kb    = Inputs.number({label: "Expected amplicon size (kb)", value: 1, min: 0.1, step: 0.1})
+viewof n_cycles       = Inputs.number({label: "Number of cycles", value: 25, min: 25, max: 30, step: 1})
+```
+
+```{ojs}
+//| echo: false
+extension_s = Math.max(60, Math.ceil(15 * amplicon_kb))
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {"Cycle step": "Initial denaturation", Temp: "98°C", Time: "30 s", Cycles: 1},
+  {"Cycle step": "Denaturation / Annealing / Extension", Temp: `98°C / ${anneal_temp}°C / 72°C`, Time: `5 s / 5 s / ${extension_s} s`, Cycles: n_cycles},
+  {"Cycle step": "Final extension / Hold", Temp: "72°C / 4°C", Time: "1 min / hold", Cycles: 1}
+], {layout: "auto"})
+```
+
+Visualize on a 2% agarose gel (time permitting).
+
+---
+
+## Gel electrophoresis
+
+**2% agarose gel (50 mL)**
+
+| Component | Amount |
+|-----------|--------|
+| Tris-Acetate-EDTA (TAE), 1X | 50 mL |
+| Agarose | 1 g |
+| SYBR Safe DNA gel stain | 5 µL |
+
+**Sample loading**
+
+| Component | Volume |
+|-----------|--------|
+| PCR product (DNA) | _______ µL |
+| 6X Loading Dye | _______ µL |
+| Nuclease-Free Water (if needed) | _______ µL |
+
+Run for 60 min at 100 V.
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Primer resuspension | Clear, no precipitate | | |
+| PCR amplification | Band at expected amplicon size | | |
+| Negative control | No band | | |
+| Gel image | Bands consistent across replicates | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+Thermo Fisher Scientific. *Phire Hot Start II DNA Polymerase Manual.*
+Protocol adapted by Kamisha Woolery and Eliza Thulson. This page merges `PCR_Genomic_DNA.docx` (standard) and `PCR_Genomic_DNA_DMSO.docx` (DMSO variant) — confirm with JP that no other differences between the two source documents were missed beyond the DMSO addition and the (likely accidental) truncated extension-time cell in the DMSO document's cycling table.
