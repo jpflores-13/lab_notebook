@@ -104,8 +104,8 @@ base_components = [
   {Component: "Forward Primer (10 µM)",   "Per reaction (µL)": 1},
   {Component: "Reverse Primer (10 µM)",   "Per reaction (µL)": 1}
 ]
-dmso_component = { Component: `Dimethylsulfoxide (DMSO) — ${fmt(dmso_pct * 100, 1)}% of final rxn vol`, "Per reaction (µL)": Number(fmt(dmso_vol, 2)) }
-pol_component  = { Component: "Phire Hot Start II DNA Polymerase", "Per reaction (µL)": 0.4 }
+dmso_component = ({ Component: `Dimethylsulfoxide (DMSO) — ${fmt(dmso_pct * 100, 1)}% of final rxn vol`, "Per reaction (µL)": Number(fmt(dmso_vol, 2)) })
+pol_component  = ({ Component: "Phire Hot Start II DNA Polymerase", "Per reaction (µL)": 0.4 })
 
 mm_rows   = [...base_components, ...(use_dmso ? [dmso_component] : []), pol_component]
 mm_per_rxn = mm_rows.reduce((s, r) => s + r["Per reaction (µL)"], 0)
