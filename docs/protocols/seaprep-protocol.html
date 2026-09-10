@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-09-09">
+
+<title>SeaPrep Nuclei Isolation Protocol – JP Flores’ Lab Notebook</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-6b6957c917596b414ec0b78690761e87.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-de63f62b328812d8e578a4d74e282472.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-4ee3db49c2535a8f187f0d04f590a1ac.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-116113aa9c8a47437295d5ebc80afb4d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JP Flores’ Lab Notebook</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../protocols/index.html"> 
+<span class="menu-text">Protocols</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../experiments/index.html"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jpflores-13/lab_notebook"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#configure-experiment" id="toc-configure-experiment" class="nav-link active" data-scroll-target="#configure-experiment">Configure experiment</a></li>
+  <li><a href="#stock-buffers" id="toc-stock-buffers" class="nav-link" data-scroll-target="#stock-buffers">Stock buffers</a>
+  <ul class="collapse">
+  <li><a href="#m-stock-reagents-make-first" id="toc-m-stock-reagents-make-first" class="nav-link" data-scroll-target="#m-stock-reagents-make-first">1 M stock reagents (make first)</a></li>
+  <li><a href="#citrahb" id="toc-citrahb" class="nav-link" data-scroll-target="#citrahb">CitraHB</a></li>
+  <li><a href="#detergent-1-ml" id="toc-detergent-1-ml" class="nav-link" data-scroll-target="#detergent-1-ml">Detergent (1 mL)</a></li>
+  </ul></li>
+  <li><a href="#fresh-working-solutions-1000x-stocks" id="toc-fresh-working-solutions-1000x-stocks" class="nav-link" data-scroll-target="#fresh-working-solutions-1000x-stocks">Fresh working solutions (1000X stocks)</a></li>
+  <li><a href="#working-solutions-scaled-to-sample-count" id="toc-working-solutions-scaled-to-sample-count" class="nav-link" data-scroll-target="#working-solutions-scaled-to-sample-count">Working solutions: scaled to sample count</a>
+  <ul class="collapse">
+  <li><a href="#citrahb-complete" id="toc-citrahb-complete" class="nav-link" data-scroll-target="#citrahb-complete">CitraHB Complete</a></li>
+  <li><a href="#resuspension-buffer" id="toc-resuspension-buffer" class="nav-link" data-scroll-target="#resuspension-buffer">Resuspension buffer</a></li>
+  </ul></li>
+  <li><a href="#protocol" id="toc-protocol" class="nav-link" data-scroll-target="#protocol">Protocol</a>
+  <ul class="collapse">
+  <li><a href="#homogenization-counting" id="toc-homogenization-counting" class="nav-link" data-scroll-target="#homogenization-counting">1 · Homogenization &amp; counting</a></li>
+  </ul></li>
+  <li><a href="#qc-log" id="toc-qc-log" class="nav-link" data-scroll-target="#qc-log">QC log</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">SeaPrep Nuclei Isolation Protocol</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">Gradient-free citrate nuclei prep for small, soft tissue</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 9, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">
+🖨 Print / Save as PDF
+</button>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Overview
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>SeaPrep isolates nuclei from small, soft tissue (e.g.&nbsp;ganglia) for single-nucleus work. Tissue is homogenized in a citrate-based homogenization buffer (CitraHB) with a handheld homogenizer, then nuclei are pelleted and washed at low speed — <strong>no iodixanol gradient and no ultracentrifuge</strong>. RNase inhibitors go into the CitraHB Complete and the resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT) are left <strong>out</strong> of the resuspension buffer because they interfere with downstream cDNA synthesis.</p>
+<p>For firm or snap-frozen tissue that needs density-gradient purification, use the <strong>CitraPrep</strong> protocol instead.</p>
+<!-- TODO: confirm source/citation for this protocol with JP -->
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Before starting
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Use <strong>cell culture grade water</strong> for every “water” call in this protocol.</li>
+<li>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and the resuspension buffer are built from them.</li>
+<li>Prepare CitraHB and Detergent stock buffers <strong>a day ahead</strong>; good for 1 month at 4°C.</li>
+<li>Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) <strong>fresh</strong> each time.</li>
+<li>Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.</li>
+<li>Make the resuspension buffer with <strong>no</strong> spermine, spermidine, or DTT in it.</li>
+<li>A handheld/electric homogenizer is fine here — the tissue is soft.</li>
+</ul>
+</div>
+</div>
+<hr>
+<section id="configure-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="configure-experiment">Configure experiment</h2>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="35" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 34;"><span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>viewof n_samples  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of samples"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">24</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>viewof excess_pct <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Extra overage on scaled solutions (%)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="44" data-source-offset="-238"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 43;"><span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>viewof chb_per_sample <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"CitraHB Complete per sample (mL) — homogenization volume"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>viewof wash_per_spin  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Resuspension volume per wash spin (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>viewof n_wash_spins   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of wash spins"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>viewof final_resus_uL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Final resuspension volume (µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="55" data-source-offset="-229"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 54;"><span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>viewof superase_final <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERasin final conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>viewof superase_stock <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERasin stock conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>viewof rnasin_final   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Protector / RNasin final conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>viewof rnasin_stock   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Protector / RNasin stock conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-3-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="63" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> n_samples <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> excess_pct <span class="op">/</span> <span class="dv">100</span>)</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>fmt   <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>MW    <span class="op">=</span> ({<span class="dt">sucrose</span><span class="op">:</span> <span class="fl">342.30</span><span class="op">,</span> <span class="dt">KCl</span><span class="op">:</span> <span class="fl">74.55</span><span class="op">,</span> <span class="dt">MgCl2</span><span class="op">:</span> <span class="fl">203.30</span><span class="op">,</span> <span class="dt">glycine</span><span class="op">:</span> <span class="fl">75.07</span><span class="op">,</span> <span class="dt">sorbitol</span><span class="op">:</span> <span class="fl">182.17</span><span class="op">,</span> <span class="dt">tricine</span><span class="op">:</span> <span class="fl">179.17</span><span class="op">,</span> <span class="dt">citric</span><span class="op">:</span> <span class="fl">192.124</span>})</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>solid <span class="op">=</span> (M<span class="op">,</span> V<span class="op">,</span> mw) <span class="kw">=&gt;</span> M <span class="op">*</span> (V <span class="op">/</span> <span class="dv">1000</span>) <span class="op">*</span> mw   <span class="co">// grams of a solid at molarity M in V mL</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">// Stock volume needed to hit a final conc in total volume V (V and result share units).</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>superase_vol <span class="op">=</span> (V) <span class="kw">=&gt;</span> superase_final <span class="op">*</span> V <span class="op">/</span> superase_stock</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>rnasin_vol   <span class="op">=</span> (V) <span class="kw">=&gt;</span> rnasin_final   <span class="op">*</span> V <span class="op">/</span> rnasin_stock</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) · </span><span class="sc">${</span>excess_pct<span class="sc">}</span><span class="vs">% overage · SUPERasin </span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL (stock </span><span class="sc">${</span>superase_stock<span class="sc">}</span><span class="vs">) · Protector </span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL (stock </span><span class="sc">${</span>rnasin_stock<span class="sc">}</span><span class="vs">)**`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-4-7" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="stock-buffers" class="level2">
+<h2 class="anchored" data-anchor-id="stock-buffers">Stock buffers</h2>
+<p>Make ~1 month’s supply at once; store at 4°C. These do <strong>not</strong> scale with sample count.</p>
+<section id="m-stock-reagents-make-first" class="level3">
+<h3 class="anchored" data-anchor-id="m-stock-reagents-make-first">1 M stock reagents (make first)</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="85" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 84;"><span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>viewof stock_vol_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"1M stock batch volume (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">10</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="90" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 89;"><span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine (free acid)"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="dv">1</span><span class="op">,</span> stock_vol_mL<span class="op">,</span> MW<span class="op">.</span><span class="at">tricine</span>))<span class="sc">}</span><span class="vs"> g`</span><span class="op">,</span> <span class="st">"Recipe"</span><span class="op">:</span> <span class="vs">`Dissolve in ~80% of </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL water; titrate to pH 7.8 with Potassium Hydroxide (KOH); bring to </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Citric Acid"</span><span class="op">,</span>         <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="dv">1</span><span class="op">,</span> stock_vol_mL<span class="op">,</span> MW<span class="op">.</span><span class="at">citric</span>))<span class="sc">}</span><span class="vs"> g`</span><span class="op">,</span>  <span class="st">"Recipe"</span><span class="op">:</span> <span class="vs">`Dissolve in water to </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
+<section id="citrahb" class="level3">
+<h3 class="anchored" data-anchor-id="citrahb">CitraHB</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="100" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 99;"><span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>viewof citrahb_vol <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"CitraHB batch volume (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb8" data-startfrom="105" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 104;"><span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sucrose"</span><span class="op">,</span>            <span class="st">"Final"</span><span class="op">:</span> <span class="st">"0.25 M"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.25</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sucrose</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Potassium Chloride (KCl)"</span><span class="op">,</span>   <span class="st">"Final"</span><span class="op">:</span> <span class="st">"225 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.225</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">KCl</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Magnesium Chloride (MgCl₂·6H₂O)"</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"5 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.005</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">MgCl2</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine-KOH pH 7.8"</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"20 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> citrahb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Citric Acid"</span><span class="op">,</span>        <span class="st">"Final"</span><span class="op">:</span> <span class="st">"10 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">10</span> <span class="op">*</span> citrahb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Glycine"</span><span class="op">,</span>            <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">glycine</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sorbitol"</span><span class="op">,</span>           <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sorbitol</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}</span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-8" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>Dissolve in cell culture grade water to the batch volume.</p>
+</section>
+<section id="detergent-1-ml" class="level3">
+<h3 class="anchored" data-anchor-id="detergent-1-ml">Detergent (1 mL)</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IGEPAL CA-630</td>
+<td>50 µL</td>
+</tr>
+<tr class="even">
+<td>CitraHB</td>
+<td>950 µL</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Diluent — optional, not used in the steps below
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Included from the buffer set for gradient work; the SeaPrep steps below don’t use it. Recipe for <strong>5 mL</strong> (scale linearly): KCl 375 mM (0.1397 g), MgCl₂·6H₂O 30 mM (0.0304 g), Tricine-KOH pH 7.8 120 mM (600 µL of 1 M stock), Citric Acid 10 mM (50 µL of 1 M stock), Glycine 50 mM (0.0189 g), Sorbitol 50 mM (0.0455 g). Dissolve to 5 mL.</p>
+</div>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="fresh-working-solutions-1000x-stocks" class="level2">
+<h2 class="anchored" data-anchor-id="fresh-working-solutions-1000x-stocks">Fresh working solutions (1000X stocks)</h2>
+<p>Make fresh each time; do not store. Scale to the volume you need.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 40%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Final stock</th>
+<th>Recipe</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 M Dithiothreitol (DTT)</td>
+<td>1000X</td>
+<td>0.077 g in 500 µL cell culture grade water</td>
+</tr>
+<tr class="even">
+<td>0.15 M spermine</td>
+<td>1000X</td>
+<td>0.015 g in 500 µL cell culture grade water</td>
+</tr>
+<tr class="odd">
+<td>0.5 M spermidine</td>
+<td>1000X</td>
+<td>0.0363 g in 500 µL cell culture grade water</td>
+</tr>
+</tbody>
+</table>
+<p>Add spermine, spermidine, and Dithiothreitol (DTT) to CitraHB Complete for a final 1X concentration. Add SUPERasin and Protector to <strong>both</strong> CitraHB Complete and the resuspension buffer at the final concentrations set in <strong>Configure experiment</strong> (default 0.5 U/µL each). Do <strong>not</strong> add spermine, spermidine, or DTT to the resuspension buffer.</p>
+<hr>
+</section>
+<section id="working-solutions-scaled-to-sample-count" class="level2">
+<h2 class="anchored" data-anchor-id="working-solutions-scaled-to-sample-count">Working solutions: scaled to sample count</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Math audit: how every volume is calculated
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>CitraHB Complete</strong> — made in 10 mL increments because each aliquot takes one whole protease inhibitor tablet, so the total is rounded <strong>up</strong> to the next 10 mL:</p>
+<p><span class="math display">\[V_{make} = \left\lceil \frac{v_{per\ sample} \times N_{samples} \times (1 + overage)}{10} \right\rceil \times 10 \qquad tablets = \frac{V_{make}}{10}\]</span></p>
+<p><strong>Resuspension buffer</strong> — one pool covers the wash spin(s) and the final resuspension:</p>
+<p><span class="math display">\[V_{buffer} = \left( v_{wash} \times n_{spins} + \frac{V_{final\ \mu L}}{1000} \right) \times N_{samples} \times (1 + overage)\]</span></p>
+<p>BSA is 1% w/v of <span class="math inline">\(V_{buffer}\)</span>; SUPERasin and Protector use <span class="math inline">\(V_{stock} = (C_{final}/C_{stock}) \times V_{buffer}\)</span>, each with its own stock strength.</p>
+</div>
+</div>
+</div>
+<section id="citrahb-complete" class="level3">
+<h3 class="anchored" data-anchor-id="citrahb-complete">CitraHB Complete</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb9" data-startfrom="167" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 166;"><span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>chb_need     <span class="op">=</span> chb_per_sample <span class="op">*</span> scale</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a>chb_vol      <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(chb_need <span class="op">/</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>chb_tablets  <span class="op">=</span> chb_vol <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a>detergent_uL <span class="op">=</span> <span class="dv">50</span> <span class="op">*</span> chb_per_sample   <span class="co">// 50 µL Detergent per mL CitraHB Complete used to homogenize</span></span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Need ≈ </span><span class="sc">${</span><span class="fu">fmt</span>(chb_need)<span class="sc">}</span><span class="vs"> mL for </span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) → make </span><span class="sc">${</span><span class="fu">fmt</span>(chb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL** (rounded up to a 10 mL multiple: **</span><span class="sc">${</span>chb_tablets<span class="sc">}</span><span class="vs"> mini protease tablet(s)**). Detergent for homogenization: **</span><span class="sc">${</span><span class="fu">fmt</span>(detergent_uL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL/sample**.`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-9-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb10" data-startfrom="176" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 175;"><span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Mini protease inhibitor tablet"</span><span class="op">,</span>           <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"1 whole tablet"</span><span class="op">,</span>                 <span class="st">"Total"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>chb_tablets<span class="sc">}</span><span class="vs"> tablet(s)`</span>}<span class="op">,</span></span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`SUPERasin (</span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>  <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">superase_vol</span>(<span class="dv">10000</span>))<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>  <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(<span class="fu">superase_vol</span>(chb_vol <span class="op">*</span> <span class="dv">1000</span>))}<span class="op">,</span></span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`Protector (</span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>    <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(<span class="dv">10000</span>))<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>    <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(chb_vol <span class="op">*</span> <span class="dv">1000</span>))}<span class="op">,</span></span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Spermidine (1000X)"</span><span class="op">,</span>                       <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Spermine (1000X)"</span><span class="op">,</span>                         <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Dithiothreitol (DTT, 1000X)"</span><span class="op">,</span>              <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"CitraHB stock"</span><span class="op">,</span>                            <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"to volume"</span><span class="op">,</span>                       <span class="st">"Total (mL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}</span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-10" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</section>
+<section id="resuspension-buffer" class="level3">
+<h3 class="anchored" data-anchor-id="resuspension-buffer">Resuspension buffer</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>No spermine, spermidine, or DTT in this buffer
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These interfere with downstream cDNA synthesis.</p>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb11" data-startfrom="197" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 196;"><span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a>resus_per_sample <span class="op">=</span> wash_per_spin <span class="op">*</span> n_wash_spins <span class="op">+</span> final_resus_uL <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a>resus_vol <span class="op">=</span> resus_per_sample <span class="op">*</span> scale</span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span><span class="fu">fmt</span>(resus_per_sample)<span class="sc">}</span><span class="vs"> mL/sample × </span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> → </span><span class="sc">${</span><span class="fu">fmt</span>(resus_vol)<span class="sc">}</span><span class="vs"> mL** (</span><span class="sc">${</span>n_wash_spins<span class="sc">}</span><span class="vs"> wash spin(s) of </span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL + </span><span class="sc">${</span><span class="fu">fmt</span>(final_resus_uL)<span class="sc">}</span><span class="vs"> µL final resuspension)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-11-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-11-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-11-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="204" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 203;"><span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Bovine Serum Albumin (BSA)"</span><span class="op">,</span>       <span class="st">"Final"</span><span class="op">:</span> <span class="st">"1% w/v"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fl">0.01</span> <span class="op">*</span> resus_vol)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Potassium Chloride (KCl)"</span><span class="op">,</span>         <span class="st">"Final"</span><span class="op">:</span> <span class="st">"250 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.25</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">KCl</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Magnesium Chloride (MgCl₂·6H₂O)"</span><span class="op">,</span>  <span class="st">"Final"</span><span class="op">:</span> <span class="st">"≈ 2.5 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fl">0.0095</span> <span class="op">*</span> resus_vol <span class="op">/</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine-KOH pH 7.8"</span><span class="op">,</span>               <span class="st">"Final"</span><span class="op">:</span> <span class="st">"20 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> resus_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Glycine"</span><span class="op">,</span>                          <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">glycine</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sorbitol"</span><span class="op">,</span>                         <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sorbitol</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`SUPERasin (</span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"—"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">superase_vol</span>(resus_vol))<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`Protector (</span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>   <span class="st">"Final"</span><span class="op">:</span> <span class="st">"—"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(resus_vol))<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-12" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The MgCl₂ mass follows the source recipe as written (0.0095 g / 20 mL ≈ 2.5 mM MgCl₂·6H₂O). The recipe nominally lists 5 mM — confirm which is intended before scaling up.</p>
+</div>
+</div>
+<p>Dissolve BSA and salts in cell culture grade water to volume, then add SUPERasin and Protector.</p>
+<hr>
+</section>
+</section>
+<section id="protocol" class="level2">
+<h2 class="anchored" data-anchor-id="protocol">Protocol</h2>
+<section id="homogenization-counting" class="level3">
+<h3 class="anchored" data-anchor-id="homogenization-counting">1 · Homogenization &amp; counting</h3>
+<div class="cell">
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb13" data-startfrom="231" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 230;"><span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a>homog_rows <span class="op">=</span> [</span>
+<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="vs">`Homogenize the tissue (e.g. ganglia) in CitraHB Complete + Detergent in a round-bottom tube with a handheld homogenizer.`</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(chb_per_sample)<span class="sc">}</span><span class="vs"> mL CitraHB Complete + </span><span class="sc">${</span><span class="fu">fmt</span>(detergent_uL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL Detergent`</span>}<span class="op">,</span></span>
+<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Count an aliquot on a hemocytometer (method below)."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Spin 10 min at 500×g, 4°C; discard the supernatant."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Resuspend the pellet in resuspension buffer; pipette gently, do not vortex."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="vs">`Spin 10 min at 500×g, 4°C; discard the supernatant.</span><span class="sc">${</span>n_wash_spins <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> <span class="vs">` Repeat the resuspend + spin so the nuclei are washed </span><span class="sc">${</span>n_wash_spins<span class="sc">}</span><span class="vs">× in total.`</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> n_wash_spins <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL per wash`</span> <span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Resuspend the final pellet; count on a hemocytometer."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(final_resus_uL)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Load for single cell."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}</span>
+<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a>]<span class="op">.</span><span class="fu">map</span>((r<span class="op">,</span> i) <span class="kw">=&gt;</span> ({<span class="dt">Step</span><span class="op">:</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> r<span class="op">.</span><span class="at">Action</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> r[<span class="st">"Per sample"</span>]}))</span>
+<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(homog_rows<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-13-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-13-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hemocytometer counting method
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nuclei yields are typically too low for a reliable Countess (automated) read, so this is a <strong>manual hemocytometer count</strong> every time.</p>
+<ol type="a">
+<li>Filter your trypan blue stock through a 0.2 µm filter before use; unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</li>
+<li>Mix the nuclei suspension with filtered trypan blue at a <strong>1:1</strong> ratio (e.g.&nbsp;10 µL suspension + 10 µL trypan blue, dilution factor = 2).</li>
+<li>Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.</li>
+<li>Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.</li>
+<li>Calculate concentration:</li>
+</ol>
+<p><span class="math display">\[Nuclei/mL = \frac{\text{sum of nuclei in 4 corner squares}}{4} \times 2\ (\text{dilution factor}) \times 10^4\]</span></p>
+<p>Divide by 1000 to convert to nuclei/µL for loading calculations.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Checklist
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Trypan blue filtered (0.2 µm) before use</label></li>
+<li><label><input type="checkbox">Nuclei intact and free of debris under the hemocytometer</label></li>
+<li><label><input type="checkbox">Post-homogenization nuclei concentration: _______ nuclei/µL</label></li>
+<li><label><input type="checkbox">Final nuclei concentration: _______ nuclei/µL</label></li>
+<li><label><input type="checkbox">Loaded for single-cell run at: _______</label></li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="qc-log" class="level2">
+<h2 class="anchored" data-anchor-id="qc-log">QC log</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Checkpoint</th>
+<th>Expected</th>
+<th>Observed</th>
+<th>Pass</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Post-homogenization aliquot</td>
+<td>Nuclei released, minimal intact cells</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Post-wash nuclei pellet</td>
+<td>Clean pellet, no debris ring</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Hemocytometer count</td>
+<td>Nuclei intact, non-clumped</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes / deviations:</strong></p>
+<hr>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<!-- TODO: no source paper, kit, or lab of origin on hand; add citation/attribution once confirmed with JP -->
+<p>Protocol: source not specified; transcribed by JP Flores.</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBuX3NhbXBsZXMgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIHNhbXBsZXNcIiwgdmFsdWU6IDEsIG1pbjogMSwgbWF4OiAyNCwgc3RlcDogMX0pXG52aWV3b2YgZXhjZXNzX3BjdCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkV4dHJhIG92ZXJhZ2Ugb24gc2NhbGVkIHNvbHV0aW9ucyAoJSlcIiwgdmFsdWU6IDAsIG1pbjogMCwgbWF4OiAzMCwgc3RlcDogNX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiIvLyBQZXItc2FtcGxlIHdvcmtpbmcgdm9sdW1lcy4gQ2l0cmFIQiBDb21wbGV0ZSBpcyBtYWRlIGluIDEwIG1MIGluY3JlbWVudHNcbi8vICh3aG9sZSBwcm90ZWFzZSBpbmhpYml0b3IgdGFibGV0cyksIHNvIGl0cyB0b3RhbCBpcyBhbHdheXMgcm91bmRlZCBVUCB0byB0aGVcbi8vIG5leHQgMTAgbUwg4oCUIHNldCB0aGUgcGVyLXNhbXBsZSBudW1iZXIgaGVyZSBhbmQgdGhlIHRhYmxlIGJlbG93IGRvZXMgdGhlIHJlc3QuXG52aWV3b2YgY2hiX3Blcl9zYW1wbGUgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJDaXRyYUhCIENvbXBsZXRlIHBlciBzYW1wbGUgKG1MKSDigJQgaG9tb2dlbml6YXRpb24gdm9sdW1lXCIsIHZhbHVlOiAzLCBtaW46IDEsIHN0ZXA6IDF9KVxudmlld29mIHdhc2hfcGVyX3NwaW4gID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiUmVzdXNwZW5zaW9uIHZvbHVtZSBwZXIgd2FzaCBzcGluIChtTClcIiwgdmFsdWU6IDEwLCBtaW46IDEsIHN0ZXA6IDF9KVxudmlld29mIG5fd2FzaF9zcGlucyAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiTnVtYmVyIG9mIHdhc2ggc3BpbnNcIiwgdmFsdWU6IDEsIG1pbjogMCwgbWF4OiA1LCBzdGVwOiAxfSlcbnZpZXdvZiBmaW5hbF9yZXN1c191TCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIkZpbmFsIHJlc3VzcGVuc2lvbiB2b2x1bWUgKMK1TClcIiwgdmFsdWU6IDIwMCwgbWluOiA1MCwgc3RlcDogNTB9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiLy8gUk5hc2UgaW5oaWJpdG9yIGZpbmFsIEFORCBzdG9jayBjb25jZW50cmF0aW9ucywgcGVyIGluaGliaXRvci4gU1VQRVJhc2XigKJJblxuLy8gKHN1cGVyYXNpbikgaXMgY29tbW9ubHkgc29sZCBhdCAyMCBVL8K1TCBhbmQgUk5hc2luIC8gUHJvdGVjdG9yIGF0IDQwIFUvwrVMIOKAlFxuLy8gY2hlY2sgeW91ciB0dWJlcy4gU2V0IGEgZmluYWwgY29uYyB0byAwIHRvIGxlYXZlIHRoYXQgaW5oaWJpdG9yIG91dC5cbnZpZXdvZiBzdXBlcmFzZV9maW5hbCA9IElucHV0cy5udW1iZXIoe2xhYmVsOiBcIlNVUEVSYXNpbiBmaW5hbCBjb25jLiAoVS/CtUwpXCIsIHZhbHVlOiAwLjUsIG1pbjogMCwgc3RlcDogMC4wNX0pXG52aWV3b2Ygc3VwZXJhc2Vfc3RvY2sgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJTVVBFUmFzaW4gc3RvY2sgY29uYy4gKFUvwrVMKVwiLCB2YWx1ZTogNDAsIG1pbjogMSwgc3RlcDogMX0pXG52aWV3b2Ygcm5hc2luX2ZpbmFsICAgPSBJbnB1dHMubnVtYmVyKHtsYWJlbDogXCJQcm90ZWN0b3IgLyBSTmFzaW4gZmluYWwgY29uYy4gKFUvwrVMKVwiLCB2YWx1ZTogMC41LCBtaW46IDAsIHN0ZXA6IDAuMDV9KVxudmlld29mIHJuYXNpbl9zdG9jayAgID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiUHJvdGVjdG9yIC8gUk5hc2luIHN0b2NrIGNvbmMuIChVL8K1TClcIiwgdmFsdWU6IDQwLCBtaW46IDEsIHN0ZXA6IDF9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC00IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoic2NhbGUgPSBuX3NhbXBsZXMgKiAoMSArIGV4Y2Vzc19wY3QgLyAxMDApXG5mbXQgICA9ICh4LCBkID0gMikgPT4geC50b0ZpeGVkKGQpXG5cbk1XICAgID0gKHtzdWNyb3NlOiAzNDIuMzAsIEtDbDogNzQuNTUsIE1nQ2wyOiAyMDMuMzAsIGdseWNpbmU6IDc1LjA3LCBzb3JiaXRvbDogMTgyLjE3LCB0cmljaW5lOiAxNzkuMTcsIGNpdHJpYzogMTkyLjEyNH0pXG5zb2xpZCA9IChNLCBWLCBtdykgPT4gTSAqIChWIC8gMTAwMCkgKiBtdyAgIC8vIGdyYW1zIG9mIGEgc29saWQgYXQgbW9sYXJpdHkgTSBpbiBWIG1MXG5cbi8vIFN0b2NrIHZvbHVtZSBuZWVkZWQgdG8gaGl0IGEgZmluYWwgY29uYyBpbiB0b3RhbCB2b2x1bWUgViAoViBhbmQgcmVzdWx0IHNoYXJlIHVuaXRzKS5cbnN1cGVyYXNlX3ZvbCA9IChWKSA9PiBzdXBlcmFzZV9maW5hbCAqIFYgLyBzdXBlcmFzZV9zdG9ja1xucm5hc2luX3ZvbCAgID0gKFYpID0+IHJuYXNpbl9maW5hbCAgICogViAvIHJuYXNpbl9zdG9ja1xuXG5tZGAqKiR7bl9zYW1wbGVzfSBzYW1wbGUocykgwrcgJHtleGNlc3NfcGN0fSUgb3ZlcmFnZSDCtyBTVVBFUmFzaW4gJHtzdXBlcmFzZV9maW5hbH0gVS/CtUwgKHN0b2NrICR7c3VwZXJhc2Vfc3RvY2t9KSDCtyBQcm90ZWN0b3IgJHtybmFzaW5fZmluYWx9IFUvwrVMIChzdG9jayAke3JuYXNpbl9zdG9ja30pKipgXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTUiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2Ygc3RvY2tfdm9sX21MID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiMU0gc3RvY2sgYmF0Y2ggdm9sdW1lIChtTClcIiwgdmFsdWU6IDEwMCwgbWluOiAxMCwgc3RlcDogMTB9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC02IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJUcmljaW5lIChmcmVlIGFjaWQpXCIsIFwiQW1vdW50XCI6IGAke2ZtdChzb2xpZCgxLCBzdG9ja192b2xfbUwsIE1XLnRyaWNpbmUpKX0gZ2AsIFwiUmVjaXBlXCI6IGBEaXNzb2x2ZSBpbiB+ODAlIG9mICR7Zm10KHN0b2NrX3ZvbF9tTCwgMCl9IG1MIHdhdGVyOyB0aXRyYXRlIHRvIHBIIDcuOCB3aXRoIFBvdGFzc2l1bSBIeWRyb3hpZGUgKEtPSCk7IGJyaW5nIHRvICR7Zm10KHN0b2NrX3ZvbF9tTCwgMCl9IG1MYH0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmljIEFjaWRcIiwgICAgICAgICBcIkFtb3VudFwiOiBgJHtmbXQoc29saWQoMSwgc3RvY2tfdm9sX21MLCBNVy5jaXRyaWMpKX0gZ2AsICBcIlJlY2lwZVwiOiBgRGlzc29sdmUgaW4gd2F0ZXIgdG8gJHtmbXQoc3RvY2tfdm9sX21MLCAwKX0gbUxgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC03IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIGNpdHJhaGJfdm9sID0gSW5wdXRzLm51bWJlcih7bGFiZWw6IFwiQ2l0cmFIQiBiYXRjaCB2b2x1bWUgKG1MKVwiLCB2YWx1ZTogMjAsIG1pbjogNSwgc3RlcDogNX0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTgiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJJbnB1dHMudGFibGUoW1xuICB7Q29tcG9uZW50OiBcIlN1Y3Jvc2VcIiwgICAgICAgICAgICBcIkZpbmFsXCI6IFwiMC4yNSBNXCIsIFwiQW1vdW50XCI6IGAke2ZtdChzb2xpZCgwLjI1LCBjaXRyYWhiX3ZvbCwgTVcuc3Vjcm9zZSkpfSBnYH0sXG4gIHtDb21wb25lbnQ6IFwiUG90YXNzaXVtIENobG9yaWRlIChLQ2wpXCIsICAgXCJGaW5hbFwiOiBcIjIyNSBtTVwiLCBcIkFtb3VudFwiOiBgJHtmbXQoc29saWQoMC4yMjUsIGNpdHJhaGJfdm9sLCBNVy5LQ2wpKX0gZ2B9LFxuICB7Q29tcG9uZW50OiBcIk1hZ25lc2l1bSBDaGxvcmlkZSAoTWdDbOKCgsK3NkjigoJPKVwiLCBcIkZpbmFsXCI6IFwiNSBtTVwiLCBcIkFtb3VudFwiOiBgJHtmbXQoc29saWQoMC4wMDUsIGNpdHJhaGJfdm9sLCBNVy5NZ0NsMiksIDQpfSBnYH0sXG4gIHtDb21wb25lbnQ6IFwiVHJpY2luZS1LT0ggcEggNy44XCIsIFwiRmluYWxcIjogXCIyMCBtTVwiLCAgXCJBbW91bnRcIjogYCR7Zm10KDIwICogY2l0cmFoYl92b2wsIDApfSDCtUwgb2YgMSBNIHN0b2NrYH0sXG4gIHtDb21wb25lbnQ6IFwiQ2l0cmljIEFjaWRcIiwgICAgICAgIFwiRmluYWxcIjogXCIxMCBtTVwiLCAgXCJBbW91bnRcIjogYCR7Zm10KDEwICogY2l0cmFoYl92b2wsIDApfSDCtUwgb2YgMSBNIHN0b2NrYH0sXG4gIHtDb21wb25lbnQ6IFwiR2x5Y2luZVwiLCAgICAgICAgICAgIFwiRmluYWxcIjogXCI1MCBtTVwiLCAgXCJBbW91bnRcIjogYCR7Zm10KHNvbGlkKDAuMDUsIGNpdHJhaGJfdm9sLCBNVy5nbHljaW5lKSwgNCl9IGdgfSxcbiAge0NvbXBvbmVudDogXCJTb3JiaXRvbFwiLCAgICAgICAgICAgXCJGaW5hbFwiOiBcIjUwIG1NXCIsICBcIkFtb3VudFwiOiBgJHtmbXQoc29saWQoMC4wNSwgY2l0cmFoYl92b2wsIE1XLnNvcmJpdG9sKSwgNCl9IGdgfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC05IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiY2hiX25lZWQgICAgID0gY2hiX3Blcl9zYW1wbGUgKiBzY2FsZVxuY2hiX3ZvbCAgICAgID0gTWF0aC5jZWlsKGNoYl9uZWVkIC8gMTApICogMTBcbmNoYl90YWJsZXRzICA9IGNoYl92b2wgLyAxMFxuZGV0ZXJnZW50X3VMID0gNTAgKiBjaGJfcGVyX3NhbXBsZSAgIC8vIDUwIMK1TCBEZXRlcmdlbnQgcGVyIG1MIENpdHJhSEIgQ29tcGxldGUgdXNlZCB0byBob21vZ2VuaXplXG5cbm1kYCoqTmVlZCDiiYggJHtmbXQoY2hiX25lZWQpfSBtTCBmb3IgJHtuX3NhbXBsZXN9IHNhbXBsZShzKSDihpIgbWFrZSAke2ZtdChjaGJfdm9sLCAwKX0gbUwqKiAocm91bmRlZCB1cCB0byBhIDEwIG1MIG11bHRpcGxlOiAqKiR7Y2hiX3RhYmxldHN9IG1pbmkgcHJvdGVhc2UgdGFibGV0KHMpKiopLiBEZXRlcmdlbnQgZm9yIGhvbW9nZW5pemF0aW9uOiAqKiR7Zm10KGRldGVyZ2VudF91TCwgMCl9IMK1TC9zYW1wbGUqKi5gXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTEwIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiSW5wdXRzLnRhYmxlKFtcbiAge0NvbXBvbmVudDogXCJNaW5pIHByb3RlYXNlIGluaGliaXRvciB0YWJsZXRcIiwgICAgICAgICAgIFwiUGVyIDEwIG1MXCI6IFwiMSB3aG9sZSB0YWJsZXRcIiwgICAgICAgICAgICAgICAgIFwiVG90YWxcIjogYCR7Y2hiX3RhYmxldHN9IHRhYmxldChzKWB9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2luICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCAgXCJQZXIgMTAgbUxcIjogYCR7Zm10KHN1cGVyYXNlX3ZvbCgxMDAwMCkpfSDCtUxgLCAgXCJUb3RhbCAowrVMKVwiOiBmbXQoc3VwZXJhc2Vfdm9sKGNoYl92b2wgKiAxMDAwKSl9LFxuICB7Q29tcG9uZW50OiBgUHJvdGVjdG9yICgke3JuYXNpbl9maW5hbH0gVS/CtUwgZmluYWwpYCwgICAgXCJQZXIgMTAgbUxcIjogYCR7Zm10KHJuYXNpbl92b2woMTAwMDApKX0gwrVMYCwgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQocm5hc2luX3ZvbChjaGJfdm9sICogMTAwMCkpfSxcbiAge0NvbXBvbmVudDogXCJTcGVybWlkaW5lICgxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MXCI6IFwiMTAgwrVMXCIsICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJUb3RhbCAowrVMKVwiOiBmbXQoY2hiX3ZvbCl9LFxuICB7Q29tcG9uZW50OiBcIlNwZXJtaW5lICgxMDAwWClcIiwgICAgICAgICAgICAgICAgICAgICAgICAgXCJQZXIgMTAgbUxcIjogXCIxMCDCtUxcIiwgICAgICAgICAgICAgICAgICAgICAgICAgICBcIlRvdGFsICjCtUwpXCI6IGZtdChjaGJfdm9sKX0sXG4gIHtDb21wb25lbnQ6IFwiRGl0aGlvdGhyZWl0b2wgKERUVCwgMTAwMFgpXCIsICAgICAgICAgICAgICBcIlBlciAxMCBtTFwiOiBcIjEwIMK1TFwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiVG90YWwgKMK1TClcIjogZm10KGNoYl92b2wpfSxcbiAge0NvbXBvbmVudDogXCJDaXRyYUhCIHN0b2NrXCIsICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwiUGVyIDEwIG1MXCI6IFwidG8gdm9sdW1lXCIsICAgICAgICAgICAgICAgICAgICAgICBcIlRvdGFsIChtTClcIjogZm10KGNoYl92b2wpfVxuXSwge2xheW91dDogXCJhdXRvXCJ9KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InJlc3VzX3Blcl9zYW1wbGUgPSB3YXNoX3Blcl9zcGluICogbl93YXNoX3NwaW5zICsgZmluYWxfcmVzdXNfdUwgLyAxMDAwXG5yZXN1c192b2wgPSByZXN1c19wZXJfc2FtcGxlICogc2NhbGVcblxubWRgKioke2ZtdChyZXN1c19wZXJfc2FtcGxlKX0gbUwvc2FtcGxlIMOXICR7bl9zYW1wbGVzfSDihpIgJHtmbXQocmVzdXNfdm9sKX0gbUwqKiAoJHtuX3dhc2hfc3BpbnN9IHdhc2ggc3BpbihzKSBvZiAke2ZtdCh3YXNoX3Blcl9zcGluKX0gbUwgKyAke2ZtdChmaW5hbF9yZXN1c191TCl9IMK1TCBmaW5hbCByZXN1c3BlbnNpb24pYFxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0xMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IklucHV0cy50YWJsZShbXG4gIHtDb21wb25lbnQ6IFwiQm92aW5lIFNlcnVtIEFsYnVtaW4gKEJTQSlcIiwgICAgICAgXCJGaW5hbFwiOiBcIjElIHcvdlwiLCAgXCJBbW91bnRcIjogYCR7Zm10KDAuMDEgKiByZXN1c192b2wpfSBnYH0sXG4gIHtDb21wb25lbnQ6IFwiUG90YXNzaXVtIENobG9yaWRlIChLQ2wpXCIsICAgICAgICAgXCJGaW5hbFwiOiBcIjI1MCBtTVwiLCAgXCJBbW91bnRcIjogYCR7Zm10KHNvbGlkKDAuMjUsIHJlc3VzX3ZvbCwgTVcuS0NsKSl9IGdgfSxcbiAge0NvbXBvbmVudDogXCJNYWduZXNpdW0gQ2hsb3JpZGUgKE1nQ2zigoLCtzZI4oKCTylcIiwgIFwiRmluYWxcIjogXCLiiYggMi41IG1NXCIsIFwiQW1vdW50XCI6IGAke2ZtdCgwLjAwOTUgKiByZXN1c192b2wgLyAyMCwgNCl9IGdgfSxcbiAge0NvbXBvbmVudDogXCJUcmljaW5lLUtPSCBwSCA3LjhcIiwgICAgICAgICAgICAgICBcIkZpbmFsXCI6IFwiMjAgbU1cIiwgICBcIkFtb3VudFwiOiBgJHtmbXQoMjAgKiByZXN1c192b2wsIDApfSDCtUwgb2YgMSBNIHN0b2NrYH0sXG4gIHtDb21wb25lbnQ6IFwiR2x5Y2luZVwiLCAgICAgICAgICAgICAgICAgICAgICAgICAgXCJGaW5hbFwiOiBcIjUwIG1NXCIsICAgXCJBbW91bnRcIjogYCR7Zm10KHNvbGlkKDAuMDUsIHJlc3VzX3ZvbCwgTVcuZ2x5Y2luZSksIDQpfSBnYH0sXG4gIHtDb21wb25lbnQ6IFwiU29yYml0b2xcIiwgICAgICAgICAgICAgICAgICAgICAgICAgXCJGaW5hbFwiOiBcIjUwIG1NXCIsICAgXCJBbW91bnRcIjogYCR7Zm10KHNvbGlkKDAuMDUsIHJlc3VzX3ZvbCwgTVcuc29yYml0b2wpLCA0KX0gZ2B9LFxuICB7Q29tcG9uZW50OiBgU1VQRVJhc2luICgke3N1cGVyYXNlX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCBcIkZpbmFsXCI6IFwi4oCUXCIsIFwiQW1vdW50XCI6IGAke2ZtdChzdXBlcmFzZV92b2wocmVzdXNfdm9sKSl9IG1MYH0sXG4gIHtDb21wb25lbnQ6IGBQcm90ZWN0b3IgKCR7cm5hc2luX2ZpbmFsfSBVL8K1TCBmaW5hbClgLCAgIFwiRmluYWxcIjogXCLigJRcIiwgXCJBbW91bnRcIjogYCR7Zm10KHJuYXNpbl92b2wocmVzdXNfdm9sKSl9IG1MYH1cbl0sIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJob21vZ19yb3dzID0gW1xuICB7QWN0aW9uOiBgSG9tb2dlbml6ZSB0aGUgdGlzc3VlIChlLmcuIGdhbmdsaWEpIGluIENpdHJhSEIgQ29tcGxldGUgKyBEZXRlcmdlbnQgaW4gYSByb3VuZC1ib3R0b20gdHViZSB3aXRoIGEgaGFuZGhlbGQgaG9tb2dlbml6ZXIuYCwgXCJQZXIgc2FtcGxlXCI6IGAke2ZtdChjaGJfcGVyX3NhbXBsZSl9IG1MIENpdHJhSEIgQ29tcGxldGUgKyAke2ZtdChkZXRlcmdlbnRfdUwsIDApfSDCtUwgRGV0ZXJnZW50YH0sXG4gIHtBY3Rpb246IFwiQ291bnQgYW4gYWxpcXVvdCBvbiBhIGhlbW9jeXRvbWV0ZXIgKG1ldGhvZCBiZWxvdykuXCIsIFwiUGVyIHNhbXBsZVwiOiBcIuKAlFwifSxcbiAge0FjdGlvbjogXCJTcGluIDEwIG1pbiBhdCA1MDDDl2csIDTCsEM7IGRpc2NhcmQgdGhlIHN1cGVybmF0YW50LlwiLCBcIlBlciBzYW1wbGVcIjogXCLigJRcIn0sXG4gIHtBY3Rpb246IFwiUmVzdXNwZW5kIHRoZSBwZWxsZXQgaW4gcmVzdXNwZW5zaW9uIGJ1ZmZlcjsgcGlwZXR0ZSBnZW50bHksIGRvIG5vdCB2b3J0ZXguXCIsIFwiUGVyIHNhbXBsZVwiOiBgJHtmbXQod2FzaF9wZXJfc3Bpbil9IG1MYH0sXG4gIHtBY3Rpb246IGBTcGluIDEwIG1pbiBhdCA1MDDDl2csIDTCsEM7IGRpc2NhcmQgdGhlIHN1cGVybmF0YW50LiR7bl93YXNoX3NwaW5zID4gMSA/IGAgUmVwZWF0IHRoZSByZXN1c3BlbmQgKyBzcGluIHNvIHRoZSBudWNsZWkgYXJlIHdhc2hlZCAke25fd2FzaF9zcGluc33DlyBpbiB0b3RhbC5gIDogXCJcIn1gLCBcIlBlciBzYW1wbGVcIjogbl93YXNoX3NwaW5zID4gMSA/IGAke2ZtdCh3YXNoX3Blcl9zcGluKX0gbUwgcGVyIHdhc2hgIDogXCLigJRcIn0sXG4gIHtBY3Rpb246IFwiUmVzdXNwZW5kIHRoZSBmaW5hbCBwZWxsZXQ7IGNvdW50IG9uIGEgaGVtb2N5dG9tZXRlci5cIiwgXCJQZXIgc2FtcGxlXCI6IGAke2ZtdChmaW5hbF9yZXN1c191TCl9IMK1TGB9LFxuICB7QWN0aW9uOiBcIkxvYWQgZm9yIHNpbmdsZSBjZWxsLlwiLCBcIlBlciBzYW1wbGVcIjogXCLigJRcIn1cbl0ubWFwKChyLCBpKSA9PiAoe1N0ZXA6IGkgKyAxLCBBY3Rpb246IHIuQWN0aW9uLCBcIlBlciBzYW1wbGVcIjogcltcIlBlciBzYW1wbGVcIl19KSlcblxuSW5wdXRzLnRhYmxlKGhvbW9nX3Jvd3MsIHtsYXlvdXQ6IFwiYXV0b1wifSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnbl9zYW1wbGVzJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2V4Y2Vzc19wY3QnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnY2hiX3Blcl9zYW1wbGUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnd2FzaF9wZXJfc3BpbicpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCduX3dhc2hfc3BpbnMnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZmluYWxfcmVzdXNfdUwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc3VwZXJhc2VfZmluYWwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc3VwZXJhc2Vfc3RvY2snKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncm5hc2luX2ZpbmFsJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3JuYXNpbl9zdG9jaycpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzdG9ja192b2xfbUwnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnY2l0cmFoYl92b2wnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../protocols";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "SeaPrep Nuclei Isolation Protocol"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Gradient-free citrate nuclei prep for small, soft tissue"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick</span><span class="op">=</span><span class="st">"window.print()"</span><span class="ot"> style</span><span class="op">=</span><span class="st">"float:right;margin-bottom:1rem"</span><span class="dt">&gt;</span>🖨 Print / Save as PDF<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>SeaPrep isolates nuclei from small, soft tissue (e.g. ganglia) for single-nucleus work. Tissue is homogenized in a citrate-based homogenization buffer (CitraHB) with a handheld homogenizer, then nuclei are pelleted and washed at low speed — **no iodixanol gradient and no ultracentrifuge**. RNase inhibitors go into the CitraHB Complete and the resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT) are left **out** of the resuspension buffer because they interfere with downstream cDNA synthesis.</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>For firm or snap-frozen tissue that needs density-gradient purification, use the **CitraPrep** protocol instead.</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: confirm source/citation for this protocol with JP --&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before starting</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use **cell culture grade water** for every "water" call in this protocol.</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and the resuspension buffer are built from them.</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prepare CitraHB and Detergent stock buffers **a day ahead**; good for 1 month at 4°C.</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) **fresh** each time.</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make the resuspension buffer with **no** spermine, spermidine, or DTT in it.</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A handheld/electric homogenizer is fine here — the tissue is soft.</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configure experiment</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>viewof n_samples  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of samples"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">24</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>viewof excess_pct <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Extra overage on scaled solutions (%)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">30</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co">// Per-sample working volumes. CitraHB Complete is made in 10 mL increments</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="co">// (whole protease inhibitor tablets), so its total is always rounded UP to the</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="co">// next 10 mL — set the per-sample number here and the table below does the rest.</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>viewof chb_per_sample <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"CitraHB Complete per sample (mL) — homogenization volume"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>viewof wash_per_spin  <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Resuspension volume per wash spin (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>viewof n_wash_spins   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Number of wash spins"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">max</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>viewof final_resus_uL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Final resuspension volume (µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">50</span>})</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="co">// RNase inhibitor final AND stock concentrations, per inhibitor. SUPERase•In</span></span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="co">// (superasin) is commonly sold at 20 U/µL and RNasin / Protector at 40 U/µL —</span></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="co">// check your tubes. Set a final conc to 0 to leave that inhibitor out.</span></span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>viewof superase_final <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERasin final conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>viewof superase_stock <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"SUPERasin stock conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>viewof rnasin_final   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Protector / RNasin final conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.05</span>})</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>viewof rnasin_stock   <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Protector / RNasin stock conc. (U/µL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span>})</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> n_samples <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> excess_pct <span class="op">/</span> <span class="dv">100</span>)</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>fmt   <span class="op">=</span> (x<span class="op">,</span> d <span class="op">=</span> <span class="dv">2</span>) <span class="kw">=&gt;</span> x<span class="op">.</span><span class="fu">toFixed</span>(d)</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>MW    <span class="op">=</span> ({<span class="dt">sucrose</span><span class="op">:</span> <span class="fl">342.30</span><span class="op">,</span> <span class="dt">KCl</span><span class="op">:</span> <span class="fl">74.55</span><span class="op">,</span> <span class="dt">MgCl2</span><span class="op">:</span> <span class="fl">203.30</span><span class="op">,</span> <span class="dt">glycine</span><span class="op">:</span> <span class="fl">75.07</span><span class="op">,</span> <span class="dt">sorbitol</span><span class="op">:</span> <span class="fl">182.17</span><span class="op">,</span> <span class="dt">tricine</span><span class="op">:</span> <span class="fl">179.17</span><span class="op">,</span> <span class="dt">citric</span><span class="op">:</span> <span class="fl">192.124</span>})</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>solid <span class="op">=</span> (M<span class="op">,</span> V<span class="op">,</span> mw) <span class="kw">=&gt;</span> M <span class="op">*</span> (V <span class="op">/</span> <span class="dv">1000</span>) <span class="op">*</span> mw   <span class="co">// grams of a solid at molarity M in V mL</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="co">// Stock volume needed to hit a final conc in total volume V (V and result share units).</span></span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>superase_vol <span class="op">=</span> (V) <span class="kw">=&gt;</span> superase_final <span class="op">*</span> V <span class="op">/</span> superase_stock</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>rnasin_vol   <span class="op">=</span> (V) <span class="kw">=&gt;</span> rnasin_final   <span class="op">*</span> V <span class="op">/</span> rnasin_stock</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) · </span><span class="sc">${</span>excess_pct<span class="sc">}</span><span class="vs">% overage · SUPERasin </span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL (stock </span><span class="sc">${</span>superase_stock<span class="sc">}</span><span class="vs">) · Protector </span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL (stock </span><span class="sc">${</span>rnasin_stock<span class="sc">}</span><span class="vs">)**`</span></span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stock buffers</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>Make ~1 month's supply at once; store at 4°C. These do **not** scale with sample count.</span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1 M stock reagents (make first)</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>viewof stock_vol_mL <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"1M stock batch volume (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">10</span>})</span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine (free acid)"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="dv">1</span><span class="op">,</span> stock_vol_mL<span class="op">,</span> MW<span class="op">.</span><span class="at">tricine</span>))<span class="sc">}</span><span class="vs"> g`</span><span class="op">,</span> <span class="st">"Recipe"</span><span class="op">:</span> <span class="vs">`Dissolve in ~80% of </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL water; titrate to pH 7.8 with Potassium Hydroxide (KOH); bring to </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Citric Acid"</span><span class="op">,</span>         <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="dv">1</span><span class="op">,</span> stock_vol_mL<span class="op">,</span> MW<span class="op">.</span><span class="at">citric</span>))<span class="sc">}</span><span class="vs"> g`</span><span class="op">,</span>  <span class="st">"Recipe"</span><span class="op">:</span> <span class="vs">`Dissolve in water to </span><span class="sc">${</span><span class="fu">fmt</span>(stock_vol_mL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### CitraHB</span></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>viewof citrahb_vol <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">number</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"CitraHB batch volume (mL)"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">min</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">5</span>})</span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sucrose"</span><span class="op">,</span>            <span class="st">"Final"</span><span class="op">:</span> <span class="st">"0.25 M"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.25</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sucrose</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Potassium Chloride (KCl)"</span><span class="op">,</span>   <span class="st">"Final"</span><span class="op">:</span> <span class="st">"225 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.225</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">KCl</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Magnesium Chloride (MgCl₂·6H₂O)"</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"5 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.005</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">MgCl2</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine-KOH pH 7.8"</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"20 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> citrahb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Citric Acid"</span><span class="op">,</span>        <span class="st">"Final"</span><span class="op">:</span> <span class="st">"10 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">10</span> <span class="op">*</span> citrahb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Glycine"</span><span class="op">,</span>            <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">glycine</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sorbitol"</span><span class="op">,</span>           <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> citrahb_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sorbitol</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>Dissolve in cell culture grade water to the batch volume.</span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### Detergent (1 mL)</span></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> Amount <span class="pp">|</span></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----------|--------|</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> IGEPAL CA-630 <span class="pp">|</span> 50 µL <span class="pp">|</span></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> CitraHB <span class="pp">|</span> 950 µL <span class="pp">|</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## Diluent — optional, not used in the steps below</span></span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>Included from the buffer set for gradient work; the SeaPrep steps below don't use it. Recipe for **5 mL** (scale linearly): KCl 375 mM (0.1397 g), MgCl₂·6H₂O 30 mM (0.0304 g), Tricine-KOH pH 7.8 120 mM (600 µL of 1 M stock), Citric Acid 10 mM (50 µL of 1 M stock), Glycine 50 mM (0.0189 g), Sorbitol 50 mM (0.0455 g). Dissolve to 5 mL.</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fresh working solutions (1000X stocks)</span></span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>Make fresh each time; do not store. Scale to the volume you need.</span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Component <span class="pp">|</span> Final stock <span class="pp">|</span> Recipe <span class="pp">|</span></span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="pp">|-----------|-------------|--------|</span></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 1 M Dithiothreitol (DTT) <span class="pp">|</span> 1000X <span class="pp">|</span> 0.077 g in 500 µL cell culture grade water <span class="pp">|</span></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.15 M spermine <span class="pp">|</span> 1000X <span class="pp">|</span> 0.015 g in 500 µL cell culture grade water <span class="pp">|</span></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 0.5 M spermidine <span class="pp">|</span> 1000X <span class="pp">|</span> 0.0363 g in 500 µL cell culture grade water <span class="pp">|</span></span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>Add spermine, spermidine, and Dithiothreitol (DTT) to CitraHB Complete for a final 1X concentration. Add SUPERasin and Protector to **both** CitraHB Complete and the resuspension buffer at the final concentrations set in **Configure experiment** (default 0.5 U/µL each). Do **not** add spermine, spermidine, or DTT to the resuspension buffer.</span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Working solutions: scaled to sample count</span></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>::: {.callout-note collapse="true"}</span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## Math audit: how every volume is calculated</span></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>**CitraHB Complete** — made in 10 mL increments because each aliquot takes one whole protease inhibitor tablet, so the total is rounded **up** to the next 10 mL:</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a>$$V_{make} = \left\lceil \frac{v_{per\ sample} \times N_{samples} \times (1 + overage)}{10} \right\rceil \times 10 \qquad tablets = \frac{V_{make}}{10}$$</span>
+<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a>**Resuspension buffer** — one pool covers the wash spin(s) and the final resuspension:</span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a>$$V_{buffer} = \left( v_{wash} \times n_{spins} + \frac{V_{final\ \mu L}}{1000} \right) \times N_{samples} \times (1 + overage)$$</span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a>BSA is 1% w/v of $V_{buffer}$; SUPERasin and Protector use $V_{stock} = (C_{final}/C_{stock}) \times V_{buffer}$, each with its own stock strength.</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="fu">### CitraHB Complete</span></span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a>chb_need     <span class="op">=</span> chb_per_sample <span class="op">*</span> scale</span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a>chb_vol      <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">ceil</span>(chb_need <span class="op">/</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>chb_tablets  <span class="op">=</span> chb_vol <span class="op">/</span> <span class="dv">10</span></span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a>detergent_uL <span class="op">=</span> <span class="dv">50</span> <span class="op">*</span> chb_per_sample   <span class="co">// 50 µL Detergent per mL CitraHB Complete used to homogenize</span></span>
+<span id="cb14-189"><a href="#cb14-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-190"><a href="#cb14-190" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**Need ≈ </span><span class="sc">${</span><span class="fu">fmt</span>(chb_need)<span class="sc">}</span><span class="vs"> mL for </span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> sample(s) → make </span><span class="sc">${</span><span class="fu">fmt</span>(chb_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> mL** (rounded up to a 10 mL multiple: **</span><span class="sc">${</span>chb_tablets<span class="sc">}</span><span class="vs"> mini protease tablet(s)**). Detergent for homogenization: **</span><span class="sc">${</span><span class="fu">fmt</span>(detergent_uL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL/sample**.`</span></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Mini protease inhibitor tablet"</span><span class="op">,</span>           <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"1 whole tablet"</span><span class="op">,</span>                 <span class="st">"Total"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span>chb_tablets<span class="sc">}</span><span class="vs"> tablet(s)`</span>}<span class="op">,</span></span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`SUPERasin (</span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>  <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">superase_vol</span>(<span class="dv">10000</span>))<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>  <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(<span class="fu">superase_vol</span>(chb_vol <span class="op">*</span> <span class="dv">1000</span>))}<span class="op">,</span></span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`Protector (</span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>    <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(<span class="dv">10000</span>))<span class="sc">}</span><span class="vs"> µL`</span><span class="op">,</span>    <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(chb_vol <span class="op">*</span> <span class="dv">1000</span>))}<span class="op">,</span></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Spermidine (1000X)"</span><span class="op">,</span>                       <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Spermine (1000X)"</span><span class="op">,</span>                         <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Dithiothreitol (DTT, 1000X)"</span><span class="op">,</span>              <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"10 µL"</span><span class="op">,</span>                           <span class="st">"Total (µL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}<span class="op">,</span></span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"CitraHB stock"</span><span class="op">,</span>                            <span class="st">"Per 10 mL"</span><span class="op">:</span> <span class="st">"to volume"</span><span class="op">,</span>                       <span class="st">"Total (mL)"</span><span class="op">:</span> <span class="fu">fmt</span>(chb_vol)}</span>
+<span id="cb14-205"><a href="#cb14-205" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb14-206"><a href="#cb14-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### Resuspension buffer</span></span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## No spermine, spermidine, or DTT in this buffer</span></span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>These interfere with downstream cDNA synthesis.</span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a>resus_per_sample <span class="op">=</span> wash_per_spin <span class="op">*</span> n_wash_spins <span class="op">+</span> final_resus_uL <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a>resus_vol <span class="op">=</span> resus_per_sample <span class="op">*</span> scale</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a><span class="fu">md</span><span class="vs">`**</span><span class="sc">${</span><span class="fu">fmt</span>(resus_per_sample)<span class="sc">}</span><span class="vs"> mL/sample × </span><span class="sc">${</span>n_samples<span class="sc">}</span><span class="vs"> → </span><span class="sc">${</span><span class="fu">fmt</span>(resus_vol)<span class="sc">}</span><span class="vs"> mL** (</span><span class="sc">${</span>n_wash_spins<span class="sc">}</span><span class="vs"> wash spin(s) of </span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL + </span><span class="sc">${</span><span class="fu">fmt</span>(final_resus_uL)<span class="sc">}</span><span class="vs"> µL final resuspension)`</span></span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>([</span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Bovine Serum Albumin (BSA)"</span><span class="op">,</span>       <span class="st">"Final"</span><span class="op">:</span> <span class="st">"1% w/v"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fl">0.01</span> <span class="op">*</span> resus_vol)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Potassium Chloride (KCl)"</span><span class="op">,</span>         <span class="st">"Final"</span><span class="op">:</span> <span class="st">"250 mM"</span><span class="op">,</span>  <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.25</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">KCl</span>))<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Magnesium Chloride (MgCl₂·6H₂O)"</span><span class="op">,</span>  <span class="st">"Final"</span><span class="op">:</span> <span class="st">"≈ 2.5 mM"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fl">0.0095</span> <span class="op">*</span> resus_vol <span class="op">/</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Tricine-KOH pH 7.8"</span><span class="op">,</span>               <span class="st">"Final"</span><span class="op">:</span> <span class="st">"20 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="dv">20</span> <span class="op">*</span> resus_vol<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL of 1 M stock`</span>}<span class="op">,</span></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Glycine"</span><span class="op">,</span>                          <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">glycine</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="st">"Sorbitol"</span><span class="op">,</span>                         <span class="st">"Final"</span><span class="op">:</span> <span class="st">"50 mM"</span><span class="op">,</span>   <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">solid</span>(<span class="fl">0.05</span><span class="op">,</span> resus_vol<span class="op">,</span> MW<span class="op">.</span><span class="at">sorbitol</span>)<span class="op">,</span> <span class="dv">4</span>)<span class="sc">}</span><span class="vs"> g`</span>}<span class="op">,</span></span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`SUPERasin (</span><span class="sc">${</span>superase_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span> <span class="st">"Final"</span><span class="op">:</span> <span class="st">"—"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">superase_vol</span>(resus_vol))<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Component</span><span class="op">:</span> <span class="vs">`Protector (</span><span class="sc">${</span>rnasin_final<span class="sc">}</span><span class="vs"> U/µL final)`</span><span class="op">,</span>   <span class="st">"Final"</span><span class="op">:</span> <span class="st">"—"</span><span class="op">,</span> <span class="st">"Amount"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(<span class="fu">rnasin_vol</span>(resus_vol))<span class="sc">}</span><span class="vs"> mL`</span>}</span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>]<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a>The MgCl₂ mass follows the source recipe as written (0.0095 g / 20 mL ≈ 2.5 mM MgCl₂·6H₂O). The recipe nominally lists 5 mM — confirm which is intended before scaling up.</span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a>Dissolve BSA and salts in cell culture grade water to volume, then add SUPERasin and Protector.</span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## Protocol</span></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1 · Homogenization &amp; counting</span></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a>homog_rows <span class="op">=</span> [</span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="vs">`Homogenize the tissue (e.g. ganglia) in CitraHB Complete + Detergent in a round-bottom tube with a handheld homogenizer.`</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(chb_per_sample)<span class="sc">}</span><span class="vs"> mL CitraHB Complete + </span><span class="sc">${</span><span class="fu">fmt</span>(detergent_uL<span class="op">,</span> <span class="dv">0</span>)<span class="sc">}</span><span class="vs"> µL Detergent`</span>}<span class="op">,</span></span>
+<span id="cb14-259"><a href="#cb14-259" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Count an aliquot on a hemocytometer (method below)."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb14-260"><a href="#cb14-260" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Spin 10 min at 500×g, 4°C; discard the supernatant."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb14-261"><a href="#cb14-261" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Resuspend the pellet in resuspension buffer; pipette gently, do not vortex."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL`</span>}<span class="op">,</span></span>
+<span id="cb14-262"><a href="#cb14-262" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="vs">`Spin 10 min at 500×g, 4°C; discard the supernatant.</span><span class="sc">${</span>n_wash_spins <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> <span class="vs">` Repeat the resuspend + spin so the nuclei are washed </span><span class="sc">${</span>n_wash_spins<span class="sc">}</span><span class="vs">× in total.`</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">`</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> n_wash_spins <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(wash_per_spin)<span class="sc">}</span><span class="vs"> mL per wash`</span> <span class="op">:</span> <span class="st">"—"</span>}<span class="op">,</span></span>
+<span id="cb14-263"><a href="#cb14-263" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Resuspend the final pellet; count on a hemocytometer."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="vs">`</span><span class="sc">${</span><span class="fu">fmt</span>(final_resus_uL)<span class="sc">}</span><span class="vs"> µL`</span>}<span class="op">,</span></span>
+<span id="cb14-264"><a href="#cb14-264" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">Action</span><span class="op">:</span> <span class="st">"Load for single cell."</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> <span class="st">"—"</span>}</span>
+<span id="cb14-265"><a href="#cb14-265" aria-hidden="true" tabindex="-1"></a>]<span class="op">.</span><span class="fu">map</span>((r<span class="op">,</span> i) <span class="kw">=&gt;</span> ({<span class="dt">Step</span><span class="op">:</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">Action</span><span class="op">:</span> r<span class="op">.</span><span class="at">Action</span><span class="op">,</span> <span class="st">"Per sample"</span><span class="op">:</span> r[<span class="st">"Per sample"</span>]}))</span>
+<span id="cb14-266"><a href="#cb14-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-267"><a href="#cb14-267" aria-hidden="true" tabindex="-1"></a>Inputs<span class="op">.</span><span class="fu">table</span>(homog_rows<span class="op">,</span> {<span class="dt">layout</span><span class="op">:</span> <span class="st">"auto"</span>})</span>
+<span id="cb14-268"><a href="#cb14-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-269"><a href="#cb14-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-270"><a href="#cb14-270" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb14-271"><a href="#cb14-271" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hemocytometer counting method</span></span>
+<span id="cb14-272"><a href="#cb14-272" aria-hidden="true" tabindex="-1"></a>Nuclei yields are typically too low for a reliable Countess (automated) read, so this is a **manual hemocytometer count** every time.</span>
+<span id="cb14-273"><a href="#cb14-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-274"><a href="#cb14-274" aria-hidden="true" tabindex="-1"></a>a. Filter your trypan blue stock through a 0.2 µm filter before use; unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.</span>
+<span id="cb14-275"><a href="#cb14-275" aria-hidden="true" tabindex="-1"></a>b. Mix the nuclei suspension with filtered trypan blue at a **1:1** ratio (e.g. 10 µL suspension + 10 µL trypan blue, dilution factor = 2).</span>
+<span id="cb14-276"><a href="#cb14-276" aria-hidden="true" tabindex="-1"></a>c. Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.</span>
+<span id="cb14-277"><a href="#cb14-277" aria-hidden="true" tabindex="-1"></a>d. Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.</span>
+<span id="cb14-278"><a href="#cb14-278" aria-hidden="true" tabindex="-1"></a>e. Calculate concentration:</span>
+<span id="cb14-279"><a href="#cb14-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-280"><a href="#cb14-280" aria-hidden="true" tabindex="-1"></a>$$Nuclei/mL = \frac{\text{sum of nuclei in 4 corner squares}}{4} \times 2\ (\text{dilution factor}) \times 10^4$$</span>
+<span id="cb14-281"><a href="#cb14-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-282"><a href="#cb14-282" aria-hidden="true" tabindex="-1"></a>Divide by 1000 to convert to nuclei/µL for loading calculations.</span>
+<span id="cb14-283"><a href="#cb14-283" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-284"><a href="#cb14-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-285"><a href="#cb14-285" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb14-286"><a href="#cb14-286" aria-hidden="true" tabindex="-1"></a><span class="fu">## Checklist</span></span>
+<span id="cb14-287"><a href="#cb14-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Trypan blue filtered (0.2 µm) before use</span>
+<span id="cb14-288"><a href="#cb14-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Nuclei intact and free of debris under the hemocytometer</span>
+<span id="cb14-289"><a href="#cb14-289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Post-homogenization nuclei concentration: _______ nuclei/µL</span>
+<span id="cb14-290"><a href="#cb14-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Final nuclei concentration: _______ nuclei/µL</span>
+<span id="cb14-291"><a href="#cb14-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> Loaded for single-cell run at: _______</span>
+<span id="cb14-292"><a href="#cb14-292" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-293"><a href="#cb14-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-294"><a href="#cb14-294" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-295"><a href="#cb14-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-296"><a href="#cb14-296" aria-hidden="true" tabindex="-1"></a><span class="fu">## QC log</span></span>
+<span id="cb14-297"><a href="#cb14-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-298"><a href="#cb14-298" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Checkpoint <span class="pp">|</span> Expected <span class="pp">|</span> Observed <span class="pp">|</span> Pass <span class="pp">|</span></span>
+<span id="cb14-299"><a href="#cb14-299" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------|----------|----------|------|</span></span>
+<span id="cb14-300"><a href="#cb14-300" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-homogenization aliquot <span class="pp">|</span> Nuclei released, minimal intact cells <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb14-301"><a href="#cb14-301" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Post-wash nuclei pellet <span class="pp">|</span> Clean pellet, no debris ring <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb14-302"><a href="#cb14-302" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Hemocytometer count <span class="pp">|</span> Nuclei intact, non-clumped <span class="pp">|</span> <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb14-303"><a href="#cb14-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-304"><a href="#cb14-304" aria-hidden="true" tabindex="-1"></a>**Notes / deviations:**</span>
+<span id="cb14-305"><a href="#cb14-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-306"><a href="#cb14-306" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb14-307"><a href="#cb14-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-308"><a href="#cb14-308" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb14-309"><a href="#cb14-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-310"><a href="#cb14-310" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- </span><span class="al">TODO</span><span class="co">: no source paper, kit, or lab of origin on hand; add citation/attribution once confirmed with JP --&gt;</span></span>
+<span id="cb14-311"><a href="#cb14-311" aria-hidden="true" tabindex="-1"></a>Protocol: source not specified; transcribed by JP Flores.</span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>JP Flores</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

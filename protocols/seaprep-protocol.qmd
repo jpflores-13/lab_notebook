@@ -1,0 +1,285 @@
+---
+title: "SeaPrep Nuclei Isolation Protocol"
+subtitle: "Gradient-free citrate nuclei prep for small, soft tissue"
+date: today
+---
+
+<button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
+
+::: {.callout-note}
+## Overview
+SeaPrep isolates nuclei from small, soft tissue (e.g. ganglia) for single-nucleus work. Tissue is homogenized in a citrate-based homogenization buffer (CitraHB) with a handheld homogenizer, then nuclei are pelleted and washed at low speed — **no iodixanol gradient and no ultracentrifuge**. RNase inhibitors go into the CitraHB Complete and the resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT) are left **out** of the resuspension buffer because they interfere with downstream cDNA synthesis.
+
+For firm or snap-frozen tissue that needs density-gradient purification, use the **CitraPrep** protocol instead.
+
+<!-- TODO: confirm source/citation for this protocol with JP -->
+:::
+
+::: {.callout-important}
+## Before starting
+- Use **cell culture grade water** for every "water" call in this protocol.
+- Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and the resuspension buffer are built from them.
+- Prepare CitraHB and Detergent stock buffers **a day ahead**; good for 1 month at 4°C.
+- Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) **fresh** each time.
+- Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.
+- Make the resuspension buffer with **no** spermine, spermidine, or DTT in it.
+- A handheld/electric homogenizer is fine here — the tissue is soft.
+:::
+
+---
+
+## Configure experiment
+
+```{ojs}
+//| echo: false
+viewof n_samples  = Inputs.number({label: "Number of samples", value: 1, min: 1, max: 24, step: 1})
+viewof excess_pct = Inputs.number({label: "Extra overage on scaled solutions (%)", value: 0, min: 0, max: 30, step: 5})
+```
+
+```{ojs}
+//| echo: false
+// Per-sample working volumes. CitraHB Complete is made in 10 mL increments
+// (whole protease inhibitor tablets), so its total is always rounded UP to the
+// next 10 mL — set the per-sample number here and the table below does the rest.
+viewof chb_per_sample = Inputs.number({label: "CitraHB Complete per sample (mL) — homogenization volume", value: 3, min: 1, step: 1})
+viewof wash_per_spin  = Inputs.number({label: "Resuspension volume per wash spin (mL)", value: 10, min: 1, step: 1})
+viewof n_wash_spins   = Inputs.number({label: "Number of wash spins", value: 1, min: 0, max: 5, step: 1})
+viewof final_resus_uL = Inputs.number({label: "Final resuspension volume (µL)", value: 200, min: 50, step: 50})
+```
+
+```{ojs}
+//| echo: false
+// RNase inhibitor final AND stock concentrations, per inhibitor. SUPERase•In
+// (superasin) is commonly sold at 20 U/µL and RNasin / Protector at 40 U/µL —
+// check your tubes. Set a final conc to 0 to leave that inhibitor out.
+viewof superase_final = Inputs.number({label: "SUPERasin final conc. (U/µL)", value: 0.5, min: 0, step: 0.05})
+viewof superase_stock = Inputs.number({label: "SUPERasin stock conc. (U/µL)", value: 40, min: 1, step: 1})
+viewof rnasin_final   = Inputs.number({label: "Protector / RNasin final conc. (U/µL)", value: 0.5, min: 0, step: 0.05})
+viewof rnasin_stock   = Inputs.number({label: "Protector / RNasin stock conc. (U/µL)", value: 40, min: 1, step: 1})
+```
+
+```{ojs}
+//| echo: false
+scale = n_samples * (1 + excess_pct / 100)
+fmt   = (x, d = 2) => x.toFixed(d)
+
+MW    = ({sucrose: 342.30, KCl: 74.55, MgCl2: 203.30, glycine: 75.07, sorbitol: 182.17, tricine: 179.17, citric: 192.124})
+solid = (M, V, mw) => M * (V / 1000) * mw   // grams of a solid at molarity M in V mL
+
+// Stock volume needed to hit a final conc in total volume V (V and result share units).
+superase_vol = (V) => superase_final * V / superase_stock
+rnasin_vol   = (V) => rnasin_final   * V / rnasin_stock
+
+md`**${n_samples} sample(s) · ${excess_pct}% overage · SUPERasin ${superase_final} U/µL (stock ${superase_stock}) · Protector ${rnasin_final} U/µL (stock ${rnasin_stock})**`
+```
+
+---
+
+## Stock buffers
+
+Make ~1 month's supply at once; store at 4°C. These do **not** scale with sample count.
+
+### 1 M stock reagents (make first)
+
+```{ojs}
+//| echo: false
+viewof stock_vol_mL = Inputs.number({label: "1M stock batch volume (mL)", value: 100, min: 10, step: 10})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Tricine (free acid)", "Amount": `${fmt(solid(1, stock_vol_mL, MW.tricine))} g`, "Recipe": `Dissolve in ~80% of ${fmt(stock_vol_mL, 0)} mL water; titrate to pH 7.8 with Potassium Hydroxide (KOH); bring to ${fmt(stock_vol_mL, 0)} mL`},
+  {Component: "Citric Acid",         "Amount": `${fmt(solid(1, stock_vol_mL, MW.citric))} g`,  "Recipe": `Dissolve in water to ${fmt(stock_vol_mL, 0)} mL`}
+], {layout: "auto"})
+```
+
+### CitraHB
+
+```{ojs}
+//| echo: false
+viewof citrahb_vol = Inputs.number({label: "CitraHB batch volume (mL)", value: 20, min: 5, step: 5})
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Sucrose",            "Final": "0.25 M", "Amount": `${fmt(solid(0.25, citrahb_vol, MW.sucrose))} g`},
+  {Component: "Potassium Chloride (KCl)",   "Final": "225 mM", "Amount": `${fmt(solid(0.225, citrahb_vol, MW.KCl))} g`},
+  {Component: "Magnesium Chloride (MgCl₂·6H₂O)", "Final": "5 mM", "Amount": `${fmt(solid(0.005, citrahb_vol, MW.MgCl2), 4)} g`},
+  {Component: "Tricine-KOH pH 7.8", "Final": "20 mM",  "Amount": `${fmt(20 * citrahb_vol, 0)} µL of 1 M stock`},
+  {Component: "Citric Acid",        "Final": "10 mM",  "Amount": `${fmt(10 * citrahb_vol, 0)} µL of 1 M stock`},
+  {Component: "Glycine",            "Final": "50 mM",  "Amount": `${fmt(solid(0.05, citrahb_vol, MW.glycine), 4)} g`},
+  {Component: "Sorbitol",           "Final": "50 mM",  "Amount": `${fmt(solid(0.05, citrahb_vol, MW.sorbitol), 4)} g`}
+], {layout: "auto"})
+```
+
+Dissolve in cell culture grade water to the batch volume.
+
+### Detergent (1 mL)
+
+| Component | Amount |
+|-----------|--------|
+| IGEPAL CA-630 | 50 µL |
+| CitraHB | 950 µL |
+
+::: {.callout-note collapse="true"}
+## Diluent — optional, not used in the steps below
+Included from the buffer set for gradient work; the SeaPrep steps below don't use it. Recipe for **5 mL** (scale linearly): KCl 375 mM (0.1397 g), MgCl₂·6H₂O 30 mM (0.0304 g), Tricine-KOH pH 7.8 120 mM (600 µL of 1 M stock), Citric Acid 10 mM (50 µL of 1 M stock), Glycine 50 mM (0.0189 g), Sorbitol 50 mM (0.0455 g). Dissolve to 5 mL.
+:::
+
+---
+
+## Fresh working solutions (1000X stocks)
+
+Make fresh each time; do not store. Scale to the volume you need.
+
+| Component | Final stock | Recipe |
+|-----------|-------------|--------|
+| 1 M Dithiothreitol (DTT) | 1000X | 0.077 g in 500 µL cell culture grade water |
+| 0.15 M spermine | 1000X | 0.015 g in 500 µL cell culture grade water |
+| 0.5 M spermidine | 1000X | 0.0363 g in 500 µL cell culture grade water |
+
+Add spermine, spermidine, and Dithiothreitol (DTT) to CitraHB Complete for a final 1X concentration. Add SUPERasin and Protector to **both** CitraHB Complete and the resuspension buffer at the final concentrations set in **Configure experiment** (default 0.5 U/µL each). Do **not** add spermine, spermidine, or DTT to the resuspension buffer.
+
+---
+
+## Working solutions: scaled to sample count
+
+::: {.callout-note collapse="true"}
+## Math audit: how every volume is calculated
+
+**CitraHB Complete** — made in 10 mL increments because each aliquot takes one whole protease inhibitor tablet, so the total is rounded **up** to the next 10 mL:
+
+$$V_{make} = \left\lceil \frac{v_{per\ sample} \times N_{samples} \times (1 + overage)}{10} \right\rceil \times 10 \qquad tablets = \frac{V_{make}}{10}$$
+
+**Resuspension buffer** — one pool covers the wash spin(s) and the final resuspension:
+
+$$V_{buffer} = \left( v_{wash} \times n_{spins} + \frac{V_{final\ \mu L}}{1000} \right) \times N_{samples} \times (1 + overage)$$
+
+BSA is 1% w/v of $V_{buffer}$; SUPERasin and Protector use $V_{stock} = (C_{final}/C_{stock}) \times V_{buffer}$, each with its own stock strength.
+:::
+
+### CitraHB Complete
+
+```{ojs}
+//| echo: false
+chb_need     = chb_per_sample * scale
+chb_vol      = Math.ceil(chb_need / 10) * 10
+chb_tablets  = chb_vol / 10
+detergent_uL = 50 * chb_per_sample   // 50 µL Detergent per mL CitraHB Complete used to homogenize
+
+md`**Need ≈ ${fmt(chb_need)} mL for ${n_samples} sample(s) → make ${fmt(chb_vol, 0)} mL** (rounded up to a 10 mL multiple: **${chb_tablets} mini protease tablet(s)**). Detergent for homogenization: **${fmt(detergent_uL, 0)} µL/sample**.`
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Mini protease inhibitor tablet",           "Per 10 mL": "1 whole tablet",                 "Total": `${chb_tablets} tablet(s)`},
+  {Component: `SUPERasin (${superase_final} U/µL final)`,  "Per 10 mL": `${fmt(superase_vol(10000))} µL`,  "Total (µL)": fmt(superase_vol(chb_vol * 1000))},
+  {Component: `Protector (${rnasin_final} U/µL final)`,    "Per 10 mL": `${fmt(rnasin_vol(10000))} µL`,    "Total (µL)": fmt(rnasin_vol(chb_vol * 1000))},
+  {Component: "Spermidine (1000X)",                       "Per 10 mL": "10 µL",                           "Total (µL)": fmt(chb_vol)},
+  {Component: "Spermine (1000X)",                         "Per 10 mL": "10 µL",                           "Total (µL)": fmt(chb_vol)},
+  {Component: "Dithiothreitol (DTT, 1000X)",              "Per 10 mL": "10 µL",                           "Total (µL)": fmt(chb_vol)},
+  {Component: "CitraHB stock",                            "Per 10 mL": "to volume",                       "Total (mL)": fmt(chb_vol)}
+], {layout: "auto"})
+```
+
+### Resuspension buffer
+
+::: {.callout-warning}
+## No spermine, spermidine, or DTT in this buffer
+These interfere with downstream cDNA synthesis.
+:::
+
+```{ojs}
+//| echo: false
+resus_per_sample = wash_per_spin * n_wash_spins + final_resus_uL / 1000
+resus_vol = resus_per_sample * scale
+
+md`**${fmt(resus_per_sample)} mL/sample × ${n_samples} → ${fmt(resus_vol)} mL** (${n_wash_spins} wash spin(s) of ${fmt(wash_per_spin)} mL + ${fmt(final_resus_uL)} µL final resuspension)`
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Bovine Serum Albumin (BSA)",       "Final": "1% w/v",  "Amount": `${fmt(0.01 * resus_vol)} g`},
+  {Component: "Potassium Chloride (KCl)",         "Final": "250 mM",  "Amount": `${fmt(solid(0.25, resus_vol, MW.KCl))} g`},
+  {Component: "Magnesium Chloride (MgCl₂·6H₂O)",  "Final": "≈ 2.5 mM", "Amount": `${fmt(0.0095 * resus_vol / 20, 4)} g`},
+  {Component: "Tricine-KOH pH 7.8",               "Final": "20 mM",   "Amount": `${fmt(20 * resus_vol, 0)} µL of 1 M stock`},
+  {Component: "Glycine",                          "Final": "50 mM",   "Amount": `${fmt(solid(0.05, resus_vol, MW.glycine), 4)} g`},
+  {Component: "Sorbitol",                         "Final": "50 mM",   "Amount": `${fmt(solid(0.05, resus_vol, MW.sorbitol), 4)} g`},
+  {Component: `SUPERasin (${superase_final} U/µL final)`, "Final": "—", "Amount": `${fmt(superase_vol(resus_vol))} mL`},
+  {Component: `Protector (${rnasin_final} U/µL final)`,   "Final": "—", "Amount": `${fmt(rnasin_vol(resus_vol))} mL`}
+], {layout: "auto"})
+```
+
+::: {.callout-note}
+The MgCl₂ mass follows the source recipe as written (0.0095 g / 20 mL ≈ 2.5 mM MgCl₂·6H₂O). The recipe nominally lists 5 mM — confirm which is intended before scaling up.
+:::
+
+Dissolve BSA and salts in cell culture grade water to volume, then add SUPERasin and Protector.
+
+---
+
+## Protocol
+
+### 1 · Homogenization & counting
+
+```{ojs}
+//| echo: false
+homog_rows = [
+  {Action: `Homogenize the tissue (e.g. ganglia) in CitraHB Complete + Detergent in a round-bottom tube with a handheld homogenizer.`, "Per sample": `${fmt(chb_per_sample)} mL CitraHB Complete + ${fmt(detergent_uL, 0)} µL Detergent`},
+  {Action: "Count an aliquot on a hemocytometer (method below).", "Per sample": "—"},
+  {Action: "Spin 10 min at 500×g, 4°C; discard the supernatant.", "Per sample": "—"},
+  {Action: "Resuspend the pellet in resuspension buffer; pipette gently, do not vortex.", "Per sample": `${fmt(wash_per_spin)} mL`},
+  {Action: `Spin 10 min at 500×g, 4°C; discard the supernatant.${n_wash_spins > 1 ? ` Repeat the resuspend + spin so the nuclei are washed ${n_wash_spins}× in total.` : ""}`, "Per sample": n_wash_spins > 1 ? `${fmt(wash_per_spin)} mL per wash` : "—"},
+  {Action: "Resuspend the final pellet; count on a hemocytometer.", "Per sample": `${fmt(final_resus_uL)} µL`},
+  {Action: "Load for single cell.", "Per sample": "—"}
+].map((r, i) => ({Step: i + 1, Action: r.Action, "Per sample": r["Per sample"]}))
+
+Inputs.table(homog_rows, {layout: "auto"})
+```
+
+::: {.callout-tip}
+## Hemocytometer counting method
+Nuclei yields are typically too low for a reliable Countess (automated) read, so this is a **manual hemocytometer count** every time.
+
+a. Filter your trypan blue stock through a 0.2 µm filter before use; unfiltered trypan blue carries particulates that get miscounted as nuclei, and this matters more at low nuclei numbers where a few false counts skew the result.
+b. Mix the nuclei suspension with filtered trypan blue at a **1:1** ratio (e.g. 10 µL suspension + 10 µL trypan blue, dilution factor = 2).
+c. Load 10 µL of the mix onto the hemocytometer; let it wick in by capillary action, no bubbles.
+d. Under the microscope, count nuclei in the 4 corner grid squares (16 small squares each). Count nuclei touching the top and left borders of a square, but not the bottom or right, to avoid double-counting nuclei that sit on a line.
+e. Calculate concentration:
+
+$$Nuclei/mL = \frac{\text{sum of nuclei in 4 corner squares}}{4} \times 2\ (\text{dilution factor}) \times 10^4$$
+
+Divide by 1000 to convert to nuclei/µL for loading calculations.
+:::
+
+::: {.callout-important}
+## Checklist
+- [ ] Trypan blue filtered (0.2 µm) before use
+- [ ] Nuclei intact and free of debris under the hemocytometer
+- [ ] Post-homogenization nuclei concentration: _______ nuclei/µL
+- [ ] Final nuclei concentration: _______ nuclei/µL
+- [ ] Loaded for single-cell run at: _______
+:::
+
+---
+
+## QC log
+
+| Checkpoint | Expected | Observed | Pass |
+|------------|----------|----------|------|
+| Post-homogenization aliquot | Nuclei released, minimal intact cells | | |
+| Post-wash nuclei pellet | Clean pellet, no debris ring | | |
+| Hemocytometer count | Nuclei intact, non-clumped | | |
+
+**Notes / deviations:**
+
+---
+
+## References
+
+<!-- TODO: no source paper, kit, or lab of origin on hand; add citation/attribution once confirmed with JP -->
+Protocol: source not specified; transcribed by JP Flores.
