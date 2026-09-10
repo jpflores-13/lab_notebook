@@ -8,7 +8,9 @@ date: today
 
 ::: {.callout-note}
 ## Overview
-CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work (Step 15: "Load for single cell"). Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min scheduled run time, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® Ribonuclease Inhibitor) go into **every** buffer, including the final nuclei resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT), by contrast, are deliberately left **out** of the nuclei resuspension buffer because they interfere with downstream cDNA synthesis.
+CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work. Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min run, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (SUPERase•In™ RNase Inhibitor + RNasin® / Protector Ribonuclease Inhibitor) go into **every** buffer, including the final nuclei wash / resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT) are deliberately left **out** of that buffer because they interfere with downstream cDNA synthesis.
+
+For small, soft tissue that doesn't need a density gradient, see the **SeaPrep** protocol instead.
 
 <!-- TODO: confirm source/citation for this protocol with JP -->
 :::
@@ -19,11 +21,12 @@ CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-n
 - Make 1 M Tricine–Potassium Hydroxide (Tricine-KOH, pH 7.8) and 1 M Citric Acid stocks first; CitraHB and Diluent are both built from them.
 - Prepare CitraHB, Diluent, and Detergent stock buffers **a day ahead**; good for 1 month at 4°C.
 - Pre-chill the 7 mL glass dounce homogenizer on ice.
+- Hand-dounce only: **no motorized homogenizer**, it shears nuclei and causes blebbing.
 - Make 1 M Dithiothreitol (DTT), 0.15 M spermine, and 0.5 M spermidine (1000X stocks) **fresh** each time.
 - Make CitraHB Complete (stock + protease inhibitor tablet) fresh; add spermine/spermidine/DTT to bring it to 1X.
-- Make the nuclei resuspension buffer during the centrifugation step (Step 8) with **no** spermine, spermidine, or DTT in this one.
-- Set the **ultracentrifuge** to 4°C and confirm the rotor/tubes are rated for **no-brake** deceleration (Step 8).
-- Book more time than the spin itself: the 18 min is only the run; loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to **around an hour**. Schedule accordingly.
+- Make the nuclei wash / resuspension buffer while the gradient is running, with **no** spermine, spermidine, or DTT in this one.
+- Set the ultracentrifuge to 4°C and confirm the rotor/tubes are rated for **no-brake** deceleration.
+- Book more time than the spin itself. The 18 min is only the run; loading, vacuum draw-down, acceleration, and the unbraked coast to a stop routinely bring the whole ultracentrifuge step to **around an hour**.
 :::
 
 ---
@@ -38,12 +41,24 @@ viewof excess_pct = Inputs.number({label: "Extra overage on scaled solutions (%)
 
 ```{ojs}
 //| echo: false
-// RNase inhibitor final concentrations. Different lab members dose these
-// differently, so they're toggles here; every buffer table below rescales.
-// Set to 0 to leave an inhibitor out entirely.
+// Per-sample working volumes. CitraHB Complete is made in 10 mL increments
+// (whole protease inhibitor tablets), so its total is always rounded UP to the
+// next 10 mL — set the per-sample number here and the table below does the rest.
+viewof chb_per_sample = Inputs.number({label: "CitraHB Complete per sample (mL) — two-round dounce uses ≈ 5", value: 10, min: 1, step: 1})
+viewof wash_per_spin  = Inputs.number({label: "Nuclei wash / resuspension volume per spin (mL)", value: 10, min: 1, step: 1})
+viewof n_wash_spins   = Inputs.number({label: "Number of nuclei wash spins", value: 1, min: 0, max: 5, step: 1})
+viewof final_resus_uL = Inputs.number({label: "Final resuspension volume (µL)", value: 200, min: 50, step: 50})
+```
+
+```{ojs}
+//| echo: false
+// RNase inhibitor final AND stock concentrations, per inhibitor. SUPERase•In is
+// commonly sold at 20 U/µL and RNasin / Protector at 40 U/µL — check your tubes,
+// they are not always the same. Set a final conc to 0 to leave that inhibitor out.
 viewof superase_final = Inputs.number({label: "SUPERase final conc. (U/µL, each buffer)", value: 0.5, min: 0, step: 0.05})
-viewof rnasin_final   = Inputs.number({label: "RNAsin final conc. (U/µL, each buffer)", value: 0.5, min: 0, step: 0.05})
-viewof rnase_stock    = Inputs.number({label: "RNase inhibitor stock conc. (U/µL)", value: 40, min: 1, step: 1})
+viewof superase_stock = Inputs.number({label: "SUPERase•In stock conc. (U/µL)", value: 40, min: 1, step: 1})
+viewof rnasin_final   = Inputs.number({label: "RNAsin / Protector final conc. (U/µL, each buffer)", value: 0.5, min: 0, step: 0.05})
+viewof rnasin_stock   = Inputs.number({label: "RNAsin / Protector stock conc. (U/µL)", value: 40, min: 1, step: 1})
 ```
 
 ```{ojs}
@@ -51,14 +66,11 @@ viewof rnase_stock    = Inputs.number({label: "RNase inhibitor stock conc. (U/µ
 scale = n_samples * (1 + excess_pct / 100)
 fmt   = (x, d = 2) => x.toFixed(d)
 
-md`**${n_samples} sample(s) · ${excess_pct}% overage · scale factor ${fmt(scale)}× · SUPERase ${superase_final} U/µL · RNAsin ${rnasin_final} U/µL (stock ${rnase_stock} U/µL)**`
-```
+// Stock volume needed to hit a final conc in total volume V (V and result share units).
+superase_vol = (V) => superase_final * V / superase_stock
+rnasin_vol   = (V) => rnasin_final   * V / rnasin_stock
 
-```{ojs}
-//| echo: false
-// Volume of RNase inhibitor stock needed to reach final conc c_final in a total
-// volume V (V and the returned volume are in the same units).
-rnase_vol = (V, c_final) => c_final * V / rnase_stock
+md`**${n_samples} sample(s) · ${excess_pct}% overage · SUPERase ${superase_final} U/µL (stock ${superase_stock}) · RNAsin ${rnasin_final} U/µL (stock ${rnasin_stock})**`
 ```
 
 ::: {.callout-tip collapse="true"}
@@ -147,9 +159,9 @@ Make fresh each time; do not store.
 | 0.15 M spermine | 1000X | 0.03035 g in 1 mL cell culture grade water |
 | 0.5 M spermidine | 1000X | 0.072625 g in 1 mL cell culture grade water |
 
-Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, **except** the nuclei resuspension buffer (see warning below).
+Add spermine, spermidine, and Dithiothreitol (DTT) to all buffers below for a final 1X concentration, **except** the nuclei wash / resuspension buffer (see warning below).
 
-Add RNase inhibitor to all buffers below at the final concentrations set in **Configure experiment** above. The defaults are 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) and 0.5 U/µL RNasin® Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members dose these differently; change the values up top and every table below rescales (set one to 0 to leave it out). Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.
+Add RNase inhibitor to all buffers below at the final concentrations set in **Configure experiment** above. The defaults are 0.5 U/µL SUPERase•In™ RNase Inhibitor (SUPERase) and 0.5 U/µL RNasin® / Protector Ribonuclease Inhibitor (RNAsin), 1 U/µL total. Different lab members use different inhibitors, final concentrations, and stock strengths (SUPERase•In is often 20 U/µL, RNasin / Protector often 40 U/µL) — set all four values up top and every table below rescales. Both are referred to by their short names (SUPERase, RNAsin) throughout the rest of this document.
 
 ---
 
@@ -158,48 +170,74 @@ Add RNase inhibitor to all buffers below at the final concentrations set in **Co
 ::: {.callout-note collapse="true"}
 ## Math audit: how every volume is calculated
 
-**CitraHB Complete** (10 mL aliquot per sample, used in Steps 2, 3, and 6):
+**CitraHB Complete** — made in 10 mL increments because each aliquot takes one whole protease inhibitor tablet, so the total is rounded **up** to the next 10 mL:
 
-$$V_{aliquot} = 10\;mL \times N_{samples} \times (1 + overage)$$
+$$V_{make} = \left\lceil \frac{v_{per\ sample} \times N_{samples} \times (1 + overage)}{10} \right\rceil \times 10 \qquad tablets = \frac{V_{make}}{10}$$
 
-Additives (SUPERase, RNAsin, spermidine, spermine, DTT) scale linearly with $V_{aliquot}$; protease inhibitor tablets are whole units, so the tablet count rounds up.
+RNase inhibitors and the 1000X polyamine/DTT additives scale linearly with $V_{make}$.
 
-**Iodixanol step gradient**: each of the three working solutions is made by diluting 50% iodixanol (itself made 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and $5/6 \times 60\% = 50\%$) down to the target percentage with CitraPrepHB, using $C_1V_1 = C_2V_2$:
+**Nuclei wash / resuspension buffer** — one pool covers the wash spin(s) and the final resuspension:
 
-$$V_{50\%\ stock\ needed} = V_{total} \times \frac{\%_{target}}{50\%} \qquad V_{diluent} = V_{total} - V_{50\%\ stock\ needed}$$
+$$V_{buffer} = \left( v_{wash} \times n_{spins} + \frac{V_{final\ \mu L}}{1000} \right) \times N_{samples} \times (1 + overage)$$
 
-Per-sample total volumes: 15 mL of 50% (kept as-is), 4 mL of 40%, and 7.5 mL of 30%. All three scale with $N_{samples} \times (1+overage)$.
+Default is one wash spin of 10 mL plus a 200 µL final resuspension ≈ 10 mL/sample. Bovine Serum Albumin (BSA) is 1% w/v of $V_{buffer}$; SUPERase and RNAsin use $V_{stock} = (C_{final}/C_{stock}) \times V_{buffer}$, each with its own stock strength. No spermine, spermidine, or DTT; these interfere with downstream cDNA synthesis.
 
-Polyamine additives in each gradient solution scale as $V_{total}/1000$ (spermidine, spermine, DTT, all 1000X). SUPERase and RNAsin scale as:
+**Iodixanol step gradient** — each of the three working solutions is diluted from base 50% iodixanol (itself 5 parts OptiPrep : 1 part Diluent, since OptiPrep ships at 60% and $5/6 \times 60\% = 50\%$) with CitraHB, using $C_1V_1 = C_2V_2$:
 
-$$V_{stock} = \frac{C_{final}}{C_{stock}} \times V_{total}$$
+$$V_{50\%\ needed} = V_{total} \times \frac{\%_{target}}{50\%} \qquad V_{CitraHB} = V_{total} - V_{50\%\ needed}$$
 
-Each inhibitor's $C_{final}$ and the shared $C_{stock}$ are set in **Configure experiment** (`superase_final`, `rnasin_final`, `rnase_stock`; defaults 0.5 / 0.5 / 40 U/µL). Change them there and every table below rescales.
+Per-sample totals: 15 mL of 50% (kept as-is), 4 mL of 40%, 7.5 mL of 30%; all scale with $N_{samples} \times (1+overage)$. Polyamine/DTT additives scale as $V_{total}/1000$; SUPERase and RNAsin use the same $C_{final}/C_{stock} \times V_{total}$ formula.
 
 <!-- TODO: SUPERase/RNAsin in the retained 50% fraction are dosed at half the rate of the 40%/30% fractions (divided by 2). Preserved here as-is; confirm with JP whether this is intentional before scaling to large batches. -->
-
-**Nuclei resuspension buffer** (30 mL aliquot per sample):
-
-$$V_{buffer} = 30\;mL \times N_{samples} \times (1+overage)$$
-
-Bovine Serum Albumin (BSA) scales as 1% w/v of $V_{buffer}$; SUPERase and RNAsin use the same $C_{final}/C_{stock} \times V_{buffer}$ formula above. No spermine, spermidine, or Dithiothreitol (DTT); these interfere with downstream cDNA synthesis.
 :::
 
-### CitraHB Complete (10 mL aliquot/sample)
+### CitraHB Complete
 
 ```{ojs}
 //| echo: false
-chb_vol     = 10 * scale
-chb_tablets = Math.ceil(chb_vol / 10)
+chb_need    = chb_per_sample * scale
+chb_vol     = Math.ceil(chb_need / 10) * 10
+chb_tablets = chb_vol / 10
 
+md`**Need ≈ ${fmt(chb_need)} mL for ${n_samples} sample(s) → make ${fmt(chb_vol, 0)} mL** (rounded up to a 10 mL multiple so protease tablets come out whole: **${chb_tablets} tablet(s)**)`
+```
+
+```{ojs}
+//| echo: false
 Inputs.table([
-  {Component: "Protease inhibitor tablet",                "Per 10 mL (aliquot)": "1 whole tablet",                              "Total": `${chb_tablets} tablet(s)`},
-  {Component: `SUPERase (${superase_final} U/µL final)`,  "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000, superase_final))} µL`,  "Total (µL)": fmt(rnase_vol(chb_vol * 1000, superase_final))},
-  {Component: `RNAsin (${rnasin_final} U/µL final)`,      "Per 10 mL (aliquot)": `${fmt(rnase_vol(10000, rnasin_final))} µL`,    "Total (µL)": fmt(rnase_vol(chb_vol * 1000, rnasin_final))},
-  {Component: "Spermidine (1000X)",                       "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
-  {Component: "Spermine (1000X)",                         "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
-  {Component: "Dithiothreitol (DTT, 1000X)",                              "Per 10 mL (aliquot)": "10 µL",                             "Total (µL)": fmt(10 * chb_vol / 10)},
-  {Component: "CitraHB stock",                            "Per 10 mL (aliquot)": "to volume",                         "Total (mL)": fmt(chb_vol)}
+  {Component: "Protease inhibitor tablet",               "Per 10 mL": "1 whole tablet",                        "Total": `${chb_tablets} tablet(s)`},
+  {Component: `SUPERase (${superase_final} U/µL final)`,  "Per 10 mL": `${fmt(superase_vol(10000))} µL`,         "Total (µL)": fmt(superase_vol(chb_vol * 1000))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,      "Per 10 mL": `${fmt(rnasin_vol(10000))} µL`,           "Total (µL)": fmt(rnasin_vol(chb_vol * 1000))},
+  {Component: "Spermidine (1000X)",                      "Per 10 mL": "10 µL",                                  "Total (µL)": fmt(chb_vol)},
+  {Component: "Spermine (1000X)",                        "Per 10 mL": "10 µL",                                  "Total (µL)": fmt(chb_vol)},
+  {Component: "Dithiothreitol (DTT, 1000X)",             "Per 10 mL": "10 µL",                                  "Total (µL)": fmt(chb_vol)},
+  {Component: "CitraHB stock",                           "Per 10 mL": "to volume",                              "Total (mL)": fmt(chb_vol)}
+], {layout: "auto"})
+```
+
+### Nuclei wash / resuspension buffer
+
+::: {.callout-warning}
+## No spermine, spermidine, or DTT in this buffer
+These interfere with downstream cDNA synthesis. Make this buffer while the gradient is running.
+:::
+
+```{ojs}
+//| echo: false
+resus_per_sample = wash_per_spin * n_wash_spins + final_resus_uL / 1000
+resus_vol   = resus_per_sample * scale
+resus_bsa_g = resus_vol * 1 / 100
+
+md`**${fmt(resus_per_sample)} mL/sample × ${n_samples} → ${fmt(resus_vol)} mL** (${n_wash_spins} wash spin(s) of ${fmt(wash_per_spin)} mL + ${fmt(final_resus_uL)} µL final resuspension)`
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Bovine Serum Albumin (BSA)",           "Amount": `${fmt(resus_bsa_g)} g (1% w/v)`},
+  {Component: "1X Phosphate-Buffered Saline (PBS)",   "Amount": `to ${fmt(resus_vol)} mL`},
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Amount": `${fmt(superase_vol(resus_vol))} mL`},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,    "Amount": `${fmt(rnasin_vol(resus_vol))} mL`}
 ], {layout: "auto"})
 ```
 
@@ -226,11 +264,11 @@ v30 = 7.5 * scale
 optiprep_50 = v50 * 5/6
 diluent_50  = v50 * 1/6
 
-stock50_for_40  = v40 * 40/50
-citraprephb_40  = v40 - stock50_for_40
+stock50_for_40 = v40 * 40/50
+citrahb_40     = v40 - stock50_for_40
 
-stock50_for_30  = v30 * 30/50
-citraprephb_30  = v30 - stock50_for_30
+stock50_for_30 = v30 * 30/50
+citrahb_30     = v30 - stock50_for_30
 
 md`**50% iodixanol: ${fmt(v50)} mL total**`
 ```
@@ -243,8 +281,8 @@ Inputs.table([
   {Component: "Spermidine (1000X)", "Volume (mL)": fmt(v50/1000)},
   {Component: "Spermine (1000X)",   "Volume (mL)": fmt(v50/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",        "Volume (mL)": fmt(v50/1000)},
-  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v50, superase_final) / 2)},
-  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v50, rnasin_final) / 2)}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(superase_vol(v50) / 2)},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnasin_vol(v50) / 2)}
 ], {layout: "auto"})
 ```
 
@@ -257,12 +295,12 @@ md`**40% iodixanol: ${fmt(v40)} mL total**`
 //| echo: false
 Inputs.table([
   {Component: "50% iodixanol (above)", "Volume (mL)": fmt(stock50_for_40)},
-  {Component: "CitraPrepHB",           "Volume (mL)": fmt(citraprephb_40)},
+  {Component: "CitraHB",               "Volume (mL)": fmt(citrahb_40)},
   {Component: "Spermidine (1000X)",    "Volume (mL)": fmt(v40/1000)},
   {Component: "Spermine (1000X)",      "Volume (mL)": fmt(v40/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",           "Volume (mL)": fmt(v40/1000)},
-  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v40, superase_final))},
-  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v40, rnasin_final))}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(superase_vol(v40))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnasin_vol(v40))}
 ], {layout: "auto"})
 ```
 
@@ -275,32 +313,12 @@ md`**30% iodixanol: ${fmt(v30)} mL total**`
 //| echo: false
 Inputs.table([
   {Component: "50% iodixanol (above)", "Volume (mL)": fmt(stock50_for_30)},
-  {Component: "CitraPrepHB",           "Volume (mL)": fmt(citraprephb_30)},
+  {Component: "CitraHB",               "Volume (mL)": fmt(citrahb_30)},
   {Component: "Spermidine (1000X)",    "Volume (mL)": fmt(v30/1000)},
   {Component: "Spermine (1000X)",      "Volume (mL)": fmt(v30/1000)},
   {Component: "Dithiothreitol (DTT, 1000X)",           "Volume (mL)": fmt(v30/1000)},
-  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(rnase_vol(v30, superase_final))},
-  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnase_vol(v30, rnasin_final))}
-], {layout: "auto"})
-```
-
-### Nuclei resuspension buffer (30 mL aliquot/sample)
-
-::: {.callout-warning}
-## No spermine, spermidine, or DTT in this buffer
-These will interfere with downstream cDNA synthesis. Make this buffer during the Step 8 centrifugation spin.
-:::
-
-```{ojs}
-//| echo: false
-nrb_vol   = 30 * scale
-nrb_bsa_g = nrb_vol * 1/100
-
-Inputs.table([
-  {Component: "Bovine Serum Albumin (BSA)",             "Amount": `${fmt(nrb_bsa_g)} g`},
-  {Component: "1X Phosphate-Buffered Saline (PBS)",     "Amount": `to ${fmt(nrb_vol)} mL`},
-  {Component: `SUPERase (${superase_final} U/µL final)`, "Amount": `${fmt(rnase_vol(nrb_vol, superase_final))} mL`},
-  {Component: `RNAsin (${rnasin_final} U/µL final)`,      "Amount": `${fmt(rnase_vol(nrb_vol, rnasin_final))} mL`}
+  {Component: `SUPERase (${superase_final} U/µL final)`, "Volume (mL)": fmt(superase_vol(v30))},
+  {Component: `RNAsin (${rnasin_final} U/µL final)`,   "Volume (mL)": fmt(rnasin_vol(v30))}
 ], {layout: "auto"})
 ```
 
@@ -308,34 +326,44 @@ Inputs.table([
 
 ## Protocol
 
-### Tissue homogenization (~30 min)
-
-::: {.callout-tip collapse="true"}
-## Check nuclei before proceeding
-Step 4 calls for pulling an aliquot to check nuclei release after homogenization; add more strokes with the tight pestle if intact cells are still visible before moving on.
-:::
-
-| Step | Action | Volume |
-|------|--------|--------|
-| 1 | Pre-chill 7 mL glass dounce homogenizer on ice | — |
-| 2 | Cut snap-frozen tissue into small pieces (<0.5 cm) with clean scissors, in a petri dish on ice, in CitraHB complete | 1 mL/sample |
-| 3 | Transfer to dounce homogenizer on ice; add CitraHB complete; incubate 7 min on ice | 4 mL/sample |
-| 4 | Homogenize 20× with loose pestle; add Detergent; homogenize 20× with tight pestle. Pull an aliquot to check nuclei; homogenize further if needed | 320 µL/sample Detergent |
-| 5 | Filter through 40 µM strainer | — |
-
-### Iodixanol gradient centrifugation (~1 hr + spin)
+### 1 · Tissue homogenization (~30 min)
 
 ::: {.callout-warning}
-## No brake on the Step 8 spin
-This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking will disturb the gradient interface and mix layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall; loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.
+## No motorized homogenizer
+Hand-dounce only; a rotor-stator or other motorized homogenizer shears nuclei and causes blebbing.
 :::
 
-| Step | Action | Volume |
-|------|--------|--------|
-| 6 | Add 50% iodixanol solution to the filtered sample (5 mL CitraHB fraction) and vortex to mix | 5 mL/sample |
-| 7 | Underlay sample with 30% and then 40% iodixanol solutions | Per gradient volumes above |
-| 8 | Weigh conical tubes against each other on a scale, topping up the lighter tube(s) with cell culture grade water dropwise until matched (within ~0.1 g), then place balanced tubes opposite each other in the rotor; centrifuge in the ultracentrifuge for 18 min at 10,000×g, 4°C, **no brake** | — |
-| 9 | Collect nuclei from the interface layer with a P1000 pipette; transfer to a new tube | — |
+::: {.callout-tip collapse="true"}
+## Under-homogenize on purpose
+A run that was deliberately under-homogenized gave intact nuclei with **no blebbing at all**. Stop douncing as soon as nuclei start releasing; you do not need a clear homogenate, and over-douncing loses more nuclei than it frees.
+:::
+
+Two-round dounce: the ≈ 5 mL CitraHB Complete per sample is split 4 mL + 1 mL, and the 320 µL Detergent per sample is split 256 µL + 64 µL to match.
+
+| Step | Action | Per sample |
+|------|--------|-----------|
+| a | Pre-chill the 7 mL glass dounce homogenizer on ice. | — |
+| b | Cut snap-frozen tissue into < 0.5 cm pieces with clean scissors in a chilled petri dish on ice. | — |
+| c | Transfer the pieces to the dounce with **4 mL CitraHB Complete**; rest 7 min on ice. | 4 mL CitraHB Complete |
+| d | Dounce ~20× with the loose pestle; add **256 µL Detergent**; dounce ~20× with the tight pestle. Under-homogenize (see tip); pull a drop to confirm nuclei are releasing. | 256 µL Detergent |
+| e | Filter through a 40 µm strainer into a tube on ice; keep this filtrate. | — |
+| f | Return the tissue chunks left on top of the strainer to the dounce with the **remaining 1 mL CitraHB Complete + 64 µL Detergent**; dounce again. | 1 mL CitraHB Complete + 64 µL Detergent |
+| g | Filter through the same strainer and pool with the round-1 filtrate (≈ 5 mL/sample). | — |
+
+### 2 · Iodixanol gradient centrifugation (~1 hr + spin)
+
+::: {.callout-warning}
+## No brake on the spin
+This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking disturbs the gradient interface and mixes the layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall; loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.
+:::
+
+| Step | Action | Per sample |
+|------|--------|-----------|
+| a | Add 50% iodixanol solution to the pooled homogenate filtrate and vortex to mix. | 5 mL 50% iodixanol |
+| b | Underlay the sample with 30% then 40% iodixanol solutions. | Per gradient table above |
+| c | Balance the conical tubes against each other on a scale, topping up the lighter tube(s) dropwise with cell culture grade water to within ~0.1 g; load balanced tubes opposite each other in the rotor. | — |
+| d | Centrifuge 18 min at 10,000×g, 4°C, **no brake**. | — |
+| e | Collect nuclei from the interface layer with a P1000 pipette; transfer to a new tube. | — |
 
 ::: {.callout-important}
 ## Checklist
@@ -345,16 +373,22 @@ This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with n
 - [ ] Interface layer collected cleanly, minimal carryover of gradient layers
 :::
 
-### Nuclei wash & counting (~30 min)
+### 3 · Nuclei wash & counting (~30 min)
 
-| Step | Action | Volume |
-|------|--------|--------|
-| 10 | Add nuclei wash buffer in a 15 mL tube; vortex | 10 mL/sample |
-| 11 | Filter through 20 µM filter | — |
-| 12 | Spin 10 min at 500×g, 4°C to pellet nuclei | — |
-| 13 | Resuspend in nuclei wash buffer; repeat spin (Step 12) | 10 mL/sample |
-| 14 | Resuspend in nuclei wash buffer; count using hemocytometer (see method below) | 200 µL/sample |
-| 15 | Load for single cell | — |
+```{ojs}
+//| echo: false
+wash_rows = [
+  {Action: "Collect nuclei from the gradient interface (Step 2e) into a 15 mL tube.", Volume: "—"},
+  {Action: "Resuspend in nuclei wash / resuspension buffer in a 15 mL tube; pipette gently, do not vortex.", Volume: `${fmt(wash_per_spin)} mL`},
+  {Action: "Filter through a 20 µm filter.", Volume: "—"},
+  {Action: `Spin 10 min at 500×g, 4°C; discard the supernatant.${n_wash_spins > 1 ? ` Repeat the resuspend + spin so the nuclei are washed ${n_wash_spins}× in total.` : ""}`,
+   Volume: n_wash_spins > 1 ? `${fmt(wash_per_spin)} mL per wash` : "—"},
+  {Action: "Resuspend the final pellet; count on a hemocytometer (method below).", Volume: `${fmt(final_resus_uL)} µL`},
+  {Action: "Load for single cell.", Volume: "—"}
+].map((r, i) => ({Step: i + 1, Action: r.Action, "Per sample": r.Volume}))
+
+Inputs.table(wash_rows, {layout: "auto"})
+```
 
 ::: {.callout-tip}
 ## Hemocytometer counting method
