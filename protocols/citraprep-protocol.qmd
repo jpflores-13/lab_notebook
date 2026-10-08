@@ -6,6 +6,55 @@ date: today
 
 <button onclick="window.print()" style="float:right;margin-bottom:1rem">🖨 Print / Save as PDF</button>
 
+```{ojs}
+//| echo: false
+// Run-checklist state, shared by the Protocol section's checkable steps below.
+// Persisted to localStorage so it survives a reload; "Reset checklist" clears it.
+mutable checkedSteps = (() => {
+  try { return JSON.parse(localStorage.getItem("citraprep-checklist-v1") || "{}"); } catch (e) { return {}; }
+})()
+
+setStepChecked = (id, isChecked) => {
+  const next = {...checkedSteps, [id]: isChecked};
+  mutable checkedSteps = next;
+  try { localStorage.setItem("citraprep-checklist-v1", JSON.stringify(next)); } catch (e) {}
+}
+
+resetChecklist = () => {
+  mutable checkedSteps = {};
+  try { localStorage.removeItem("citraprep-checklist-v1"); } catch (e) {}
+}
+
+// One checkable row. `content` is plain text (numbers already stand out as text).
+checkStep = (id, content) => html`<label style="display:flex;gap:10px;align-items:flex-start;background:var(--bs-body-bg, #fff);border:1px solid var(--bs-border-color, #dee2e6);border-radius:8px;padding:8px 10px;margin-bottom:6px;cursor:pointer;">
+  <input type="checkbox" style="margin-top:3px;flex-shrink:0;" checked=${checkedSteps[id] ? true : null} onchange=${(e) => setStepChecked(id, e.target.checked)}>
+  <span style="flex:1;${checkedSteps[id] ? "opacity:.55;text-decoration:line-through;" : ""}">${content}</span>
+</label>`
+
+allStepIds = [
+  "homog-a","homog-b","homog-c","homog-d","homog-e","homog-f","homog-g",
+  "grad-a","grad-b","grad-c","grad-d","grad-e",
+  "wash-1","wash-2","wash-3","wash-4","wash-5","wash-6"
+]
+checkedCount = allStepIds.filter(id => checkedSteps[id]).length
+totalCount   = allStepIds.length
+progressPct  = totalCount ? Math.round(checkedCount / totalCount * 100) : 0
+```
+
+```{ojs}
+//| echo: false
+html`<div style="position:sticky;top:0;z-index:30;background:var(--bs-body-bg, #fff);border-bottom:1px solid var(--bs-border-color, #dee2e6);padding:8px 2px;margin-bottom:1rem;">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;">
+    <strong style="font-size:.9rem;">Run checklist</strong>
+    <span style="font-size:.8rem;color:var(--bs-secondary-color, #6c757d);">${checkedCount} / ${totalCount} steps checked (${progressPct}%)</span>
+    <button onclick=${() => resetChecklist()} style="font-size:.75rem;padding:2px 8px;border-radius:5px;border:1px solid var(--bs-border-color, #dee2e6);background:none;cursor:pointer;">Reset checklist</button>
+  </div>
+  <div style="height:5px;border-radius:99px;background:var(--bs-tertiary-bg, #e9ecef);margin-top:6px;overflow:hidden;">
+    <div style="height:100%;width:${progressPct}%;background:var(--bs-primary, #2c3e50);transition:width .2s ease;"></div>
+  </div>
+</div>`
+```
+
 ::: {.callout-note}
 ## Overview
 CitraPrep isolates intact nuclei from snap-frozen tissue for downstream single-nucleus work. Tissue is dounce-homogenized in a citrate-based homogenization buffer (CitraHB), then nuclei are purified on an iodixanol step gradient in an **ultracentrifuge** (18 min run, ~1 hr total with load/accel/no-brake coast, 10,000×g, **no brake**) and collected from the gradient interface. RNase inhibitors (RNasin Ribonuclease Inhibitor + Protector RNase Inhibitor) go into **every** buffer, including the final nuclei wash / resuspension buffer. Spermine, spermidine, and dithiothreitol (DTT) are deliberately left **out** of that buffer because they interfere with downstream cDNA synthesis.
@@ -336,6 +385,43 @@ Inputs.table([
 
 ## Protocol
 
+### Ice bucket map
+
+Three buckets, organized by what's moving through the protocol rather than by reagent — keeps you from digging through "everything" mid-step.
+
+```{ojs}
+//| echo: false
+bucket = (title, items) => html`<div style="background:var(--bs-tertiary-bg, #f8f9fa);border:1px solid var(--bs-border-color, #dee2e6);border-radius:10px;padding:10px 12px;flex:1;min-width:180px;">
+  <strong style="font-size:.85rem;">❄ ${title}</strong>
+  <ul style="margin:6px 0 0;padding-left:18px;font-size:.82rem;color:var(--bs-secondary-color, #6c757d);">
+    ${items.map(i => html`<li>${i}</li>`)}
+  </ul>
+</div>`
+
+html`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1rem;">
+  ${bucket("Reagents", [
+    "CitraHB Complete",
+    "3 dosed iodixanol tubes (leftover 50%, 40%, 30%)",
+    "Nuclei wash / resuspension buffer",
+    "RNasin + Protector working aliquots",
+    "1000X DTT / spermine / spermidine"
+  ])}
+  ${bucket("Active sample", [
+    "Dounce homogenizer",
+    "Chilled petri dish + tissue",
+    "Detergent aliquot",
+    "40 µm strainer",
+    "This sample's filtrate tube"
+  ])}
+  ${bucket("Post-spin", [
+    `Empty tubes for interface collection — label all ${n_samples} now`,
+    "20 µm filters",
+    "Spare wash buffer",
+    "Trypan blue (0.2 µm filtered)"
+  ])}
+</div>`
+```
+
 ### 1 · Tissue homogenization (~30 min)
 
 ::: {.callout-warning}
@@ -348,17 +434,31 @@ Hand-dounce only; a rotor-stator or other motorized homogenizer shears nuclei an
 A run that was deliberately under-homogenized gave intact nuclei with **no blebbing at all**. Stop douncing as soon as nuclei start releasing; you do not need a clear homogenate, and over-douncing loses more nuclei than it frees.
 :::
 
-Two-round dounce: the ≈ 5 mL CitraHB Complete per sample is split 4 mL + 1 mL, and the 320 µL Detergent per sample is split 256 µL + 64 µL to match.
+```{ojs}
+//| echo: false
+// Two-round dounce: a fixed bench-use split (Marissa's 4 mL + 1 mL, 256 + 64 µL),
+// independent of the chb_per_sample "how much to make" toggle above — that toggle
+// sets prep headroom, not what actually goes into the dounce.
+round1_chb = 4
+round2_chb = 1
+round1_det = 256
+round2_det = 64
 
-| Step | Action | Per sample |
-|------|--------|-----------|
-| a | Pre-chill the 7 mL glass dounce homogenizer on ice. | — |
-| b | Cut snap-frozen tissue into < 0.5 cm pieces with clean scissors in a chilled petri dish on ice. | — |
-| c | Transfer the pieces to the dounce with **4 mL CitraHB Complete**; rest 7 min on ice. | 4 mL CitraHB Complete |
-| d | Dounce ~20× with the loose pestle; add **256 µL Detergent**; dounce ~20× with the tight pestle. Under-homogenize (see tip); pull a drop to confirm nuclei are releasing. | 256 µL Detergent |
-| e | Filter through a 40 µm strainer into a tube on ice; keep this filtrate. | — |
-| f | Return the tissue chunks left on top of the strainer to the dounce with the **remaining 1 mL CitraHB Complete + 64 µL Detergent**; dounce again. | 1 mL CitraHB Complete + 64 µL Detergent |
-| g | Filter through the same strainer and pool with the round-1 filtrate (≈ 5 mL/sample). | — |
+md`Two-round dounce: the ≈ 5 mL CitraHB Complete used per sample is split ${fmt(round1_chb, 0)} mL + ${fmt(round2_chb, 0)} mL, and the 320 µL Detergent per sample is split ${fmt(round1_det, 0)} µL + ${fmt(round2_det, 0)} µL to match. (This is fixed bench usage — it doesn't change if you make extra CitraHB Complete above.)`
+```
+
+```{ojs}
+//| echo: false
+html`<div>${[
+  checkStep("homog-a", "Pre-chill the 7 mL glass dounce homogenizer on ice."),
+  checkStep("homog-b", "Cut snap-frozen tissue into < 0.5 cm pieces with clean scissors in a chilled petri dish on ice."),
+  checkStep("homog-c", `Transfer the pieces to the dounce with ${fmt(round1_chb, 0)} mL CitraHB Complete; rest 7 min on ice.`),
+  checkStep("homog-d", `Dounce ~20× with the loose pestle; add ${fmt(round1_det, 0)} µL Detergent; dounce ~20× with the tight pestle. Under-homogenize (see tip above); pull a drop to confirm nuclei are releasing.`),
+  checkStep("homog-e", "Filter through a 40 µm strainer into a tube on ice; keep this filtrate."),
+  checkStep("homog-f", `Return the tissue chunks left on top of the strainer to the dounce with the remaining ${fmt(round2_chb, 0)} mL CitraHB Complete + ${fmt(round2_det, 0)} µL Detergent; dounce again.`),
+  checkStep("homog-g", `Filter through the same strainer and pool with the round-1 filtrate (≈ ${fmt(round1_chb + round2_chb, 0)} mL/sample).`)
+]}</div>`
+```
 
 ### 2 · Iodixanol gradient centrifugation (~1 hr + spin)
 
@@ -367,13 +467,16 @@ Two-round dounce: the ≈ 5 mL CitraHB Complete per sample is split 4 mL + 1 mL,
 This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with no brake**. Braking disturbs the gradient interface and mixes the layers together, ruining nuclei recovery. Schedule the ultracentrifuge for **18 min** run time, but budget closer to **an hour** for the step overall; loading/vacuum draw-down, acceleration, and the unbraked coast to a stop add substantial time beyond the programmed 18 min.
 :::
 
-| Step | Action | Per sample |
-|------|--------|-----------|
-| a | Add 50% iodixanol solution to the pooled homogenate filtrate and vortex to mix. | 5 mL 50% iodixanol |
-| b | Underlay the sample with 30% then 40% iodixanol solutions. | Per gradient table above |
-| c | Balance the conical tubes against each other on a scale, topping up the lighter tube(s) dropwise with cell culture grade water to within ~0.1 g; load balanced tubes opposite each other in the rotor. | — |
-| d | Centrifuge 18 min at 10,000×g, 4°C, **no brake**. | — |
-| e | Collect nuclei from the interface layer with a P1000 pipette; transfer to a new tube. | — |
+```{ojs}
+//| echo: false
+html`<div>${[
+  checkStep("grad-a", "Add 5 mL 50% iodixanol solution to the pooled homogenate filtrate and vortex to mix."),
+  checkStep("grad-b", "Underlay the sample with 30% then 40% iodixanol solutions (per the gradient tables above)."),
+  checkStep("grad-c", "Balance the conical tubes against each other on a scale, topping up the lighter tube(s) dropwise with cell culture grade water to within ~0.1 g; load balanced tubes opposite each other in the rotor."),
+  checkStep("grad-d", "Centrifuge 18 min at 10,000×g, 4°C, no brake."),
+  checkStep("grad-e", "Collect nuclei from the interface layer with a P1000 pipette; transfer to a new tube.")
+]}</div>`
+```
 
 ::: {.callout-important}
 ## Checklist
@@ -387,17 +490,14 @@ This spin is run on an **ultracentrifuge**: **18 min at 10,000×g at 4°C with n
 
 ```{ojs}
 //| echo: false
-wash_rows = [
-  {Action: "Collect nuclei from the gradient interface (Step 2e) into a 15 mL tube.", Volume: "—"},
-  {Action: "Resuspend in nuclei wash / resuspension buffer in a 15 mL tube; pipette gently, do not vortex.", Volume: `${fmt(wash_per_spin)} mL`},
-  {Action: "Filter through a 20 µm filter.", Volume: "—"},
-  {Action: `Spin 10 min at 500×g, 4°C; discard the supernatant.${n_wash_spins > 1 ? ` Repeat the resuspend + spin so the nuclei are washed ${n_wash_spins}× in total.` : ""}`,
-   Volume: n_wash_spins > 1 ? `${fmt(wash_per_spin)} mL per wash` : "—"},
-  {Action: "Resuspend the final pellet; count on a hemocytometer (method below).", Volume: `${fmt(final_resus_uL)} µL`},
-  {Action: "Load for single cell.", Volume: "—"}
-].map((r, i) => ({Step: i + 1, Action: r.Action, "Per sample": r.Volume}))
-
-Inputs.table(wash_rows, {layout: "auto"})
+html`<div>${[
+  checkStep("wash-1", "Collect nuclei from the gradient interface (Step 2e) into a 15 mL tube."),
+  checkStep("wash-2", `Resuspend in ${fmt(wash_per_spin)} mL nuclei wash / resuspension buffer in a 15 mL tube; pipette gently, do not vortex.`),
+  checkStep("wash-3", "Filter through a 20 µm filter."),
+  checkStep("wash-4", `Spin 10 min at 500×g, 4°C; discard the supernatant.${n_wash_spins > 1 ? ` Repeat the resuspend (${fmt(wash_per_spin)} mL) + spin so the nuclei are washed ${n_wash_spins}× in total.` : ""}`),
+  checkStep("wash-5", `Resuspend the final pellet in ${fmt(final_resus_uL)} µL; count on a hemocytometer (method below).`),
+  checkStep("wash-6", "Load for single cell.")
+]}</div>`
 ```
 
 ::: {.callout-tip}
