@@ -166,28 +166,70 @@ Inputs.table([
 Tricine-KOH is the free-acid form of Tricine titrated to pH 7.8 with Potassium Hydroxide (KOH); the "-KOH" in the name refers to this titration, not a separate reagent added at the bench. Citric Acid stock is used as-is; both CitraHB and Diluent get their acidic character partly from it, so no pH adjustment is needed here.
 :::
 
-**CitraHB (30 mL)**
+**CitraHB**
 
-| Component | Final conc. | Amount |
-|-----------|-------------|--------|
-| Sucrose | 0.25 M | 2.567 g |
-| Potassium Chloride (KCl) | 25 mM | 55.9 mg |
-| Magnesium Chloride (MgCl₂) | 5 mM | 14.3 mg |
-| Tricine-KOH pH 7.8 | 20 mM | 600 µL of 1 M stock |
-| Citric Acid | 10 mM | 300 µL of 1 M stock |
+```{ojs}
+//| echo: false
+sucrose_MW = 342.2965
+kcl_MW     = 74.5513
+mgcl2_MW   = 95.211
 
-Dissolve in cell culture grade water to a final volume of 30 mL.
+citrahb_need_mL = chb_vol + citrahb_40 + citrahb_30   // CitraHB Complete + both iodixanol dilutions — Detergent draws more on top, see note below
+viewof citrahb_batch_mL = Inputs.number({label: "CitraHB batch volume (mL)", value: Math.max(30, Math.ceil(citrahb_need_mL / 10) * 10), min: 10, step: 10})
+```
 
-**Diluent (10 mL)**
+```{ojs}
+//| echo: false
+citrahb_sucrose_g  = 0.25  * (citrahb_batch_mL / 1000) * sucrose_MW
+citrahb_kcl_g      = 0.025 * (citrahb_batch_mL / 1000) * kcl_MW
+citrahb_mgcl2_g    = 0.005 * (citrahb_batch_mL / 1000) * mgcl2_MW
+citrahb_tricine_uL = 20 * citrahb_batch_mL
+citrahb_citric_uL  = 10 * citrahb_batch_mL
 
-| Component | Final conc. | Amount |
-|-----------|-------------|--------|
-| Potassium Chloride (KCl) | 150 mM | 111.8 mg |
-| Magnesium Chloride (MgCl₂) | 30 mM | 28.6 mg |
-| Tricine-KOH pH 7.8 | 120 mM | 1.2 mL of 1 M stock |
-| Citric Acid | 10 mM | 100 µL of 1 M stock |
+md`**This run needs ≈ ${fmt(citrahb_need_mL)} mL** of CitraHB stock (CitraHB Complete + the 40%/30% iodixanol dilutions) — plus whatever your Detergent batch draws on top (320 µL/sample × ${n_samples} sample(s) ≈ ${fmt(n_samples * 0.32)} mL, pulled from this same stock).`
+```
 
-Dissolve in cell culture grade water to a final volume of 10 mL.
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Sucrose",                      "Final conc.": "0.25 M", "Amount": `${fmt(citrahb_sucrose_g)} g`},
+  {Component: "Potassium Chloride (KCl)",     "Final conc.": "25 mM",  "Amount": `${fmt(citrahb_kcl_g * 1000, 1)} mg`},
+  {Component: "Magnesium Chloride (MgCl₂)",   "Final conc.": "5 mM",   "Amount": `${fmt(citrahb_mgcl2_g * 1000, 1)} mg`},
+  {Component: "Tricine-KOH pH 7.8",           "Final conc.": "20 mM",  "Amount": `${fmt(citrahb_tricine_uL, 0)} µL of 1 M stock`},
+  {Component: "Citric Acid",                  "Final conc.": "10 mM",  "Amount": `${fmt(citrahb_citric_uL, 0)} µL of 1 M stock`}
+], {layout: "auto"})
+```
+
+Dissolve in cell culture grade water to the batch volume above.
+
+**Diluent**
+
+```{ojs}
+//| echo: false
+viewof diluent_batch_mL = Inputs.number({label: "Diluent batch volume (mL)", value: Math.max(10, Math.ceil(diluent_50 / 5) * 5), min: 5, step: 5})
+```
+
+```{ojs}
+//| echo: false
+diluent_kcl_g      = 0.150 * (diluent_batch_mL / 1000) * kcl_MW
+diluent_mgcl2_g    = 0.030 * (diluent_batch_mL / 1000) * mgcl2_MW
+diluent_tricine_uL = 120 * diluent_batch_mL
+diluent_citric_uL  = 10  * diluent_batch_mL
+
+md`**This run needs ≈ ${fmt(diluent_50)} mL** of Diluent — its only job is the base 50% iodixanol; nothing else draws on it.`
+```
+
+```{ojs}
+//| echo: false
+Inputs.table([
+  {Component: "Potassium Chloride (KCl)",   "Final conc.": "150 mM", "Amount": `${fmt(diluent_kcl_g * 1000, 1)} mg`},
+  {Component: "Magnesium Chloride (MgCl₂)", "Final conc.": "30 mM",  "Amount": `${fmt(diluent_mgcl2_g * 1000, 1)} mg`},
+  {Component: "Tricine-KOH pH 7.8",         "Final conc.": "120 mM", "Amount": `${fmt(diluent_tricine_uL / 1000, 2)} mL of 1 M stock`},
+  {Component: "Citric Acid",                "Final conc.": "10 mM",  "Amount": `${fmt(diluent_citric_uL, 0)} µL of 1 M stock`}
+], {layout: "auto"})
+```
+
+Dissolve in cell culture grade water to the batch volume above.
 
 **Detergent (1 mL)**
 
