@@ -74,6 +74,11 @@ md`**${n_samples} sample(s) · ${excess_pct}% overage · RNasin ${rnasin_final} 
 ```
 
 ::: {.callout-tip collapse="true"}
+## Running low on inhibitor? There's flexibility here
+The default 0.5 U/µL RNasin + 0.5 U/µL Protector split (1 U/µL total) is a precaution, not something backed by a side-by-side experiment — per Marissa. If you only have one of the two on hand, **1 U/µL of a single inhibitor is fine**: set one of the two final-conc toggles above to 0 and the other to 1. Short on total inhibitor too? **As low as 0.8 U/µL total is passable** in a pinch.
+:::
+
+::: {.callout-tip collapse="true"}
 ## Ordering quantities
 Per sample, keep roughly **1 mL RNasin** and **500 µL Protector** (RNase inhibitor) on hand. The line-item breakdown below is the granular per-buffer calculation; it will not sum to exactly this figure, since the ordering number is a rough estimate rather than a derived total.
 :::
