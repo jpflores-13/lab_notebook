@@ -26,10 +26,25 @@ resetChecklist = () => {
 }
 
 // One checkable row. `content` is plain text (numbers already stand out as text).
-checkStep = (id, content) => html`<label style="display:flex;gap:10px;align-items:flex-start;background:var(--bs-body-bg, #fff);border:1px solid var(--bs-border-color, #dee2e6);border-radius:8px;padding:8px 10px;margin-bottom:6px;cursor:pointer;">
-  <input type="checkbox" style="margin-top:3px;flex-shrink:0;" checked=${checkedSteps[id] ? true : null} onchange=${(e) => setStepChecked(id, e.target.checked)}>
-  <span style="flex:1;${checkedSteps[id] ? "opacity:.55;text-decoration:line-through;" : ""}">${content}</span>
-</label>`
+// Built with plain DOM calls rather than an onchange=${...} attribute in an html``
+// template — that pattern was silently failing to bind and leaking its own source
+// text onto the page instead of rendering a working checkbox.
+checkStep = (id, content) => {
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.style.cssText = "margin-top:3px;flex-shrink:0;";
+  input.checked = !!checkedSteps[id];
+  input.onchange = (e) => setStepChecked(id, e.target.checked);
+
+  const span = document.createElement("span");
+  span.style.cssText = `flex:1;${checkedSteps[id] ? "opacity:.55;text-decoration:line-through;" : ""}`;
+  span.textContent = content;
+
+  const label = document.createElement("label");
+  label.style.cssText = "display:flex;gap:10px;align-items:flex-start;background:var(--bs-body-bg, #fff);border:1px solid var(--bs-border-color, #dee2e6);border-radius:8px;padding:8px 10px;margin-bottom:6px;cursor:pointer;";
+  label.append(input, span);
+  return label;
+}
 
 allStepIds = [
   "homog-a","homog-b","homog-c","homog-d","homog-e","homog-f","homog-g",
@@ -43,11 +58,21 @@ progressPct  = totalCount ? Math.round(checkedCount / totalCount * 100) : 0
 
 ```{ojs}
 //| echo: false
+// Same fix as checkStep: build the button with the DOM API and interpolate the
+// node itself into the template below, instead of an onclick=${...} attribute.
+resetBtn = {
+  const btn = document.createElement("button");
+  btn.textContent = "Reset checklist";
+  btn.style.cssText = "font-size:.75rem;padding:2px 8px;border-radius:5px;border:1px solid var(--bs-border-color, #dee2e6);background:none;cursor:pointer;";
+  btn.onclick = () => resetChecklist();
+  return btn;
+}
+
 html`<div style="position:sticky;top:0;z-index:30;background:var(--bs-body-bg, #fff);border-bottom:1px solid var(--bs-border-color, #dee2e6);padding:8px 2px;margin-bottom:1rem;">
   <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;">
     <strong style="font-size:.9rem;">Run checklist</strong>
     <span style="font-size:.8rem;color:var(--bs-secondary-color, #6c757d);">${checkedCount} / ${totalCount} steps checked (${progressPct}%)</span>
-    <button onclick=${() => resetChecklist()} style="font-size:.75rem;padding:2px 8px;border-radius:5px;border:1px solid var(--bs-border-color, #dee2e6);background:none;cursor:pointer;">Reset checklist</button>
+    ${resetBtn}
   </div>
   <div style="height:5px;border-radius:99px;background:var(--bs-tertiary-bg, #e9ecef);margin-top:6px;overflow:hidden;">
     <div style="height:100%;width:${progressPct}%;background:var(--bs-primary, #2c3e50);transition:width .2s ease;"></div>
