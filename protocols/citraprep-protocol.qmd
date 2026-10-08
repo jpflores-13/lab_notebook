@@ -191,7 +191,7 @@ Default is one wash spin of 10 mL plus a 200 µL final resuspension ≈ 10 mL/sa
 
 $$V_{50\%\ needed} = V_{total} \times \frac{\%_{target}}{50\%} \qquad V_{CitraHB} = V_{total} - V_{50\%\ needed}$$
 
-Per-sample totals: 15 mL of 50% (kept as-is), 4 mL of 40%, 7.5 mL of 30%; all scale with $N_{samples} \times (1+overage)$. Polyamine/DTT additives scale as $V_{total}/1000$; RNasin and Protector use the same $C_{final}/C_{stock} \times V_{total}$ formula.
+Per-sample totals: 15 mL of 50% (retained and dosed), 4 mL of 40%, 7.5 mL of 30%; all scale with $N_{samples} \times (1+overage)$. The undosed OptiPrep+Diluent base you actually make is larger than the 15 mL retained figure: $V_{base\ 50\%} = V_{50\%} + V_{50\%\ needed}^{(40\%)} + V_{50\%\ needed}^{(30\%)}$, since the 40%/30% pulls come out of that same base before it's dosed. Polyamine/DTT additives scale as $V_{total}/1000$; RNasin and Protector use the same $C_{final}/C_{stock} \times V_{total}$ formula.
 
 <!-- TODO: RNasin/Protector in the retained 50% fraction are dosed at half the rate of the 40%/30% fractions (divided by 2). Preserved here as-is; confirm with JP whether this is intentional before scaling to large batches. -->
 :::
@@ -251,9 +251,9 @@ Inputs.table([
 ::: {.callout-warning}
 ## Make base 50% first, split it, then add additives to each tube separately
 
-The 40% and 30% solutions are diluted from **additive-free base 50% iodixanol**, not from the finished 50% solution in the first table below. Work in this order:
+The 40% and 30% solutions are diluted from **additive-free base 50% iodixanol**, not from the finished 50% solution in the first table below. Because some of that base gets pulled off before dosing, you make **more than the 15 mL/sample you'll end up dosing** — see the total below. Work in this order:
 
-1. Make base 50% iodixanol with **OptiPrep + Diluent only.** No spermidine, spermine, DTT, RNasin, or Protector yet.
+1. Make base 50% iodixanol with **OptiPrep + Diluent only**, at the larger "base 50% to make" total below. No spermidine, spermine, DTT, RNasin, or Protector yet.
 2. Pull off the "50% iodixanol (above)" volumes listed in the 40% and 30% tables. That aliquot carries **no additives** with it.
 3. You now have three separate tubes (leftover 50%, 40% mix, 30% mix). Add spermidine, spermine, DTT, RNasin, and Protector to **each tube**, scaled to that tube's own total volume.
 
@@ -262,12 +262,9 @@ Each tube is dosed once, on its own. The RNase inhibitor in the 40% and 30% tabl
 
 ```{ojs}
 //| echo: false
-v50 = 15  * scale
+v50 = 15  * scale   // retained & dosed with additives below — the "50% iodixanol" working solution
 v40 = 4   * scale
 v30 = 7.5 * scale
-
-optiprep_50 = v50 * 5/6
-diluent_50  = v50 * 1/6
 
 stock50_for_40 = v40 * 40/50
 citrahb_40     = v40 - stock50_for_40
@@ -275,7 +272,15 @@ citrahb_40     = v40 - stock50_for_40
 stock50_for_30 = v30 * 30/50
 citrahb_30     = v30 - stock50_for_30
 
-md`**50% iodixanol: ${fmt(v50)} mL total**`
+// Undosed OptiPrep+Diluent base has to cover v50 (retained, dosed below) PLUS what
+// gets pulled off additive-free for the 40%/30% dilutions — make v50 alone and
+// you come up stock50_for_40 + stock50_for_30 short after pulling.
+base50_make = v50 + stock50_for_40 + stock50_for_30
+
+optiprep_50 = base50_make * 5/6
+diluent_50  = base50_make * 1/6
+
+md`**Base 50% iodixanol to make: ${fmt(base50_make)} mL** (undosed — ${fmt(v50)} mL to retain and dose below, plus ${fmt(stock50_for_40)} mL + ${fmt(stock50_for_30)} mL to pull off additive-free for the 40%/30% dilutions)`
 ```
 
 ```{ojs}
